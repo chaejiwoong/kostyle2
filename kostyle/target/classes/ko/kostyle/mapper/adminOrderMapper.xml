@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.AdminOrderMapper"> <!-- 고유한 도메인 -->
+
+	
+	<select id="orderList" resultType="ko.kostyle.domain.OrderVO">
+		select * from orders order by ono desc
+	</select>
+
+	<select id="getOrder" resultType="ko.kostyle.domain.OrderVO">
+		select * from orders where ono = #{ono}
+	</select>
+
+	<select id="orderDetails" resultType="ko.kostyle.domain.OrderDetailVO">
+		select * from order_detail
+			 where odno not in
+			 			(select odno from order_cancel)
+			 	and ono = #{ono}
+	</select>
+	
+	<select id="getOrderDetail" resultType="ko.kostyle.domain.OrderDetailVO">
+		select * from order_detail where odno = #{odno}
+	</select>
+
+
+
+
+
+	<select id="addressDetail"
+		resultType="ko.kostyle.domain.AddressVO">
+		select * from address where ano = #{ano}
+	</select>
+
+
+
+	<select id="productDetail"
+		resultType="ko.kostyle.domain.ProductVO">
+		select * from product where pno =
+		(select pno from order_detail where odno = #{odno})
+	</select>
+
+
+</mapper>
+

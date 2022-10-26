@@ -1,0 +1,59 @@
+.qna-nav li {
+    padding: 0 5px;
+}
+.qna-nav .board-radio {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    padding: 3px 26px;
+}
+.qna-nav span {
+    width: auto;
+    height: auto;
+}
+.radio-bax {
+    width: auto;
+    height: auto;
+}
+.qna-nav .on {
+    color: #ffffff;
+    background-color: #000000;
+}
+.qna-nav a:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+.feq-box {
+    border-top: solid 1px;
+}
+.list {
+    width: 600px;
+    margin: 0 auto;
+    background: red;
+}
+.feq-box .list .top {
+    padding: 0 0 0 30px;
+    font-size: 14px;
+    color: #000000;
+}
+.feq-box .list .top .type {
+    width: auto;
+    position: relative;
+    left: 0px;
+    display: inline-block;
+    font-size: 20px;
+}
+.feq-box .list .top .tit {
+    position: relative;
+    width: 500px;
+    display: inline-block;
+}
+.tit span {
+    font-size: 20px;
+}
+.feq-box .list .top .tit a {
+    display: block;
+    padding: 17px 0 17px 56px;
+    background: url("../img/icn_dropdown.png") no-repeat 100% 18px;
+}
