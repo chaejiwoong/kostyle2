@@ -117,7 +117,7 @@
                     alert("해당하는 회원정보가 없습니다.");
                 } else {
                     alert( "회원님 반갑습니다." + result);
-                    self.location = "/auth/main";
+                    self.location = "/kostyle4u";
 
                 }
             });
