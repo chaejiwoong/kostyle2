@@ -1,0 +1,41 @@
+.detail-box {
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+}
+.detail-box .width-box {
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+}
+.width-box > .detail-date{
+    width: auto;
+    height: auto;
+    font-size: 18px;
+}
+.width-box > .detail-title {
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    padding: 10px 0;
+}
+.width-box > .detail-content {
+    padding: 20px;
+    background: #fafafa;
+    color: #4c504f;
+    height: 500px;
+}
+.detail-box > .detail-btn {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.detail-btn button {
+    height: auto;
+    border: none;
+    border: 1px solid black;
+    padding: 10px 18px;
+    border-radius: 20px;
+}

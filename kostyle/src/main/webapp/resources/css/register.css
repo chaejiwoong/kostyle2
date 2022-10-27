@@ -1,0 +1,88 @@
+.qa, .notice {
+    color: #000000;
+}
+.register {
+    color: #35C5F0;
+}
+.chat-box {
+    padding: 25px 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.chat-box .inquiry-content {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    bottom: -2px;
+    border-radius: 29px;
+    padding: 7px 20px;
+    background-color: #edf4f7;
+    color: #159dd1;
+    margin-right: 20px;
+}
+/*#5195bb*/
+.chat-box .inquiry-input {
+    width: 600px;
+    height: 35px;
+    padding-left: 20px;
+    font-size: 18px;
+    border-radius: 24px;
+    outline: 1px solid #8cd7f3;
+    border: none;
+    margin-right: 32px;
+}
+.chat-box .inquiry-btn {
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    width: 120px;
+    height: 39px;
+    background-color: #5195bb;
+}
+.text-box {
+    width: auto;
+    height: auto;
+    padding-top: 15px;
+}
+.text-box .clean-text {
+    color: red;
+    font-weight: bold;
+}
+.waiting-box {
+    width: 100%;
+    height: auto;
+    padding: 15px 0;
+    text-align: center;
+}
+.waiting-box .waiting-people {
+    font-size: 18px;
+    font-weight: bold;
+}
+.inquiry-box {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.inquiry-box .inquiry-box-bottom {
+    position: relative;
+    width: 900px;
+    height: auto;
+    display: inline-block;
+}
+.table > thead > tr > th {
+    border-top: 2px solid #ddd;
+}
+.table tr > th {
+    background-color: #eaeaea;
+}
+.inquiry-box-bottom .create-btn {
+    position: absolute;
+    right: 0;
+    border-radius: 22px;
+    padding: 5px 20px;
+    background-color: #5195bb;
+    border: none;
+    color: #ffffff;
+}
