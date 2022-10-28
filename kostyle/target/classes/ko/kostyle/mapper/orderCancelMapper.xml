@@ -3,31 +3,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.OrderCancelMapper"> <!-- 고유한 도메인 -->
 
-	<insert id="insertOrderCancel" parameterType="ko.kostyle.domain.OrderCancelVO">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and">
+			<choose>
+				<when test="type == 'K'.toString()">
+					ocno = #{keyword}
+				</when>
+				<when test="type == 'P'.toString()">
+					odno = (
+					select odno from order_detail
+					 where pno =
+					 (select pno from product
+					 where name = #{keyword}))
+				</when>
+				<when test="type == 'C'.toString()">
+					category = #{keyword}
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<insert id="insertOrderCancel"
+		parameterType="ko.kostyle.domain.OrderCancelVO">
 		<selectKey keyProperty="ocno" order="BEFORE"
 			resultType="long">
 			select ocno_seq.nextval from dual
 		</selectKey>
 		insert into order_cancel
-		values(#{ocno}, #{odno}, #{category}, #{reason}, sysdate)
+		values(#{ocno}, #{odno}, #{category},
+		#{reason}, sysdate)
 	</insert>
-	
-	<select id="orderCancelList" resultType="ko.kostyle.domain.OrderCancelVO">
-		select * from order_cancel order by ocno desc
+
+	<select id="orderCancelList"
+		resultType="ko.kostyle.domain.OrderCancelVO">
+	    <![CDATA[
+        select * from(
+            select rownum rn, ocno, odno, category, reason, created_date
+            from order_cancel
+            where rownum <= #{pageNum} * #{amount})
+        where
+                ]]>
+		<include refid="criteria"></include>
+        	    <![CDATA[
+         rn > (#{pageNum} - 1) * #{amount}
+        order by odno desc
+        ]]>
 	</select>
-	
-	<select id="orderCancelDetail" resultType="ko.kostyle.domain.OrderCancelVO">
+
+	<select id="orderCancelDetail"
+		resultType="ko.kostyle.domain.OrderCancelVO">
 		select * from order_cancel where ocno = #{ocno}
 	</select>
-	
-	<select id="productDetail" resultType="ko.kostyle.domain.ProductVO">
+
+	<select id="productDetail"
+		resultType="ko.kostyle.domain.ProductVO">
 		select * from product where pno =
-		(select pno from order_detail where odno = #{odno})
+		(select pno from
+		order_detail where odno = #{odno})
 	</select>
-	
+
 	<update id="updateOrderPrice">
-		update orders set totalprice = totalprice - #{price} where ono = #{ono}
+		update orders set totalprice = totalprice - #{price}
+		where ono = #{ono}
 	</update>
+
+	<select id="getTotal" resultType="int">
+		select count(*) from order_cancel
+		where
+		<include refid="criteria"></include>
+		ocno > 0
+	</select>
 
 </mapper>
 

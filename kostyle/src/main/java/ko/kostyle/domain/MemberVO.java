@@ -19,12 +19,12 @@ public class MemberVO implements Serializable {
     private String password;
     private String name;
     private int birth;
-    private char gender;
+    private String gender;
     private int point;
     private String authority;
     private Date created_date;
 
-    public MemberVO(String email, String password,String name, int birth, char gender, int point, String authority, String introduce) {
+    public MemberVO(String email, String password,String name, int birth, String gender, int point, String authority, String introduce) {
         this.email = email;
         this.password = password;
         this.name = name;

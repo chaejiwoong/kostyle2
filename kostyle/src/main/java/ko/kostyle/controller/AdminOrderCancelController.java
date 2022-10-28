@@ -1,5 +1,7 @@
 package ko.kostyle.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.OrderCancelDTO;
+import ko.kostyle.dto.PageDTO;
 import ko.kostyle.service.AdminOrderCancelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -27,11 +31,16 @@ public class AdminOrderCancelController {
 	
 	// 주문 취소 목록 조회
 	@GetMapping
-	public String orderCancelList(Model model) {
+	public String orderCancelList(Criteria cri,Model model) {
 		
 		log.info("admin orderCancel list........");
 		
-		model.addAttribute("orderCancels", service.getOrderCancelList());
+		List<OrderCancelDTO> list = service.getOrderCancelList(cri);
+		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("orderCancels", list);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 		return "admin/orderCancelList";
 	}

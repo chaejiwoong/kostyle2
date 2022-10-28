@@ -1,92 +1,175 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
         <title>KoStyle4U</title>
         <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
+        <link href="/resources/css/header.css" rel="stylesheet"/>
+        <link href="/resources/css/footer.css" rel="stylesheet"/>
+<style>
+
+        h1{
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+.paging {
+	text-align: center;
+}
+
+.selectBox{
+	text-align: center;
+}
+</style>
 </head>
 <body>
-    <h1>관리자 회원 목록</h1>
-    <ul>
-        <li><a href="#">상품관리</a></li>
-        <li><a href="#">고객센터관리</a></li>
-        <li><a href="#">회원관리</a></li>
-        <li><a href="#">주문관리</a></li>
-        <li><a href="#">경매관리</a></li>
-        <li><a href="#">통계</a></li>
-    </ul>
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+	<h1>관리자 회원 목록</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>회원번호</th>
-            <th>이메일</th>
-            <th>아이디</th>
-            <th>가입일자</th>
-        </tr>
-        </thead>
+	<div class="container selectBox">
+	<form id='searchForm' class="form-horizontal" action="/admin/members" method='get'>
+	<div class="form-inline form-group">
+				<select class="form-control" name='type'>
+				<option value=""
+					<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+				<option value="K"
+					<c:out value="${pageMaker.cri.type eq 'K'?'selected':''}"/>>회원번호</option>
+				<option value="E"
+					<c:out value="${pageMaker.cri.type eq 'E'?'selected':''}"/>>이메일</option>
+				<option value="N"
+					<c:out value="${pageMaker.cri.type eq 'N'?'selected':''}"/>>이름</option>
 
-        <c:forEach items="${list}" var="member">
-            <tr>
-                <td><c:out value="${member.mno}" /></td>
-                <td><a href='<c:out value="members/${member.mno}"/>'>
-                    <c:out value="${member.email}" />
-                </a></td>
+			</select>
+			<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
+				<button id="search" class='btn btn-default'>Search</button>
+				<button id="default" class='btn btn-default'>Default</button>
+	</div>
+			<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
+			<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 
-                <td><c:out value="${member.name}" /></td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.createdDate}" /></td>
-            </tr>
-        </c:forEach>
+		</form>
 
-    </table>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>이메일</th>
+					<th>이름</th>
+					<th>가입일자</th>
+				</tr>
+			</thead>
 
-        <ul class="pagination">
-            <!-- 페이징 구현 부분 -->
-            <c:if test="${pageMaker.prev}">
-                <li class="paginate_button previous"><a
-                        href="${pageMaker.startPage -1}">Previous</a></li>
-            </c:if>
+			<c:forEach items="${list}" var="member">
+				<tr>
+					<td><c:out value="${member.mno}" /></td>
+					<td><a href='<c:out value="members/${member.mno}"/>'> <c:out
+								value="${member.email}" />
+					</a></td>
 
-            <c:forEach var="num" begin="${pageMaker.startPage}"
-                       end="${pageMaker.endPage}">
-                <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-                    <a href="${num}">${num}</a>
-                </li>
-            </c:forEach>
+					<td><c:out value="${member.name}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${member.createdDate}" /></td>
+				</tr>
+			</c:forEach>
 
-            <c:if test="${pageMaker.next}">
-                <li class="paginate_button next"><a
-                        href="${pageMaker.endPage +1 }">Next</a></li>
-            </c:if>
-        </ul>
+		</table>
 
-        <!-- 페이징 번호 요청 시에 submit되는 form -->
-        <form id='actionForm' action="/admin/members" method='get'>
-            <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-            <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+		<div class="paging">
+			<ul class="pagination">
+				<!-- 페이징 구현 부분 -->
+				<c:if test="${pageMaker.prev}">
+					<li class="paginate_button previous"><a
+						href="${pageMaker.startPage -1}">&lt</a></li>
+				</c:if>
 
-            <input type='hidden' name='type'
-                   value='<c:out value="${ pageMaker.cri.type }"/>'> <input
-                type='hidden' name='keyword'
-                value='<c:out value="${ pageMaker.cri.keyword }"/>'>
-        </form>
+				<c:forEach var="num" begin="${pageMaker.startPage}"
+					end="${pageMaker.endPage}">
+					<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+						<a href="${num}">${num}</a>
+					</li>
+				</c:forEach>
 
-<script>
-    $(document).ready(function () {
-        var actionForm = $("#actionForm");
+				<c:if test="${pageMaker.next}">
+					<li class="paginate_button next"><a
+						href="${pageMaker.endPage +1 }">&gt</a></li>
+				</c:if>
+			</ul>
+			
+		</div>
 
-        $(".paginate_button a").on("click", function(e) {
 
-                e.preventDefault();
+		<!-- 페이징 번호 요청 시에 submit되는 form -->
+		<form id='actionForm' action="/admin/members" method='get'>
+			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+			<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 
-                // 해당 pageNum을 a 태그의 href 속성 값으로 치환
-                actionForm.find("input[name='pageNum']")
-                    .val($(this).attr("href"));
-                actionForm.submit();
-            });
-    });
-</script>
+			<input type='hidden' name='type'
+				value='<c:out value="${ pageMaker.cri.type }"/>'> <input
+				type='hidden' name='keyword'
+				value='<c:out value="${ pageMaker.cri.keyword }"/>'>
+		</form>
+	</div>
+
+
+	<script>
+		$(document).ready(
+				function() {
+					var actionForm = $("#actionForm");
+					
+
+					$(".paginate_button a").on(
+							"click",
+							function(e) {
+
+								e.preventDefault();
+
+								// 해당 pageNum을 a 태그의 href 속성 값으로 치환
+								actionForm.find("input[name='pageNum']").val(
+										$(this).attr("href"));
+								actionForm.submit();
+							});
+					
+					var searchForm = $('#searchForm');
+
+					$("#search").on(
+							"click",
+							// 값이 들어있지 않다면 alert창 호출
+							function(e) {
+
+								if (!searchForm.find("option:selected")
+										.val()) {
+									alert("검색종류를 선택하세요");
+									return false;
+								}
+
+								if (!searchForm.find(
+										"input[name='keyword']").val()) {
+									alert("키워드를 입력하세요");
+									return false;
+								}
+
+								// 1페이지로 바꾸고 submit.
+								searchForm.find("input[name='pageNum']")
+										.val("1");
+								e.preventDefault();
+
+								searchForm.submit();
+
+							});
+					
+					$("#default").on('click', function(e){
+						e.preventDefault();
+						self.location="/admin/members";
+					})
+
+				});
+	</script>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

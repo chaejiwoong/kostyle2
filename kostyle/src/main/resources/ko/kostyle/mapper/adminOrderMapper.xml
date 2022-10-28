@@ -3,23 +3,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.AdminOrderMapper"> <!-- 고유한 도메인 -->
 
-	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and">
+			<choose>
+				<when test="type == 'K'.toString()">
+					ono = #{keyword}
+				</when>
+				<when test="type == 'E'.toString()">
+					mno = (select mno from member where email = #{keyword})
+				</when>
+				<when test="type == 'S'.toString()">
+					status = #{keyword}
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+
 	<select id="orderList" resultType="ko.kostyle.domain.OrderVO">
-		select * from orders order by ono desc
+		<![CDATA[
+        select * from(
+            select rownum rn, ono, ano, mno, payment, totalprice, status, created_date
+            from orders
+            where rownum <= #{pageNum} * #{amount})
+        where
+             ]]>
+		<include refid="criteria"></include>
+        	<![CDATA[
+        		
+         rn > (#{pageNum} - 1) * #{amount}
+        order by ono desc
+        ]]>
 	</select>
 
 	<select id="getOrder" resultType="ko.kostyle.domain.OrderVO">
-		select * from orders where ono = #{ono}
+		select * from orders where ono
+		= #{ono}
 	</select>
 
-	<select id="orderDetails" resultType="ko.kostyle.domain.OrderDetailVO">
+	<select id="orderDetails"
+		resultType="ko.kostyle.domain.OrderDetailVO">
 		select * from order_detail
-			 where odno not in
-			 			(select odno from order_cancel)
-			 	and ono = #{ono}
+		where odno not in
+		(select odno from order_cancel)
+		and ono = #{ono}
 	</select>
-	
-	<select id="getOrderDetail" resultType="ko.kostyle.domain.OrderDetailVO">
+
+	<select id="getOrderDetail"
+		resultType="ko.kostyle.domain.OrderDetailVO">
 		select * from order_detail where odno = #{odno}
 	</select>
 
@@ -37,9 +68,20 @@
 	<select id="productDetail"
 		resultType="ko.kostyle.domain.ProductVO">
 		select * from product where pno =
-		(select pno from order_detail where odno = #{odno})
+		(select pno from
+		order_detail where odno = #{odno})
 	</select>
 
 
+	<select id="getTotal" resultType="int">
+		select count(*) from orders
+		where
+		<include refid="criteria"></include>
+		ono > 0
+	</select>
+
+	<update id="updateOrderStatus">
+		update orders set status=#{status} where ono = #{ono}
+	</update>
 </mapper>
 

@@ -64,7 +64,7 @@
 
             <div class="row last">
                 <span class="col-md-4"></span>
-                <a id="login" class="btn btn-primary col-md-3" href="/auth/login">로그인</a>
+                <button id="login" type="submit" class="btn btn-primary col-md-3" href="/auth/login">로그인</button>
             </div>
         </div>
     </form>

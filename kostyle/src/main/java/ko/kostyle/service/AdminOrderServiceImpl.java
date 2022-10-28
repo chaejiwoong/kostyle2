@@ -8,6 +8,7 @@ import ko.kostyle.domain.ProductVO;
 import ko.kostyle.dto.AddressDTO;
 import ko.kostyle.dto.AdminOrderDetailDTO;
 import ko.kostyle.dto.AdminProductDTO;
+import ko.kostyle.dto.Criteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -33,8 +34,8 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 
     //관리자 주문정보 가져오기
     @Override
-    public List<AdminOrderDTO> orderList() {
-        List<OrderVO> orders = orderMapper.orderList();
+    public List<AdminOrderDTO> orderList(Criteria cri) {
+        List<OrderVO> orders = orderMapper.orderList(cri);
         List<AdminOrderDTO> dtos = new ArrayList<>();
         for (OrderVO order : orders) {
             MemberVO vo = memberMapper.memberDetailById(order.getMno());
@@ -110,5 +111,11 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         
         return dtos; 
     }
+
+
+	@Override
+	public int getTotal(Criteria cri) {
+		return orderMapper.getTotal(cri);
+	}
 
 }

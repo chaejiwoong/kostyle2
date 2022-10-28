@@ -21,7 +21,11 @@
 				</c:if>
 				<c:if test="${not empty sessionScope.user}">
 				<li>${sessionScope.user.name }님 반가워요 ! </li>
-					<li><a href="/members/myPage"><span>마이페이지</sspan></a></li>
+					<c:if test="${sessionScope.user.authority eq 'ROLE_ADMIN' }">
+						<li><a href="/admin/members"><span>관리자페이지</span></a></li>
+					</c:if>
+					<li><a href="/members/myPage"><span>마이페이지</span></a></li>
+					
 					<li class="line"></li>
 					<li><a id="logout" href="/auth/logout"><span>로그아웃</span></a></li>
 				</c:if>
