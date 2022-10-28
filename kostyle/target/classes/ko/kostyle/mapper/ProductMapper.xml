@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.ProductMapper"> <!-- 고유한 도메인 -->
+
+
+<!-- 	<resultMap type="ko.kostyle.domain.ProductVO" id="productMap">
+		<id property="pno" column="pno"/>
+		<result property="pno" column="pno"/>
+		<result property="scno" column="scno"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="hitCount" column="hitCount"/>
+		<result property="season" column="season"/>
+		<result property="color" column="color"/>
+		<result property="gender" column="gender"/>
+		<result property="created_date" column="created_date"/>
+		<result property="last_modified_date"  column="last_modified_date"/>
+	</resultMap> -->
+
+
+	<select id="productList" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT
+	</select>
+	
+	<select id="producGet" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT where pno = #{pno}
+	</select>
+	
+<!-- 	<insert id ="productInsert">
+		INSERT INTO PRODUCT(pno,scno,NAME,PRICE,HITCOUNT,SEASON,COLOR,GENDER,CREATED_DATE,LAST_MODIFIED_DATE)
+		VALUES(pno_seq,scno_seq,#{name},#{price},#{hitcount},#{season},#{color},#{gender},sysdate,sysdate)
+	</insert> -->
+	
+	<insert id = "productInsert">
+		<selectKey resultType="Long" order="BEFORE" keyProperty="pno">
+			select pno_seq.nextval from dual
+		</selectKey>
+			INSERT INTO PRODUCT(pno,NAME,PRICE,HITCOUNT,SEASON,COLOR,GENDER,CREATED_DATE,LAST_MODIFIED_DATE)
+			VALUES(#{pno},#{name},#{price},0,#{season},#{color},#{gender},sysdate,sysdate)
+	</insert>
+	
+	
+	
+	
+<!-- 	<insert id="stockInsert">
+		<selectKey resultType="Long" order="BEFORE" keyProperty="sno">
+			select sno_seq.nextval from dual
+		</selectKey>
+			INSERT INTO PRODUCT(sno,pno,p_size,amount)
+			VALUES(#{sno},#{pno},#{p_size},#{amount})
+	</insert> -->
+	
+<!-- 	<insert id="imgInsert">
+		<selectKey resultType="Long" order="BEFORE" keyProperty="pino">
+			select pino_seq.nextval from dual
+		</selectKey>
+			INSERT INTO PRODUCT(pino,pno,filepath,filename,uuid)
+			VALUES(#{pino},#{pno},#{p_siz},#{amount})
+	</insert> -->
+	
+	<update id="productUpdate">
+		UPDATE PRODUCT
+		SET name = #{name}, price = #{price} season = #{season} color = #{color} gender = #{gender}
+		where pno = #{pno}
+	</update>
+	
+	<delete id="productDelete">
+		DELETE FROM PRODUCT WHERE pno = #{pno}
+	</delete>
+	
+	
+	<sql id="criteria">
+		<trim prefixOverrides="OR" suffix=") AND " prefix="(">
+			<foreach collection="typeArr" item="type"> 
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							pno like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'C'.toString()">
+							name like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'W'.toString()">
+							color like '%'||#{keyword}||'%' 
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	
+	<select id="productGetTotal" resultType="int">
+		
+		select count(*) from
+		PRODUCT where
+		<include refid ="criteria"/>
+		pno>0
+	</select> 
+	
+ 	<select id="getListWithPaging" resultType="ko.kostyle.domain.ProductVO">
+		<![CDATA[
+			select pno,name,price,color,gender,season,CREATED_DATE
+			FROM(
+				select /*INDEX_DESC(PRODUCT SYS_C007221)*/
+				rownum rn,pno,name,price,color,gender,season,CREATED_DATE
+				from PRODUCT
+				where
+					]]>
+				<include refid ="criteria"/>
+				<![CDATA[
+					rownum <= #{pageNum} * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}
+				]]>
+	</select> 
+	
+	
+
+   
+
+    
+</mapper>
+

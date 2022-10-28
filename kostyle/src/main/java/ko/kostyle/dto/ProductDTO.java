@@ -1,12 +1,12 @@
-package ko.kostyle.domain;
+package ko.kostyle.dto;
 
-import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class ProductVO implements Serializable{
+public class ProductDTO  {
 	
 	private Long pno;
 	private Long scno;
@@ -19,5 +19,6 @@ public class ProductVO implements Serializable{
 	private Date created_date;
 	private Date last_modified_date;
 	
+	private List<StockDTO> stockList;
 
 }
