@@ -169,7 +169,7 @@
             var member = {
                 'point' :form.find("input[name='point']").val(),
                 'authority' :form.find("input[name='authority']").val()
-            }
+           }
 
             memberService.updateMember(member, function (result) {
                 alert('수정이 완료되었습니다.');

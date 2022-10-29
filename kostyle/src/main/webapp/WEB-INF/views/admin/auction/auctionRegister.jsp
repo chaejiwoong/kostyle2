@@ -53,7 +53,8 @@ function setThumbnail(event) {
 
 		 reader.onload = function(event) {
 		   		var img = document.createElement("img");
-		   		img.setAttribute("src", event.target.result);
+		   		img.setAttribute("src", event.target.result)
+		   		$("#img-result").empty();
 		    	document.querySelector("div#img-result").appendChild(img);
 		 };
 

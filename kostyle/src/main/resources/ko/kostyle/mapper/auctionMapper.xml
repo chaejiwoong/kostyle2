@@ -3,6 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.AuctionMapper"> <!-- 고유한 도메인 -->
 
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and">
+			<choose>
+				<when test="type == 'K'.toString()">
+					apno = #{keyword}
+				</when>
+				<when test="type == 'N'.toString()">
+					name = #{keyword}
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
     <insert id="insertAuction" parameterType="ko.kostyle.domain.AuctionVO">
 
         <selectKey keyProperty="apno" order="BEFORE"
@@ -13,16 +26,52 @@
         values (#{apno},#{name},#{start_price}, #{best_bid_price}, #{bid_unit}, sysdate, sysdate+1)
     </insert>
     
-    <insert id="insertAuctionImg" parameterType="ko.kostyle.domain.AuctionImgVO">
-    	insert into auction_img values(aino_seq.nextval, #{apno}, #{filepath}, #{filename}, #{uuid})
-    </insert>
-    
+
     <select id="auctionList" resultType="ko.kostyle.domain.AuctionVO">
-    	select * from auction_product order by apno desc
+    	    <![CDATA[
+        select * from(
+            select rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
+            from auction_product
+            where rownum <= #{pageNum} * #{amount})
+        ]]>
+        where
+		<include refid="criteria"></include>
+		<![CDATA[
+         rn > (#{pageNum} - 1) * #{amount}
+        order by apno desc
+        ]]>
+    </select>
+    
+    <select id="auctionDetail" resultType="ko.kostyle.domain.AuctionVO">
+    	select * from auction_product where apno = #{apno}
     </select>
     
     <select id="auctionImgDetail" resultType="ko.kostyle.domain.AuctionImgVO">
     	select * from auction_img where apno = #{apno}
     </select>
+    
+    <update id="updateAuction">
+    	update auction_product set name=#{name}, bid_unit=#{bid_unit} where apno = #{apno}
+    </update>
+    
+    <delete id="deleteAuction">
+    	delete from auction_product where apno = #{apno} 
+    </delete>
+    
+    <delete id="deleteAuctionImg">
+    	delete from auction_img where apno=#{apno}
+    </delete>
+    
+    <insert id="insertAuctionImg" parameterType="ko.kostyle.domain.AuctionImgVO">
+    	insert into auction_img values(aino_seq.nextval, #{apno}, #{filepath}, #{filename}, #{uuid})
+    </insert>
+    
+    <select id="getTotal" resultType="int">
+    	select count(*) from auction_product
+    	where
+		<include refid="criteria"></include>
+		apno > 0
+    </select>
+    
 </mapper>
 

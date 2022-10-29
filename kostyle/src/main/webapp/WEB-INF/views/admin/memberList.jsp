@@ -68,9 +68,7 @@
 			<c:forEach items="${list}" var="member">
 				<tr>
 					<td><c:out value="${member.mno}" /></td>
-					<td><a href='<c:out value="members/${member.mno}"/>'> <c:out
-								value="${member.email}" />
-					</a></td>
+					<td><a href="members/${member.mno}">${member.email}</a></td>
 
 					<td><c:out value="${member.name}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
