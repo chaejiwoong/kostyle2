@@ -33,6 +33,7 @@
 				<th>결제방식</th>
 				<th>가격</th>
 				<th>배송상태</th>
+				<th>구분</th>
 				<th>주문일자</th>
 			</tr>
 		</thead>
@@ -43,6 +44,7 @@
 			<td><c:out value="${order.payment}" /></td>
 			<td><c:out value="${order.totalPrice}" /></td>
 			<td><c:out value="${order.status}" /></td>
+			<td><c:out value="${order.category}" /></td>	
 			<td><fmt:formatDate pattern="yyyy-MM-dd"
 					value="${order.created_date}" /></td>
 		</tr>
@@ -67,11 +69,13 @@
 	</table>
 
 	<h1>주문상품 정보</h1>
-	<table class="table">
+	<c:if test="${order.category eq 'product' }">
+		<table class="table">
 		<thead>
 			<tr>
 				<th>주문상세번호</th>
 				<th>상품명</th>
+				<th>사이즈</th>
 				<th>수량</th>
 				<th>가격</th>
 				<th>주문취소</th>
@@ -82,6 +86,7 @@
 			<tr>
 				<td><c:out value="${detail.odno}" /></td>
 				<td><c:out value="${detail.product.name}" /></td>
+				<td><c:out value="${detail.p_size}" /></td>
 				<td><c:out value="${detail.amount}" /></td>
 				<td><c:out value="${detail.price}" /></td>
 				<td>
@@ -94,6 +99,25 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</c:if>
+	<c:if test="${order.category eq 'auction_product' }">
+		<table class="table">
+		<thead>
+			<tr>
+				<th>낙찰번호</th>
+				<th>상품명</th>
+				<th>낙찰가격</th>
+			</tr>
+		</thead>
+			<tr>
+				<td><c:out value="${winningBid.wbno}" /></td>
+				<td><c:out value="${winningBid.name}" /></td>
+				<td><c:out value="${winningBid.price}" /></td>
+			</tr>
+	</table>	
+	
+	</c:if>
+
 
 </div>
 

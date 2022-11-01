@@ -60,11 +60,15 @@
         select * from(
             select rownum rn, mno, email, name, birth, gender, point, authority, created_date
             from member
-            where rownum <= #{pageNum} * #{amount})
+            where 
         ]]>
+            <include refid="criteria"></include>
+       <![CDATA[
+            rownum <= #{pageNum} * #{amount})
+
         where
-		<include refid="criteria"></include>
-		<![CDATA[
+
+
          rn > (#{pageNum} - 1) * #{amount}
         order by mno desc
         ]]>
@@ -73,14 +77,24 @@
 
 
     <update id="updateMember">
-        update member set point=#{point}, authority=#{authority} where mno = #{mno}
+        update member set point=#{point}
+        , authority=#{authority}
+         where mno = #{mno}
     </update>
 
     <select id="getTotal" resultType="int">
         select count(*) from member
         where 
 		<include refid="criteria"></include>
+       <![CDATA[	
     	mno > 0
+        ]]>
     </select>
+    
+    <update id="updatePoint">
+        update member set point= point - #{point}
+         where mno = #{mno}
+    </update>
+
 </mapper>
 

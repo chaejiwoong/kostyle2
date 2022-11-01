@@ -40,11 +40,12 @@
         select * from(
             select rownum rn, ocno, odno, category, reason, created_date
             from order_cancel
-            where rownum <= #{pageNum} * #{amount})
-        where
+            where 
                 ]]>
 		<include refid="criteria"></include>
-        	    <![CDATA[
+        	    <![CDATA[            
+            rownum <= #{pageNum} * #{amount})
+        where
          rn > (#{pageNum} - 1) * #{amount}
         order by odno desc
         ]]>

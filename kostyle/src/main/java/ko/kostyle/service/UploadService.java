@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import ko.kostyle.dto.ImgDTO;
@@ -75,6 +77,30 @@ public class UploadService {
 
 		}
 		return list;
+	}
+	
+	public ResponseEntity<byte[]> showImg(String fileName) {
+		
+		log.info("fileName: " + fileName);
+        // 파라미터로 넘어온 파일경로와 서버의 경로를 합친 file 객체 생성 => 파일의 Full Path
+        File file = new File("c:\\upload\\" + fileName);
+        log.info("file : " + file);
+
+        ResponseEntity<byte[]> result = null;
+
+        try {
+            // 헤더정보를 담기 위한 HttpHeaders 객체 생성
+            HttpHeaders header = new HttpHeaders();
+
+            // 헤더의 해당 파일의 MIME 타입을 Content-Type 으로 추가
+            header.add("Content-Type", Files.probeContentType(file.toPath()));
+            // ResponseEntity 에 해당 파일정보를 Byte 코드로 변환한 값, 헤더, 상태코드를 담아서 리턴
+            result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+        return result;
 	}
 
 	private String getFolder() {

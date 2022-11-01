@@ -171,13 +171,13 @@
                 'authority' :form.find("input[name='authority']").val()
            }
 
-            memberService.updateMember(member, function (result) {
+		        memberService.updateMember(member, function (result) {
                 alert('수정이 완료되었습니다.');
                 $(form.find("input[name='point']")).attr('readonly', true);
                 $(form.find("input[name='authority']")).attr('readonly', true);
                 $('#completion-btn').hide();
                 $('#update-btn').show();
-            });
+            }); 
         });
     });
 </script>

@@ -25,17 +25,34 @@ public class MemberMapperTest {
 	
 	@Autowired PasswordEncoder passwordEncoder;
 
+//	@Test
+//	public void insertTest() {
+//
+//		IntStream.range(0, 200).forEach(i -> {
+//			MemberVO vo = new MemberVO();
+//			vo.setEmail("test" + i);
+//			vo.setName("tester" + i);
+//			vo.setBirth(111111 + i);
+//			vo.setAuthority("ROLE_USER");
+//			vo.setGender(i%2==0?"M":"F");
+//			vo.setPassword(passwordEncoder.encode("test" + i));
+//			
+//			mapper.memberInsert(vo);
+//		});
+//
+//	}
+	
 	@Test
-	public void insertTest() {
+	public void adminInsert() {
 
-		IntStream.range(0, 200).forEach(i -> {
+		IntStream.range(0, 1).forEach(i -> {
 			MemberVO vo = new MemberVO();
-			vo.setEmail("test" + i);
-			vo.setName("tester" + i);
-			vo.setBirth(111111 + i);
-			vo.setAuthority("ROLE_USER");
+			vo.setEmail("admin");
+			vo.setName("admin");
+			vo.setBirth(111111);
+			vo.setAuthority("ROLE_ADMIN");
 			vo.setGender(i%2==0?"M":"F");
-			vo.setPassword(passwordEncoder.encode("test" + i));
+			vo.setPassword(passwordEncoder.encode("admin"));
 			
 			mapper.memberInsert(vo);
 		});

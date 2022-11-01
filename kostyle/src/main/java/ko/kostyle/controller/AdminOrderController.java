@@ -49,11 +49,15 @@ public class AdminOrderController {
     @GetMapping("/{ono}")
     public String orderDetail(@PathVariable Long ono, Model model) {
         // 주문 정보 저장
-        model.addAttribute("order", orderService.orderDetail(ono));
+    	AdminOrderDTO order = orderService.orderDetail(ono);
+        model.addAttribute("order", order);
         // 주문 상세 저장
-        List<AdminOrderDetailDTO> list = orderService.orderDetails(ono); 
-        list.forEach(log::info);
-        model.addAttribute("details", list);
+        if(order.getCategory().equals("product")) {
+            model.addAttribute("details", orderService.orderDetails(ono));
+        }else {
+        	model.addAttribute("winningBid", orderService.getWinningBid(ono));
+        }
+
         
         return "admin/orderDetailList";
     }

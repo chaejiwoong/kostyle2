@@ -4,7 +4,7 @@
 <mapper namespace="ko.kostyle.mapper.AuctionMapper"> <!-- 고유한 도메인 -->
 
 	<sql id="criteria">
-		<trim prefix="(" suffix=") and">
+		<trim prefix="(" suffix=") and" prefixOverrides="and">
 			<choose>
 				<when test="type == 'K'.toString()">
 					apno = #{keyword}
@@ -13,65 +13,157 @@
 					name = #{keyword}
 				</when>
 			</choose>
+			<choose>
+				<when test="filter == 'P'.toString()">
+				   	<![CDATA[
+					and end_date > sysdate
+					]]>
+				</when>
+				<when test="filter == 'D'.toString()">
+				  	<![CDATA[
+					and end_date < sysdate
+					]]>
+				</when>
+			</choose>
 		</trim>
 	</sql>
 
-    <insert id="insertAuction" parameterType="ko.kostyle.domain.AuctionVO">
+	<insert id="insertAuction"
+		parameterType="ko.kostyle.domain.AuctionVO">
 
-        <selectKey keyProperty="apno" order="BEFORE"
-                   resultType="long">
-            select apno_seq.nextval from dual
-        </selectKey>
-        insert into auction_product
-        values (#{apno},#{name},#{start_price}, #{best_bid_price}, #{bid_unit}, sysdate, sysdate+1)
-    </insert>
-    
+		<selectKey keyProperty="apno" order="BEFORE"
+			resultType="long">
+			select apno_seq.nextval from dual
+		</selectKey>
+		insert into auction_product
+		values (#{apno},#{name},#{start_price},
+		#{best_bid_price}, #{bid_unit},
+		sysdate, sysdate+1/24)
+	</insert>
 
-    <select id="auctionList" resultType="ko.kostyle.domain.AuctionVO">
+
+	<select id="auctionList"
+		resultType="ko.kostyle.domain.AuctionVO">
     	    <![CDATA[
         select * from(
             select rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
             from auction_product
-            where rownum <= #{pageNum} * #{amount})
-        ]]>
-        where
+            where
+            ]]>
 		<include refid="criteria"></include>
-		<![CDATA[
+		<![CDATA[ 
+           rownum <= #{pageNum} * #{amount})
+            
+        where
          rn > (#{pageNum} - 1) * #{amount}
-        order by apno desc
         ]]>
-    </select>
-    
-    <select id="auctionDetail" resultType="ko.kostyle.domain.AuctionVO">
-    	select * from auction_product where apno = #{apno}
-    </select>
-    
-    <select id="auctionImgDetail" resultType="ko.kostyle.domain.AuctionImgVO">
-    	select * from auction_img where apno = #{apno}
-    </select>
-    
-    <update id="updateAuction">
-    	update auction_product set name=#{name}, bid_unit=#{bid_unit} where apno = #{apno}
-    </update>
-    
-    <delete id="deleteAuction">
-    	delete from auction_product where apno = #{apno} 
-    </delete>
-    
-    <delete id="deleteAuctionImg">
-    	delete from auction_img where apno=#{apno}
-    </delete>
-    
-    <insert id="insertAuctionImg" parameterType="ko.kostyle.domain.AuctionImgVO">
-    	insert into auction_img values(aino_seq.nextval, #{apno}, #{filepath}, #{filename}, #{uuid})
-    </insert>
-    
-    <select id="getTotal" resultType="int">
-    	select count(*) from auction_product
-    	where
+	</select>
+
+	<select id="auctionProgressList"
+		resultType="ko.kostyle.domain.AuctionVO">
+		<![CDATA[
+    	select * from auction_product where end_date > sysdate
+        ]]>
+
+	</select>
+
+	<!-- 마감 1시간도 안남은 상품 조회 -->
+	<select id="auctionDeadlineList"
+		resultType="ko.kostyle.domain.AuctionVO">
+		<![CDATA[
+    	select * from auction_product where end_date > sysdate and end_date < sysdate + 1/24 
+    	and rownum <= 4
+        ]]>
+
+	</select>
+
+	<select id="auctionDetail"
+		resultType="ko.kostyle.domain.AuctionVO">
+		select * from auction_product where apno = #{apno}
+	</select>
+	
+	<!-- 낙찰상품의 상품 조회 -->
+	<select id="auctionDetailByBno" resultType="ko.kostyle.domain.AuctionVO">
+		select * from auction_product where apno = (select apno from bid where bno=#{bno})
+	</select>
+
+	<select id="auctionImgDetail"
+		resultType="ko.kostyle.domain.AuctionImgVO">
+		select * from auction_img where apno = #{apno}
+	</select>
+
+	<update id="updateAuction">
+		update auction_product set name=#{name},
+		bid_unit=#{bid_unit} where apno =
+		#{apno}
+	</update>
+
+	<update id="updatePrice">
+		update auction_product set best_bid_price =
+		#{best_bid_price} where apno = #{apno}
+	</update>
+
+	<delete id="deleteAuction">
+		delete from auction_product where apno = #{apno}
+	</delete>
+
+	<delete id="deleteAuctionImg">
+		delete from auction_img where apno=#{apno}
+	</delete>
+
+	<insert id="insertAuctionImg"
+		parameterType="ko.kostyle.domain.AuctionImgVO">
+		insert into auction_img values(aino_seq.nextval,
+		#{apno}, #{filepath},
+		#{filename}, #{uuid})
+	</insert>
+
+	<select id="getTotal" resultType="int">
+		select count(*) from auction_product
+		where
 		<include refid="criteria"></include>
 		apno > 0
-    </select>
-    
+	</select>
+
+	<!-- 관심경매 상품 조회 -->
+	<select id="attentionList"
+		resultType="ko.kostyle.domain.AuctionVO">
+		select *
+		from auction_product
+		where apno IN (
+		select apno from
+		attention_auction where mno=#{mno})
+		<![CDATA[
+    	and end_date > sysdate
+        ]]>
+	</select>
+
+	<!-- 경매 마감 후 1시간이 덜 지난 상품 조회 -->
+	<select id="auctionCloseList" resultType="ko.kostyle.domain.AuctionVO">
+		select * from auction_product
+		where end_date between
+		(sysdate-1/24) and sysdate
+	</select>
+
+	<!-- 회원이 입찰한 상품목록 조회 -->
+	<select id="memberAuctionBidList"
+		resultType="ko.kostyle.domain.AuctionVO">
+		select b.subbno as bno,
+		a.apno as apno,
+		a.name as name,
+		a.start_price as start_price,
+		a.best_bid_price as best_bid_price,
+		a.bid_unit as bid_unit,
+		a.start_date as start_date,
+		a.end_date as end_date
+		from (select max(bno) as subbno, apno
+				from bid 
+				where mno = #{mno}
+				group by apno) b left outer join auction_product a on b.apno = a.apno
+		where a.apno in (select distinct apno from bid where mno = #{mno})
+		order by bno desc
+	</select>
+	
+
 </mapper>
 

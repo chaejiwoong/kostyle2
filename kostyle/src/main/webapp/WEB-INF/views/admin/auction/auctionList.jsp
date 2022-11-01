@@ -26,6 +26,7 @@ font-weight: bold;
 .paging {
 	text-align: center;
 }
+
 </style>
 </head>
 <body>
@@ -35,20 +36,27 @@ font-weight: bold;
 	<div class="container">
 			<div class="selectBox">
 		<form id='searchForm' class="form-horizontal" action="/admin/auctions" method='get'>
-	<div class="form-inline form-group">
+			<div class="form-inline form-group">
 				<select class="form-control" name='type'>
-				<option value=""
-					<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-				<option value="K"
-					<c:out value="${pageMaker.cri.type eq 'K'?'selected':''}"/>>경매상품번호</option>
-				<option value="N"
-					<c:out value="${pageMaker.cri.type eq 'N'?'selected':''}"/>>상품명</option>
+					<option value=""
+						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+					<option value="K"
+						<c:out value="${pageMaker.cri.type eq 'K'?'selected':''}"/>>경매상품번호</option>
+					<option value="N"
+						<c:out value="${pageMaker.cri.type eq 'N'?'selected':''}"/>>상품명</option>
 
-			</select>
-			<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
-				<button id="search" class='btn btn-default'>Search</button>
-				<button id="default" class='btn btn-default'>Default</button>
+				</select>
+				<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
+					<button id="search" class='btn btn-default'>Search</button>
+					<button id="default" class='btn btn-default'>Default</button>
+				
+				<span>경매 여부</span>
+				<label for="progress">진행</label><input type="radio" id="progress" class="form-control filter" name="filter" value="P"
+				<c:out value="${pageMaker.cri.filter eq 'P'?'checked':''}"/>>
+				<label for="deadline">마감</label><input type="radio" id="deadline" class="form-control filter" name="filter" value="D"
+				<c:out value="${pageMaker.cri.filter eq 'D'?'checked':''}"/>>
 			</div>
+			
 			<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 			<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 
@@ -66,6 +74,7 @@ font-weight: bold;
 					<th>입찰시작가</th>
 					<th>최고입찰가</th>
 					<th>입찰단위</th>
+					<th>진행여부</th>
 					<th>시작일자</th>
 					<th>종료일자</th>
 				</tr>
@@ -80,6 +89,7 @@ font-weight: bold;
 					<td><c:out value="${auction.start_price}" /></td>
 					<td><c:out value="${auction.best_bid_price}" /></td>
 					<td><c:out value="${auction.bid_unit}" /></td>
+					<td><c:out value="${auction.status}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${auction.start_date}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -115,7 +125,7 @@ font-weight: bold;
 		</div>
 
 		<!-- 페이징 번호 요청 시에 submit되는 form -->
-		<form id='actionForm' action="/admin/members" method='get'>
+		<form id='actionForm' action="/admin/auctions" method='get'>
 			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 			<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 
@@ -123,6 +133,8 @@ font-weight: bold;
 				value='<c:out value="${ pageMaker.cri.type }"/>'> <input
 				type='hidden' name='keyword'
 				value='<c:out value="${ pageMaker.cri.keyword }"/>'>
+			<input type='hidden' name='filter'
+				value='<c:out value="${ pageMaker.cri.filter }"/>'>
 		</form>
 	</div>
 
@@ -182,6 +194,10 @@ var aa = (function loadThumbnail() {
 					"click",
 					// 값이 들어있지 않다면 alert창 호출
 					function(e) {
+						if(searchForm.find("option:selected").val() == "K" && isNaN(searchForm.find("input[name='keyword']").val())){
+							alert("번호를 입력하세요.")
+							return false;
+						}
 
 						if (!searchForm.find("option:selected")
 								.val()) {
@@ -207,6 +223,15 @@ var aa = (function loadThumbnail() {
 			$("#default").on('click', function(e){
 				e.preventDefault();
 				self.location="/admin/auctions";
+			})
+			
+			
+			$("#progress, #deadline").on('change', function(){
+				// 1페이지로 바꾸고 submit.
+				searchForm.find("input[name='pageNum']")
+						.val("1");
+
+				searchForm.submit();
 			})
 	})
 </script>

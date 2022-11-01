@@ -35,6 +35,10 @@ font-weight: bold;
 label{
 	width: 100px;
 }
+
+        button{
+            margin: 20px;
+        }
 </style>
 </head>
 <body>
@@ -53,14 +57,14 @@ label{
                 <label for="name">상품명</label>
                 <input type="text" id="name" name="name" class="form-control" value="${auction.name}" readonly/><br>
             </div>
-            
-            <div>
-            	<label>상품 이미지</label>
+         	<div class="form-inline form-group">
+         	    <label>상품 이미지</label>
             	<div class="img-result">
             	    <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}"
             	 data-filename="${auction.imgs[0].filename}" style="width:300px; height:200px;">
-            	</div>
-            </div>
+            	</div>        	
+         	</div>
+
             
             <div id="img-div" class="form-inline form-group" hidden>
 				<label for="uploadFile">이미지</label>
@@ -84,11 +88,11 @@ label{
 
             <div class="form-inline form-group">
                 <label for="start_date">경매시작일자</label>
-                <input type="text" id="start_date" name="start_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${auction.start_date}" />" readonly/><br>
+                <input type="text" id="start_date" name="start_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.start_date}" />" readonly/><br>
             </div>
             <div class="form-inline form-group">
-                <label for="end_date">경매종료읿자</label>
-                <input type="text" id="end_date" name="end_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${auction.end_date}" />" readonly/><br>
+                <label for="end_date">경매종료일자</label>
+                <input type="text" id="end_date" name="end_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.end_date}" />" readonly/><br>
             </div>
             <div class="form-inline form-group">
                 <button type="button" class="btn btn-primary" id="update-btn">수정</button>

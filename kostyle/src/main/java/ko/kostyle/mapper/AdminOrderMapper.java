@@ -25,4 +25,8 @@ public interface AdminOrderMapper {
     int getTotal(Criteria cri);
     
     void updateOrderStatus(OrderVO vo);
+    
+    void insertAuctionOrder(OrderVO vo);
+    
+    void deleteOrder();
 }
