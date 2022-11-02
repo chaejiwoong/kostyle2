@@ -35,6 +35,10 @@
         .button{
             margin-left: 20px;
         }
+        
+        .register{
+        	margin-left: 60px;
+        }
     </style>
 </head>
 
@@ -71,6 +75,7 @@
 	        </div>
 	    </form>
 	</div>
+
 </div>
 <script src="/resources/js/authService.js"></script>
 <script>
@@ -123,6 +128,7 @@
                 } else {
                     alert( "회원님 반갑습니다." + result);
                     self.location = "/kostyle4u";
+
 
                 }
             });

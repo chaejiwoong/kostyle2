@@ -14,9 +14,10 @@ public class Criteria {
 
     private String type;
     private String keyword;
+    private String filter;
 
     public Criteria() {
-        this(1, 10);
+        this(1, 5);
     }
 
     public Criteria(int pageNum, int amount) {

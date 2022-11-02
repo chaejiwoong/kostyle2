@@ -16,60 +16,155 @@
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <style>
-h1 {
+.find-title h1 {
 	margin-top: 25px;
 	margin-bottom: 25px;
 	font-size: 30px;
 	font-weight: bold;
 	text-align: center;
 }
+
+.find-title p {
+	font-size: 12px;
+	color: gray;
+	text-align: center;
+}
+
+.center-block {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.find-tab {
+	text-align: center;
+}
+
+.find-tab li {
+	width: 296px;
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px #ebebeb;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+
+.find-tab li:hover {
+	background: black;
+	color: white;
+}
+
+.find-section {
+	border: solid 1px black;
+	width: 600px;
+	margin: 20px auto;
+	padding-bottom: 30px;
+}
+
+#mail-check-btn {
+	margin-left: 20px;
+}
+
+label {
+	width: 100px;
+}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<h1>ID/PW 찾기</h1>
+	<div class="find-title">
+		<h1>ID / PW 찾기</h1>
+		<p>해당하는 정보를 입력하여 아이디 / 비밀번호를 찾을 수 있습니다.</p>
+	</div>
+
+
 	<div class="container">
-		<div class="row">
-			<a href="#" class="btn btn-primary">아이디 찾기</a> <a href="#"
-				class="btn btn-primary">비밀번호 찾기</a>
-		</div>
-		<div class="center-block">
-			<div>
-				<form id="findIdForm" action="/auth/findId">
-					이름<input type="text" name="name"><br> 생년월일<input
-						type="text" name="birth"><br>
-					<button type="button" id="findId">아이디 찾기</button>
-				</form>
-			</div>
+		<div class="find-section">
 
-			<div>
-				<div>
+			<ul class="find-tab">
+				<li id="idsc" class="selected">아이디 찾기</li>
+				<li id="pwsc">비밀번호 찾기</li>
+			</ul>
 
-					<form id="findPwForm" action="/auth/findPw">
-						이름<input type="text" name="name"><br> 이메일<input
-							type="text" name="email">
-						<button type="button" id="mail-check-btn">본인인증</button>
-						<br>
-						<div id="chkEmailDiv" hidden>
-							인증번호<input type="text" name="chkEmail" id="chkEmail"
-								maxlength="6"><br>
+
+			<div class="center-block">
+
+				<div class="find-id">
+					<form id="findIdForm" class="form-horizontal" action="/auth/findId">
+						<div class="form-inline form-group">
+							<label for="name">이름</label> <input type="text" id="name"
+								name="name" class="form-control"><br>
 						</div>
-						<button type="button" id="findPw">완료</button>
-					</form>
-
-				</div>
-
-				<div>
-					<form id="changePwForm" action="/auth/changePw" hidden>
-						비밀번호<input id="password" type="password" name="password"
-							placeholder="영문 대소문자, 숫자,특수문자 포함한 8~20자리"><br> 비밀번호
-						확인<input id="chkPassword" type="password" name="chkPassword"><br>
-						<button type="button" id="changePw">비밀번호 변경</button>
+						<div class="form-inline form-group">
+							<label for="birth">생년월일</label> <input type="text" id="birth"
+								name="birth" class="form-control"><br>
+						</div>
+						<div class="row">
+							<button type="button" id="findId"
+								class="btn btn-primary col-md-12">아이디 찾기</button>
+						</div>
 					</form>
 				</div>
 
+				<div class="find-password" hidden>
+					<div>
+
+						<form id="findPwForm" class="form-horizontal"
+							action="/auth/findPw">
+							<div class="form-inline form-group">
+								<label for="name2">이름</label> <input type="text" id="name2"
+									name="name" class="form-control"><br>
+							</div>
+							<div class="form-inline form-group">
+								<label for="email">이메일</label> <input type="text" id="email"
+									name="email" class="form-control">
+								<button type="button" class="btn btn-secondary"
+									id="mail-check-btn">본인인증</button>
+							</div>
+							<div class="form-inline form-group"></div>
+
+							<br>
+							<div class="form-inline form-group">
+								<div id="chkEmailDiv" hidden>
+									<label for="chkEmail">인증번호</label> <input type="text"
+										name="chkEmail" id="chkEmail" class="form-control"
+										maxlength="6"><br>
+								</div>
+							</div>
+							<div class="form-inline form-group">
+								<span class="col-md-2"></span>
+								<button type="button" id="findPw"
+									class="btn btn-primary col-md-8">완료</button>
+							</div>
+						</form>
+
+					</div>
+
+					<div>
+						<form id="changePwForm" class="form-horizontal"
+							action="/auth/changePw" hidden>
+							<div class="form-inline form-group">
+								<label for="password">비밀번호</label> <input id="password"
+									type="password" name="password" class="form-control"><br>
+							</div>
+							<div class="form-inline form-group">
+								<label for="chkPassword">비밀번호 확인</label> <input id="chkPassword"
+									type="password" name="chkPassword" class="form-control"><br>
+							</div>
+
+							<div>
+							<button type="button" id="changePw" class="btn btn-primary col-md-12">비밀번호
+								변경</button>
+							</div>
+							
+						</form>
+					</div>
+
+				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<script src="/resources/js/authService.js"></script>
@@ -78,6 +173,16 @@ h1 {
         var idForm = $('#findIdForm');
         var pwForm = $('#findPwForm');
         var changePwForm = $('#changePwForm');
+        
+        $('#pwsc').on('click', function () {
+            $('.find-password').show()
+            $('.find-id').hide()
+        });
+
+        $('#idsc').on('click', function () {
+            $('.find-id').show()
+            $('.find-password').hide()
+        });
 
         // 아이디 찾기
         $('#findId').on("click", function () {

@@ -22,5 +22,5 @@ public interface MemberService {
 
     public void updateMember(MemberDTO dto);
 
-    public int getTotal();
+    public int getTotal(Criteria cri);
 }

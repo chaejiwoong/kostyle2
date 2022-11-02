@@ -3,6 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.MemberMapper"> <!-- 고유한 도메인 -->
 
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and">
+			<choose>
+				<when test="type == 'K'.toString()">
+					mno = #{keyword}
+				</when>
+				<when test="type == 'E'.toString()">
+					email = #{keyword}
+				</when>
+				<when test="type == 'N'.toString()">
+					name = #{keyword}
+				</when>
+			</choose>			
+		</trim> 
+	</sql>
+
+
     <insert id="memberInsert" parameterType="ko.kostyle.domain.MemberVO">
 
         <selectKey keyProperty="mno" order="BEFORE"
@@ -43,19 +60,41 @@
         select * from(
             select rownum rn, mno, email, name, birth, gender, point, authority, created_date
             from member
-            where rownum <= #{pageNum} * #{amount})
-        where rn > (#{pageNum} - 1) * #{amount}
+            where 
+        ]]>
+            <include refid="criteria"></include>
+       <![CDATA[
+            rownum <= #{pageNum} * #{amount})
+
+        where
+
+
+         rn > (#{pageNum} - 1) * #{amount}
+        order by mno desc
         ]]>
     </select>
 
 
 
     <update id="updateMember">
-        update member set point=#{point}, authority=#{authority} where mno = #{mno}
+        update member set point=#{point}
+        , authority=#{authority}
+         where mno = #{mno}
     </update>
 
     <select id="getTotal" resultType="int">
-        select count(*) from member where mno > 0
+        select count(*) from member
+        where 
+		<include refid="criteria"></include>
+       <![CDATA[	
+    	mno > 0
+        ]]>
     </select>
+    
+    <update id="updatePoint">
+        update member set point= point - #{point}
+         where mno = #{mno}
+    </update>
+
 </mapper>
 
