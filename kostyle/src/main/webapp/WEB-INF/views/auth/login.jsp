@@ -9,6 +9,11 @@
     <link href="/resources/css/footer.css" rel="stylesheet"/>
 
     <style>
+    #wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
         h1{
             margin-top: 25px;
             margin-bottom: 25px;
@@ -34,38 +39,38 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
-<h1>로그인</h1>
-<div class="container">
-    <form id="loginForm" class="form-horizontal" action="/auth/login">
-        <div class="form-inline form-group">
-            <span class="col-md-4"></span>
-            <label for="email" class="col-md-1">email</label>
-            <input class="form-control" type="text" name="email" id="email">
-        </div>
-        <div class="form-inline form-group">
-            <span class="col-md-4"></span>
-            <label for="password" class="col-md-1">password</label>
-            <input id="password" type="password" class="form-control" name="password">
-        </div>
-        <div class="button">
-            <div class="row">
-                <span class="col-md-4"></span>
-                <label for="remember-id">아이디 기억</label>
-                <input id="remember-id" type="radio" class="radio-inline" value="remember-id">
-                <a href="/auth/register">회원가입</a>
-                <a href="/auth/find">id/pw찾기</a>
-            </div>
-
-
-            <div class="row last">
-                <span class="col-md-4"></span>
-                <a id="login" class="btn btn-primary col-md-3" href="/auth/login">로그인</a>
-            </div>
-        </div>
-    </form>
-
-
+<div id="wrap">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<h1>로그인</h1>
+	<div class="container">
+	    <form id="loginForm" class="form-horizontal" action="/auth/login">
+	        <div class="form-inline form-group">
+	            <span class="col-md-4"></span>
+	            <label for="email" class="col-md-1">email</label>
+	            <input class="form-control" type="text" name="email" id="email">
+	        </div>
+	        <div class="form-inline form-group">
+	            <span class="col-md-4"></span>
+	            <label for="password" class="col-md-1">password</label>
+	            <input id="password" type="password" class="form-control" name="password">
+	        </div>
+	        <div class="button">
+	            <div class="row">
+	                <span class="col-md-4"></span>
+	                <label for="remember-id">아이디 기억</label>
+	                <input id="remember-id" type="radio" class="radio-inline" value="remember-id">
+	                <a href="/auth/register">회원가입</a>
+	                <a href="/auth/find">id/pw찾기</a>
+	            </div>
+	
+	
+	            <div class="row last">
+	                <span class="col-md-4"></span>
+	                <a id="login" class="btn btn-primary col-md-3" href="/auth/login">로그인</a>
+	            </div>
+	        </div>
+	    </form>
+	</div>
 </div>
 <script src="/resources/js/authService.js"></script>
 <script>

@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <html>
 <head>
 <%--    boarddetail--%>
@@ -22,31 +24,33 @@
     <link href="/resources/css/noticedetail.css" rel="stylesheet"/>
 </head>
 <body>
-    <%@ include file="/views/include/header.jsp"%>
-    <%@ include file="/views/customerCenter/include/nav.jsp"%>
-        <div class="detail-box">
-            <div class="width-box">
-                <div class="detail-date">
-                    <c:out value="${boarddetail.created_date}"/>
-                </div>
-                <div class="detail-title">
-                    <c:out value="${boarddetail.title}"/>
-                </div>
-                <div class="detail-content">
-                    <c:out value="${boarddetail.content}"/>
-                </div>
+<div id="wrap">
+    <%@ include file="/WEB-INF/views/include/header.jsp"%>
+    <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
+    <div class="detail-box">
+        <div class="width-box">
+            <div class="detail-date">
+                <c:out value="${boarddetail.created_date}"/>
             </div>
-            <form id='operForm' action="/customerCenter/notice" method="get">
-                <input type="hidden"  id='nno' name='nno'
-                       value='<c:out value="${boarddetail.nno}"/>'> <input
-                    type='hidden' name='pageNum'
-                    value='<c:out value="${cri.pageNum}"/>'> <input
-                    type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-            </form>
-            <div class="detail-btn">
-                <button type="submit"><span>목록보기</span></button>
+            <div class="detail-title">
+                <c:out value="${boarddetail.title}"/>
+            </div>
+            <div class="detail-content">
+                ${fn:replace(boarddetail.content, replaceChar, "<br/>")}
             </div>
         </div>
-    <%@ include file="/views/include/footer.jsp"%>
+        <form id='operForm' action="/customerCenter/notice" method="get">
+            <input type="hidden"  id='nno' name='nno'
+                   value='<c:out value="${boarddetail.nno}"/>'> <input
+                type='hidden' name='pageNum'
+                value='<c:out value="${cri.pageNum}"/>'> <input
+                type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+        </form>
+        <div class="detail-btn">
+            <button type="submit"><span>목록보기</span></button>
+        </div>
+    </div>
+</div>
+    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

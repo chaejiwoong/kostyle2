@@ -3,6 +3,8 @@
     height: auto;
     background-color: #323232;
     text-align: center;
+    position: relative;
+    transform: translateY(-100%);
 }
 .footer-box {
     padding: 15px 0;

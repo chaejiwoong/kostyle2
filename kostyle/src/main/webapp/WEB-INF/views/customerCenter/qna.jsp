@@ -22,103 +22,41 @@
     <link href="/resources/css/qna.css" rel="stylesheet"/>
 </head>
 <body>
-    <%@ include file="/views/include/header.jsp"%>
-    <%@ include file="/views/customerCenter/include/nav.jsp"%>
-    <nav class="qna-nav">
-        <ul>
-            <li><a href="" class="board-radio on" name="all"><span class="all">전체</span></a></li>
-            <li><a id="usage-policy" class="board-radio"><span class="usage-policy">이용정책</span></a></li>
-            <li><a id="purchase" class="board-radio"><span class="purchase">구매</span></a></li>
-            <li><a class="board-radio"><span class="sale">판매</span></a></li>
-        </ul>
-    </nav>
-    <div class="feq-box">
-        <ul class="list">
-           <c:forEach items="${qnaList}" var="list">
-           <li class="qna-title">
-               <div class="qna-top">
-                   <div class="list-category"><c:out value="${list.category}"/></div>
-                   <div class="list-title"><c:out value="${list.title}"/></div>
-                   <div class="date">날짜:<fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></div>
-                   <img src="../../resources/img/icn_dropdown.png">
-               </div>
-               <div class="qna-bottom">
-                   <div class="qna-box">
-                       <div class="qna-answer"><c:out value="${list.content}"/></div>
-                   </div>
-               </div>
-           </li>
-           </c:forEach>
-        </ul>
-        <div class='pull-right'>
-            <ul class="pagination">
-                <c:if test="${pageMaker.prev}">
-                    <li class="paginate_button previous">
-                        <a href="${pageMaker.startPage -1}">Previous</a>
-                    </li>
-                </c:if>
-                <c:forEach var="num" begin="${pageMaker.startPage}"
-                           end="${pageMaker.endPage}">
-                    <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-                        <a href="${num}">${num}</a>
-                    </li>
-                </c:forEach>
-
-                <c:if test="${pageMaker.next}">
-                    <li class="paginate_button next">
-                        <a href="${pageMaker.endPage +1 }">Next</a>
-                    </li>
-                </c:if>
-
-
-            </ul>
-        </div>
-        <!--  end Pagination -->
-    </div>
-    <form id='actionForm' action="/customerCenter/qna" method='get'>
-        <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-        <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-
-        <input type='hidden' name='type'
-               value='<c:out value="${ pageMaker.cri.type }"/>'> <input
-            type='hidden' name='keyword'
-            value='<c:out value="${ pageMaker.cri.keyword }"/>'>
-    </form>
-    <%@ include file="/views/include/footer.jsp"%>
-
-
-    <script type="text/javascript">
-        $(document)
-            .ready(
-                function() {
-
-                    var result = '<c:out value="${result}"/>';
-
-                    checkModal(result);
-
-                    history.replaceState({}, null, null);
-
-                    function checkModal(result) {
-                        if (result === '' || history.state) {
-                            return;
-                        }
-                    }
-
-                    var actionForm = $("#actionForm");
-
-                    $(".paginate_button a").on(
-                        "click",
-                        function(e) {
-
-                            e.preventDefault();
-
-                            console.log('click');
-
-                            actionForm.find("input[name='pageNum']")
-                                .val($(this).attr("href"));
-                            actionForm.submit();
-                        });
-                });
-    </script>
+<div id="wrap">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
+	 <nav class="qna-nav">
+	     <ul>
+	         <li><a href="/customerCenter/qna?category=all" id="all" data-value="all" class="board-radio on" name="all"><span class="all">전체</span></a></li>
+	         <li><a id="usage-policy" data-value="usage-policy" class="board-radio"><span class="usage-policy">이용정책</span></a></li>
+	         <li><a id="purchase" data-value="purchase" name="purchase" class="board-radio"><span class="purchase">구매</span></a></li>
+	         <li><a class="board-radio" data-value="sale"> <span class="sale">판매</span></a></li>
+	     </ul>
+	 </nav>
+	 <div class="feq-box">
+	     <ul class="list">
+	        <c:forEach items="${qnaList}" var="list">
+	        <li class="qna-title">
+	            <div class="qna-top">
+	                <div class="list-category">
+	                		<c:out value="${list.category}"/>
+	             	</div>
+	                <div class="list-title"><c:out value="${list.title}"/></div>
+	                <div class="date">날짜: <fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></div>
+	                <a></a>
+	            </div>
+	            <div class="qna-bottom">
+	                <div class="qna-box">
+	                    <div class="qna-answer"><c:out value="${list.content}"/></div>
+	                </div>
+	            </div>
+	        </li>
+	        </c:forEach>
+	     </ul>
+	     
+	     <!--  end Pagination -->
+	 </div>
+</div>
+    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

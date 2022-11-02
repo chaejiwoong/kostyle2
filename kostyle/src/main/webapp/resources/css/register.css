@@ -1,3 +1,8 @@
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
 .qa, .notice {
     color: #000000;
 }
@@ -64,6 +69,7 @@
     width: 100%;
     height: auto;
     text-align: center;
+    padding-bottom: 45px;
 }
 .inquiry-box .inquiry-box-bottom {
     position: relative;
@@ -85,4 +91,9 @@
     background-color: #5195bb;
     border: none;
     color: #ffffff;
+}
+.pull-right {
+    width: 100%;
+    height: auto;
+    text-align: center;
 }

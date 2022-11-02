@@ -17,11 +17,27 @@ $(document).ready(function () {
     //qna-nav 영역 끝
 
     //noticedetail 페이지 시작
+    
+
+
+    
     var operForm = $("#operForm");
     $(".detail-btn button").click(function () {
         operForm.find("#bno").remove();
         operForm.attr("action","/customerCenter/notice")
         operForm.submit();
-    })
+    });
+     
+    
     //noticedetail 페이지 끝
+    //1:1실시간 채팅 영역
+
+    $(".create-btn").click(function () {
+       location.href="/customerCenter/insert";
+    });
+    
+    
+    
+    
+    //문의 작성하기버튼 끝
 });

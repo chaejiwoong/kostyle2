@@ -9,7 +9,7 @@
 <div class="customerCenterBox">
     <div class="categorybox">
         <ul>
-            <li><a href="/customerCenter/qna" class="qa"><span>Q&amp;A</span></a></li>
+            <li><a href="/customerCenter/qna?category=all" class="qa"><span>Q&amp;A</span></a></li>
             <li><a href="/customerCenter/notice" class="notice"><span>공지사항</span></a></li>
             <li><a href="/customerCenter/register" class="register"><span>문의</span></a></li>
         </ul>

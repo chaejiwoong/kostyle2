@@ -1,15 +1,21 @@
 package ko.kostyle.mapper;
 
-import ko.kostyle.domain.Criteria;
+
 import ko.kostyle.domain.ServiceCenterVo;
+import ko.kostyle.dto.Criteria;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface ServiceCenterMapper {
-//    @Select("SELECT * FROM notice WHERE nno > 0")
-    public List<ServiceCenterVo> getQnaList();
-    public List<ServiceCenterVo> getQnaListWithPaging(Criteria criteria);
+//	QNA
+//    public List<ServiceCenterVo> getQnaList();
+    public List<ServiceCenterVo> getQnaListWithPaging(@Param("category") String category);
+    public List<ServiceCenterVo> getAjaxListWithPaging(@Param("category") String category);
     public List<ServiceCenterVo> getPurchase();
+    
+
 //    공지사항
 //    public List<ServiceCenterVo> getNoticeList();
     public List<ServiceCenterVo> getNoticeListWithPaging(Criteria criteria);

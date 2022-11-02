@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.QuestionMapper">
+	
+	<resultMap type="ko.kostyle.domain.QuestionVO" id="joinVO">
+		<result column="qno" property="qno"/>
+		<result column="mno" property="mno"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="created_date" property="created_date"/>	
+		<collection resultMap="MemberVO" property="memberVO"/>
+	</resultMap>
+	
+	<resultMap type="ko.kostyle.domain.MemberVO" id="MemberVO">
+		<result column="name" property="name"/>
+		<result column="mno" property="mno"/>
+	</resultMap>
+	<!-- 
+	<select id="getjoin" resultMap="joinVO">
+		SELECT q.qno, q.mno,q.title,q.content,q.created_date m.name FROM question q LEFT JOIN member m ON q.mno = m.mno WHERE q.mno = m.mno
+	</select>
+		 -->	
+	<select id="getQuestionListWithPaging" resultMap="joinVO">
+		<![CDATA[
+			SELECT q.qno, q.title, q.content, q.created_date, m.name, m.mno
+				FROM (SELECT /*+INDEX_DESC(QUESTION SYS_C007798)*/ rownum rn, qno, mno, title, content, created_date FROM 
+					question WHERE rownum <= #{pageNum} * #{amount}) q 
+					LEFT JOIN member m ON m.mno = q.mno
+					WHERE rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<insert id="insertQuestion">
+		INSERT INTO question (qno, mno, title, content, created_date)
+			VALUES (qno_seq.nextval, #{mno}, #{title}, #{content}, SYSDATE)
+	</insert>
+	
+	<insert id="insertQuestionKey">
+		<selectKey keyProperty="qno" order="BEFORE" resultType="long">
+			SELECT qno_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO question (qno, mno, title, content, created_date) VALUES(#{qno}, #{mno}, #{title}, #{content}, SYSDATE)
+	</insert>
+	
+		<!--전체 데이터 개수 처리-->
+	<select id="questionTotalCount" resultType="int">
+		SELECT COUNT(*) FROM question WHERE qno > 0
+	</select>	
+</mapper>

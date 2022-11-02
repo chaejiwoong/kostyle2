@@ -1,3 +1,8 @@
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
 .notice {
     color: #35C5F0;
 }
@@ -9,10 +14,10 @@
 }
 .feq-box {
     width: 100%;
-    height: 100%;
+    height: auto;
     padding-top: 40px;
 }
-.feq-box .pull-right {
+.pull-right {
     width: 100%;
     height: auto;
     text-align: center;

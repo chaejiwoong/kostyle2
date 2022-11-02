@@ -1,14 +1,15 @@
 package ko.kostyle.service;
 
-import ko.kostyle.domain.Criteria;
 import ko.kostyle.domain.ServiceCenterVo;
+import ko.kostyle.dto.Criteria;
 
 import java.util.List;
 
 public interface ServiceCenterService {
 
 //    public List<ServiceCenterVo> getList();
-    public List<ServiceCenterVo> getList(Criteria criteria);
+    public List<ServiceCenterVo> getList(String category);
+    public List<ServiceCenterVo> getAjaxList(String category);
     public List<ServiceCenterVo> purchaseList();
 //    공지사항
 //    public List<ServiceCenterVo> getNoticeList();

@@ -38,7 +38,7 @@
 			<li class="li-list"><a href="#"><span>코디</span></a></li>
 			<li class="li-list"><a href="#"><span>경매</span></a></li>
 			<li class="li-list"><a class="customerCenter"
-				href="/customerCenter/qna"><span>고객센터</span></a></li>
+				href="/customerCenter/qna?category=all"><span>고객센터</span></a></li>
 			<li class="li-list"><a href="#"><span>About Us</span></a></li>
 		</ul>
 	</div>

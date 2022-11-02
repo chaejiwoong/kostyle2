@@ -4,32 +4,42 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.ServiceCenterMapper">
 	<!--QNA-->
+	<!-- QNA 전체 -->
 	<select id="getQnaList" resultType="ko.kostyle.domain.ServiceCenterVo">
 		<![CDATA[
 		SELECT * FROM  notice WHERE category NOT LIKE '%notice%'
 		]]>
 	</select>
-<!--	<select id="getQnaList" resultType="ko.kostyle.domain.ServiceCenterVo">-->
-<!--		<![CDATA[-->
-<!--		SELECT rownum rn, nno, title, content, category, created_date FROM  notice-->
-<!--            WHERE category NOT LIKE '%notice%' AND rownum <= 10-->
-<!--		]]>-->
-<!--	</select>-->
-
-	<select id="getQnaListWithPaging" resultType="ko.kostyle.domain.ServiceCenterVo">
-		<![CDATA[
-		SELECT nno, title, content, category, created_date FROM
-			   (SELECT rownum rn, nno, title, content, category, created_date FROM notice
-				WHERE rownum <= #{pageNum} * #{amount})
-			WHERE rn > (#{pageNum} -1) * #{amount} AND category NOT LIKE '%notice%'
-		]]>
-	</select>
+	<!-- 이용정책 -->
+<!-- 	<select id="">
+		
+	</select> -->
+	<!-- 구매 -->
+<!-- 	<select id="purchaseList" resultType="ko.kostyle.domain.ServiceCenterVo">
+		SELECT * FROM notice WHERE category LIKE '%purchase%'
+	</select> -->
+	
 	<select id="getPurchase" resultType="ko.kostyle.domain.ServiceCenterVo">
 		SELECT * FROM notice WHERE category = 'purchase'
 	</select>
+	<!-- 판매 -->
+
+	<!-- ================================== -->
+	
+	<select id="getQnaListWithPaging" resultType="ko.kostyle.domain.ServiceCenterVo">
+		<![CDATA[
+		SELECT nno, title, content, category, created_date FROM notice WHERE category NOT LIKE '%notice%' ORDER BY nno DESC
+		]]>
+	</select>
+	
+	<select id="getAjaxListWithPaging" resultType="ko.kostyle.domain.ServiceCenterVo">	
+		<![CDATA[
+		SELECT nno, title, content, category, created_date FROM notice WHERE category like '%'||#{category}||'%' ORDER BY nno DESC
+		]]>		
+	</select>
 	<!--공지사항-->
 	<select id="getNoticeList" resultType="ko.kostyle.domain.ServiceCenterVo">
-		SELECT * FROM notice WHERE category LIKE '%notice%'
+		SELECT * FROM notice WHERE category LIKE '%notice%' ORDER BY nno DESC
 	</select>
 
 	<select id="NoticeDetail" resultType="ko.kostyle.domain.ServiceCenterVo">
@@ -39,39 +49,27 @@
 	<select id="getNoticeListWithPaging" resultType="ko.kostyle.domain.ServiceCenterVo">
 		<![CDATA[
 		SELECT nno, title, content, category, created_date FROM
-			(SELECT rownum rn, nno, title, content, category, created_date FROM notice
-			 WHERE rownum <= #{pageNum} * #{amount})
-		WHERE rn > (#{pageNum} -1) * #{amount} AND category LIKE '%notice%'
+			(SELECT/*+INDEX_DESC(NOTICE SYS_C007809)*/ rownum rn, nno, title, content, category, created_date FROM notice
+			 WHERE rownum <= #{pageNum} * #{amount} AND category = 'notice')
+		WHERE rn > (#{pageNum} -1) * #{amount} 
 		]]>
 	</select>
-	<!--문의-->
-
+	
+	
 	<!--전체 데이터 개수 처리-->
 	<select id="noticeTotalCount" resultType="int">
-		SELECT COUNT(*) FROM notice WHERE nno > 0
+		SELECT COUNT(*) FROM notice WHERE nno > 0 AND category = 'notice'
 	</select>
-<!--	<select id="getCategoryList" resultType="ko.kostyle.domain.ServiceCenterVo" parameterType="NoticeVo">-->
-<!--&#45;&#45; 		SERLECT * FROM notice WHERE category = #{category}-->
-<!--		SELECT * FROM notice-->
-<!--		<WHERE>-->
-<!--			<if></if>-->
-<!--		</WHERE>-->
-<!--	</select>-->
-<!--QnA-->
+
 	<insert id="insertNotice">
 		INSERT INTO notice (nno, title, content, category, created_date)
 		    VALUES (nno_seq.nextval, #{title}, #{content}, #{category},SYSDATE)
 	</insert>
 	<insert id="selectNoticeKey">
 		<selectKey keyProperty="nno" order="BEFORE" resultType="long">
-			SELECT nno_seq.nextval FROM notice
+			SELECT nno_seq.nextval FROM notice ORDER BY nno DESC
 		</selectKey>
 			INSERT INTO notice (nno, title, content, category, created_date) VALUES(#{nno}, #{title}, #{content}, #{category},SYSDATE)
 	</insert>
-	<insert id="insertQuestion">
-		INSERT INTO question (qno, mno, title, content, created_date)
-			VALUES (qno_seq.nextval, #{mno}, #{title}, #{content}, sysdate )
-	</insert>
 
-	<!--문의-->
 </mapper>

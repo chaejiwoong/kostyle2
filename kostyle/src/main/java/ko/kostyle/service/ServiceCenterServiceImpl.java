@@ -1,7 +1,8 @@
 package ko.kostyle.service;
 
-import ko.kostyle.domain.Criteria;
+
 import ko.kostyle.domain.ServiceCenterVo;
+import ko.kostyle.dto.Criteria;
 import ko.kostyle.mapper.ServiceCenterMapper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,16 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
     private ServiceCenterMapper mapper;
 
     @Override
-    public List<ServiceCenterVo> getList(Criteria criteria) {
-        return mapper.getQnaListWithPaging(criteria);
+    public List<ServiceCenterVo> getList(String category) {
+        return mapper.getQnaListWithPaging(category);
     }
 
+	@Override
+	public List<ServiceCenterVo> getAjaxList(String category) {
+		// TODO Auto-generated method stub
+		return mapper.getAjaxListWithPaging(category);
+	}
+    
     @Override
     public List<ServiceCenterVo> purchaseList() {
         return mapper.getPurchase();
@@ -58,4 +65,5 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
     public void insertNotice(ServiceCenterVo centerVo) {
         return;
     }
+
 }

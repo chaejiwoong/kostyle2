@@ -1,9 +1,13 @@
 $(document).ready(function () {
    $(".list .qna-title").each(function (index) {
-      $(this).click(function () {
+      $(document).on("click", ".qna-title", function () {
          $(".list .qna-bottom").css("display", "none");
-         // $(this).children().children("a").css("background","url('../img/icn_dropdown_on.png')");
-         $(this).children().children("img").attr("src","../img/icn_dropdown_on.png");
+         
+         $(".qna-title a").css({"background":"url(../resources/img/icn_dropdown.png)", 'background-repeat' : 'no-repeat', 'background-position':'center center'});
+         $(this).children().children("a").css({"background":"url(../resources/img/icn_dropdown_on.png)", 'background-repeat' : 'no-repeat', 'background-position':'center center'}); 
+		
+
+		
          $(this).find(".qna-bottom").css("display","block");
       });
    });

@@ -6,10 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
     <script type="text/javascript" src="/resources/js/header.js"></script>
+    <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
     <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
     <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/header.css" rel="stylesheet"/>
@@ -18,10 +21,12 @@
     <link href="/resources/css/register.css" rel="stylesheet"/>
 </head>
 <body>
-    <%@ include file="/views/include/header.jsp"%>
-    <%@ include file="/views/customerCenter/include/nav.jsp"%>
-        <div class="chat-box">
-            <form method="">
+<div id="wrap">
+    <%@ include file="/WEB-INF/views/include/header.jsp"%>
+    <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
+    	<div class="chat-box">
+    	<!--action="/customerCenter/register/chatadd"-->
+            <form method="post">
                 <span class="inquiry-content">문의 내용</span>
                 <input class="inquiry-input" type="text" name="chat-title"/>
                 <button class="inquiry-btn" type="submit"><span>서비스 신청</span></button>
@@ -34,7 +39,6 @@
 
         <div class="inquiry-box">
             <div class="inquiry-box-bottom">
-<%--                <span class="">문의</span>--%>
                 <table class="table">
                     <thead>
                     <tr>
@@ -45,23 +49,85 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td scope="row">1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
+                    <c:forEach items="${registerList}" var="list">
+	                    <tr>
+	                        <td scope="row"><c:out value="${list.qno}"/></td>
+	                        <td><c:out value="${list.memberVO.name}"/></td>
+	                        <td><c:out value="${list.title}"/></td>
+	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></td>
+	                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <button class="create-btn" type="submit">문의 작성하기</button>
             </div>
         </div>
-    <%@ include file="/views/include/footer.jsp"%>
+        <div class='pull-right'>
+            <ul class="pagination">
+                <c:if test="${pageMaker.prev}">
+                    <li class="paginate_button previous">
+                        <a href="${pageMaker.startPage -1}">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach var="num" begin="${pageMaker.startPage}"
+                           end="${pageMaker.endPage}">
+                    <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+                        <a href="${num}">${num}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${pageMaker.next}">
+                    <li class="paginate_button next">
+                        <a href="${pageMaker.endPage +1 }">Next</a>
+                    </li>
+                </c:if>
+
+
+            </ul>
+        </div>
+
+    </div>
+    <form id='actionForm' action="/customerCenter/register" method='get'>
+	    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+	    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+    </form>
+    
+    
+    
+        <!--  end Pagination -->
+    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    
+    <script type="text/javascript">
+        $(document)
+            .ready(
+                function() {
+                    var result = '<c:out value="${result}"/>';
+
+                    checkModal(result);
+
+                    history.replaceState({}, null, null);
+
+                    function checkModal(result) {
+                        if (result === '' || history.state) {
+                            return;
+                        }
+                    }
+
+                    var actionForm = $("#actionForm");
+
+                    $(".paginate_button a").on(
+                        "click",
+                        function(e) {
+
+                            e.preventDefault();
+
+                            console.log('click');
+
+                            actionForm.find("input[name='pageNum']")
+                                .val($(this).attr("href"));
+                            actionForm.submit();
+                        });
+                });
+    </script>
 </body>
 </html>

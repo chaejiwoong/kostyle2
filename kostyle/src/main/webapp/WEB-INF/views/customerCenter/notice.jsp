@@ -21,46 +21,48 @@
     <link href="/resources/css/notice.css" rel="stylesheet"/>
 </head>
 <body>
-    <%@ include file="/views/include/header.jsp"%>
-    <%@ include file="/views/customerCenter/include/nav.jsp"%>
-    <div class="feq-box">
-        <ul class="list">
-            <c:forEach items="${noticeList}" var="list">
-                <a class="move" href="<c:out value='${list.nno}'/>">
-                    <li>
-                        <div class="list-title"><c:out value="${list.title}"/></div>
-                    </li>
-                </a>
-            </c:forEach>
-        </ul>
-        <div class='pull-right'>
-            <ul class="pagination">
-                <c:if test="${pageMaker.prev}">
-                    <li class="paginate_button previous">
-                        <a href="${pageMaker.startPage -1}">Previous</a>
-                    </li>
-                </c:if>
-                <c:forEach var="num" begin="${pageMaker.startPage}"
-                           end="${pageMaker.endPage}">
-                    <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-                        <a href="${num}">${num}</a>
-                    </li>
-                </c:forEach>
-
-                <c:if test="${pageMaker.next}">
-                    <li class="paginate_button next">
-                        <a href="${pageMaker.endPage +1 }">Next</a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-        <!--  end Pagination -->
+<div id="wrap">
+    <%@ include file="/WEB-INF/views/include/header.jsp"%>
+    <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
+	    <div class="feq-box">
+	        <ul class="list">
+	            <c:forEach items="${noticeList}" var="list">
+	                <a class="move" href="<c:out value='${list.nno}'/>">
+	                    <li>
+	                        <div class="list-title"><c:out value="${list.title}"/></div>
+	                    </li>
+	                </a>
+	            </c:forEach>
+	        </ul>
     </div>
+    <div class='pull-right'>
+	            <ul class="pagination">
+	                <c:if test="${pageMaker.prev}">
+	                    <li class="paginate_button previous">
+	                        <a href="${pageMaker.startPage -1}">Previous</a>
+	                    </li>
+	                </c:if>
+	                <c:forEach var="num" begin="${pageMaker.startPage}"
+	                           end="${pageMaker.endPage}">
+	                    <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+	                        <a href="${num}">${num}</a>
+	                    </li>
+	                </c:forEach>
+	
+	                <c:if test="${pageMaker.next}">
+	                    <li class="paginate_button next">
+	                        <a href="${pageMaker.endPage +1 }">Next</a>
+	                    </li>
+	                </c:if>
+	            </ul>
+	        </div>
+	        <!--  end Pagination -->
+	    </div>
     <form id='actionForm' action="/customerCenter/notice" method='get'>
         <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
         <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
     </form>
-    <%@ include file="/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 
     <script type="text/javascript">
         $(document)
@@ -102,7 +104,7 @@
                                     + $(this).attr(
                                         "href")
                                     + "'>")
-                                // alert($(this).attr("href"));
+                                //alert($(this).attr("href"));
                                 actionForm.attr("action", "/customerCenter/noticedetail");
                                 // alert("두번째" + actionForm.attr("action"));
                                 // alert("두번째" + actionForm.attr("action","/customerCenter/noticedetail"));
