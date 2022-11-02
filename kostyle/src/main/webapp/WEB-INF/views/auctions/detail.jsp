@@ -203,12 +203,15 @@ var display = (function loadThumbnail() {
 				data:JSON.stringify(bid),
                 contentType : "application/json; charset=UTF-8",
                 success: function (result, status, xhr) {
-					alert("입찰이 완료되었습니다.")
-					self.location = "/auctions/" + ${auction.apno}
-                },
-                error: function (xhr, status, er) {
-                	console.log(xhr)
-					alert(xhr.responseJSON.message)
+                	console.log(result.message)
+                	if(result.message == undefined){
+                		alert('로그인이 필요한 서비스입니다.')
+                		self.location="/auth/login"
+                	}else{
+     					alert("입찰이 완료되었습니다.")
+    					self.location = "/auctions/" + ${auction.apno}
+                	}
+
                 }
 			})
 			

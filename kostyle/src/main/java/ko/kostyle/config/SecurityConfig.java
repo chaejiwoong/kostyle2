@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("favicon.ico","/resources/**");
+                .antMatchers("favicon.ico","/resources/**", "/commons/**");
     }
 
     @Override
@@ -46,32 +46,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
 
-                // 시큐리티는 기본적으로 세션을 사용
-                // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
                 .and()
                 .authorizeRequests()
-
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/members/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                
+                
+                .antMatchers("/members/**").authenticated()
+
+                .antMatchers("/admin/**").hasRole("ADMIN")           
                 .antMatchers("/customerCenter/**").permitAll()
-                .anyRequest().authenticated();   // 나머지 API 는 전부 인증 필요
+                
+                
+                .antMatchers("/auctions/attention/**").authenticated()
+                .antMatchers("/auctions/**").permitAll()
 
-                // 로그인 관련 처리
-//                .and()
-//                .logout()
-//                .logoutUrl("/auth/logout")
-//                .logoutSuccessUrl("/auth/login")
-//                .invalidateHttpSession(true);
-//                .deleteCookies("Authorization");
+                
+                .anyRequest().authenticated(); 
 
-                // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
-//                .and()
-//                .apply(new JwtSecurityConfig(tokenProvider));
     }
 }

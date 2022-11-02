@@ -2,6 +2,8 @@ package ko.kostyle.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import lombok.extern.log4j.Log4j;
 public class BidController {
 	
 	private final AuctionService auctionService;
+	
 	
 	@PostMapping(value = "/{apno}", produces = "application/json; charset=UTF-8")
 	@ResponseBody

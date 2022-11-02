@@ -93,19 +93,24 @@ font-weight: bold;
 	$(document).ready(function(){
 		$('.attention').on("click", function(e){
 			e.preventDefault();
-			
-			if($(this).text() =='관심등록'){
-				$(this).text('관심해제')
-			}else{
-				$(this).text('관심등록')
-			}
+			var btn = $(this)
 			
  			$.ajax({
 				url:$(this).attr('href'),
 				type:'put',
 				success:function(data){
+					if(btn.text() =='관심등록'){
+						btn.text('관심해제')
+					}else{
+						btn.text('관심등록')
+					}					
+				},error:function(){
+					alert("로그인이 필요한 서비스입니다.");
+					self.location="/auth/login";
 				}
 			})
+			
+
 		})
 	})
 </script>

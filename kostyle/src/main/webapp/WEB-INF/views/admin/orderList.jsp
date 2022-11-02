@@ -101,9 +101,7 @@ font-weight: bold;
 							value="${order.created_date}" /></td>
 	
 					<td><c:if test="${order.status eq '상품준비중' }">
-							<c:if test="${order.category eq 'product' }">
 								<a class="btn btn-primary delivery" data-ono="${order.ono }">배송</a>
-							</c:if>
 						</c:if></td>
 				</tr>
 			</c:forEach>

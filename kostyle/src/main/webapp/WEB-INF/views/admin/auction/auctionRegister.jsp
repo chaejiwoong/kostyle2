@@ -49,7 +49,7 @@
 <script src="/resources/js/auctionService.js"></script>
 <script>
 function setThumbnail(event) {
-		 var reader = new FileReader();
+ var reader = new FileReader();
 
 		 reader.onload = function(event) {
 		   		var img = document.createElement("img");

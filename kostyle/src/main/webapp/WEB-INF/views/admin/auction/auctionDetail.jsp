@@ -125,7 +125,7 @@ function setThumbnail(event) {
 reader.readAsDataURL(event.target.files[0]);
 }
 
-var aa = (function loadThumbnail() {
+var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
 	
 	$(uploadResultArr).each(function (i, obj) {

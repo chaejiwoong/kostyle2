@@ -18,6 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @ToString
+@Builder
 public class AuctionDTO {
 	
 	private Long apno;
@@ -25,32 +26,12 @@ public class AuctionDTO {
 	private int start_price;
 	private int best_bid_price;
 	private int bid_unit;	
-	
 	private String status;
-	
-	
-	
 	private Date start_date;
 	private Date end_date;
 	private boolean isAttention;
 	
 	private List<ImgDTO> imgs;
-	
-	@Builder
-	public AuctionDTO(Long apno, String name, int start_price, int best_bid_price, int bid_unit, Date start_date, String status, boolean isAttention,
-			Date end_date, List<ImgDTO> imgs) {
-		super();
-		this.apno = apno;
-		this.name = name;
-		this.start_price = start_price;
-		this.best_bid_price = best_bid_price;
-		this.status = status;
-		this.bid_unit = bid_unit;
-		this.start_date = start_date;
-		this.isAttention = isAttention;
-		this.end_date = end_date;
-		this.imgs = imgs;
-	}
 	
 	
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,7 @@ public class AuctionServiceImpl implements AuctionService{
 	private final MemberMapper memberMapper;
 	private final BidMapper bidMapper;
 	private final AddressMapper addressMapper;
+	private final HttpSession session;
 	
 	// 상품 등록
 	@Override
@@ -176,9 +179,10 @@ public class AuctionServiceImpl implements AuctionService{
 			
 			
 			boolean isAttention = false;
+			
 			AttentionAuctionVO attention = AttentionAuctionVO.builder()
 					.apno(auction.getApno())
-					.mno(SecurityUtil.getCurrentMemberId())
+					.mno(session.getAttribute("user")== null?0:((MemberVO)session.getAttribute("user")).getMno())
 					.build();
 		
 			if(attentionMapper.existByAttention(attention) != null) {

@@ -81,66 +81,66 @@
 
 </div>
 <script>
-    var memberService = (function(){
-        function updateInfo(member, callback, error) {
-            $.ajax({
-                type: 'put',
-                url: "/members",
-                data: JSON.stringify(member),
-                contentType : "application/json; charset=UTF-8",
-                success: function (result, status, xhr) {
-                    if (callback) {
-                        callback(result);
-                    }
-                },
-                error: function (xhr, status, er) {
-                    if (error) {
-                        error(xhr);
-                    }
+var memberService = (function(){
+    function updateInfo(member, callback, error) {
+        $.ajax({
+            type: 'put',
+            url: "/members",
+            data: JSON.stringify(member),
+            contentType : "application/json; charset=UTF-8",
+            success: function (result, status, xhr) {
+                if (callback) {
+                    callback(result);
                 }
-            })
-        }
-
-        function deleteMember(callback, error) {
-            $.ajax({
-                type: 'delete',
-                url: "/admin/members/" + ${member.mno},
-                contentType : "application/json; charset=UTF-8",
-                success: function (result, status, xhr) {
-                    if (callback) {
-                        callback(result);
-                    }
-                },
-                error: function (xhr, status, er) {
-                    if (error) {
-                        error(xhr);
-                    }
+            },
+            error: function (xhr, status, er) {
+                if (error) {
+                    error(xhr);
                 }
-            })
-        }
+            }
+        })
+    }
 
-        function updateMember(member, callback, error) {
-            $.ajax({
-                type:'put',
-                url:'/admin/members/' + ${member.mno},
-                data: JSON.stringify(member),
-                contentType : "application/json; charset=UTF-8",
-                success: function (result, status, xhr) {
-                    if (callback) {
-                        callback(result);
-                    }
-                },
-                error: function (xhr, status, er) {
-                    if (error) {
-                        error(xhr);
-                    }
+    function deleteMember(callback, error) {
+        $.ajax({
+            type: 'delete',
+            url: "/admin/members/" + ${member.mno},
+            contentType : "application/json; charset=UTF-8",
+            success: function (result, status, xhr) {
+                if (callback) {
+                    callback(result);
                 }
+            },
+            error: function (xhr, status, er) {
+                if (error) {
+                    error(xhr);
+                }
+            }
+        })
+    }
 
-            })
-        }
+    function updateMember(member, callback, error) {
+        $.ajax({
+            type:'put',
+            url:'/admin/members/' + ${member.mno},
+            data: JSON.stringify(member),
+            contentType : "application/json; charset=UTF-8",
+            success: function (result, status, xhr) {
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error: function (xhr, status, er) {
+                if (error) {
+                    error(xhr);
+                }
+            }
 
-        return {updateInfo:updateInfo, deleteMember:deleteMember, updateMember:updateMember}
-    })();// 즉시 실행함수
+        })
+    }
+
+    return {updateInfo:updateInfo, deleteMember:deleteMember, updateMember:updateMember}
+})();// 즉시 실행함수
 
     $(document).ready(function () {
 
