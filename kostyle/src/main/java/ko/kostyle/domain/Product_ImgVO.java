@@ -1,9 +1,11 @@
 package ko.kostyle.domain;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class Product_ImgVO {
+public class Product_ImgVO implements Serializable{
 	
 	private Long pino;
 	private Long pno;

@@ -15,8 +15,12 @@
 <body>
 
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+
+
 <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>상품 상세</span></div>
+                    <div class="admin_content_subject">
+                    <span>상품 상세</span>
+                    </div>
                     <div class="admin_content_main">
  
                     
@@ -140,7 +144,7 @@ $("#cancelBtn").on("click", function(e){
 	e.preventDefault();
 	
 	$("input[name=pno]").remove();
-	moveForm.attr("action", "/admin/products")
+	moveForm.attr("action", "/products")
 	moveForm.submit();
 	
 });

@@ -17,7 +17,7 @@
 
 	 <div class="goods_table_wrap">
                     	<!-- 상품 리스트 O -->
-	                    <form action="/admin/products/register" method="get" id="enrollForm">
+	                
 	                    	<table class="goods_table">
 	                    		<thead>
 	                    			<tr>
@@ -42,15 +42,13 @@
 	                    		</tr>
 	                    		</c:forEach>
 	                    	</table>
-	                    			</form>
-		<div class="btn_section">
-			<button id="enrollBtn" class="btn enroll_btn">등 록</button>
-		</div>
+	                    			
+
 		
 		
 
 <div class='search_wrap'>
-					<form id='searchForm' action="/admin/products" method='get'>
+					<form id='searchForm' action="/products" method='get'>
 							<select name='type'>
 								<option value=""
 									<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
@@ -101,7 +99,7 @@
 	                    </ul>
                 	</div>
                 	
-                	<form id="moveForm" action="/admin/products" method="get" >
+                	<form id="moveForm" action="/products" method="get" >
  						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
@@ -113,14 +111,6 @@
 		let enrollForm = $("#enrollForm")
 
 
-		/* 상품 등록 폼 */
-		$("#enrollBtn").on("click", function(e) {
-
-			e.preventDefault();
-
-			enrollForm.submit();
-
-		});
 		
 		/*상품 페이지  */
 		let moveForm = $('#moveForm');
@@ -140,18 +130,11 @@
 			e.preventDefault();
 			
 			moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
-			moveForm.attr("action", "/admin/products/get");
+			moveForm.attr("action", "/products/get");
 			moveForm.submit();
 			
 		});
 		
-		/* 삭제 결과 경고창 */
-		let delete_result = '${delete_result}';
-		
-		if(delete_result == 1){
-			alert("삭제 완료");
-		}
-
 		
 
 		
