@@ -6,20 +6,26 @@
         <title>KoStyle4U</title>
         <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
+        <link href="/resources/css/header.css" rel="stylesheet"/>
+        <link href="/resources/css/footer.css" rel="stylesheet"/>
+        <style>
+        	h1{
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        </style>
 </head>
 <body>
-	<h1>관리자 주문 목록</h1>
-	<ul>
-		<li><a href="#">상품관리</a></li>
-		<li><a href="#">고객센터관리</a></li>
-		<li><a href="#">회원관리</a></li>
-		<li><a href="#">주문관리</a></li>
-		<li><a href="#">경매관리</a></li>
-		<li><a href="#">통계</a></li>
-	</ul>
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-	<h2>주문정보</h2>
-	<table>
+<div class="container">
+	<h1>주문정보</12>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>주문번호</th>
@@ -42,8 +48,8 @@
 		</tr>
 
 	</table>
-	<h3>배송지 정보</h3>
-	<table>
+	<h1>배송지 정보</h1>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>배송번호</th>
@@ -60,15 +66,15 @@
 		</tr>
 	</table>
 
-	<h3>주문상품 정보</h3>
-	<table>
+	<h1>주문상품 정보</h1>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>주문상세번호</th>
 				<th>상품명</th>
 				<th>수량</th>
 				<th>가격</th>
-				<th></th>
+				<th>주문취소</th>
 			</tr>
 		</thead>
 
@@ -78,10 +84,19 @@
 				<td><c:out value="${detail.product.name}" /></td>
 				<td><c:out value="${detail.amount}" /></td>
 				<td><c:out value="${detail.price}" /></td>
-				<td><a class="cancel" href='<c:out value="/admin/orderCancels/${detail.odno}"/>' data-odno="${detail.odno }">취소</a></td>
+				<td>
+				<c:if test="${order.status eq '상품준비중' }">
+				
+				<a class="cancel btn btn-danger" href='<c:out value="/admin/orderCancels/${detail.odno}"/>' data-odno="${detail.odno }">취소</a>
+				</c:if>
+				
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
+
+</div>
+
 	<script>
 		$(document).ready(function(){
 			
@@ -111,5 +126,6 @@
 			})
 		})
 	</script>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

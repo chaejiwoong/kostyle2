@@ -10,17 +10,19 @@ import ko.kostyle.dto.StockDTO;
 
 public interface ProductService {
 	
-	public List<ProductDTO> productList(Criteria cri);
+	public List<ProductDTO> productList(Criteria cri); //상품목록
 	
-	public void register(ProductDTO proDTO);
+	public void register(ProductDTO proDTO);//상품등록
 	
-	public int modify(ProductDTO proDTO);
+	public int modify(ProductDTO proDTO);//상품수정
 	
-	public int remvove(Long pno);
+	public int remvove(Long pno);//상품삭제
 	
 	public ProductDTO get(Long pno);
 	
 	public int getTotal(Criteria cri);
+	
+
 	
 	
 	

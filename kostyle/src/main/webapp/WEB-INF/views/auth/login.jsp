@@ -30,6 +30,10 @@
         .button{
             margin-left: 20px;
         }
+        
+        .register{
+        	margin-left: 60px;
+        }
     </style>
 </head>
 
@@ -53,14 +57,14 @@
                 <span class="col-md-4"></span>
                 <label for="remember-id">아이디 기억</label>
                 <input id="remember-id" type="radio" class="radio-inline" value="remember-id">
-                <a href="/auth/register">회원가입</a>
+                <a class="register" href="/auth/register">회원가입</a>
                 <a href="/auth/find">id/pw찾기</a>
             </div>
 
 
             <div class="row last">
                 <span class="col-md-4"></span>
-                <a id="login" class="btn btn-primary col-md-3" href="/auth/login">로그인</a>
+                <button id="login" type="submit" class="btn btn-primary col-md-3" href="/auth/login">로그인</button>
             </div>
         </div>
     </form>
@@ -117,7 +121,7 @@
                     alert("해당하는 회원정보가 없습니다.");
                 } else {
                     alert( "회원님 반갑습니다." + result);
-                    self.location = "/auth/main";
+                    self.location = "/members/myPage";
 
                 }
             });

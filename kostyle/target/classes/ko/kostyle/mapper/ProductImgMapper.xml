@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.ProductImgMapper"> <!-- 고유한 도메인 -->
+
+
+
+	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
+	
+		select * from PRODUCT_IMG where pno= #{pno}
+	
+	</select>
+</mapper>

@@ -12,6 +12,7 @@ import ko.kostyle.domain.OrderCancelVO;
 import ko.kostyle.domain.OrderDetailVO;
 import ko.kostyle.domain.ProductVO;
 import ko.kostyle.dto.AdminProductDTO;
+import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.OrderCancelDTO;
 import ko.kostyle.mapper.AdminOrderMapper;
 import ko.kostyle.mapper.OrderCancelMapper;
@@ -43,10 +44,10 @@ public class AdminOrderCancelServiceImpl implements AdminOrderCancelService{
 	}
 
 	@Override
-	public List<OrderCancelDTO> getOrderCancelList() {		
+	public List<OrderCancelDTO> getOrderCancelList(Criteria cri) {		
 		
 		// vo를 dto list로 변환 후 반환
-		return orderCancelMapper.orderCancelList()
+		return orderCancelMapper.orderCancelList(cri)
 				.stream().map(vo -> getDto(vo))
 				.collect(Collectors.toList());
 			
@@ -75,6 +76,11 @@ public class AdminOrderCancelServiceImpl implements AdminOrderCancelService{
 		dto.setProduct(productDto);
 		
 		return dto;
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		return orderCancelMapper.getTotal(cri);
 	}
 
 }

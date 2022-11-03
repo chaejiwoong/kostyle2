@@ -4,7 +4,7 @@
 <mapper namespace="ko.kostyle.mapper.ProductMapper"> <!-- 고유한 도메인 -->
 
 
-<!-- 	<resultMap type="ko.kostyle.domain.ProductVO" id="productMap">
+<!--  	<resultMap type="ko.kostyle.domain.ProductVO" id="productMap">
 		<id property="pno" column="pno"/>
 		<result property="pno" column="pno"/>
 		<result property="scno" column="scno"/>
@@ -16,57 +16,68 @@
 		<result property="gender" column="gender"/>
 		<result property="created_date" column="created_date"/>
 		<result property="last_modified_date"  column="last_modified_date"/>
-	</resultMap> -->
-
-
-	<select id="productList" resultType="ko.kostyle.domain.ProductVO">
-		SELECT * FROM PRODUCT
-	</select>
+	</resultMap>  -->
 	
-	<select id="producGet" resultType="ko.kostyle.domain.ProductVO">
-		SELECT * FROM PRODUCT where pno = #{pno}
-	</select>
 	
-<!-- 	<insert id ="productInsert">
-		INSERT INTO PRODUCT(pno,scno,NAME,PRICE,HITCOUNT,SEASON,COLOR,GENDER,CREATED_DATE,LAST_MODIFIED_DATE)
-		VALUES(pno_seq,scno_seq,#{name},#{price},#{hitcount},#{season},#{color},#{gender},sysdate,sysdate)
-	</insert> -->
-	
-	<insert id = "productInsert">
+	<insert id = "productInsert" >
 		<selectKey resultType="Long" order="BEFORE" keyProperty="pno">
 			select pno_seq.nextval from dual
 		</selectKey>
-			INSERT INTO PRODUCT(pno,NAME,PRICE,HITCOUNT,SEASON,COLOR,GENDER,CREATED_DATE,LAST_MODIFIED_DATE)
-			VALUES(#{pno},#{name},#{price},0,#{season},#{color},#{gender},sysdate,sysdate)
+			INSERT INTO PRODUCT(pno, scno,NAME,PRICE,HITCOUNT,SEASON,COLOR,GENDER,CREATED_DATE,LAST_MODIFIED_DATE)
+			VALUES(#{pno},#{scno},#{name},#{price},0,#{season},#{color},#{gender},sysdate,sysdate)
 	</insert>
-	
-	
-	
-	
-<!-- 	<insert id="stockInsert">
+
+	<insert id="stockInsert" parameterType="ko.kostyle.domain.StockVO">
 		<selectKey resultType="Long" order="BEFORE" keyProperty="sno">
 			select sno_seq.nextval from dual
 		</selectKey>
-			INSERT INTO PRODUCT(sno,pno,p_size,amount)
+			INSERT INTO STOCK(sno,pno,p_size,amount)
 			VALUES(#{sno},#{pno},#{p_size},#{amount})
-	</insert> -->
+	</insert>   	
 	
-<!-- 	<insert id="imgInsert">
+	<insert id="imgInsert" parameterType="ko.kostyle.domain.Product_ImgVO">
 		<selectKey resultType="Long" order="BEFORE" keyProperty="pino">
 			select pino_seq.nextval from dual
 		</selectKey>
-			INSERT INTO PRODUCT(pino,pno,filepath,filename,uuid)
-			VALUES(#{pino},#{pno},#{p_siz},#{amount})
-	</insert> -->
+				insert into PRODUCT_IMG(pino, pno, fileName, filePath, uuid) 
+				values (#{pino},#{pno}, #{fileName}, #{filePath}, #{uuid})
+	</insert> 
+	
+ 	<select id="stockList" resultType="ko.kostyle.domain.StockVO">
+	select * from stock where pno = #{pno}
+	</select> 
+	<select id="productList" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT order by pno
+	</select>
+	
+	
+	<select id="productGet" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT where pno = #{pno}
+	</select>
+	
+
+	
+	
+
 	
 	<update id="productUpdate">
 		UPDATE PRODUCT
-		SET name = #{name}, price = #{price} season = #{season} color = #{color} gender = #{gender}
+		SET name = #{name}, price = #{price}, season = #{season},color = #{color}, gender = #{gender},LAST_MODIFIED_DATE = sysdate
 		where pno = #{pno}
+	</update>
+	<update id="stockUpdate">
+		UPDATE STOCK
+		SET amount = #{amount}
+		where pno = #{pno} and p_size = #{p_size}
 	</update>
 	
 	<delete id="productDelete">
 		DELETE FROM PRODUCT WHERE pno = #{pno}
+	</delete>
+	
+	<!-- 지정 상품 이미지 전체 삭제 --> 
+	<delete id="imageDelete">
+		delete FROM PRODUCT_IMG where pno=#{pno}
 	</delete>
 	
 	
@@ -103,7 +114,7 @@
 		<![CDATA[
 			select pno,name,price,color,gender,season,CREATED_DATE
 			FROM(
-				select /*INDEX_DESC(PRODUCT SYS_C007221)*/
+				select /*+INDEX_DESC(PRODUCT SYS_C007221)*/
 				rownum rn,pno,name,price,color,gender,season,CREATED_DATE
 				from PRODUCT
 				where
@@ -113,6 +124,7 @@
 					rownum <= #{pageNum} * #{amount}
 					) where rn > (#{pageNum}-1) * #{amount}
 				]]>
+				
 	</select> 
 	
 	
