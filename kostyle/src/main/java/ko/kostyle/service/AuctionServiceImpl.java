@@ -93,7 +93,7 @@ public class AuctionServiceImpl implements AuctionService{
 				.bid_unit(vo.getBid_unit())
 				.start_date(vo.getStart_date())
 				.end_date(vo.getEnd_date())
-				.imgs(ImgDTO.of(auctionMapper.auctionImgDetail(apno)))
+				.imgs(ImgDTO.ofList(auctionMapper.auctionImgDetail(apno)))
 				.build();
 	}
 
@@ -195,7 +195,7 @@ public class AuctionServiceImpl implements AuctionService{
 					.start_price(auction.getStart_price())
 					.best_bid_price(auction.getBest_bid_price())
 					.bid_unit(auction.getBid_unit())
-					.imgs(ImgDTO.of(auctionMapper.auctionImgDetail(auction.getApno())))
+					.imgs(ImgDTO.ofList(auctionMapper.auctionImgDetail(auction.getApno())))
 					.status(status)
 					.isAttention(isAttention)
 					.start_date(auction.getStart_date())

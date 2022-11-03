@@ -1,9 +1,9 @@
 package ko.kostyle.dto;
 
+import java.util.Date;
 import java.util.List;
 
-import ko.kostyle.domain.AuctionImgVO;
-import ko.kostyle.dto.AdminOrderDetailDTO.AdminOrderDetailDTOBuilder;
+import ko.kostyle.dto.AuctionDTO.AuctionDTOBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,16 +11,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
 @ToString
 @Builder
-public class AdminProductDTO {
+public class ReviewDTO {
+
+	private Long rno;
+	private Long mno;
+	private Long odno;
 	private Long pno;
-	private String name;
-	private int price;
-	private ImgDTO img;
+	private int starPoint;
+	private String content;
+	private Date last_modified_date;
 }

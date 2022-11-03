@@ -56,7 +56,7 @@
             <div class="row">
                 <span class="col-md-4"></span>
                 <label for="remember-id">아이디 기억</label>
-                <input id="remember-id" type="radio" class="radio-inline" value="remember-id">
+                <input id="remember-id" type="checkbox" class="radio-inline" value="remember-id">
                 <a class="register" href="/auth/register">회원가입</a>
                 <a href="/auth/find">id/pw찾기</a>
             </div>
@@ -75,6 +75,15 @@
 <script>
     $(document).ready(function () {
         var form = $("#loginForm")
+    	
+    	var email = localStorage.getItem('remember-id');
+    	if(email != undefined){
+    		form.find("input[name='email']").val(email);
+    		$('#remember-id').prop('checked', true) 
+    	}
+
+    	
+
 
         // jwt 쿠키 설정
         function setCookie(name, value, exp) {
@@ -120,10 +129,13 @@
                 if (result.length >= 100) {
                     alert("해당하는 회원정보가 없습니다.");
                 } else {
+                	if($('#remember-id').is(':checked')){
+                		localStorage.setItem("remember-id", result)
+                	}
                     alert( "회원님 반갑습니다." + result);
                     self.location = "/members/myPage";
-
                 }
+                
             });
         });
 
