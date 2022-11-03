@@ -42,7 +42,8 @@
 				</tr>
 			</thead>
 				<tr>
-					<td><c:out value="이미지" /></td>
+					<td><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
+							style="width: 180px; height: 200px;"></td>
 					<td><a href="/products/${detail.product.name}">${detail.product.name}</a></td>
 					<td><c:out value="${detail.p_size}" /></td>
 					<td><c:out value="${detail.amount}" /></td>
@@ -61,6 +62,16 @@
 </div>
 
 <script>
+var display = (function loadThumbnail() {
+	var uploadResultArr = $('.thumb');
+	
+	$(uploadResultArr).each(function (i, obj) {
+		//섬네일 파일을 불러오기 위한 경로
+		var fileCallPath = encodeURIComponent($(obj).data('filepath') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+		// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
+		$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
+		})
+	})();
 	$(document).ready(function(){
 		$("#submitBtn").on('click', function(e){
 			e.preventDefault();

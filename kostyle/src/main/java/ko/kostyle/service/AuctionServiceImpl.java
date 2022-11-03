@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ko.kostyle.domain.AddressVO;
 import ko.kostyle.domain.AttentionAuctionVO;
+import ko.kostyle.controller.AdminAuctionController;
 import ko.kostyle.domain.AuctionImgVO;
 import ko.kostyle.domain.AuctionVO;
 import ko.kostyle.domain.BidVO;

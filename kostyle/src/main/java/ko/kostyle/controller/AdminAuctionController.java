@@ -116,5 +116,6 @@ public class AdminAuctionController {
 		
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
 	}
+
 	
 }

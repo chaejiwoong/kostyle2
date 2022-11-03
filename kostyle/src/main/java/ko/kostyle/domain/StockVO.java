@@ -24,3 +24,4 @@ public class StockVO implements Serializable{
 	private String p_size;
 	private int amount;
 }
+

@@ -53,6 +53,7 @@ public class AdminOrderController {
         model.addAttribute("order", order);
         // 주문 상세 저장
         if(order.getCategory().equals("product")) {
+        	log.info(orderService.orderDetails(ono));
             model.addAttribute("details", orderService.orderDetails(ono));
         }else {
         	model.addAttribute("winningBid", orderService.getWinningBid(ono));

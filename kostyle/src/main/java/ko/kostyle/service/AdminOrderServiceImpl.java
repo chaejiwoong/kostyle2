@@ -93,6 +93,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         return dto;
     }
 
+    // 주문 상세 가져오기
     @Override
     public List<AdminOrderDetailDTO> orderDetails(Long ono) {
         List<OrderDetailVO> list = orderMapper.orderDetails(ono);

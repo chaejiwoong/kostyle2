@@ -80,16 +80,16 @@ public class ReviewServiceImpl implements ReviewService{
         	ProductVO product = orderMapper.productDetail(orderDetail.getOdno());
         	
         	// 해당 상품의 이미지 조회 후 DTO로 변환
-//        	ProductImgVO img = reviewMapper.selectImg(product.getPno());
-//        			ImgDTO imgDto = ImgDTO.builder()
-//        							.filename(img.getFilename())
-//        							.filepath(img.getFilepath())
-//        							.uuid(img.getUuid()).build();
+        	ProductImgVO img = reviewMapper.selectImg(product.getPno());
+        			ImgDTO imgDto = ImgDTO.builder()
+        							.filename(img.getFilename())
+        							.filepath(img.getFilepath())
+        							.uuid(img.getUuid()).build();
         	// 상품 DTO로 변환
         	AdminProductDTO productDto = AdminProductDTO.builder()
         									.pno(product.getPno())
         									.name(product.getName())
-//        									.img(imgDto)
+        									.img(imgDto)
         									.build();
         	
         	//최종적으로 주문상세 DTO로 변환
