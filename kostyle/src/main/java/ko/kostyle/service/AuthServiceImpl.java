@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService{
         UsernamePasswordAuthenticationToken authenticationToken = memberJoinDto.toAuthentication();
 
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
-        //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
+        //authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -67,8 +67,6 @@ public class AuthServiceImpl implements AuthService{
         MemberVO vo = memberMapper.memberDetailById(mno);
         session.setAttribute("user", vo);
 
-        // 5. 토큰 발급
-//        return tokenProvider.generateTokenDto(authentication);
         return memberJoinDto.getEmail();
     }
 

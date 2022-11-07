@@ -1,0 +1,69 @@
+/* 관리자 컨텐츠 메인 영역 */
+.form_section{
+	width: 95%;
+    margin-left: 2%;
+    margin-top: 20px;
+    border: 1px solid #dbdde2;
+    background-color: #efefef;	
+}
+.form_section_title{
+	padding: 20px 35px;	
+}
+.form_section_title label{
+	display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+.form_section_content{
+	padding: 20px 35px;
+    border-top: 1px solid #dbdde2;	
+}
+.form_section_content input{
+	width: 98%;
+    height: 25px;
+    font-size: 20px;
+    padding: 5px 1%;
+}
+.form_section_content textarea{
+    width: 98%;
+    height: 170px;
+    font-size: 20px;	
+}
+.form_section_content select{
+	width: 98%;
+    height: 35px;
+    font-size: 20px;
+    text-align-last: center;
+}
+.input_block{
+	background-color:#f9f9f9;	
+}
+
+
+/* 버튼 영역 */
+.btn_section{
+	text-align: center;
+	margin: 80px 0;
+}
+.btn{
+    min-width: 180px;
+    padding: 4px 30px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 40px;
+}
+.modify_btn{
+	background-color: #b8d3e8;
+	margin-left:15px;
+}
+
+
+#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+}
+

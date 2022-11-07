@@ -6,6 +6,8 @@ import ko.kostyle.dto.Criteria;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MemberMapper {
 
     MemberVO memberDetailByEmail(String email);
@@ -26,6 +28,8 @@ public interface MemberMapper {
 
     void updateMember(MemberVO vo);
 
-    int getTotal();
+    int getTotal(Criteria cri);
+    
+    void updatePoint(@Param("mno") Long mno, @Param("point") int point);
 }
 

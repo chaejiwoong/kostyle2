@@ -1,8 +1,10 @@
 package ko.kostyle.service;
 
 import ko.kostyle.domain.MemberVO;
+import ko.kostyle.domain.OrderVO;
 import ko.kostyle.dto.members.MemberUpdateDTO;
 import ko.kostyle.mapper.MemberMapper;
+import ko.kostyle.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
     private final MemberMapper mapper;
+    private final OrderMapper orderMapper;
     private final PasswordEncoder passwordEncoder;
 
     // 현재 SecurityContext 에 있는 유저 정보 가져오기
@@ -32,6 +35,18 @@ public class MemberServiceImpl implements MemberService{
         MemberDTO dto = new MemberDTO();
         dto.setName(vo.getName());
         dto.setPoint(vo.getPoint());
+        
+        List<String> statusList = orderMapper.memberOrderStatus(SecurityUtil.getCurrentMemberId());
+        for(String status : statusList) {
+        	if(status.equals("상품준비중")) {
+        		dto.setReady(dto.getReady() + 1);
+        	}else if(status.equals("배송중")) {
+        		dto.setDelivery(dto.getDelivery() + 1);
+        	}else {
+        		dto.setDone(dto.getDone() + 1);
+        	}
+        }
+        
         return dto;
     }
 
@@ -90,8 +105,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int getTotal() {
-        return mapper.getTotal();
+    public int getTotal(Criteria cri) {
+        return mapper.getTotal(cri);
     }
 
 }
