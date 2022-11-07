@@ -204,9 +204,10 @@
 			<version>2.9.6</version>
 		</dependency>
 
+		
 		<!-- 썸네일 이미지 -->
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
-		        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>

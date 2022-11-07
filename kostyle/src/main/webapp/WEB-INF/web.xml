@@ -44,10 +44,12 @@
 
 	</servlet>
 
+
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 
 
 	<!-- 시큐리티 필터 적용 -->

@@ -58,6 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auctions/attention/**").authenticated()
                 .antMatchers("/auctions/**").permitAll()
 
+                .antMatchers("/coordies/register").authenticated()
+               // .antMatchers("/coordies/like").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/coordies/**").permitAll()
+                .antMatchers("/coordiComments/**").permitAll()
+                
+                //.antMatchers("/coordiComments/register").authenticated()
+
                 
                 .anyRequest().authenticated(); 
 

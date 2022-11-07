@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.CoordiMapper">
+
+	<!-- 글 목록 -->
+<!-- 	<resultMap type="ko.kostyle.domain.CoordiVO" id="coordiMap">
+		<id property="cno" column="cno"/>
+		<result property="mno" column="mno"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="c_count" column="c_count"/>
+		<result property="hitcount" column="hitcount"/>
+		<result property="filepath" column="filepath"/>
+		<result property="filename" column="filename"/>
+		<result property="uuid" column="uuid"/>
+		<result property="created_date" column="created_date"/>
+		
+		<association property="member" javaType="MemberVO">
+			<id property="mno" column="mno"/>
+			<result property="name" column="name"/>
+		</association>
+		
+	</resultMap>
+	
+	<select id="getList" resultMap="coordiMap">
+		<![CDATA[ 		
+			select c.cno, c.mno, c.title , c.content, c_count, c.hitcount, c.filepath, c.filename, c.uuid, c.created_date, m.name
+				from coordi c, member m
+				where c.mno = m.mno
+				and c.cno > 0 order by created_date desc
+		]]>
+	</select>
+	
+	
+	<select id="getList" resultType="ko.kostyle.domain.CoordiVO">
+		<![CDATA[ 		
+			select *
+				from coordi
+				where c.cno > 0 order by created_date desc
+		]]>
+	</select> -->
+
+	<!-- 코디 글 목록 -->
+	<!-- 정렬 처리 각 마다 인덱스 생성해서? -->
+	<!-- <sql id="sort">
+		<if test="sort == ">
+			
+		</if>
+	</sql> -->
+	
+	
+	
+	<!--페이징 처리 -->
+	<select id="getList"
+		resultType="ko.kostyle.domain.CoordiVO">
+		<![CDATA[
+			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+				from(
+						select /*+INDEX_DESC(	coordi SYS_C007442) */
+						 rownum rn, cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+							from coordi
+							where rownum <= #{pageNum} * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select> 
+
+
+	<!-- 코디 글 작성 -->
+	<insert id="insertSelectKey">
+		<selectKey resultType="long" order="BEFORE"
+			keyProperty="cno">
+			select cno_seq.nextval from dual
+		</selectKey>
+		insert into coordi (cno, mno, title, content, c_count, filepath, filename, uuid, created_date)
+			values (#{cno}, #{mno}, #{title}, #{content}, 0, #{filepath}, #{filename}, #{uuid}, sysdate)
+	</insert>
+	
+	<!-- 코디 글 세부 보기 -->
+	<select id="getCoordi" resultType="ko.kostyle.domain.CoordiVO">
+		select * from coordi where cno =#{cno}
+	</select>
+	
+	<!-- 코디 글 수정 -->
+	<update id="update">
+		update coordi set title= #{title},content=#{content}
+		where cno =#{cno}
+	</update>
+	
+	<!-- 코디 글 삭제 -->
+	<delete id="delete">
+		delete coordi where cno = #{cno}
+	</delete>
+	
+	<!-- 댓글 수 처리 -->
+	<update id="updateCommentCount">
+		update coordi 
+		set c_count = c_count + #{amount} 
+		where cno = #{cno}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHitcount">
+		update coordi
+		set hitcount = hitcount + 1
+		where cno = #{cno}
+	</update>
+	
+	<!-- 좋아요 수 증가 -->
+	<update id="updateLikeCoutnt">
+		update coordi
+		set lk_count = (select count(*) from coordi_like where cno = #{cno})
+		where cno = #{cno}
+	</update>
+	
+
+	<!-- 전체 글 갯수 -->
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			select count(*)
+				from coordi
+				where cno > 0
+		]]>
+	</select>
+
+	
+
+
+
+</mapper>
