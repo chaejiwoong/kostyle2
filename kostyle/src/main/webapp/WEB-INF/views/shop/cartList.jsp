@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<title>aa</title>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"
-></script>
+<html>
+<head>
+<title>장바구니</title>
+<link rel="stylesheet" href = "./resources/css/bootstrap.min.css">
+</head>
 <div class="container" style="text-align: center">
 	<!-- 센터 말고 컨테이너만 넣으면 왼쪽 줄 맞춰서 됨 -->
 
@@ -200,3 +198,4 @@ function goOrder(){
 		}
 	}
 </script>
+</html>
