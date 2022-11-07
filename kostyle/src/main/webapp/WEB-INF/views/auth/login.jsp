@@ -9,68 +9,121 @@
     <link href="/resources/css/footer.css" rel="stylesheet"/>
 
     <style>
-        h1{
-            margin-top: 25px;
-            margin-bottom: 25px;
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-        }
+    	label{
+    		width:100px;
+    	}    
+    	
+    	
+    
+    	#login{
+    		color:white;
+    		display: inline-block;
+    		padding: 6px 12px;
+			line-height: 1.42857143;    	
+			border-radius: 4px;        	
+    	    width:300px;
+    		margin-bottom:10px;
+    		font-size:15px;
+    		font-weight:bold;
+    		background-color:#f891aa;
+    		border:1px solid #ebebeb;
+    	}
+    	
+    	#login:click{  	
+    	    width:300px;
+    		margin-bottom:10px;
+    		font-size:15px;
+    		font-weight:bold;
+    		background-color:#f891aa;
+    		border:1px solid #ebebeb;    	
+    	}
+    	
+    	.button a{
+    		display: inline-block;
+    		padding: 6px 12px;
+			line-height: 1.42857143;    	
+			border-radius: 4px;    	
+    		width:300px;
+    		margin-bottom:10px;
+    		font-size:15px;
+    		font-weight:bold;
+    	}
+    	
+    	#signin{
+    		background-color:#ffc8c8;
+    		border:1px solid #ebebeb;
+    	}
+    	
+    	#find{
+    		background-color: #fda9a9;
+   	 		border: 1px solid #ebebeb;
+    		color: white;	
 
-        .last {
-            margin-bottom: 30px;
-            margin-top: 10px;
+    	}    	
+    	
 
-        }
+    	
+    	.hello{
+    		display:flex;
+    		justify-content:center;
+    	}
+    	
+    	.login-title{
+    		text-align: center;
+    		font-size : 25px;
+    		margin: 30px;
+    		font-weight:bold;
+    	}
+    	
 
-        #loginForm{
-            margin-left: 50px;
-        }
-
-        .button{
-            margin-left: 20px;
-        }
-        
-        .register{
-        	margin-left: 60px;
-        }
+    	
+    	
     </style>
+    
+    
 </head>
 
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<h1>로그인</h1>
+
 <div class="container">
-    <form id="loginForm" class="form-horizontal" action="/auth/login">
-        <div class="form-inline form-group">
-            <span class="col-md-4"></span>
-            <label for="email" class="col-md-1">email</label>
-            <input class="form-control" type="text" name="email" id="email">
-        </div>
-        <div class="form-inline form-group">
-            <span class="col-md-4"></span>
-            <label for="password" class="col-md-1">password</label>
-            <input id="password" type="password" class="form-control" name="password">
-        </div>
-        <div class="button">
-            <div class="row">
-                <span class="col-md-4"></span>
-                <label for="remember-id">아이디 기억</label>
-                <input id="remember-id" type="checkbox" class="radio-inline" value="remember-id">
-                <a class="register" href="/auth/register">회원가입</a>
-                <a href="/auth/find">id/pw찾기</a>
+<h1 class="login-title">로그인</h1>
+<div class="hello">
+    <form id="loginForm" class="form-horizonal" action="/auth/login">
+			<div class="row form-group form-inline">
+			    <label for="email">email</label>
+            	<input class="form-control" type="text" name="email" id="email">
+			</div>
+
+
+			<div class="row form-group form-inline">
+            	<label for="password">password</label>
+            	<input id="password" type="password" class="form-control" name="password">
+			</div>
+        	<div class="row button form-group form-inline form-check">
+                <label for="remember-id" class="form-check-label">아이디 기억</label>
+                <input id="remember-id" type="checkbox" class="form-check-input" value="remember-id">
+
             </div>
 
 
-            <div class="row last">
-                <span class="col-md-4"></span>
-                <button id="login" type="submit" class="btn btn-primary col-md-3" href="/auth/login">로그인</button>
+            <div class="row last button">
+                <button type="submit" id="login" >로그인</button>
             </div>
-        </div>
+            <div class="row button">
+                <a id="signin" class="register btn btn-primary" href="/auth/register">회원가입</a>	
+            </div>
+            <div class="row button">
+                <a id="find" href="/auth/find" class="btn btn-default">id/pw찾기</a>
+            </div>
     </form>
+</div>
+
 
 
 </div>
+
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="/resources/js/authService.js"></script>
 <script>
     $(document).ready(function () {
@@ -84,8 +137,8 @@
 
     	
 
-
-        // jwt 쿠키 설정
+	
+	    
         function setCookie(name, value, exp) {
             var date = new Date();
             date.setTime(date.getTime() + exp);
@@ -104,7 +157,7 @@
                 "password" : form.find("input[name='password']").val()
             };
 
-            function add(member, callback, error){
+            function login(member, callback, error){
                 $.ajax({
                     type : "post",
                     url : "/auth/login",
@@ -125,7 +178,7 @@
             }
 
             // 로그인 처리
-            add(member, function (result) {
+            login(member, function (result) {
                 if (result.length >= 100) {
                     alert("해당하는 회원정보가 없습니다.");
                 } else {
@@ -141,6 +194,5 @@
 
     });
 </script>
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

@@ -106,7 +106,7 @@ font-weight: bold;
 		</div>
 
 		<!-- 페이징 번호 요청 시에 submit되는 form -->
-		<form id='actionForm' action="/admin/members" method='get'>
+		<form id='actionForm' action="/admin/orderCancels" method='get'>
 			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 			<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 

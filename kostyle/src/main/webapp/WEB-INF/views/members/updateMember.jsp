@@ -9,115 +9,129 @@
         <script type="text/javascript" src="/resources/js/header.js"></script>
         <link href="/resources/css/header.css" rel="stylesheet"/>
         <link href="/resources/css/footer.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>        
         
-        <style>
-    #left-sidebar{
-        position: relative;
-        float: left;
-        margin-left: 30px;
-        margin-right: 30px;
-        font-size: 17px;
-        border: solid 1px #ebebeb;
-        vertical-align: center;
-        border-radius: 10px;
-        padding-top: 20px;
-        margin-top: 20px;
-    }
+<style>
+label{
+	width:100px;
+}
 
-    #left-sidebar h1{
-        border-bottom: 1px solid black;
-        text-align: center;
-        height: 50px;
-        font-size: 20px;
-        font-weight: bold;
-    }
+.update-title {
+	text-align: center;
+    font-size : 25px;
+    margin: 30px;
+    font-weight:bold;
+    margin-bottom: 100px;
+}
 
-    #menu li{
-        display: block;
-        list-style: circle;
-        width: 200px;
-        height: 50px;
-        padding-left: 10px;
-        padding-top: 10px;
-    }
-    
-	.selected-li{
-    	background-color: black;
-    	color: white;
-    }
-    
-    #menu li:hover{
-        background-color: black;
-    	color: white;
-    }
+.update-contents{
+    vertical-content:center;
+	display:flex;
+	justify-content:center;
+	height: 360px;
+}
+/* 사이드바 */
+#left-sidebar{
+	position:absolute;
+	left:0px;
+	text-align:center;
+	width:200px;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 20px;
+}
 
-    .update-contents{
-        display: flex;
-        justify-content: center;
-    }
-    #update-title{
-        margin-top: 25px;
-        margin-bottom: 25px;
-        font-size: 30px;
-        font-weight: bold;
-        text-align: center;
-    }
+#left-sidebar h1{
+	font-size: 20px;
+	font-weight: bold;
+	padding:20px;
+	border-bottom: 1px solid black;
+}
 
-    #update-form{
-        margin-top: 50px;
-    }
+#left-sidebar li{
+	display:block;
+	padding: 15px;
+	font-weight:bold;
+}
 
-    label{
-        width: 100px;
-        font-size: 15px;
-    }
+#left-sidebar li:hover{
+	background-color: #f891aa;
+	color: white;
+	cursor:pointer;
+}
 
-    .form-div{
-        margin-top: 30px;
-    }
+.selected{
+	background-color: #f891aa;
+	color: white;
+}
+/* 사이드바 끝 */
+#update-btn{
+    color:white;
+    display: inline-block;
+    padding: 6px 12px;
+	line-height: 1.42857143;    	
+	border-radius: 4px;        	
+    width:80px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-weight:bold;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+    margin-right: 30px;
+}
 
-    button{
-        margin: 15px;
-    }
-    
+#cancel-btn{
+	width:80px;
+}
+
+ #remove-btn{
+	width:80px;
+	margin-left:30px;
+}
 
 </style>
     </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<div id="left-sidebar">
-    <h1>MyPage</h1>
-    <ul id="menu">
-        <li><a href=""></a>주문목록/배송조회</li>
-        <li>리뷰관리</li>
-        <li class="selected-li">회원정보수정/탈퇴</li>
-        <li>배송지관리</li>
-        <li>장바구니</li>
-        <li>코디/위시리스트</li>
-        <li>내 경매 조회</li>
-    </ul>
-</div>
+
 <div class="container">
-    <h1 id="update-title">회원정보 수정</h1>
+
+    <div id="left-sidebar">
+    <h1>MyPage</h1>
+
+	<ul>
+		<li onclick="location.replace('/orders')">주문배송조회</li>
+		<li onclick="location.replace('/members')" class="selected">회원정보수정</li>
+		<li onclick="location.replace('/members/address')">배송지관리</li>
+		<li onclick="location.replace('/reviews/unwritten')">리뷰관리</li>
+		<li>장바구니</li>
+		<li>위시리스트/코디</li>
+		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
+		<li>1:1문의</li>
+	</ul>  		
+</div>
+    <h1 class="update-title">회원정보 수정</h1>
     <div class="update-contents">
 
         <form id="update-form" class="form-horizontal">
-            <div class="form-inline form-group form-div">
+            <div class="form-inline form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" class="form-control"><br>
             </div>
-            <div class="form-inline form-group form-div">
-                <label for="password">비밀번호</label>
+            <div class="form-inline form-group">
+                <label for="password">수정 비밀번호</label>
                 <input id="password" type="password" name="password" class="form-control"><br>
             </div>
-            <div class="form-inline form-group form-div">
+            <div class="form-inline form-group">
                 <label for="chkPassword">비밀번호 확인</label>
                 <input id="chkPassword" type="password" class="form-control" name="chkPassword"><br>
             </div>
-            <div class="form-div form-group form-inline"></div>
-            <button id="update-btn" class="btn btn-primary" type="button">수정</button>
-            <button id="cancel-btn" class="btn btn-secondary" type="button">취소</button>
-            <button id="remove-btn" class="btn btn-danger" type="button">탈퇴</button>
+            <div class="form-group form-inline">
+                <button id="update-btn" type="button">수정</button>
+            	<button id="cancel-btn" class="btn btn-secondary" type="button">취소</button>
+            	<button id="remove-btn" class="btn btn-danger" type="button">탈퇴</button>
+            </div>
+
         </form>
     </div>
 

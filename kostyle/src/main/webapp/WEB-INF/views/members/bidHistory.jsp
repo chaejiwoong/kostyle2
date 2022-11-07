@@ -11,45 +11,55 @@
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <style>
-h1{
-margin-top: 25px;
-margin-bottom: 25px;
-font-size: 30px;
-font-weight: bold;
- text-align: center;
-        }
-        
- .selectBox{
-	text-align: center;
-}
-.paging {
-	text-align: center;
+
+/* 사이드바 */
+#left-sidebar{
+	position:absolute;
+	left:0px;
+	text-align:center;
+	width:200px;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 20px;
 }
 
- 
-    .auction{
-    	border-bottom : 1px solid #ebebeb;
-    	text-align: center;
-    	vertical-align: center;
-    }
-    
-    .auction-title{
-    	font-weight: bold;
-    	font-size: 20px;
-    	padding-bottom: 20px;
-    }
-    
-    .auction-content{
-    	margin-bottom: 30px;
-    	font-size: 18px;
-    	vertical-align: center;
-    }
-    
-    .bid-result{
-    	border-bottom : 1px solid #ebebeb;
-    }
+
+#left-sidebar h1{
+	font-size: 20px;
+	font-weight: bold;
+	padding:20px;
+	border-bottom: 1px solid black;
+}
+
+#left-sidebar li{
+	display:block;
+	padding: 15px;
+	font-weight:bold;
+}
+
+#left-sidebar li:hover{
+	background-color: #f891aa;
+	color: white;
+	cursor:pointer;
+}
+
+.selected{
+	background-color: #f891aa;
+	color: white;
+}
+/* 사이드바 끝 */
+
+.bidList-title{
+	text-align: center;
+    font-size : 25px;
+    margin: 30px;
+    font-weight:bold;
+    margin-bottom: 50px;
+}
+
     
     .bid-title{
+    	margin-top:10px;
     	font-weight: bold;
     	font-size: 18px;
     	margin-bottom: 20px;
@@ -63,11 +73,93 @@ font-weight: bold;
     .bid-result{
      	text-align: center;
     }
-    
-    .auction-content span:not(:first-of-type){
-    	padding-top : 50px;
-    }    
 
+/* 경매 미작성, 작성 영역 */
+.auction-section{
+	margin-left: 50px;
+	text-align: center;
+} 
+
+.auction-menu{
+	margin-bottom:50px;
+
+}
+
+.auction-menu a{
+	border: 1px solid #c8c8c8;
+	padding-top: 10px;
+	padding-bottom:10px;
+	font-weight:bold;
+}
+
+.auction-menu .selected{
+	color:white;     	
+    background-color:#f891aa;
+}
+
+/* 출력 css */
+.auction-content{
+	height:150px;
+	vertical-align:middle;	
+	border-top: 1px solid #c8c8c8;
+	font-size:15px;
+}
+
+
+.auction-content:hover{
+	background-color: #fff7f9;
+}
+
+.auction-title{
+	height:50px;
+	font-weight:bold;
+	font-size:17px;
+	border-bottom: 1px solid black;
+}
+
+.auction-content .img{
+	padding-top:30px;
+}
+
+.auction-content span:not(:first-of-type){
+	padding-top:70px;
+}
+
+
+.bid-detail, .bid-close{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.bid-detail:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.bid-close:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.bid-detail:active{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.bid-close:active{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.hello{
+
+	border-top: 1px solid #c8c8c8;
+}
 </style>
 </head>
 <body>
@@ -75,31 +167,56 @@ font-weight: bold;
 
 
 <div class="container">
-    	<h1>입찰내역</h1>
-    	<div class="row auction-title auction">
-    				<span class="col-md-3">이미지</span>
-					<span class="col-md-3">상품명</span>
-					<span class="col-md-2">최고입찰가</span>
-					<span class="col-md-2">진행여부</span>
-					<span class="col-md-2">입찰내역</span>					
-    	</div>
-     	<c:forEach items="${auctions}" var="auction">
-    	<div class="row auction-content auction">
-    		<span class="col-md-3"><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"></span>
-    		<span class="col-md-3"><a href='<c:out value="/auctions/${auction.apno}"/>'> <c:out value="${auction.name}" /></a></span>
-    		<fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price }" type="number"/>
-    		<span class="col-md-2"><c:out value="${best_bid_price}" /></span>
-    		<span class="col-md-2"><c:out value="${auction.status}" /></span>
 
-    		<span class="col-md-2"><a href='<c:out value="${auction.apno}"/>' class="btn btn-primary bid-detail">상세보기</a></span>
-    		<span class="col-md-2" hidden="hidden"><a href='<c:out value="${auction.apno}"/>' class="btn btn-primary bid-close">상세닫기</a></span>
-    	</div>
-    	<div id="${auction.apno}" class="bid-result">
+<div id="left-sidebar">
+    <h1>MyPage</h1>
 
-    	</div>
-      </c:forEach> 
+	<ul>
+		<li onclick="location.replace('/orders')">주문배송조회</li>
+		<li onclick="location.replace('/members')">회원정보수정</li>
+		<li onclick="location.replace('/members/address')">배송지관리</li>
+		<li onclick="location.replace('/reviews/unwritten')">리뷰관리</li>
+		<li>장바구니</li>
+		<li>위시리스트/코디</li>
+		<li onclick="location.replace('/members/bidHistory')" class="selected">내경매조회</li>
+		<li>1:1문의</li>
+	</ul>  		
+	
+</div>
+	<h1 class="bidList-title">입찰내역</h1>
+
+<div class="auction-section">
+	<div class="row auction-menu">
+		<a href="/members/bidHistory" class="col-md-6 btn selected">입찰내역</a>
+		<a href="/members/attention" class="col-md-6 btn">관심 경매 리스트</a>
+	</div>
+
+	<div class="row auction-title">
+		<span class="col-md-3">이미지</span>
+		<span class="col-md-3">상품명</span>
+		<span class="col-md-2">최고입찰가</span>
+		<span class="col-md-2">진행여부</span>
+		<span class="col-md-2">입찰내역</span>
+	</div>
+	
+	<c:forEach items="${auctions}" var="auction">
+		<div class="row auction-content">
+			<span class="col-md-3 img"><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
+							style="width: 100px; height: 100px;"></span>
+			<span class="col-md-3"><a href='<c:out value="/auctions/${auction.apno}"/>'> <c:out
+								value="${auction.name}" /></a></span>
+			<fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+			<span class="col-md-2"><c:out value="${best_bid_price}" /></span>
+			<span class="col-md-2"><c:out value="${auction.status}" /></span>
+			<span class="col-md-2"><a href='<c:out value="${auction.apno}"/>' class="btn bid-detail">상세보기</a></span>
+    		<span class="col-md-2" hidden="hidden"><a href='<c:out value="${auction.apno}"/>' class="btn bid-close">상세닫기</a></span>
+		</div>	
+		<div id="${auction.apno}" class="bid-result"></div>
+	</c:forEach>
+	<div class="hello row"></div>
 </div>
 
+</div>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
@@ -146,7 +263,7 @@ var display = (function loadThumbnail() {
                     	result += '<div class="row bid-content bid">'
                     	result += '<span class="col-md-3">' + item.rank + '</span>';
                 		result += '<span class="col-md-3">' + item.name + '</span>';
-                		result += '<span class="col-md-3">' + item.price + '</span>';
+                		result += '<span class="col-md-3">' + item.price.toLocaleString() + '</span>';
                 		result += '<span class="col-md-3">' + new Date(item.created_date).toISOString().replace('T', ' ').replace(/\..*/, '') + '</span>';
                 		result += '</div>'
                 		

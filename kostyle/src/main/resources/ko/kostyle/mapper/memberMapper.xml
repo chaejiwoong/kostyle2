@@ -58,19 +58,16 @@
     <select id="memberList" resultType="ko.kostyle.domain.MemberVO">
     <![CDATA[
         select * from(
-            select rownum rn, mno, email, name, birth, gender, point, authority, created_date
+            select /*+INDEX_DESC(MEMBER SYS_C007595)*/ rownum rn, mno, email, name, birth, gender, point, authority, created_date
             from member
             where 
         ]]>
-            <include refid="criteria"></include>
+        <include refid="criteria"></include>
        <![CDATA[
             rownum <= #{pageNum} * #{amount})
 
         where
-
-
          rn > (#{pageNum} - 1) * #{amount}
-        order by mno desc
         ]]>
     </select>
 

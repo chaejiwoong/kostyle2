@@ -212,6 +212,8 @@ var display = (function loadThumbnail() {
     					self.location = "/auctions/" + ${auction.apno}
                 	}
 
+                },error:function(xhr){
+                	alert(xhr.responseJSON.message)
                 }
 			})
 			

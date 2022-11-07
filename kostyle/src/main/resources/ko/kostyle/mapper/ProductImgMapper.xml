@@ -10,4 +10,10 @@
 		select * from PRODUCT_IMG where pno= #{pno}
 	
 	</select>
+	
+		<!-- 임시 상품 사진 조회 -->
+	<select id="selectImg" resultType="ko.kostyle.domain.ProductImgVO">
+		select * from product_img where pno = #{pno} and
+		rownum = 1
+	</select>
 </mapper>

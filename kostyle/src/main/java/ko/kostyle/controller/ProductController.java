@@ -20,13 +20,13 @@ public class ProductController {
 	private ProductService service;
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("pno") Long pno, Model model, Criteria cri) {
+	public String get(@RequestParam("pno") Long pno, Model model, Criteria cri) {
 		// 페이지 정보
 		model.addAttribute("cri", cri);
 		// 선택상품정보
 		model.addAttribute("product", service.get(pno));
 		
-		
+		return "products/productGet";
 	}
 	
 	

@@ -18,24 +18,22 @@
 	<!-- 리뷰를 남기지 않은 상품 조회 -->
 	<select id="unwrittenReviewList" resultType="ko.kostyle.domain.OrderDetailVO">
 		select * from order_detail
-		where ono in (select ono from orders where mno = #{mno}) and
+		where ono in (select ono from orders where mno = #{mno} and status='배송완료') and
 		odno not in (select odno from review where mno= #{mno})
+		and odno not in(select odno from order_cancel)
 	</select>
 
 	<!-- 리뷰를 남긴 상품 조회 -->
 	<select id="writeReviewList" resultType="ko.kostyle.domain.OrderDetailVO">
 		select * from order_detail
-		where ono in (select ono from orders where mno = #{mno}) and
+		where ono in (select ono from orders where mno = #{mno} and status='배송완료') and
 		odno in (select odno from review where mno= #{mno})
+		and odno not in(select odno from order_cancel)
 	</select>
 
 
 
 
-	<!-- 임시 상품 사진 조회 -->
-	<select id="selectImg" resultType="ko.kostyle.domain.ProductImgVO">
-		select * from product_img where pno = #{pno} and
-		rownum = 1
-	</select>
+
 </mapper>
 

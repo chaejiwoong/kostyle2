@@ -141,7 +141,7 @@ font-weight: bold;
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
-var aa = (function loadThumbnail() {
+var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
 	
 	$(uploadResultArr).each(function (i, obj) {

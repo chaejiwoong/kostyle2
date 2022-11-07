@@ -12,116 +12,157 @@
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <style>
 
-h1{
-margin-top: 25px;
-margin-bottom: 25px;
-font-size: 30px;
-font-weight: bold;
- text-align: center;
-        }
-        
- .selectBox{
-	text-align: center;
+/* 사이드바 */
+#left-sidebar{
+	position:absolute;
+	left:0px;
+	text-align:center;
+	width:200px;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 20px;
 }
-.paging {
-	text-align: center;
+
+
+#left-sidebar h1{
+	font-size: 20px;
+	font-weight: bold;
+	padding:20px;
+	border-bottom: 1px solid black;
 }
-    #left-sidebar{
-        position: relative;
-        float: left;
-        margin-left: 30px;
-        font-size: 17px;
-        border: solid 1px #ebebeb;
-        vertical-align: center;
-        border-radius: 10px;
-        padding-top: 20px;
-        margin-top: 20px;
-    }
 
-    #left-sidebar h1{
-        border-bottom: 1px solid black;
-        text-align: center;
-        height: 50px;
-        font-size: 20px;
-        font-weight: bold;
-    }
+#left-sidebar li{
+	display:block;
+	padding: 15px;
+	font-weight:bold;
+}
 
-    #menu li{
-        display: block;
-        list-style: circle;
-        width: 200px;
-        height: 50px;
-        padding-left: 10px;
-        padding-top: 10px;
-    }
-    
-	.selected-li{
-    	background-color: black;
-    	color: white;
-    }
-    
-    #menu li:hover{
-        background-color: black;
-    	color: white;
-    }
-    .attention-list{
-        display: flex;
-        justify-content: center;
-    }
+#left-sidebar li:hover{
+	background-color: #f891aa;
+	color: white;
+	cursor:pointer;
+}
+
+.selected{
+	background-color: #f891aa;
+	color: white;
+}
+/* 사이드바 끝 */
+.attention-title{
+	text-align: center;
+    font-size : 25px;
+    margin: 30px;
+    font-weight:bold;
+    margin-bottom: 50px;
+}
+
+.attention-section{
+	margin-left: 50px;
+	text-align:center;
+} 
+
+.result{
+	height:150px;
+	vertical-align:middle;
+	border-bottom: 1px solid #c8c8c8;
+	font-size:15px;
+}
+
+.result:hover{
+	background-color: #fff7f9;
+}
+
+.attentions-title{
+	height:50px;
+	font-weight:bold;
+	font-size:17px;
+	border-bottom: 1px solid black;
+}
+
+.result .img{
+	padding-top:30px;
+}
+
+.result span:not(:first-of-type){
+	padding-top:70px;
+}
+
+
+
+/* 리뷰 미작성, 작성 영역 */
+.attention-menu{
+	margin-bottom:50px;
+
+}
+
+.attention-menu a{
+	border: 1px solid #c8c8c8;
+	padding-top: 10px;
+	padding-bottom:10px;
+	font-weight:bold;
+}
+
+.attention-menu .selected{
+	color:white;     	
+    background-color:#f891aa;
+}
+
 
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<div class="container">
 
-	<div id="left-sidebar">
+<div id="left-sidebar">
     <h1>MyPage</h1>
-    <ul id="menu">
-        <li><a href=""></a>주문목록/배송조회</li>
-        <li>리뷰관리</li>
-        <li>회원정보수정/탈퇴</li>
-        <li>배송지관리</li>
-        <li>장바구니</li>
-        <li>코디/위시리스트</li>
-        <li class="selected-li">내 경매 조회</li>
-    </ul>
+
+	<ul>
+		<li onclick="location.replace('/orders')">주문배송조회</li>
+		<li onclick="location.replace('/members')">회원정보수정</li>
+		<li onclick="location.replace('/members/address')">배송지관리</li>
+		<li onclick="location.replace('/reviews/unwritten')">리뷰관리</li>
+		<li>장바구니</li>
+		<li>위시리스트/코디</li>
+		<li onclick="location.replace('/members/bidHistory')" class="selected">내경매조회</li>
+		<li>1:1문의</li>
+	</ul>  		
+	
 </div>
-	<div class="container">
+	<h1 class="attention-title">관심 경매 목록</h1>
 
-	<h1>관심 경매 목록</h1>	
-	<div class="attention-list">
-			<table class="table">
-			<thead>
-				<tr>
-					<th>경매번호</th>
-					<th>이미지</th>
-					<th>상품명</th>
-					<th>입찰시작가</th>
-					<th>최고입찰가</th>
-					<th>입찰단위</th>
-					<th>관심해제</th>
+<div class="attention-section">
+	<div class="row attention-menu">
+		<a href="/members/bidHistory" class="col-md-6 btn">입찰내역</a>
+		<a href="/members/attention" class="col-md-6 btn selected">관심 경매 리스트</a>
+</div>
+	<div class="row attentions-title">
+		<span class="col-md-2">이미지</span>
+		<span class="col-md-2">상품명</span>
+		<span class="col-md-2">입찰시작가</span>
+		<span class="col-md-2">최고입찰가</span>
+		<span class="col-md-2">입찰단위</span>
+		<span class="col-md-2">관심해제</span>
+	</div>
+	<c:forEach items="${auctions}" var="auction">
+		<div class="row result">
+			<span class="col-md-2 img"><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
+							style="width: 100px; height: 100px;"></span>
+			<span class="col-md-2"><a href='<c:out value="/auctions/${auction.apno}"/>'> <c:out
+								value="${auction.name}" /></a></span>
+			<fmt:formatNumber var="startPrice" value="${auction.start_price}" type="number"/>								
+			<span class="col-md-2"><c:out value="${startPrice}" /></span>
+			<fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+			<span class="col-md-2"><c:out value="${best_bid_price}" /></span>
+			<fmt:formatNumber var="bidUnit" value="${auction.bid_unit}" type="number"/>
+			<span class="col-md-2"><c:out value="${bidUnit}" /></span>
+			<span class="col-md-2"><a href="/auctions/attention/${auction.apno}" class="btn btn-default attention">관심해제</a></span>
+		</div>	
+	</c:forEach>
 
-				</tr>
-			</thead>
-
-			<c:forEach items="${auctions}" var="auction">
-				<tr>
-					<td><c:out value="${auction.apno}" /></td>
-					<td><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"></td>
-					<td><a href='<c:out value="/auctions/${auction.apno}"/>'> <c:out
-								value="${auction.name}" /></a></td>
-					<td><c:out value="${auction.start_price}" /></td>
-					<td><c:out value="${auction.best_bid_price}" /></td>
-					<td><c:out value="${auction.bid_unit}" /></td>
-					<td><a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심해제</a></td>
-
-				</tr>
-			</c:forEach>
-
-		</table>
 	</div>
 
-	</div>
+</div>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>

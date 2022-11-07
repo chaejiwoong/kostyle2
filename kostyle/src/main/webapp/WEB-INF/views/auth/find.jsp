@@ -50,17 +50,40 @@
 	padding: 0;
 }
 
-.find-tab li:hover {
-	background: black;
+.selected{
+	background-color: #f891aa;
 	color: white;
 }
 
+
 .find-section {
-	border: solid 1px black;
+	border: solid 1px #ebebeb;
 	width: 600px;
 	margin: 20px auto;
 	padding-bottom: 30px;
 }
+
+.button button{
+    		color:white;
+    		display: inline-block;
+    		padding: 6px 12px;
+			line-height: 1.42857143;    	
+			border-radius: 4px;        	
+    	    width:300px;
+    		margin-bottom:10px;
+    		font-size:15px;
+    		font-weight:bold;
+    		background-color:#f891aa;
+    		border:1px solid #ebebeb;
+}
+
+.button button{
+	background-color: #f891aa;
+	border: solid 1px #ebebeb;
+    font-size:15px;
+    font-weight:bold;	
+}
+
 
 #mail-check-btn {
 	margin-left: 20px;
@@ -100,9 +123,9 @@ label {
 							<label for="birth">생년월일</label> <input type="text" id="birth"
 								name="birth" class="form-control"><br>
 						</div>
-						<div class="row">
+						<div class="row button">
 							<button type="button" id="findId"
-								class="btn btn-primary col-md-12">아이디 찾기</button>
+								class="col-md-12">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
@@ -132,10 +155,10 @@ label {
 										maxlength="6"><br>
 								</div>
 							</div>
-							<div class="form-inline form-group">
+							<div class="form-inline form-group button">
 								<span class="col-md-2"></span>
 								<button type="button" id="findPw"
-									class="btn btn-primary col-md-8">완료</button>
+									class="col-md-8">완료</button>
 							</div>
 						</form>
 
@@ -153,8 +176,8 @@ label {
 									type="password" name="chkPassword" class="form-control"><br>
 							</div>
 
-							<div>
-							<button type="button" id="changePw" class="btn btn-primary col-md-12">비밀번호
+							<div class="button">
+							<button type="button" id="changePw" class="col-md-12">비밀번호
 								변경</button>
 							</div>
 							
@@ -177,15 +200,26 @@ label {
         $('#pwsc').on('click', function () {
             $('.find-password').show()
             $('.find-id').hide()
+            $('#idsc').removeClass('selected')
+            $(this).addClass('selected')            
         });
 
         $('#idsc').on('click', function () {
             $('.find-id').show()
             $('.find-password').hide()
+            $('#pwsc').removeClass('selected')
+            $(this).addClass('selected')
         });
 
         // 아이디 찾기
-        $('#findId').on("click", function () {
+        $('#findId').on("click", function (e) {
+        	e.preventDefault();
+        	if(idForm.find("input[name='name']").val()=="" || idForm.find("input[name='birth']").val()==""){
+        		alert("빈칸을 작성해주세요 !")
+        		return false;
+        		
+        	}
+        	
             var member = {
                 "name": idForm.find("input[name='name']").val(),
                 "birth": idForm.find("input[name='birth']").val()
