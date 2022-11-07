@@ -17,6 +17,4 @@ public interface ReviewMapper {
 	//리뷰 남긴 리스트
 	List<OrderDetailVO> writeReviewList(Long mno);
 	
-	//임시 상품 사진 조회
-	ProductImgVO selectImg(Long pno);
 }

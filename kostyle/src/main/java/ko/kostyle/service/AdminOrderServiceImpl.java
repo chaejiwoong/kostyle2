@@ -68,20 +68,13 @@ public class AdminOrderServiceImpl implements AdminOrderService {
     public AdminOrderDTO orderDetail(Long ono) {
         OrderVO order = orderMapper.getOrder(ono);
         MemberVO member = memberMapper.memberDetailById(order.getMno());
-        AddressVO address = orderMapper.addressDetail(order.getAno());
-
-        AddressDTO addressDTO = AddressDTO.builder()
-                .ano(address.getAno())
-                .address(address.getAddress())
-                .tel(address.getTel())
-                .name(address.getName())
-                .is_default(address.is_default())
-                .build();
-
+        
+        // 주문에 해당하는 배송지
+        AddressDTO address = AddressDTO.of(orderMapper.addressDetail(order.getAno()));
 
         AdminOrderDTO dto = AdminOrderDTO.builder()
                 .ono(order.getOno())
-                .address(addressDTO)
+                .address(address)
                 .member(MemberDTO.of(member))
                 .payment(order.getPayment())
                 .totalPrice(order.getTotalPrice())
@@ -135,7 +128,6 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	public WinningBidDTO getWinningBid(Long ono) {
 		
 		WinningBidVO winningBid = winningBidMapper.winningBidDetail(ono);
-		
 		AuctionVO auction = auctionMapper.auctionDetailByBno(winningBid.getBno());
 
 		return WinningBidDTO.builder()

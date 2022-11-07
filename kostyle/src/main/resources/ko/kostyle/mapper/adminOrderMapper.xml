@@ -48,7 +48,7 @@
              ]]>
 		<include refid="criteria"></include>
         	<![CDATA[
-        		            
+        	 totalprice > 0 and	            
              rownum <= #{pageNum} * #{amount})
         where
 
@@ -74,9 +74,6 @@
 		resultType="ko.kostyle.domain.OrderDetailVO">
 		select * from order_detail where odno = #{odno}
 	</select>
-
-
-
 
 	<!--  배송지 상세 -->
 	<select id="addressDetail"
@@ -105,8 +102,5 @@
 		update orders set status=#{status} where ono = #{ono}
 	</update>
 	
-	<delete id="deleteOrder">
-		delete from orders where totalprice = 0
-	</delete>
 </mapper>
 

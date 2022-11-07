@@ -63,14 +63,6 @@ public class SchedulerService {
 
 	}
 	
-	// 주문상세가 모두 취소된 주문 삭제
-	@Scheduled(cron = "0 0 0 0/1 * *")
-	@Transactional
-	public void deleteOrder() {
-		log.info("크론 주문 삭제 스케줄러 실행....");
-		orderMapper.deleteOrder();
-
-	}
 	
 	// 낙찰 상품 주문 자동화 스케줄러
 	@Scheduled(cron = "0 0 0/1 * * *")

@@ -21,4 +21,5 @@ public class WinningBidDTO {
 	private Long wbno;	//낙찰번호
 	private String name;	// 경매상품명
 	private int price;	// 낙찰가격
+	private ImgDTO img;	// 이미지
 }

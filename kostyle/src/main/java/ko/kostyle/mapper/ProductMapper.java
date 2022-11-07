@@ -31,7 +31,8 @@ public interface ProductMapper {
 	
 	public void updateHitcount(@Param("pno") Long pno);   
 	
-
+	/* 상품 정보 */
+	public ProductVO getProductInfo(long pno);	
 	
 	
 

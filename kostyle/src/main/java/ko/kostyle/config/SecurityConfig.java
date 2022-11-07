@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ko.kostyle.config.jwt.JwtAccessDeniedHandler;
-import ko.kostyle.config.jwt.JwtAuthenticationEntryPoint;
 
 
 @EnableWebSecurity
@@ -20,8 +18,8 @@ import ko.kostyle.config.jwt.JwtAuthenticationEntryPoint;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    private final TokenProvider tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // exception handling 할 때 우리가 만든 클래스를 추가
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler)
 
                 .and()
                 .authorizeRequests()
@@ -59,6 +57,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 
                 .antMatchers("/auctions/attention/**").authenticated()
                 .antMatchers("/auctions/**").permitAll()
+
+                .antMatchers("/coordies/register").authenticated()
+               // .antMatchers("/coordies/like").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/coordies/**").permitAll()
+                .antMatchers("/coordiComments/**").permitAll()
+                
+                //.antMatchers("/coordiComments/register").authenticated()
 
                 
                 .anyRequest().authenticated(); 

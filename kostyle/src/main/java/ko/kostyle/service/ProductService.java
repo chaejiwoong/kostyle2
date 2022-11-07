@@ -2,7 +2,9 @@ package ko.kostyle.service;
 
 import java.util.List;
 
-
+import ko.kostyle.domain.CartListVO;
+import ko.kostyle.domain.OrderDetailVO;
+import ko.kostyle.domain.ProductVO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.ProductDTO;
 import ko.kostyle.dto.StockDTO;
@@ -24,12 +26,6 @@ public interface ProductService {
 	public int getTotal(Criteria cri);
 	
 	public void updateHitcount(Long pno);//조회수 증가
-	
-	
-	 
-
-	
-	
-	
-
 }
+
+

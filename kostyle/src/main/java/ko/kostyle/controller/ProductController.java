@@ -44,6 +44,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/get")
+
 	public String get(@RequestParam("pno") Long pno, Model model, Criteria cri,   @CookieValue(name = "listCookie", required = false) Cookie cookie, HttpServletResponse response) {
 	      
 		 if (cookie != null) {
@@ -65,7 +66,6 @@ public class ProductController {
 			
 			
 
-		
 		return "/products/productGet";
 	
 	}

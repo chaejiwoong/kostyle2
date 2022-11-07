@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import ko.kostyle.domain.MemberVO;
+import ko.kostyle.dto.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +29,7 @@ public class MemberMapperTest {
 //	@Test
 //	public void insertTest() {
 //
-//		IntStream.range(0, 200).forEach(i -> {
+//		IntStream.range(10, 200).forEach(i -> {
 //			MemberVO vo = new MemberVO();
 //			vo.setEmail("test" + i);
 //			vo.setName("tester" + i);
@@ -41,7 +42,7 @@ public class MemberMapperTest {
 //		});
 //
 //	}
-	
+//	
 	@Test
 	public void adminInsert() {
 
@@ -56,6 +57,14 @@ public class MemberMapperTest {
 			
 			mapper.memberInsert(vo);
 		});
+	
+	
 
 	}
+	
+//	@Test
+//	public void adminInsert() {
+//
+//		mapper.memberList(new Criteria()).forEach(log::info);
+//	}
 }

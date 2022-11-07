@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.CartMapper">
+
+	<resultMap type="ko.kostyle.domain.CartListVO" id="cart">
+		<id property="cpno" column="cpno" />
+		<result property="cpno" column="cpno" />
+		<result property="pno" column="pno" />
+		<result property="mno" column="mno" />
+		<result property="amount" column="amount" />
+		<collection property="Product" resultMap="product">
+		</collection>
+	</resultMap>
+
+	<resultMap type="ko.kostyle.domain.ProductVO" id="product">
+		<result property="pno" column="pno" />
+		<result property="scno" column="scno" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="hitcount" column="hitcount" />
+		<result property="season" column="season" />
+		<result property="color" column="color" />
+		<result property="gender" column="gender" />
+		<result property="created_date" column="created_date" />
+		<result property="last_modified_date"
+			column="last_modified_date" />
+	</resultMap>
+
+	<!-- 특정회원 특정상품의 개수 가져오기 -->
+	<select id="selectCartByPnum"
+		resultType="ko.kostyle.domain.CartListVO">
+		select count(cpno) from cart_product
+		where mno=#{mno}
+		and
+		pno=#{pno}
+	</select>
+
+	<!-- 장바구니 상품 수량 수정 -->
+	<update id="updateCartOqty"
+		parameterType="ko.kostyle.domain.CartListVO">
+		update cart_product
+		set amount=#{amount} where cpno =
+		#{cpno}
+	</update>
+
+	<!-- 장바구니에 상품 추가 -->
+	<insert id="addCart"
+		parameterType="ko.kostyle.domain.CartListVO">
+		insert into
+		cart_product(cpno, mno, pno, amount)
+		values(cart_product_seq.nextval,
+		#{mno},
+		#{pno}, #{amount})
+	</insert>
+
+	<!-- 회원번호로 장바구니 목록 가져오기 -->
+	<select id="getCart"
+		resultType="ko.kostyle.domain.CartListVO">
+		select c.cpno,c.mno, c.pno, c.amount, p.name, p.price, m.point
+		from cart_product c left outer join product p
+		on c.pno = p.pno left outer join member m on c.mno = m.mno where p.pno =
+		c.pno
+	</select>
+
+
+	<delete id="delCart" parameterType="long">
+		delete from cart_product
+		where cpno=#{cpno}
+	</delete>
+
+	<update id="editCart"
+		parameterType="ko.kostyle.domain.CartListVO">
+		update cart_product set
+		amount
+		=#{amount} where
+		cpno=#{cpno}
+	</update>
+
+	<!-- 주문완료된 상품을 장바구니에서 삭제하기 -->
+	<delete id="delCartByOrder" parameterType="map">
+		delete from cart where
+		mno=#{mno} and pno=#{pno}
+	</delete>
+</mapper>

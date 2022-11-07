@@ -20,6 +20,12 @@ public class MemberDTO {
     private int point;
     private String authority;
     private Date createdDate;
+    
+    // 마이페이지에 표시할 주문 현황
+    private int ready;
+    private int delivery;
+    private int done;
+    
 
 
 
