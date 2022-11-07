@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
 			dto.setPrice(prolist.getPrice());
 			dto.setSeason(prolist.getSeason());
 			dto.setCreated_date(prolist.getCreated_date());
+			dto.setLast_modified_date(prolist.getLast_modified_date());
 			
 			List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
 			dto.setImageList(imgList);

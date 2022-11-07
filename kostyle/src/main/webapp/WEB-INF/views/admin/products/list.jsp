@@ -3,58 +3,68 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-<title>Title</title>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
-<script type="text/javascript" src="/resources/js/header.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
-<link href="/resources/css/productList.css" rel="stylesheet" />
-
-
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-	 <div class="goods_table_wrap">
-                    	<!-- 상품 리스트 O -->
-	                    <form action="/admin/products/register" method="get" id="enrollForm">
-	                    	<table class="goods_table">
-	                    		<thead>
-	                    			<tr>
-										<td class="th_column_1">상품번호</td>
-										<td class="th_column_2">상품</td>
-	                    				<td class="th_column_3">상품이름</td>
-	                    				<td class="th_column_4">상품색상</td>
-	                    				<!-- <td class="th_column_4">상품 재고</td> -->
-	                    				<td class="th_column_5">상품가격</td>
-	                    				<td class="th_column_6">성별</td>
-	                    				<td class="th_column_7">등록날짜</td>
-	                    				<td class="th_column_8">조회수</td>
-	                    			</tr>
-	                    		</thead>	
-	                    		<c:forEach items="${product}" var="list">
-	                    		<tr>
-	                    			<td><c:out value="${list.pno}"></c:out></td>
-	                    			<td><img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
-	                    			data-filename="${list.imageList[0].fileName}"></td>
-	                    			<td><a class="move" href ='<c:out value="${list.pno}"/>'><c:out value="${list.name}"/></a></td>
-	                    			<td><c:out value="${list.color}"></c:out></td>
-	                    			<td><fmt:formatNumber value="${list.price}" pattern="#,### 원" /></td>
-	                    			<td><c:out value="${list.gender}" ></c:out></td>
-	                    			<td><fmt:formatDate value="${list.created_date}" pattern="yyyy-MM-dd"/></td>
-	                    			<td><fmt:formatDate value="${list.last_modified_date}" pattern="yyyy-MM-dd"/></td>
-	                    			<td><c:out value="${list.hitCount}" ></c:out></td>
-	                    		</tr>
-	                    		</c:forEach>
-	                    	</table>
-	                    			</form>
-		<div class="btn_section">
-			<button id="enrollBtn" class="btn enroll_btn">등 록</button>
-		</div>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Kostyle</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 		
-		
-
-<div class='search_wrap'>
+               <c:forEach  items="${product}" var="list" >
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
+	                    			data-filename="${list.imageList[0].fileName}" style="width : 253px; height : 150px;">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">"${list.name}"</h5>
+                                    <br>
+                                    <form action="/admin/products/register" method="get" id="enrollForm">
+                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto"  id = "move" 
+                                     href='<c:out value="${list.pno}"/>'>상세보기</a></div>
+                                    </form>
+                                    <br>
+                                    
+                                   가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
+                                    <br>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명
+                                        <br>
+                                        색상 : <c:out value="${list.color}"></c:out>
+                                        <br>
+                                        조회수 : <c:out value="${list.hitCount}" ></c:out>
+                                        <br>
+                                    	등록일 : <fmt:formatDate value="${list.created_date}" pattern="yyyy-MM-dd"/>
+                                    	
+                                 
+	                    				</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </c:forEach>        
+                </div>
+            </div>
+            
+            <div class='search_wrap'>
 					<form id='searchForm' action="/admin/products" method='get'>
 							<select name='type'>
 								<option value=""
@@ -71,18 +81,19 @@
 									
 
 							</select>
-							 <input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
+							 <input class="search_input" type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
 								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 							<button class='btn btn-default'>Search</button>
 							
 							<button id="default" class='btn btn-default'>초기화</button>
+							<button id="enrollBtn" class="btn enroll_btn">등 록</button>
 						</form>
+
 					
 				</div>
-
-		
-		<div class="pageMaker_wrap">
+				
+				<div class="pageMaker_wrap">
                 		<ul class="pageMaker">
                 			
                 			<!-- 이전 버튼 -->
@@ -114,28 +125,25 @@
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
-			
-			
-	<script type="text/javascript">
+            
+<script type="text/javascript">
+/* 상품 등록 폼 */
+$("#enrollBtn").on("click", function(e) {
+
+	e.preventDefault();
+
+	self.location="/admin/products/register";
+		
+
+});
+//검색어 초기화
+$("#default").on('click', function(e){
+	e.preventDefault();
+	self.location="products";
+})
+	let enrollForm = $("#enrollForm")
 	
-		
-	$("#default").on('click', function(e){
-		e.preventDefault();
-		self.location="/products";
-	})
-		let enrollForm = $("#enrollForm")
-
-
-		/* 상품 등록 폼 */
-		$("#enrollBtn").on("click", function(e) {
-
-			e.preventDefault();
-
-			enrollForm.submit();
-
-		});
-		
-		/*상품 페이지  */
+			/*상품 페이지  */
 		let moveForm = $('#moveForm');
 		$(".pageMaker_btn a").on("click", function(e){
 			
@@ -148,7 +156,7 @@
 		});
 		
 		/* 상품 상세 페이지 이동 */
-		$(".move").on("click", function(e){
+		$("#move").on("click", function(e){
 			
 			e.preventDefault();
 			
@@ -176,31 +184,8 @@
 				})
 			})();
 
-		
 
-		
-	</script>
-	
-	
-<!-- 	<script>
-$(document).ready(function(){
-	
-	let eResult = '<c:out value="${enroll_result}"/>';
-	
-	checkResult(eResult);
-	
-	function checkResult(result){
-		
-		if(result === ''){
-			return;
-		}
-		
-		alert("상품을 등록하였습니다.");
-		
-	}
+</script>
 
-});
-</script> -->
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-</body>
+    </body>
 </html>
