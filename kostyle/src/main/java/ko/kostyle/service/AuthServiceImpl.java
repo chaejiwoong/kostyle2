@@ -1,6 +1,8 @@
 package ko.kostyle.service;
 
 import ko.kostyle.domain.MemberVO;
+import ko.kostyle.dto.OrderDetailDTO;
+import ko.kostyle.dto.OrderRequestDTO;
 import ko.kostyle.dto.members.MemberChangeDTO;
 import ko.kostyle.dto.members.MemberJoinDTO;
 import ko.kostyle.mapper.MemberMapper;
@@ -147,4 +149,31 @@ public class AuthServiceImpl implements AuthService{
         System.out.println("vo = " + vo);
         memberMapper.updatePassword(vo);
     }
+
+    // 주문 알림 이메일
+	@Override
+	public void orderEmail(OrderRequestDTO dto) {
+		
+		// 포인트 제외한 결제금액
+		int payPrice = dto.getOrderDetails().stream().mapToInt(OrderDetailDTO::getPrice).sum() - dto.getPoint();
+		
+		String installment = dto.getCard().getMonth()==1?"일시불":dto.getCard().getMonth() + "개월";
+		
+        String setFrom = "cowldnd2@gmail.com";  // 이메일 전송자
+        String title = "주문 완료 이메일"; // 이메일 제목
+        String content = "저희 상품을 구매해주셔서 감사합니다." +
+                "<br><br>" +
+                "총 결제금액 " + payPrice +
+                "<br>" +
+                "결제정보" + 
+                "<br>" +
+                "카드구분 : " + dto.getCard().getCategory() + 
+                "<br>" + 
+                "카드번호" + dto.getCard().getCardNum() + 
+                "<br>" + 
+                "할부 : " + installment + "<br>감사합니다.";   // 이메일 내용 삽입
+
+        mailSend(setFrom, ((MemberVO)session.getAttribute("user")).getEmail(), title, content);
+        
+	}
 }

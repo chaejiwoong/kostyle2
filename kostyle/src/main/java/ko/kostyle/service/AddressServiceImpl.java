@@ -103,8 +103,13 @@ public class AddressServiceImpl implements AddressService{
 	// 기본 배송지 조회
 	@Override
 	public AddressDTO findDefaultAddress() {
+		AddressVO address = addressMapper.findDefaultAddress(SecurityUtil.getCurrentMemberId());
+		if(address != null) {
+			return AddressDTO.of(address);
+		}else {
+			return new AddressDTO();
+		}
 		
-		return AddressDTO.of(addressMapper.findDefaultAddress(SecurityUtil.getCurrentMemberId()));
 	}
 
 

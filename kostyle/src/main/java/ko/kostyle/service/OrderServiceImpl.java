@@ -261,46 +261,45 @@ public class OrderServiceImpl implements OrderService{
 		return dtos;
 	}
 
-	@Override
-	@Transactional
-	public void payByCard(OrderRequestDTO dto) {
-		
-		
-	}
 
+	// 주문결제
 	@Override
 	@Transactional
-	public void payByPoint(OrderRequestDTO dto) throws Exception{
-		
+	public void orderPayService(OrderRequestDTO dto) throws Exception {
 		Long mno =SecurityUtil.getCurrentMemberId();
 		
+		MemberVO member = memberMapper.memberDetailById(mno);
 		// 총합 구하기
 		List<OrderDetailDTO> list = dto.getOrderDetails();
-		int totalPrice = 0;
-		for(OrderDetailDTO o : list) {
-			totalPrice += o.getPrice();
+		int totalPrice = list.stream().mapToInt(OrderDetailDTO::getPrice).sum();
+		
+		if(dto.getPay().equals("point")) {			
+			// 포인트 검증
+			if(member.getPoint() < totalPrice) {
+				throw new RuntimeException("포인트 잔액이 부족합니다.");
+			}
+			
+			log.info("totalPrice : " + totalPrice);		
+			// 총 금액 - 적립포인트만큼 포인트 차감
+			memberMapper.updatePoint(mno, totalPrice-dto.getAccumulate()); 
+		}else {
+			// 포인트 검증
+			if(member.getPoint() < dto.getPoint()) {
+				throw new RuntimeException("포인트 잔액이 부족합니다.");
+			}
+
+			// 사용포인트만큼 포인트 차감
+			memberMapper.updatePoint(mno, dto.getPoint()); 
 		}
-		MemberVO member = memberMapper.memberDetailById(mno);
-		
-		// 포인트 검증
-		if(member.getPoint() < totalPrice) {
-			throw new RuntimeException("포인트 잔액이 부족합니다.");
-		}
-		
-		log.info("totalPrice : " + totalPrice);
-		
-		// 총 금액 - 적립포인트만큼 포인트 차감
-		memberMapper.updatePoint(mno, totalPrice-dto.getAccumulate()); 
 		
 		OrderVO order = OrderVO.builder()
 				.ano(dto.getAno())
-				.mno(mno)
+				.mno(SecurityUtil.getCurrentMemberId())
 				.payment(dto.getPay())
 				.totalPrice(totalPrice)
 				.status("상품준비중")
 				.category("product")
 				.build();
-		log.info("order : " + order);
 		
 		
 		//주문 추가

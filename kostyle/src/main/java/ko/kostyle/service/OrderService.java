@@ -32,8 +32,7 @@ public interface OrderService {
     // 주문결제창에 출력할 상품 리스트
     List<OrderDetailDTO> OrderPayList(List<OrderPayDTO> list);
     
-    // 카드로 주문결제
-    void payByCard(OrderRequestDTO dto);
-    // 포인트로 주문 결제
-    void payByPoint(OrderRequestDTO dto) throws Exception;
+    // 주문결제
+    void orderPayService(OrderRequestDTO dto) throws Exception;
+ 
 }

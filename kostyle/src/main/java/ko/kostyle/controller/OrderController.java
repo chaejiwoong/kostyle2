@@ -25,6 +25,7 @@ import ko.kostyle.dto.PageDTO;
 import ko.kostyle.dto.WinningBidDTO;
 import ko.kostyle.service.AddressService;
 import ko.kostyle.service.AuctionService;
+import ko.kostyle.service.AuthService;
 import ko.kostyle.service.BidService;
 import ko.kostyle.service.MemberService;
 import ko.kostyle.service.OrderService;
@@ -40,6 +41,7 @@ public class OrderController {
 	private final OrderService orderService;
 	private final AddressService addressService;
 	private final MemberService memberService;
+	private final AuthService authService; 
 	
 	@GetMapping
 	public String getOrderList(Criteria cri, Model model) {
@@ -127,10 +129,9 @@ public class OrderController {
 		log.info("orderPay Controller.........");
 		log.info("dto : " + dto);
 		try {
+			orderService.orderPayService(dto);
 			if(dto.getPay().equals("card")) {
-				
-			}else {
-				orderService.payByPoint(dto);
+				authService.orderEmail(dto);
 			}
 		}catch (Exception e) {
 			log.info(e.getMessage());
