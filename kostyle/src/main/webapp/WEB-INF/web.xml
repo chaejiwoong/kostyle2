@@ -49,6 +49,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
 	<!-- 시큐리티 필터 적용 -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

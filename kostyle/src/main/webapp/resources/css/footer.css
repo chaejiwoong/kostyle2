@@ -1,29 +1,19 @@
-#wrap {
-	min-height: 100%;
-	position: relative;
-	padding-bottom: 60px;
-}
-
-
 #footer {
 
-	position:absolute;	
-	width: 100%;
-	height: auto;
-	background-color: #323232;
-	text-align: center;
-	bottom: 0;
-	
+    width: 100%;
+    height: auto;
+    background-color: #323232;
+    text-align: center;
+    position: relative;
+    transform: translateY(-100%);
 
 }
-
 .footer-box {
-	padding: 15px 0;
+    padding: 15px 0;
 }
-
 #footer p {
-	font-size: 10px;
-	opacity: 0.8;
-	/*font-weight: bold;*/
-	color: #ffffff;
+    font-size: 10px;
+    opacity: 0.8;
+    /*font-weight: bold;*/
+    color: #ffffff;
 }

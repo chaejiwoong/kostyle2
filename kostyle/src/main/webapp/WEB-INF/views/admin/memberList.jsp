@@ -7,7 +7,7 @@
         <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
         <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-        <link href="/resources/css/header.css" rel="stylesheet"/>
+        <link href="/resources/css/adminHeader.css" rel="stylesheet"/>
         <link href="/resources/css/footer.css" rel="stylesheet"/>
 <style>
 
@@ -29,6 +29,7 @@
 </style>
 </head>
 <body>
+<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<h1>관리자 회원 목록</h1>
 
@@ -168,6 +169,7 @@
 
 				});
 	</script>
+</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

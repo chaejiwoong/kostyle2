@@ -59,6 +59,20 @@
    	 		border: 1px solid #ebebeb;
     		color: white;	
 
+/*     #wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
+        h1{
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+ */
+
     	}    	
     	
 
@@ -84,6 +98,7 @@
 </head>
 
 <body>
+
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 <div class="container">
@@ -118,7 +133,6 @@
             </div>
     </form>
 </div>
-
 
 
 </div>
@@ -186,7 +200,10 @@
                 		localStorage.setItem("remember-id", result)
                 	}
                     alert( "회원님 반갑습니다." + result);
+
                     self.location = "/members/myPage";
+
+/*                     self.location = "/kostyle4u"; */
                 }
                 
             });
