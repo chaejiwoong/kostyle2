@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.ChatUserMapper"> <!-- 고유한 도메인 -->
+
+	<resultMap type="ko.kostyle.domain.ChatUserVO" id="joinVO">
+		<result column="cuno" property="cuno"/>
+		<result column="mno" property="mno"/>
+		<result column="status" property="status"/>
+		<result column="chat_title" property="chat_title"/>
+		<collection resultMap="MemberVO" property="memberVO"/>
+	</resultMap>
+	
+	<resultMap type="ko.kostyle.domain.MemberVO" id="MemberVO">
+		<result column="name" property="name"/>
+		<result column="mno" property="mno"/>
+	</resultMap>
+
+	<select id="getChatListWithPaging" resultMap="joinVO">
+		<![CDATA[
+			SELECT alljoin.* FROM
+			(SELECT rownum rn, c.cuno, m.mno, c.status, c.chat_title, m.name FROM
+			chat_user c LEFT JOIN member m ON c.mno = m.mno
+			WHERE c.mno = m.mno AND
+			rownum <= #{pageNum} * #{amount}) alljoin
+			WHERE rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<insert id="insertQuestion">
+		INSERT INTO question (cuno, mno, status, chat_title)
+			VALUES (cuno_seq.nextval, #{mno}, #{status}, #{chat_title})
+	</insert>
+	
+	<insert id="insertChatKey">
+		<selectKey keyProperty="cuno" order="BEFORE" resultType="long">
+			SELECT cuno_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO question (cuno, mno, status, chat_title) VALUES(#{cuno}, #{mno}, #{status}, #{chat_title})
+	</insert>
+	
+		<!--전체 데이터 개수 처리-->
+	<select id="questionTotalCount" resultType="int">
+		SELECT COUNT(*) FROM question WHERE cuno > 0
+	</select>	
+
+</mapper>
+

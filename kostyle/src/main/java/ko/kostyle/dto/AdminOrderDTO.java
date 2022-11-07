@@ -16,6 +16,7 @@ public class AdminOrderDTO {
     private AddressDTO address;
     private MemberDTO member;
     private String payment;
+    private String category;
     private int totalPrice;
     private String status;
     private Date created_date;
