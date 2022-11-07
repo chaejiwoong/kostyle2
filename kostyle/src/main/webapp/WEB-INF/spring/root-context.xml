@@ -45,6 +45,7 @@
       <property name="dataSource" ref="dataSource"/>
    </bean>
    
+   <task:annotation-driven/>
 
     <context:property-placeholder location="classpath:email.properties"/> 
 
@@ -68,6 +69,6 @@
         </property>
     </bean>
     
-	<task:annotation-driven/>
+
    
 </beans>

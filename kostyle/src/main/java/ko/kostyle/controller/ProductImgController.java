@@ -32,7 +32,7 @@ public class ProductImgController {
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
-		log.info("ddddddddddddddddddddddddddddddddddddddddddd"+fileName);
+		
 		File file = new File("c:\\upload\\" + fileName);
 		
 		ResponseEntity<byte[]> result = null;

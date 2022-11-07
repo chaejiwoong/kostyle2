@@ -12,7 +12,9 @@ import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.domain.StockVO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.ProductDTO;
+import ko.kostyle.dto.Product_ImgDTO;
 import ko.kostyle.dto.StockDTO;
+import ko.kostyle.mapper.ProductImgMapper;
 import ko.kostyle.mapper.ProductMapper;
 import lombok.extern.log4j.Log4j;
 
@@ -23,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private ProductMapper proMapper;
+	
+	@Autowired
+	private ProductImgMapper imgMapper;
 
 	@Override
 	public List<ProductDTO> productList(Criteria cri) {
@@ -37,13 +42,16 @@ public class ProductServiceImpl implements ProductService {
 			dto.setName(prolist.getName());
 			dto.setColor(prolist.getColor());
 			dto.setGender(prolist.getGender());
+			dto.setHitCount(prolist.getHitCount());
 			dto.setPrice(prolist.getPrice());
 			dto.setSeason(prolist.getSeason());
 			dto.setCreated_date(prolist.getCreated_date());
 			
+			List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
+			dto.setImageList(imgList);
+
+			
 			proDTO.add(dto);
-			
-			
 		
 		}
 		
@@ -77,15 +85,15 @@ public class ProductServiceImpl implements ProductService {
 		
 
 	List<Product_ImgVO> imgList = proDTO.getImageList();
-	log.info("11111111111111111111111111" +imgList);
+	
 
 	proDTO.getImageList().forEach(img ->{
 			
 			img.setPno(proVO.getPno());
 			proMapper.imgInsert(img);	
-			log.info("222333333333333333332" +img);
+			
 		});
-		log.info("222222222222222222222222" +imgList);
+		
 		
 	}
 
@@ -116,13 +124,12 @@ public class ProductServiceImpl implements ProductService {
 		
 		List<Product_ImgVO> imgList = proDTO.getImageList();
 		
-		log.info("11111111111111111111111111" +imgList);
+		
 
 		proDTO.getImageList().forEach(img ->{
 				
 				img.setPno(proVO.getPno());
 				proMapper.imgInsert(img);	
-				log.info("222333333333333333332" +img);
 			});
 		return proMapper.productUpdate(proVO);
 	}
@@ -145,6 +152,7 @@ public class ProductServiceImpl implements ProductService {
 		dto.setName(vo.getName());
 		dto.setColor(vo.getColor());
 		dto.setGender(vo.getGender());
+		dto.setHitCount(vo.getHitCount());
 		dto.setPrice(vo.getPrice());
 		dto.setSeason(vo.getSeason());
 		dto.setCreated_date(vo.getCreated_date());
@@ -153,6 +161,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		List<StockVO> list = proMapper.stockList(pno);
 		dto.setStockList(list);
+		
+		
 		
 		return dto;
 	}
@@ -163,10 +173,70 @@ public class ProductServiceImpl implements ProductService {
 		return proMapper.productGetTotal(cri);
 		
 	}
+	//조회수 증가
+	   @Override
+	   public void updateHitcount(Long pno) {
+	      proMapper.updateHitcount(pno);
+	   }
+
+	  //조회수에 따른 상품 출력
+	   @Override
+		public List<ProductDTO> productListHit() {
+			List<ProductVO> proVO = imgMapper.productGetHit();
+			List<ProductDTO> proDTO =new ArrayList<ProductDTO>();
+			
+			for(ProductVO prolist : proVO) {
+				
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setPno(prolist.getPno());
+				dto.setName(prolist.getName());
+				dto.setColor(prolist.getColor());
+				dto.setGender(prolist.getGender());
+				dto.setHitCount(prolist.getHitCount());
+				dto.setPrice(prolist.getPrice());
+				dto.setSeason(prolist.getSeason());
+				dto.setCreated_date(prolist.getCreated_date());
+				log.info("이건 찍히는가.....");
+				
+				
+				List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
+				log.info("이게 이미지 리스트 인가" + imgList);
+				dto.setImageList(imgList);
+				
+				
+				
+				proDTO.add(dto);
+			
+			}
+			
+			return proDTO;
+		}   
 
 
-
-
+//	   private ProductDTO toDto(ProductVO vo) {
+//		   ProductDTO dto = new ProductDTO();
+//			
+//			dto.setPno(vo.getPno());
+//			dto.setName(vo.getName());
+//			dto.setColor(vo.getColor());
+//			dto.setGender(vo.getGender());
+//			dto.setHitCount(vo.getHitCount());
+//			dto.setPrice(vo.getPrice());
+//			dto.setSeason(vo.getSeason());
+//			dto.setCreated_date(vo.getCreated_date());
+//			dto.setLast_modified_date(vo.getLast_modified_date());
+//			
+//			
+//			List<StockVO> list = proMapper.stockList(vo.getPno());
+//			dto.setStockList(list);
+//			
+//			return dto;
+//			
+//			   return imgMapper.productGetHit().stream()
+//				   		.map(vo -> toDto(vo))
+//				   		.collect(Collectors.toList());
+//	   }
 
 
 

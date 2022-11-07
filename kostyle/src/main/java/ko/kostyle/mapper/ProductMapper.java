@@ -2,6 +2,8 @@ package ko.kostyle.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ko.kostyle.domain.ProductVO;
 import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.domain.StockVO;
@@ -27,7 +29,7 @@ public interface ProductMapper {
 	
 	public int productGetTotal(Criteria cri);
 	
-	
+	public void updateHitcount(@Param("pno") Long pno);   
 	
 
 	

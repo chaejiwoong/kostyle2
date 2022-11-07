@@ -17,45 +17,38 @@
 
 	 <div class="goods_table_wrap">
                     	<!-- 상품 리스트 O -->
-	                    <form action="/admin/products/register" method="get" id="enrollForm">
+	                
 	                    	<table class="goods_table">
 	                    		<thead>
 	                    			<tr>
-										<td class="th_column_1">상품번호</td>
-										<td class="th_column_2">상품</td>
-	                    				<td class="th_column_3">상품이름</td>
-	                    				<td class="th_column_4">상품색상</td>
+										<td class="th_column_1">상품</td>
+	                    				<td class="th_column_2">상품이름</td>
+	                    				<td class="th_column_3">상품색상</td>
 	                    				<!-- <td class="th_column_4">상품 재고</td> -->
-	                    				<td class="th_column_5">상품가격</td>
-	                    				<td class="th_column_6">성별</td>
-	                    				<td class="th_column_7">등록날짜</td>
-	                    				<td class="th_column_8">조회수</td>
+	                    				<td class="th_column_4">상품가격</td>
+	                    				<td class="th_column_5">성별</td>
+	                    				<td class="th_column_6">등록날짜</td>
 	                    			</tr>
 	                    		</thead>	
 	                    		<c:forEach items="${product}" var="list">
 	                    		<tr>
-	                    			<td><c:out value="${list.pno}"></c:out></td>
-	                    			<td><img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
-	                    			data-filename="${list.imageList[0].fileName}"></td>
+	                    			<td><img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" data-filename="${list.imageList[0].fileName}"></td>
 	                    			<td><a class="move" href ='<c:out value="${list.pno}"/>'><c:out value="${list.name}"/></a></td>
 	                    			<td><c:out value="${list.color}"></c:out></td>
-	                    			<td><fmt:formatNumber value="${list.price}" pattern="#,### 원" /></td>
-	                    			<td><c:out value="${list.gender}" ></c:out></td>
+	                    			<td><c:out value="${list.price}"></c:out></td>
+	                    			<td><c:out value="${list.gender}"></c:out></td>
 	                    			<td><fmt:formatDate value="${list.created_date}" pattern="yyyy-MM-dd"/></td>
 	                    			<td><fmt:formatDate value="${list.last_modified_date}" pattern="yyyy-MM-dd"/></td>
-	                    			<td><c:out value="${list.hitCount}" ></c:out></td>
 	                    		</tr>
 	                    		</c:forEach>
 	                    	</table>
-	                    			</form>
-		<div class="btn_section">
-			<button id="enrollBtn" class="btn enroll_btn">등 록</button>
-		</div>
+	                    			
+
 		
 		
 
 <div class='search_wrap'>
-					<form id='searchForm' action="/admin/products" method='get'>
+					<form id='searchForm' action="/products" method='get'>
 							<select name='type'>
 								<option value=""
 									<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
@@ -68,15 +61,16 @@
 									
 								<option value="W"
 									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>색상</option>
-									
-
-							</select>
-							 <input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
+							</select> 
+							
+							<input type='text' name='keyword'
+								value='<c:out value="${pageMaker.cri.keyword}"/>' />
 								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 							<button class='btn btn-default'>Search</button>
 							
 							<button id="default" class='btn btn-default'>초기화</button>
+							
 						</form>
 					
 				</div>
@@ -108,7 +102,7 @@
 	                    </ul>
                 	</div>
                 	
-                	<form id="moveForm" action="/admin/products" method="get" >
+                	<form id="moveForm" action="/products" method="get" >
  						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
@@ -117,23 +111,13 @@
 			
 			
 	<script type="text/javascript">
-	
-		
-	$("#default").on('click', function(e){
-		e.preventDefault();
-		self.location="/products";
-	})
 		let enrollForm = $("#enrollForm")
 
+			$("#default").on('click', function(e){
+						e.preventDefault();
+						self.location="/products";
+					})
 
-		/* 상품 등록 폼 */
-		$("#enrollBtn").on("click", function(e) {
-
-			e.preventDefault();
-
-			enrollForm.submit();
-
-		});
 		
 		/*상품 페이지  */
 		let moveForm = $('#moveForm');
@@ -153,17 +137,11 @@
 			e.preventDefault();
 			
 			moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
-			moveForm.attr("action", "/admin/products/get");
+			moveForm.attr("action", "/products/get");
 			moveForm.submit();
 			
 		});
 		
-		/* 삭제 결과 경고창 */
-		let delete_result = '${delete_result}';
-		
-		if(delete_result == 1){
-			alert("삭제 완료");
-		}
 		
 		var aa = (function loadThumbnail() {
 			var uploadResultArr = $('.thumb');
@@ -175,7 +153,6 @@
 				$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
 				})
 			})();
-
 		
 
 		

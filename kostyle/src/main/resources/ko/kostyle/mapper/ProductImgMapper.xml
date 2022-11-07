@@ -5,15 +5,24 @@
 
 
 
-	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
-	
-		select * from PRODUCT_IMG where pno= #{pno}
-	
+
+	<select id="productGetHit" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT where
+		<![CDATA[
+		rownum <= 4 
+		]]>
+		order by hitcount
 	</select>
-	
+
 		<!-- 임시 상품 사진 조회 -->
 	<select id="selectImg" resultType="ko.kostyle.domain.ProductImgVO">
 		select * from product_img where pno = #{pno} and
 		rownum = 1
 	</select>
+
+	 
+	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
+		select * from PRODUCT_IMG where pno= #{pno}
+	</select>
+
 </mapper>

@@ -8,15 +8,19 @@
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
-<link href="/resources/css/productGet.css" rel="stylesheet" />
+<link href="/resources/css/productGetinfo.css" rel="stylesheet" />
 
 
 </head>
 <body>
 
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+
+
 <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>상품 상세</span></div>
+                    <div class="admin_content_subject">
+                    <span>상품 상세</span>
+                    </div>
                     <div class="admin_content_main">
  
                     
@@ -37,7 +41,6 @@
                    		              
                    		<div class="form_section">
                    			<div class="form_section_title">
-                   				
                    				<label>상품 이름</label>
                    			</div>
                    			<div class="form_section_content">
@@ -67,7 +70,7 @@
                    				<label>가격</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<textarea class="input_block" name="price" readonly="readonly" ><c:out value='${product.price }'/></textarea>
+                   				<textarea class="input_block" name="price" readonly="readonly"><c:out value='${product.price }'/></textarea>
                    			</div>
                    		</div>
 
@@ -113,20 +116,13 @@
                    				<label>등록 날짜</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${product.created_date}" pattern="yyyy-MM-dd"/>">
-                   			</div>
-                   		</div>
-                   		 <div class="form_section">
-                   			<div class="form_section_title">
-                   				<label>수정 날짜</label>
-                   			</div>
-                   			<div class="form_section_content">
                    				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${product.last_modified_date}" pattern="yyyy-MM-dd"/>">
                    			</div>
                    		</div>
+                   		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">상품 목록</button>
-	                    		<button id="modifyBtn" class="btn modify_btn">수 정</button>
+								
 	                    	</div> 
                     </div>                    
                 </div>
@@ -148,41 +144,23 @@ $("#cancelBtn").on("click", function(e){
 	e.preventDefault();
 	
 	$("input[name=pno]").remove();
-	moveForm.attr("action", "/admin/products")
+	moveForm.attr("action", "/products")
 	moveForm.submit();
 	
 });
 
-/* 상품 수정 페이지 이동 버튼 */
-$("#modifyBtn").on("click", function(e){
-	
-	e.preventDefault();
-	let addInput = '<input type="hidden" name="pno" value="${product.pno}">';
-	$("#moveForm").append(addInput);
-	$("#moveForm").attr("action", "/admin/products/modify");
-	$("#moveForm").submit();
-	
-});
 
-/* 수정 성공 이벤트 */
-let modify_result = '${modify_result}';
-
-if(modify_result == 1){
-	alert("수정 완료");
-}	
-
-//이미지 출력
 $(document).ready(function() {
 	let pno = '<c:out value="${product.pno }"/>';
 	let uploadReslut = $("#uploadReslut");
 	
-	
+
 	
 	$.getJSON("/member/products/getImgList", {pno : pno}, function(arr){	
 		let str = "";
 		let obj = arr[0];
 		
-		
+		console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 		
 		if(arr.length === 0){	
 			let str = "";
@@ -200,7 +178,7 @@ $(document).ready(function() {
 		str += ">";
 		str += "<img src='/member/products/display?fileName=" + fileCallPath + "'>";
 		str += "</div>";		
-	
+		console.log("경롱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+fileCallPath);
 		
 		uploadReslut.html(str);		
 	});	
