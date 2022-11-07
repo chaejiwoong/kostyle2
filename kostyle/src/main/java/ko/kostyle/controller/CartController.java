@@ -32,60 +32,6 @@ public class CartController {
 	private final CartService service;
 	private final HttpSession session;
 
-//	//카트 추가
-//	@PostMapping("/cart/add")
-//	@ResponseBody
-//	public String addCartPOST(CartListVO cart) {
-//		// 로그인 체크
-//		
-//		
-//		MemberVO mvo = (MemberVO)session.getAttribute("member");
-//		
-//		if(mvo == null) {
-//			return "5";
-//		}
-//		
-//		// 카트 등록
-//		
-//		int result = service.addCart(cart);
-//		
-//		return result + "";
-//	}	
-//
-//	// 카트 목록
-//	@GetMapping("/cartList/{mno}")
-//	public String getCartList(@PathVariable("mno") Long mno, Model model) throws Exception {
-//		log.info("get cart list");
-//
-//		model.addAttribute("cartInfo", service.getCartList(mno));
-//		model.addAttribute("mno", mno);
-//		log.info(service.getCartList(mno));
-//		return "shop/cartList";
-//	}
-//
-//	// 카트 수정
-//	@PostMapping("/cartList/update")
-//	public String updateCartPOST(CartListVO cart) {
-//		
-//		log.info("update cart");
-//		service.modifyCount(cart);
-//
-//		return "redirect:/shop/cartList/" + cart.getMno();
-//
-//	}
-//
-//	// 카트 삭제
-//	@PostMapping("/cartList/delete")
-//	public String deleteCart(CartListVO cart) {
-//
-//		log.info("delete cart");
-//
-//		service.deleteCart(cart.getCpno());
-//
-//		return "redirect:/shop/cartList/" + cart.getMno();
-//
-//	}
-
 	@PostMapping("/cartAdd")
 	public String addCart(@RequestParam(defaultValue = "0") Long pno, @RequestParam(defaultValue = "0") int amount) {
 
@@ -152,5 +98,4 @@ public class CartController {
 	public String exceptionHandler(Exception ex) {
 		return "common/errorAlert";
 	}
-
 }

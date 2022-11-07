@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ko.kostyle.domain.CartListVO;
+import ko.kostyle.domain.OrderVO;
 import ko.kostyle.domain.ProductVO;
 import ko.kostyle.mapper.CartMapper;
 import ko.kostyle.mapper.ProductMapper;
@@ -23,48 +24,6 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private ProductMapper productMapper;
 
-//	@Override
-//	public int addCart(CartListVO cart) {
-
-//		// 장바구니 데이터 체크
-//		CartListVO checkCart = cartMapper.checkCart(cart);
-//
-//		if (checkCart != null) {
-//			return 2;
-//		}
-//
-//		// 장바구니 등록 & 에러 시 0반환
-//		try {
-//			return cartMapper.addCart(cart);
-//		} catch (Exception e) {
-//			return 0;
-//		}
-//
-//	}
-//
-//	@Override
-//	public List<CartListVO> getCartList(Long mno) throws Exception {
-//		
-//		List<CartListVO> cart = cartMapper.cartList(mno);
-//		log.info(cart);
-//		
-//		for(CartListVO vo : cart) {
-//			vo.initTotal();
-//		}
-//		
-//		
-//		return cart;
-//	}
-//
-//	@Override
-//	public int modifyCount(CartListVO cart) {
-//		return cartMapper.modifyCount(cart);
-//	}
-//
-//	@Override
-//	public int deleteCart(Long cpno) {
-//		return cartMapper.deleteCart(cpno);
-//	}
 	@Override
 	public int addCart(CartListVO CartListVO) {
 		// [1] 상품번호와 회원번호로 cart 테이블에 있는 상품개수 가져오기
@@ -143,10 +102,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public ProductVO selectByPno(Long pno) {
+	public CartListVO selectByPno(Long pno) {
 		return null;
 	}
-
-
 
 }
