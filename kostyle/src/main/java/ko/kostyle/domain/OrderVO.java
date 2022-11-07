@@ -11,15 +11,17 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 public class OrderVO implements Serializable {
 
-	private Long ono; // 주문 번호
-	private Long ano; // 배송지 번호
-	private Long mno; // 회원 번호
-	private String payment; // 결제 방식
-	private int totalPrice; // 주문 가격
-	private String status; // 배송 상태
-	private Date created_date; // 주문 일자
+    private Long ono;
+    private Long ano;
+    private Long mno;
+    private String payment;
+    private int totalPrice;
+    private String category;
+    private String status;
+    private Date created_date;
 
 	private int amount;
 	private int point;

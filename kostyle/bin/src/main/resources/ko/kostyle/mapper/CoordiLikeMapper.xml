@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.CoordiLikeMapper">
+
+	<!-- 좋아요 눌렀는지 여부 확인 -->
+	<!-- 0-> 좋아요(좋아요 안누름) / 1-> 좋아요취소 상태(좋아요 누름) -->
+	<select id="findLike" resultType="int">
+		select count(*) 
+			from coordi_like
+			where mno = #{mno}
+			and cno = #{cno}
+	</select>
+	
+	<!-- 좋아요 누름 -->
+	<insert id="insert" >
+		insert into coordi_like
+		values(clno_seq.nextval #{mno}, #{cno})
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="delete">
+		delete from coordi_like 
+			where mno = ${mno}
+			and cno = #{cno}
+	</delete>
+	
+
+	<!-- 게시글당 좋아요 총 갯수 -> 말고 코디 테이블에 좋아요 수 컬럼 추가하고 그 거 가져오기 -->
+	<!-- <select id="getTotalCount" resultType="int">
+		select count(*)
+		from coordi_like
+		where cno = #{cno}	
+	</select> -->
+	
+</mapper>

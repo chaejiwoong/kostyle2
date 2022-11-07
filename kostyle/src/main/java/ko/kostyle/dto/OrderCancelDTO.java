@@ -19,6 +19,8 @@ public class OrderCancelDTO {
 
 	private Long ocno;
 	
+	private Long odno;
+	
 	private AdminProductDTO product;
 	
 	private String category;

@@ -15,6 +15,10 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="ko.kostyle.service">
+		<level value="info" />
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -37,5 +41,12 @@
 		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
+	
+	
+	<!-- sql Logger -->
+	<logger name="java.sql" additivity="false">
+        <level value="DEBUG"/> 
+        <appender-ref ref="console"/> 
+    </logger>
 	
 </log4j:configuration>

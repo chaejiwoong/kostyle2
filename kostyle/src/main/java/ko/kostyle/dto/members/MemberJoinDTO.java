@@ -26,7 +26,7 @@ public class MemberJoinDTO {
             message = "영문,숫자,특수문자가 포함된 8자 ~ 20자리")
     private String password;
 
-    private char gender;
+    private String gender;
 
     @NotNull    // 숫자 타입에는 NOT NULL 사용
     @Pattern(regexp ="[0-9]{6}$", message = "생년월일 6자리를 입력해주세요.")

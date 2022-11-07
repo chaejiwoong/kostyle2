@@ -16,6 +16,7 @@ public class OrderDetailVO implements Serializable{
     private Long odno; //주문 상세 번호
     private Long ono; //주문 번호
     private Long pno; //상품 번호
+    private String p_size;
     private int amount; //주문 수량
     private int price; //주문 가격
     
@@ -28,5 +29,4 @@ public class OrderDetailVO implements Serializable{
 	private String tel; // 전화 번호
 	private String name; // 이름
 	private boolean is_default; // 기본 배송지 여부
-
 }
