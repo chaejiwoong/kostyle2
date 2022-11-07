@@ -20,7 +20,7 @@
 					<thead>
 						<tr class="default">
 							<th colspan="6" style="text-align: center">
-								<h3 class="text-primary">${member.name}[${member.mno}]님의
+								<h3 class="text-primary">${user.name}[${user.mno}]님의
 									장바구니</h3>
 							</th>
 						</tr>
