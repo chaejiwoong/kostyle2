@@ -4,14 +4,19 @@
 <mapper namespace="ko.kostyle.mapper.ProductImgMapper"> <!-- 고유한 도메인 -->
 
 
-
+	<select id="productGetDay" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM  (select rownum rn, pno, scno, name, price, hitcount, season, color, gender, created_date, last_modified_date from product order by created_date desc)
+		<![CDATA[
+		where rownum <= 4
+		]]>
+	</select>
+	
 
 	<select id="productGetHit" resultType="ko.kostyle.domain.ProductVO">
-		SELECT * FROM PRODUCT where
+		SELECT * FROM  (select rownum rn, pno, scno, name, price, hitcount, season, color, gender, created_date, last_modified_date from product order by hitcount desc)
 		<![CDATA[
-		rownum <= 4 
+		where rownum <= 4
 		]]>
-		order by hitcount
 	</select>
 
 		<!-- 임시 상품 사진 조회 -->
@@ -22,7 +27,7 @@
 
 	 
 	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
-		select * from PRODUCT_IMG where pno= #{pno}
+		select * from PRODUCT_IMG where pno= #{pno} 
 	</select>
 
 </mapper>

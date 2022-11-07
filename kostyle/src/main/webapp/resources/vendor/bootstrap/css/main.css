@@ -11346,6 +11346,10 @@ textarea.form-control-lg {
     background-color: #c3daf7;
 }
 /* 버튼 영역 */
+.btn-default{
+	background-color: #f891aa;
+}
+
 .btn_section{
 	text-align: center;
 	margin: 80px 0;
@@ -11358,9 +11362,12 @@ textarea.form-control-lg {
     line-height: 40px;
 }
 .enroll_btn{
-	background-color: #dbdde2;
+	background-color: #f891aa;
 	margin-left:15px;
 }
+#default{
+	background-color: #f891aa;
+}
 #enrollBtn:hover {
-    background-color: #c9cbd0;
+    background-color: #ff7d9e;
 }

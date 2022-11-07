@@ -14,5 +14,7 @@ public interface ProductImgMapper {
 	ProductImgVO selectImg(Long pno);
 
 	public List<ProductVO> productGetHit();
+	
+	public List<ProductVO> productGetDay();
 
 }

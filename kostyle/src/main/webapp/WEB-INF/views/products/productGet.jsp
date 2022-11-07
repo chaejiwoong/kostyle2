@@ -169,12 +169,7 @@
                 </div>
           
             </div>
-       	<c:forEach  items="${hitImg}" var="list">
-        <div>
-        	<td><img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
-        	data-filename="${list.imageList[0].fileName}"></td>
-        </div>
-        </c:forEach>
+
             
             
             

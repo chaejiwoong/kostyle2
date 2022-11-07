@@ -34,11 +34,12 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">NO.${list.pno}<br>${list.name}</h5>
+                                    <h5 class="fw-bolder">${list.pno}.${list.name}</h5>
                                     
                                     <br>
                                     <form action="" method="get" >
-                                     <div class="text-center" ><a class="move" href ='<c:out value="${list.pno}"/>'><span class = "btn btn-outline-dark mt-auto" >상세보기</span></a></div>
+                                     <div class="text-center" ><a class="btn btn-outline-dark mt-auto"  id = "move" 
+                                     href='<c:out value="${list.pno}"/>' >상세보기</a></div>
                                     </form>
                                     <br>
                                    가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
@@ -83,7 +84,6 @@
 							 <input class="search_input" type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
 								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
-								  
 							<button class='btn btn-default'>Search</button>
 							
 							<button id="default" class='btn btn-default'>초기화</button>
@@ -155,12 +155,12 @@ $("#default").on('click', function(e){
 		});
 		
 		/* 상품 상세 페이지 이동 */
-		$(".move").on("click", function(e){
+		$("#move").on("click", function(e){
 			
-			
+			console.log("dddd")
 			e.preventDefault();
 			
-			
+			console.log("ngngngngngn")
 			moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
 			moveForm.attr("action", "/admin/products/get");
 			moveForm.submit();

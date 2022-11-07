@@ -28,11 +28,13 @@ public class ProductController {
 	
 	@GetMapping
 	public String list(Model model, Criteria cri,HttpServletRequest request, HttpServletResponse response) {
-
+		cri.setAmount(4);
 		int total = service.getTotal(cri);
 		model.addAttribute("product", service.productList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
-
+		model.addAttribute("hitImg",service.productListHit());
+		model.addAttribute("day",service.productListDay());
+		
 		
 		   // 쿠키 주기
 	      Cookie cookie = new Cookie("listCookie", "");
@@ -47,6 +49,7 @@ public class ProductController {
 
 	public String get(@RequestParam("pno") Long pno, Model model, Criteria cri,   @CookieValue(name = "listCookie", required = false) Cookie cookie, HttpServletResponse response) {
 	      
+	   
 		 if (cookie != null) {
 	         service.updateHitcount(pno);
 	         
@@ -61,10 +64,14 @@ public class ProductController {
 			model.addAttribute("cri", cri);
 			// 선택상품정보
 			model.addAttribute("product", service.get(pno));
+			
 			//조회수 순 상품 보여죽;
 			model.addAttribute("hitImg",service.productListHit());
 			
+			//신상순
+			model.addAttribute("day",service.productListDay());
 			
+
 
 		return "/products/productGet";
 	
