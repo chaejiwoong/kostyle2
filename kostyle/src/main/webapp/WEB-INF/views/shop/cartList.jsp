@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,6 +13,8 @@
 <title>장바구니</title>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
+<body>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <div class="container" style="text-align: center">
 	<!-- 센터 말고 컨테이너만 넣으면 왼쪽 줄 맞춰서 됨 -->
 
@@ -24,7 +26,7 @@
 					<thead>
 						<tr class="default">
 							<th colspan="6" style="text-align: center">
-								<h3 class="text-primary">${user.name}[${user.mno}]님의장바구니</h3>
+								<h3 class="text-primary">${user.name} 님의 장바구니</h3>
 							</th>
 						</tr>
 						<tr>
@@ -96,17 +98,17 @@
 						</c:if>
 						<!-- --------------------------- -->
 						<tr>
-							<!-- 							<td colspan="4"> -->
-							<%-- 								<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber --%>
-							<%-- 											value="${cart.price * cart.amount}" var="totalPrice" --%>
-							<%-- 											pattern="###,###" --%>
-							<%-- 										/>원 ${cart.price * cart.amount} POINT --%>
-							<!-- 								</b> </span><br> <b>총 포인트</b>: <span style="color: red"><b> -->
-							<%-- 										<fmt:formatNumber value="${cart.price * cart.amount * 0.05}" --%>
-							<%-- 											var="totalPoint" pattern="###,###" --%>
-							<%-- 										/> ${cart.price * cart.amount * 0.05} POINT --%>
-							<!-- 								</b> </span> -->
-							<!-- 							</td> -->
+							<td colspan="4">
+								<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber
+											value="${cart.price * cart.amount}" var="totalPrice"
+											pattern="###,###"
+										/>원 ${cart.price * cart.amount} POINT
+								</b> </span><br> <b>총 포인트</b>: <span style="color: red"><b>
+										<fmt:formatNumber value="${cart.price * cart.amount * 0.05}"
+											var="totalPoint" pattern="###,###"
+										/> ${cart.price * cart.amount * 0.05} POINT
+								</b> </span>
+							</td>
 							<td colspan="2">
 								<button type="button" onclick="goOrder()"
 									class="btn btn-primary"
@@ -133,6 +135,8 @@
 	</div>
 
 </div>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+</body>
 <script>
 	$(function() {
 		$('#allChk').click(function() {
@@ -204,4 +208,5 @@
 		}
 	}
 </script>
+
 </html>
