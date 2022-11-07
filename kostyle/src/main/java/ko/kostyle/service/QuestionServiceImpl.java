@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ko.kostyle.domain.AnswerVO;
 import ko.kostyle.domain.MemberVO;
 import ko.kostyle.domain.QuestionVO;
 import ko.kostyle.dto.Criteria;
@@ -44,14 +45,43 @@ public class QuestionServiceImpl implements QuestionService{
 		
 	}
 
-//	@Override
-//	public QuestionDTO getname() {
-//		// TODO Auto-generated method stub
-//		return mapper.getjoin();
-//	}
+	@Override
+	public int register(AnswerVO answerVO, Long qno, String content) {
+		
+		return mapper.insertAnswer(answerVO, qno, content);
+	}
+
+	@Override
+	public AnswerVO get(Long qno) {
+		return mapper.readAnswer(qno);
+	}
+
+	@Override
+	public int modify(AnswerVO answerVO) {
+		
+		return mapper.updateAnswer(answerVO);
+	}
+
+	@Override
+	public int remove(Long asno) {
+		return mapper.deleteAnswer(asno);
+	}
+
+	@Override
+	public List<AnswerVO> getList(Criteria criteria, Long qno) {
+		return mapper.getListWithPaging(criteria, qno);
+	}
+
+	@Override
+	public QuestionVO showQuestion(Long qno) {
+		return mapper.insertInquiry(qno);
+		
+	}
 
 
+	
 
+	
 
 
 

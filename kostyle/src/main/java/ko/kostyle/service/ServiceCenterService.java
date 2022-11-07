@@ -6,21 +6,20 @@ import ko.kostyle.dto.Criteria;
 import java.util.List;
 
 public interface ServiceCenterService {
-
-//    public List<ServiceCenterVo> getList();
+//	qna
     public List<ServiceCenterVo> getList(String category);
     public List<ServiceCenterVo> getAjaxList(String category);
-    public List<ServiceCenterVo> purchaseList();
-//    공지사항
-//    public List<ServiceCenterVo> getNoticeList();
+//  공지사항
     public List<ServiceCenterVo> getNoticeList(Criteria criteria);
 
     public ServiceCenterVo getNoticeDetail(Long nno);
 
     public int noticeTotal(Criteria criteria);
-    void insertNotice(ServiceCenterVo centerVo);
+    
+    void insertAdminNotice(ServiceCenterVo centerVo);
 
-//    public Ser
-//    public List<NoticeVo> getCategoryList(NoticeVo noticeVo);
-//    public void insertNotice(ServiceCenterVo centerVo);
+    public boolean updateAdminNotice(ServiceCenterVo centerVo);
+    
+    public boolean removeAdminNotice(Long nno);
+
 }

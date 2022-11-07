@@ -38,12 +38,14 @@
 	        <c:forEach items="${qnaList}" var="list">
 	        <li class="qna-title">
 	            <div class="qna-top">
-	                <div class="list-category">
-	                		<c:out value="${list.category}"/>
-	             	</div>
-	                <div class="list-title"><c:out value="${list.title}"/></div>
-	                <div class="date">날짜: <fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></div>
-	                <a></a>
+	            	<div class="qna-top1">
+		            	<div class="list-category">
+		                		<c:out value="${list.category}"/>
+		             	</div>
+		                <div class="list-title"><c:out value="${list.title}"/></div>
+		                <div class="date">날짜: <fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></div>
+		                <a class="img"></a>
+	            	</div>
 	            </div>
 	            <div class="qna-bottom">
 	                <div class="qna-box">

@@ -84,6 +84,11 @@ public class ServiceCenterController {
         model.addAttribute("pageMaker", new PageDTO(criteria, total));
 //        model.addAttribute("name", service2.getname());
     }
+    @GetMapping("/answerdetail")
+	public void getAnswer(@RequestParam("qno") Long qno, Model model) {
+		model.addAttribute("list", service2.get(qno));
+		model.addAttribute("showList", service2.showQuestion(qno));
+	}
 //    @PostMapping("/register/{chat-title}")
 //    @ResponseBody
 //    public void postChat(@RequestParam() Model model)
@@ -91,6 +96,7 @@ public class ServiceCenterController {
     
     @GetMapping("/insert")
     public void getInsert(QuestionVO vo, Model model) {
+    	log.info("문의 작성:");
         Long mno = SecurityUtil.getCurrentMemberId();
     }
     

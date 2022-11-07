@@ -3,25 +3,15 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ko.kostyle.mapper.ServiceCenterMapper">
-	<!--QNA-->
 	<!-- QNA 전체 -->
 	<select id="getQnaList" resultType="ko.kostyle.domain.ServiceCenterVo">
 		<![CDATA[
 		SELECT * FROM  notice WHERE category NOT LIKE '%notice%'
 		]]>
 	</select>
-	<!-- 이용정책 -->
-<!-- 	<select id="">
-		
-	</select> -->
-	<!-- 구매 -->
-<!-- 	<select id="purchaseList" resultType="ko.kostyle.domain.ServiceCenterVo">
-		SELECT * FROM notice WHERE category LIKE '%purchase%'
-	</select> -->
 	
-	<select id="getPurchase" resultType="ko.kostyle.domain.ServiceCenterVo">
-		SELECT * FROM notice WHERE category = 'purchase'
-	</select>
+	
+
 	<!-- 판매 -->
 
 	<!-- ================================== -->
@@ -37,6 +27,7 @@
 		SELECT nno, title, content, category, created_date FROM notice WHERE category like '%'||#{category}||'%' ORDER BY nno DESC
 		]]>		
 	</select>
+	<!-- qna 끝 -->
 	<!--공지사항-->
 	<select id="getNoticeList" resultType="ko.kostyle.domain.ServiceCenterVo">
 		SELECT * FROM notice WHERE category LIKE '%notice%' ORDER BY nno DESC
@@ -65,11 +56,21 @@
 		INSERT INTO notice (nno, title, content, category, created_date)
 		    VALUES (nno_seq.nextval, #{title}, #{content}, #{category},SYSDATE)
 	</insert>
+	
+	<update id="updateNotice">
+		UPDATE notice SET title = #{title}, content = #{content}, category = #{category}, created_date = SYSDATE 
+		WHERE nno = #{nno}
+	</update>
+	
+	<delete id="deleteNotice">
+		DELETE FROM notice WHERE nno = #{nno}
+	</delete>
+	
 	<insert id="selectNoticeKey">
 		<selectKey keyProperty="nno" order="BEFORE" resultType="long">
 			SELECT nno_seq.nextval FROM notice ORDER BY nno DESC
 		</selectKey>
 			INSERT INTO notice (nno, title, content, category, created_date) VALUES(#{nno}, #{title}, #{content}, #{category},SYSDATE)
 	</insert>
-
+	<!-- 공지사항 끝 -->
 </mapper>

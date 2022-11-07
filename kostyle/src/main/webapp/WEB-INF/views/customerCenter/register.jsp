@@ -13,7 +13,6 @@
     <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
     <script type="text/javascript" src="/resources/js/header.js"></script>
     <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
-    <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
     <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/header.css" rel="stylesheet"/>
     <link href="/resources/css/footer.css" rel="stylesheet"/>
@@ -55,7 +54,12 @@
 	                        <td><c:out value="${list.memberVO.name}"/></td>
 	                        <td><c:out value="${list.title}"/></td>
 	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></td>
+	                        
 	                    </tr>
+	                    <tr class="admin-box">
+							<td class="answer" colspan="3"><span><c:out value="${list.content}"/></span></td>
+							<td class="answer" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+						</tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -101,6 +105,16 @@
         $(document)
             .ready(
                 function() {
+                	
+                	$(".admin-box").each(function(){
+            			var parmeter = $(this).find(".answer-btn").data("qno");
+            			var btn = $(this).find(".answer-btn");
+            			$(btn).click(function(){
+            				alert("asd");
+            				location.href = "/customerCenter/answerdetail?qno=" + parmeter;
+            			});
+            		});
+                	
                     var result = '<c:out value="${result}"/>';
 
                     checkModal(result);

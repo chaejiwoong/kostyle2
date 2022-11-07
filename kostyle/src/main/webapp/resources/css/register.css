@@ -1,3 +1,46 @@
+/* 어드민css */
+.admin-inquiry-box {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-bottom: 45px;
+    padding-top: 60px;
+}
+.customerCenter-a {
+	color: #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.title-inquiry {
+	color: #35C5F0;
+}
+.admin-table {
+	text-align: left;
+}
+.tbody-td {
+    display: inline-block;
+    position: relative;
+    padding: 10px 0;
+    font-size: 18px;
+}
+.td-right {
+	text-align: right;
+	padding: 8px 0 8px 8px !important;
+}
+
+.tbody-btn {
+    padding: 9px 12px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 22px;
+}
+.answer {
+	font-size: 18px;
+	font-weight: bold;
+}
+/*  */
+
 #wrap {
     min-height: 100%;
     position: relative;
@@ -71,7 +114,7 @@
     text-align: center;
     padding-bottom: 45px;
 }
-.inquiry-box .inquiry-box-bottom {
+.inquiry-box-bottom {
     position: relative;
     width: 900px;
     height: auto;

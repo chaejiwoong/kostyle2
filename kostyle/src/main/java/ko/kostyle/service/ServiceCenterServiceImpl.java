@@ -33,11 +33,6 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return mapper.getAjaxListWithPaging(category);
 	}
     
-    @Override
-    public List<ServiceCenterVo> purchaseList() {
-        return mapper.getPurchase();
-    }
-
 //    공지사항
     @Override
     public List<ServiceCenterVo> getNoticeList(Criteria criteria) {
@@ -55,15 +50,29 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
         return mapper.noticeTotalCount(criteria);
     }
 
+	@Override
+	public void insertAdminNotice(ServiceCenterVo centerVo) {
+		mapper.insertNotice(centerVo);
+		
+	}
+
+	@Override
+	public boolean updateAdminNotice(ServiceCenterVo centerVo) {
+		
+		return mapper.updateNotice(centerVo) == 1;
+	}
+
+	@Override
+	public boolean removeAdminNotice(Long nno) {
+		return mapper.deleteNotice(nno) == 1;
+	}
+
 //    @Override
 //    public List<NoticeVo> getCategoryList(NoticeVo noticeVo) {
 //        return mapper.getCategoryList(noticeVo);
 //    }
 
 
-    @Override
-    public void insertNotice(ServiceCenterVo centerVo) {
-        return;
-    }
+
 
 }

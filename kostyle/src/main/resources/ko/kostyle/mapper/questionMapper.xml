@@ -47,5 +47,35 @@
 		<!--전체 데이터 개수 처리-->
 	<select id="questionTotalCount" resultType="int">
 		SELECT COUNT(*) FROM question WHERE qno > 0
-	</select>	
+	</select>
+	<!-- 문의 보여주는 로직 -->
+	<select id="insertInquiry" resultType="ko.kostyle.domain.QuestionVO">
+		SELECT q.qno, m.mno, q.title, q.content, q.created_date, m.name FROM question q LEFT JOIN member m ON m.mno = q.mno WHERE qno = #{qno}
+	</select>
+	
+	<!-- 문의 답변 -->
+	<insert id="insertAnswer">
+		INSERT INTO answer (asno, qno, content, created_date) VALUES (asno_seq.nextval, #{qno}, #{content}, SYSDATE)
+	</insert>
+	
+	<select id="readAnswer" resultType="ko.kostyle.domain.AnswerVO">
+		SELECT * FROM answer WHERE qno = #{qno}
+		
+	</select>
+	
+	<delete id="deleteAnswer">
+		DELETE FROM answer WHERE asno = #{asno}
+	</delete>
+	
+	<update id="updateAnswer">
+		UPDATE answer SET content = #{content} WHERE asno = #{asno}
+	</update>
+	
+	<select id="getListWithPaging" resultType="ko.kostyle.domain.AnswerVO">
+		SELECT * FROM answer WHERE qno = #{qno}
+<!-- 		SELECT asno, qno, content, created_date FROM
+			(SELECT/*+INDEX_DESC(ANSWER SYS_C007803)*/ rownum rn, asno, qno, content, created_date FROM answer
+			 WHERE rownum <= #{pageNum} * #{amount})
+		WHERE rn > (#{pageNum} -1) * #{amount} -->
+	</select>
 </mapper>

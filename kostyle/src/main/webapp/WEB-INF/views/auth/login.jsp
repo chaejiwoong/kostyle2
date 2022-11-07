@@ -51,12 +51,12 @@
 	        <div class="form-inline form-group">
 	            <span class="col-md-4"></span>
 	            <label for="email" class="col-md-1">email</label>
-	            <input class="form-control" type="text" name="email" id="email">
+	            <input class="form-control" type="text" name="email" id="email" value="dhwlsdnjs55@gmail.com">
 	        </div>
 	        <div class="form-inline form-group">
 	            <span class="col-md-4"></span>
 	            <label for="password" class="col-md-1">password</label>
-	            <input id="password" type="password" class="form-control" name="password">
+	            <input id="password" type="password" class="form-control" name="password" value="dhwlsdnjs55@">
 	        </div>
 	        <div class="button">
 	            <div class="row">

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import ko.kostyle.domain.ServiceCenterVo;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,6 +21,12 @@ public class ServicecenterMapperTest {
 	
 	@Test
 	public void testRead() {
-		mapper.getPurchase().forEach(board -> log.info("리스트" + board));
+		ServiceCenterVo vo = mapper.NoticeDetail(63L);
+		log.info(vo);
 	}
+	
+//	@Test
+//	public void testDelete() {
+//		log.info("DELETE : " + mapper.deleteNotice(62L));
+//	}
 }

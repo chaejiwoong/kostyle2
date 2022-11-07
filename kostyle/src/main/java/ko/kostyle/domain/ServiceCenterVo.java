@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 @Data
-public class ServiceCenterVo implements Serializable{
+public class ServiceCenterVo {
     private Long nno;
     private String title;
     private String content;

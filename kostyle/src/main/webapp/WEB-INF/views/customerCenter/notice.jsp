@@ -28,7 +28,7 @@
 	        <ul class="list">
 	            <c:forEach items="${noticeList}" var="list">
 	                <a class="move" href="<c:out value='${list.nno}'/>">
-	                    <li>
+	                    <li class="li">
 	                        <div class="list-title"><c:out value="${list.title}"/></div>
 	                    </li>
 	                </a>
