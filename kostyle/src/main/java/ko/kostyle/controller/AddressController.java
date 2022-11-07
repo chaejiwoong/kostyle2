@@ -1,5 +1,7 @@
 package ko.kostyle.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,24 @@ public class AddressController {
 		return "address/addressList";
 	}
 	
+	// 배송지 목록 ajax
+	@GetMapping(value="/ajax", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<List<AddressDTO>> ajaxMemberAddressList() {
+		
+		return new ResponseEntity<List<AddressDTO>>(addressService.addressList(), HttpStatus.OK);
+	}
+	
+	//ajax 상세 불러오기
+	@GetMapping(value="/ajax/{ano}", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<AddressDTO> addressUpdateForm(@PathVariable Long ano) {
+		
+		return new ResponseEntity<AddressDTO>(addressService.addressDetail(ano), HttpStatus.OK);
+
+	}
+	
+	
 	// 등록 폼
 	@GetMapping("/register")
 	public String addressRegisterForm() {
@@ -44,14 +64,12 @@ public class AddressController {
 	}
 	
 	// 등록
-	@PostMapping("/register")
+	@PostMapping(value="/register", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public ResponseEntity<String> addressRegister(@RequestBody AddressDTO dto){
+	public ResponseEntity<Long> addressRegister(@RequestBody AddressDTO dto){
+
 		
-		addressService.insertAddresse(dto);
-		
-		
-		return new ResponseEntity<String>("ok", HttpStatus.OK);
+		return new ResponseEntity<Long>(addressService.insertAddresse(dto), HttpStatus.OK);
 	}
 	
 	// 수정 폼
@@ -62,6 +80,8 @@ public class AddressController {
 		
 		return "address/addressUpdate";
 	}
+	
+
 	
 	// 수정
 	@PutMapping("/{ano}")

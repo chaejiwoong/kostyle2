@@ -42,6 +42,8 @@ public class AdminAuctionController {
 	public String insertAuctionForm() {
 		log.info("admin insertAuctionForm.........");
 		return "admin/auction/auctionRegister";
+		
+
 	}
 	
 	// 상품 등록

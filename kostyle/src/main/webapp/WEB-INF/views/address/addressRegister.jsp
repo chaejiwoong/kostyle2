@@ -99,6 +99,15 @@ label{
 
 #cancel-btn{
 	width:80px;
+    display: inline-block;
+    padding: 6px 12px;
+	line-height: 1.42857143;    	
+	border-radius: 4px;        	
+    width:80px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-weight:bold;
+    border:1px solid #ebebeb;
 }
 </style>
     </head>
@@ -164,7 +173,7 @@ label{
             </div>            
             <div class="form-group form-inline">
                 <button id="register-btn" type="button">등록</button>
-            	<button id="cancel-btn" class="btn btn-secondary" type="button">취소</button>
+            	<button id="cancel-btn" class="btn-secondary" type="button">취소</button>
             </div>
 
         </form>

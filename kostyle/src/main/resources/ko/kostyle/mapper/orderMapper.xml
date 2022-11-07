@@ -10,7 +10,27 @@
 		</if>
 		</trim>
 	</sql>
+	
+	<!-- 주문 추가 -->
+	<insert id="insertOrder">
+        <selectKey keyProperty="ono" order="BEFORE"
+                   resultType="long">
+            select ono_seq.nextval from dual
+        </selectKey>
+        insert into orders
+        values (#{ono},#{ano},#{mno},#{payment}, #{totalPrice}, #{status}, sysdate, #{category})		
+	</insert>
 
+	<!-- 주문 상세 추가 -->
+	<insert id="insertOrderDetail">
+        <selectKey keyProperty="odno" order="BEFORE"
+                   resultType="long">
+            select odno_seq.nextval from dual
+        </selectKey>
+        insert into order_detail
+        values (#{odno},#{ono},#{pno},#{amount}, #{price}, #{p_size})		
+	</insert>
+	
 <!-- 주문 목록 조회 -->
 	<select id="orderList" resultType="ko.kostyle.domain.OrderVO">
 		<![CDATA[

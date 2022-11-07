@@ -26,6 +26,8 @@ import ko.kostyle.dto.ImgDTO;
 import ko.kostyle.dto.OrderCancelDTO;
 import ko.kostyle.dto.OrderDTO;
 import ko.kostyle.dto.OrderDetailDTO;
+import ko.kostyle.dto.OrderPayDTO;
+import ko.kostyle.dto.OrderRequestDTO;
 import ko.kostyle.dto.WinningBidDTO;
 import ko.kostyle.dto.members.MemberDTO;
 import ko.kostyle.mapper.AdminOrderMapper;
@@ -34,6 +36,7 @@ import ko.kostyle.mapper.MemberMapper;
 import ko.kostyle.mapper.OrderCancelMapper;
 import ko.kostyle.mapper.OrderMapper;
 import ko.kostyle.mapper.ProductImgMapper;
+import ko.kostyle.mapper.ProductMapper;
 import ko.kostyle.mapper.StockMapper;
 import ko.kostyle.mapper.WinningBidMapper;
 import ko.kostyle.util.SecurityUtil;
@@ -53,6 +56,7 @@ public class OrderServiceImpl implements OrderService{
 	private final OrderCancelMapper orderCancelMapper;
 	private final MemberMapper memberMapper;
 	private final StockMapper stockMapper;
+	private final ProductMapper productMapper;
 	
 	// 회원의 주문리스트 가져오기
 	@Override
@@ -216,6 +220,110 @@ public class OrderServiceImpl implements OrderService{
 		
 	}
 
+	// 주문결제창에 출력할 상품상세 리스트
+	@Override
+	public List<OrderDetailDTO> OrderPayList(List<OrderPayDTO> list) {
+		
+		List<OrderDetailDTO> dtos = new ArrayList<OrderDetailDTO>();
+		
+		log.info("list : " + list);
+		for(OrderPayDTO dto : list) {
+			
+	    	// 주문상세에 출력할 상품 조회
+	    	ProductVO product = productMapper.productGet(dto.getPno());
+	    	AdminProductDTO productDto = AdminProductDTO.builder()
+	    									.pno(product.getPno())
+	    									.name(product.getName())
+	    									.build();
+	    	
+	    	// 해당 상품의 이미지 조회 후 DTO로 변환
+	    	ProductImgVO img = imgMapper.selectImg(product.getPno());
+	    	ImgDTO imgDto = null;
+	    	if(img != null) {
+				imgDto = ImgDTO.builder()
+						.filename(img.getFilename())
+						.filepath(img.getFilepath())
+						.uuid(img.getUuid()).build();
+	    	}
+	    	
+	    	productDto.setImg(imgDto);
+			
+			OrderDetailDTO orderDetail = OrderDetailDTO.builder()
+				.p_size(dto.getP_size())
+				.price(dto.getPrice())
+				.amount(dto.getAmount())
+				.product(productDto)
+				.build();
 
+			dtos.add(orderDetail);
+		}
+		
+		return dtos;
+	}
+
+	@Override
+	@Transactional
+	public void payByCard(OrderRequestDTO dto) {
+		
+		
+	}
+
+	@Override
+	@Transactional
+	public void payByPoint(OrderRequestDTO dto) throws Exception{
+		
+		Long mno =SecurityUtil.getCurrentMemberId();
+		
+		// 총합 구하기
+		List<OrderDetailDTO> list = dto.getOrderDetails();
+		int totalPrice = 0;
+		for(OrderDetailDTO o : list) {
+			totalPrice += o.getPrice();
+		}
+		MemberVO member = memberMapper.memberDetailById(mno);
+		
+		// 포인트 검증
+		if(member.getPoint() < totalPrice) {
+			throw new RuntimeException("포인트 잔액이 부족합니다.");
+		}
+		
+		log.info("totalPrice : " + totalPrice);
+		
+		// 총 금액 - 적립포인트만큼 포인트 차감
+		memberMapper.updatePoint(mno, totalPrice-dto.getAccumulate()); 
+		
+		OrderVO order = OrderVO.builder()
+				.ano(dto.getAno())
+				.mno(mno)
+				.payment(dto.getPay())
+				.totalPrice(totalPrice)
+				.status("상품준비중")
+				.category("product")
+				.build();
+		log.info("order : " + order);
+		
+		
+		//주문 추가
+		orderMapper.insertOrder(order);
+		
+		for(OrderDetailDTO orderDetail : list) {
+			orderDetail.setOno(order.getOno());		
+			// 주문 상세 추가
+			StockVO stock = StockVO.builder()
+				.pno(orderDetail.getPno())
+				.p_size(orderDetail.getP_size())
+				.build();
+				
+			int amount = stockMapper.stockAmount(stock);
+			
+			// 재고 검증
+			if(amount < orderDetail.getAmount()) {
+				throw new RuntimeException("해당 상품의 재고가 소진되었습니다.");
+			}
+			
+			orderMapper.insertOrderDetail(OrderDetailDTO.toVO(orderDetail));
+		}
+		
+	}
 
 }

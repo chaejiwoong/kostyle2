@@ -12,6 +12,14 @@ import ko.kostyle.dto.Criteria;
 
 public interface OrderMapper {
 	
+	//주문 추가
+	void insertOrder(OrderVO vo);
+	
+	
+	//주문 상세 추가
+	void insertOrderDetail(OrderDetailVO vo);
+	
+	
     List<OrderVO> orderList(@Param("cri")Criteria cri, @Param("filter")String filter, @Param("mno") Long mno);
     
     List<String> memberOrderStatus(Long mno); 

@@ -7,7 +7,7 @@ import ko.kostyle.dto.AddressDTO;
 public interface AddressService {
 
 	// 배송지 추가
-	void insertAddresse(AddressDTO dto);
+	Long insertAddresse(AddressDTO dto);
 	
 	// 배송지 목록 조회
 	List<AddressDTO> addressList();
@@ -23,4 +23,6 @@ public interface AddressService {
 	
 	// 기본배송지 설정
 	void updateDefault(Long ano);
+	
+	AddressDTO findDefaultAddress();
 }

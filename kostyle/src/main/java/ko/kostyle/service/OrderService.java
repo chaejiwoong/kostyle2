@@ -8,6 +8,8 @@ import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.OrderCancelDTO;
 import ko.kostyle.dto.OrderDTO;
 import ko.kostyle.dto.OrderDetailDTO;
+import ko.kostyle.dto.OrderPayDTO;
+import ko.kostyle.dto.OrderRequestDTO;
 import ko.kostyle.dto.WinningBidDTO;
 
 public interface OrderService {
@@ -26,4 +28,12 @@ public interface OrderService {
     
     //주문 취소
     void orderCancel(OrderCancelDTO dto);
+    
+    // 주문결제창에 출력할 상품 리스트
+    List<OrderDetailDTO> OrderPayList(List<OrderPayDTO> list);
+    
+    // 카드로 주문결제
+    void payByCard(OrderRequestDTO dto);
+    // 포인트로 주문 결제
+    void payByPoint(OrderRequestDTO dto) throws Exception;
 }
