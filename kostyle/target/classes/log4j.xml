@@ -38,4 +38,11 @@
 		<appender-ref ref="console" />
 	</root>
 	
+	
+	<!-- sql Logger -->
+	<logger name="java.sql" additivity="false">
+        <level value="DEBUG"/> 
+        <appender-ref ref="console"/> 
+    </logger>
+	
 </log4j:configuration>

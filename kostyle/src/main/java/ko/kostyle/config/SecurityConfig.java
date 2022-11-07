@@ -60,6 +60,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/members/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/customerCenter/**").permitAll()
+                .antMatchers("/coordies/register").authenticated()
+               // .antMatchers("/coordies/like").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/coordies/**").permitAll()
+                .antMatchers("/coordiComments/**").permitAll()
+                
+                //.antMatchers("/coordiComments/register").authenticated()
+                
+                
                 .anyRequest().authenticated();   // 나머지 API 는 전부 인증 필요
 
                 // 로그인 관련 처리
