@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"
+></script>
 <head>
 <title>장바구니</title>
-<link rel="stylesheet" href = "./resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <div class="container" style="text-align: center">
 	<!-- 센터 말고 컨테이너만 넣으면 왼쪽 줄 맞춰서 됨 -->
@@ -18,8 +24,7 @@
 					<thead>
 						<tr class="default">
 							<th colspan="6" style="text-align: center">
-								<h3 class="text-primary">${user.name}[${user.mno}]님의
-									장바구니</h3>
+								<h3 class="text-primary">${user.name}[${user.mno}]님의장바구니</h3>
 							</th>
 						</tr>
 						<tr>
@@ -91,17 +96,17 @@
 						</c:if>
 						<!-- --------------------------- -->
 						<tr>
-<!-- 							<td colspan="4"> -->
-<%-- 								<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber --%>
-<%-- 											value="${cart.price * cart.amount}" var="totalPrice" --%>
-<%-- 											pattern="###,###" --%>
-<%-- 										/>원 ${cart.price * cart.amount} POINT --%>
-<!-- 								</b> </span><br> <b>총 포인트</b>: <span style="color: red"><b> -->
-<%-- 										<fmt:formatNumber value="${cart.price * cart.amount * 0.05}" --%>
-<%-- 											var="totalPoint" pattern="###,###" --%>
-<%-- 										/> ${cart.price * cart.amount * 0.05} POINT --%>
-<!-- 								</b> </span> -->
-<!-- 							</td> -->
+							<!-- 							<td colspan="4"> -->
+							<%-- 								<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber --%>
+							<%-- 											value="${cart.price * cart.amount}" var="totalPrice" --%>
+							<%-- 											pattern="###,###" --%>
+							<%-- 										/>원 ${cart.price * cart.amount} POINT --%>
+							<!-- 								</b> </span><br> <b>총 포인트</b>: <span style="color: red"><b> -->
+							<%-- 										<fmt:formatNumber value="${cart.price * cart.amount * 0.05}" --%>
+							<%-- 											var="totalPoint" pattern="###,###" --%>
+							<%-- 										/> ${cart.price * cart.amount * 0.05} POINT --%>
+							<!-- 								</b> </span> -->
+							<!-- 							</td> -->
 							<td colspan="2">
 								<button type="button" onclick="goOrder()"
 									class="btn btn-primary"
@@ -129,72 +134,73 @@
 
 </div>
 <script>
-	$(function(){
-		$('#allChk').click(function(){
-			let chkList=$('input[name="pno"]')
-			if($(this).is(":checked")){
-				chkList.each(function(i, ck){
-					ck.checked=true;
+	$(function() {
+		$('#allChk').click(function() {
+			let chkList = $('input[name="pno"]')
+			if ($(this).is(":checked")) {
+				chkList.each(function(i, ck) {
+					ck.checked = true;
 				})
-			}else{
-				chkList.each(function(i, ck){
-					ck.checked=false;
-			})
+			} else {
+				chkList.each(function(i, ck) {
+					ck.checked = false;
+				})
 			}
 		})
 	}) // $() end-------
-	
+
 	// 체크박스에 체크한 상품정보(상품번호-pno, 수량-amount)를 가지고 주문폼 페이지로 이동
-function goOrder(){
-		let chk=orderF.pno; // $('input[name="opnum"]')
-		if(chk==null) return;
+	function goOrder() {
+		let chk = orderF.pno; // $('input[name="opnum"]')
+		if (chk == null)
+			return;
 		// alert(chk.length)
 		// 체크박스 1개일 때는 length 속성이 안먹음
-		if(!chk.length){
+		if (!chk.length) {
 			// 체크박스가 한개 있다면 => checkbox 객체
-			if(!chk.checked){
+			if (!chk.checked) {
 				alert('주문할 상품을 체크하세요')
 				chk.focus();
 				return;
 			}
-		}else{
+		} else {
 			// 체크박스가 여러개 있다면 => check배열
-			let cnt=0;
-			for(let i=0; i<chk.length; i++){
-				if(!chk[i].checked){
+			let cnt = 0;
+			for (let i = 0; i < chk.length; i++) {
+				if (!chk[i].checked) {
 					cnt++; // 체크 안 된 체크박스 개수 세기
 					// 체크 안 된 상품이 있다면
 					// 해당 상품의 수량이 서버에 전송되지 않도록 해야함.
-					$('#amount'+ i).prop('disabled', true)
-				}else{
-					$('#amount'+ i).prop('disabled', false)
+					$('#amount' + i).prop('disabled', true)
+				} else {
+					$('#amount' + i).prop('disabled', false)
 				}
 			}// for--
-			if(cnt == chk.length){
+			if (cnt == chk.length) {
 				alert('주문할 상품을 체크해야해요!');
-				$('#amount'+ i).prop('disabled', false)
+				$('#amount' + i).prop('disabled', false)
 				return;
 			}
 		}//else--
-		orderF.method='post';
+		orderF.method = 'post';
 		orderF.submit();
 	}
 
-	function goEdit(cpno, index){
-		 //alert(index)
-		 let amount=$('#amount'+index).val()
-		 //alert(amount);
-		 
-		 editF.cpno.value=cpno;
-		 editF.amount.value=amount;
-		 editF.submit();
+	function goEdit(cpno, index) {
+		//alert(index)
+		let amount = $('#amount' + index).val()
+		//alert(amount);
+
+		editF.cpno.value = cpno;
+		editF.amount.value = amount;
+		editF.submit();
 	}//--------------
 
-	function goDel(cpno){
+	function goDel(cpno) {
 		//alert(cpno);
 		let yn = confirm("정말 삭제하실건가요..?")
-		if (yn){
-			location.href="cartDel?cpno="+cpno;
+		if (yn) {
+			location.href = "cartDel?cpno=" + cpno;
 		}
 	}
 </script>
