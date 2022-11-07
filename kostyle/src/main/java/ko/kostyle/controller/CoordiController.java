@@ -315,20 +315,30 @@ public class CoordiController {
 	//좋아요
 	@GetMapping("/like")
 	@ResponseBody
-	public String likeUp(@RequestBody CoordiLikeDTO likeDTO) {
+	public String likeUp(CoordiLikeDTO likeDTO) {
+		
+		log.info("좋아요 클릭");
+		
+		String result;
 		
 		if(likeService.findLike(likeDTO) == 0) { //좋아요 아닌 상태
 			likeService.likeUp(likeDTO);
 			service.updateLikeCount(likeDTO.getCno());
 			
+			log.info("좋아요 아닌 상태");
+			
 			//화면에 꽉찬 하트 보이게 출력할 데이터 전송
-			return "꽉찬 하트";
+			result = "꽉찬 하트";
+			return result;
 		}else {
 			likeService.likeDown(likeDTO);
 			service.updateLikeCount(likeDTO.getCno());
 			
+			log.info("좋아요 누른 상태");
+			
 			//빈하트 출력해야
-			return "텅빈 하트";
+			result = "텅빈 하트";
+			return result;
 		}	
 	}
 	

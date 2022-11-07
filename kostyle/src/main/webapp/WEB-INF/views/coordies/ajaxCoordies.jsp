@@ -31,16 +31,16 @@
 			<!-- c:when test = ${not empty sessionScope.user} -->				
 				<div class="" >
 							
-						<c:if test="${coordi.like}"><!-- 빈하트일때 -->
+						<c:if test="${!coordi.like}"><!-- 빈하트일때 -->
 							<button class="like-btn" id="${coordi.cno }" type="button">
-								<!-- svg 하트 아이콘 -->좋아요
+								<i class="fa-regular fa-heart"></i><!-- svg 하트 아이콘 -->좋아요							
 								<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
 							</button>
 						</c:if>
 						
-						 <c:if test="${!coordi.like}"><!-- 꽉찬 하트일때 -->
+						 <c:if test="${coordi.like}"><!-- 꽉찬 하트일때 -->
 							<button class="like-btn" id="${coordi.cno }" type="button">
-								<!-- svg 하트 아이콘 -->좋아요
+								<i class="fa-solid fa-heart"></i><!-- svg 하트 아이콘 -->좋아요
 								<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
 							</button>
 						</c:if>									

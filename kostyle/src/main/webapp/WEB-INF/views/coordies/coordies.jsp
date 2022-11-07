@@ -125,11 +125,7 @@
 	            url:'/coordies/ajaxCoordies?page='+page,
 	            type:'get',      
 	            success:function (list) {
-	            	
-	            	console.log("DDD" + list)
-	            	
-	            	console.log("현재 페이지는 "+ scrollPage);
-	            	
+
 	            	$(".form-group-feed").append(list);
 	            	
 	            	isLoading = false;
@@ -164,7 +160,7 @@
 	    				str +="<div class='feed-title'>제목: <a id='title' href='/coordies/get?cno="+list[i].cno+"'>"+list[i].title+"</a></div>";
             			str +="=========================" 
 	            	}
-	            	feedList.html(str);
+	            	feedList.html(str);*/
 	                
 	            }
 	        })
@@ -182,9 +178,9 @@
 
 	
 	
-
+	
 	//좋아요 버튼 클릭
-	$(".like-btn").on("click", function () {
+ 	$(".form-group-feed").on("click", ".like-btn" , function () {
 	        
 	    	//사용자
 	    	var mno = '${sessionScope.user.mno}';
@@ -194,39 +190,39 @@
 	        console.log("좋아요 클릭");
 
 	        //빈하트 눌렀을 때 (빈하트 꽉찬하트 svg아이콘 클래스명 다르게)
-	        if($(this).children("svg").attr("class") == "빈하트 클래스명"){
+	        if($(this).children("i").attr("class") == "fa-regular fa-heart"){
 	            console.log("빈하트 클릭 / 게시물 번호 :" + cno);
 	            
 	            $.ajax({
-	                url:"/likeUp",
+	                url:"/coordies/like?cno="+cno+"&mno="+mno,
 	                type:"get",
-	                data:{
-	                	cno : cno,
-	                	mno : mno
-	                }
-	                success:function (coordi객체) {
+	                success:function (result) {
 
 	                    let lk_count = coordi.lk_count;
 
 	                    //페이지에 하트 수 갱신?
 	                    //$(".like_count" + cno).text(lk_count);  블로그 내용:cno는 왜 더하지
 	                    $(".like_count").text(lk_count);
+
+	                    console.log("하트 추가, 삭제 성공")
 	                    
-	                    $(".like-btn")
+	                    if(result == "꽉찬 하트"){
+	        	            $(this).html("<i class='fa-solid fa-heart'></i>"); //이거 안 먹으면 아래꺼 쓰기
+	        	            //$(".like-btn").html("<svg~ 꽉찬 하트 아이콘");
+	                    }else if(result = "텅빈 하트"){
+	        	            $(this).html("<i class='fa-regular fa-heart'></i>"); //이거 안 먹으면 아래꺼 쓰기
+	        	            //$(".like-btn").html("<svg~ 꽉찬 하트 아이콘");
+	                    }
 	                    
-	                    
-	                    console.log("하트 추가 성공")
 	                },
 	                error:function (xhr) {
 	                    console.log(xhr)   
 	                }
 	            });
 
-	            //꽉찬 하트로 바꾸기
-	            $(this).html("<svg~ 꽉찬 하트 아이콘"); //이거 안 먹으면 아래꺼 쓰기
-	            //$(".like-btn").html("<svg~ 꽉찬 하트 아이콘");
+	            
 
-	        }else if($(this).children("svg").attr("class") == "꽉찬하트 클래스명"){
+	        }/* else if($(this).children("svg").attr("class") == "꽉찬하트 클래스명"){
 
 	            console.log("꽉찬하트 클릭 / 게시물번호 : " + cno)
 
@@ -251,8 +247,8 @@
 	            //빈 하트로 바꾸기
 	            $(this).html("<svg~ 빈 하트 아이콘"); //이거 안 먹으면 아래꺼 쓰기
 	            //$(".like-btn").html("<svg~ 빈 하트 아이콘");
-	        }
-	    }) */
+	        } */
+	    }) 
 
 
 </script> 

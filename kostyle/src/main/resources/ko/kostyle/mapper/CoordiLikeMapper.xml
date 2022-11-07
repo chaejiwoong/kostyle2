@@ -16,7 +16,7 @@
 	<!-- 좋아요 누름 -->
 	<insert id="insert" >
 		insert into coordi_like
-		values(clno_seq.nextval #{mno}, #{cno})
+		values(clno_seq.nextval, #{mno}, #{cno})
 	</insert>
 	
 	<!-- 좋아요 취소 -->
