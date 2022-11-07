@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
+
 <c:forEach items="${getCoordiList}" var="coordi">
 	<div class="form-group">
 		<div class="form-group-feed">
@@ -27,29 +28,24 @@
 			<div class="feed-btn">
 			
 			
-			<!-- c:when test = ${not empty sessionScope.user} -->		
-				<!-- 로그인 상태 -> 하트클릭 가능 -->			
-				<%-- <div class="" >
-					<c:choose>
-	
-						<c:when test="${coordi.isLike }">
-						<c:if test="${coordi.isLike }"><!-- 빈하트일때 -->
+			<!-- c:when test = ${not empty sessionScope.user} -->				
+				<div class="" >
+							
+						<c:if test="${coordi.like}"><!-- 빈하트일때 -->
 							<button class="like-btn" id="${coordi.cno }" type="button">
 								<!-- svg 하트 아이콘 -->좋아요
 								<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
 							</button>
 						</c:if>
-						</c:when>
 						
-						<c:otherwise> <!-- 꽉찬 하트일때 -->
+						 <c:if test="${!coordi.like}"><!-- 꽉찬 하트일때 -->
 							<button class="like-btn" id="${coordi.cno }" type="button">
 								<!-- svg 하트 아이콘 -->좋아요
 								<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
 							</button>
-						</c:otherwise>
-										
-					</c:choose>
-				</div> --%>
+						</c:if>									
+					
+				</div>
 				<!-- 로그인 상태 아닐 때 -> 빈하트, 하트클릭 -> 튕겨져 나감 -->
 				<!-- 아싸리 권한 확인으로 튕기기 -->
 				<%-- <c:otherwise>
@@ -95,3 +91,4 @@
 		
 	</div>	
 </c:forEach>		
+

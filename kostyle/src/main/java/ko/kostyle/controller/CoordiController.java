@@ -79,7 +79,7 @@ public class CoordiController {
 	}
 	
 	@GetMapping("/ajaxCoordies")
-	public String getList(Criteria cri, @RequestParam("page") int page, Model model,
+	public String getList(Criteria cri,  int page, Model model,
 														HttpServletRequest request, HttpServletResponse response){
 		
 		log.info("ㅇ우우우ㅜ우우웅우우우ㅜㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
@@ -239,6 +239,12 @@ public class CoordiController {
 		}
 		return coordiDTO;
 	}
+	
+	
+	//이미지 출력 //지웅씨꺼 가져오기
+	
+	
+	
 	
 	//이미지 파일 삭제  -> @미완성
 	@PostMapping("/deleteImg")

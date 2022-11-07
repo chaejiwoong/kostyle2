@@ -50,7 +50,6 @@ public class CoordiServiceImpl implements CoordiService {
 																													// 어나미머스 유저 오류 뜸
 																													// 그리고 회원 아니면 넖포인트익셉션 뜨기에 예외처리 해야함
 		} catch (Exception e) {
-			e.printStackTrace();
 			mno = 0L;
 		}
 
