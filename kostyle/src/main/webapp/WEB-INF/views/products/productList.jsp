@@ -3,163 +3,258 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-<title>Title</title>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
-<script type="text/javascript" src="/resources/js/header.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
-<link href="/resources/css/productList.css" rel="stylesheet" />
-
-
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-	 <div class="goods_table_wrap">
-                    	<!-- 상품 리스트 O -->
-	                
-	                    	<table class="goods_table">
-	                    		<thead>
-	                    			<tr>
-										<td class="th_column_1">상품번호</td>
-	                    				<td class="th_column_2">상품이름</td>
-	                    				<td class="th_column_3">상품색상</td>
-	                    				<!-- <td class="th_column_4">상품 재고</td> -->
-	                    				<td class="th_column_5">상품가격</td>
-	                    				<td class="th_column_5">성별</td>
-	                    				<td class="th_column_6">등록날짜</td>
-	                    			</tr>
-	                    		</thead>	
-	                    		<c:forEach items="${product}" var="list">
-	                    		<tr>
-	                    			<td><c:out value="${list.pno}"></c:out></td>
-	                    			<td><a class="move" href ='<c:out value="${list.pno}"/>'><c:out value="${list.name}"/></a></td>
-	                    			<td><c:out value="${list.color}"></c:out></td>
-	                    			<td><c:out value="${list.price}"></c:out></td>
-	                    			<td><c:out value="${list.gender}"></c:out></td>
-	                    			<td><fmt:formatDate value="${list.created_date}" pattern="yyyy-MM-dd"/></td>
-	                    			<td><fmt:formatDate value="${list.last_modified_date}" pattern="yyyy-MM-dd"/></td>
-	                    		</tr>
-	                    		</c:forEach>
-	                    	</table>
-	                    			
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Kostyle</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                
+                
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">인기상품</h5>
+                                    <br>
+                                    
+                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                                    <!-- Product price-->
+                                    <br>
+                                    $80.00
+                                    <br>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                         	<!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Best</div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Best</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">인기상품2</h5>
+                                    <br>
+                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 이름</a></div>
+                                    <!-- Product reviews-->
+                                    <!-- Product price-->
+                                    <br>
+                                    $18.00
+                                    <br>
+                             	    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
 
-		
-		
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">인기상품3</h5>
+                                    <br>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                               			 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                                    <!-- Product price-->
+                                    <br>
+                                    $25.00
+                                    <br>
+                      			   <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Best</div>
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">인기삼품4</h5>
+                                    <br>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                           
+                            		<br>
+                            	   <!-- Product price-->
+                                    $40.00
+                                    
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">추천</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">추천상품</h5>
+                                    <br>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                            </div>
+                            <br>
+                                    <!-- Product price-->
+                                    $25.00
+                            <br>
+                            	   <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
 
-<div class='search_wrap'>
-					<form id='searchForm' action="/products" method='get'>
-							<select name='type'>
-								<option value=""
-									<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-									
-								<option value="T"
-									<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>상품번호</option>
-									
-								<option value="C"
-									<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>상품명</option>
-									
-								<option value="W"
-									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>색상</option>
-									
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">추천</div>
+                                    <h5 class="fw-bolder">추천상품2</h5>
+                                    <br>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                            </div>
+                            <br>
+                                    <!-- Product price-->
+                                   $280.00
+                            <br>
+    							   <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품설명</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">추천</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">추천상품3</h5>
+                                    <br>
+                                    <!-- Product reviews-->
 
-							</select> <input type='text' name='keyword'
-								value='<c:out value="${pageMaker.cri.keyword}"/>' />
-								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
-								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
-							<button class='btn btn-default'>Search</button>
-						</form>
-					
-				</div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                                    <br>
+                                    <!-- Product price-->
+                                    $18.00
+                                    <br>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품 설명</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                        </div>
+                    </div>
+                    
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">추천</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">추천상품4</h5>
+                                    <br>
+                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품이름</a></div>
+                            </div>
+                                    <br>
+                                    <!-- Product price-->
+                                    $40.00
+                                  <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">상품 설명</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+       
 
-		
-		<div class="pageMaker_wrap">
-                		<ul class="pageMaker">
-                			
-                			<!-- 이전 버튼 -->
-                			<c:if test="${pageMaker.prev }">
-                				<li class="pageMaker_btn prev">
-                					<a href="${pageMaker.startPage -1}">이전</a>
-                				</li>
-                			</c:if>
-                			
-                			<!-- 페이지 번호 -->
-                			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="num">
-                				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
-                					<a href="${num}">${num}</a>
-                				</li>	
-                			</c:forEach>
-                		
-	                    	<!-- 다음 버튼 -->
-	                    	<c:if test="${pageMaker.next}">
-	                    		<li class="pageMaker_btn next">
-	                    			<a href="${pageMaker.endPage + 1 }">다음</a>
-	                    		</li>
-	                    	</c:if>
-	                    </ul>
-                	</div>
-                	
-                	<form id="moveForm" action="/products" method="get" >
- 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
-						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-                	</form>
-			
-			
-	<script type="text/javascript">
-		let enrollForm = $("#enrollForm")
-
-
-		
-		/*상품 페이지  */
-		let moveForm = $('#moveForm');
-		$(".pageMaker_btn a").on("click", function(e){
-			
-			e.preventDefault();
-			
-			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-			
-			moveForm.submit();
-			
-		});
-		
-		/* 상품 상세 페이지 이동 */
-		$(".move").on("click", function(e){
-			
-			e.preventDefault();
-			
-			moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
-			moveForm.attr("action", "/products/get");
-			moveForm.submit();
-			
-		});
-		
-		
-
-		
-	</script>
-	
-	
-<!-- 	<script>
-$(document).ready(function(){
-	
-	let eResult = '<c:out value="${enroll_result}"/>';
-	
-	checkResult(eResult);
-	
-	function checkResult(result){
-		
-		if(result === ''){
-			return;
-		}
-		
-		alert("상품을 등록하였습니다.");
-		
-	}
-
-});
-</script> -->
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-</body>
+    </body>
 </html>

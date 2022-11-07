@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.RecommendMapper"> <!-- 고유한 도메인 -->
+
+	<!-- 장바구니 상품 추천 -->
+	<select id="cartRecommendProduct"
+		resultType="ko.kostyle.domain.ProductVO">
+		select
+		p.pno as pno,
+		p.scno as scno,
+		p.name as name,
+		p.price as price,
+		p.hitcount as hitcount,
+		p.season as season,
+		p.color as color,
+		p.gender as gender,
+		p.created_date as created_date,
+		p.last_modified_date as last_modified_date
+		from
+		(select pno, sum(amount) as amount from order_detail
+		where ono in (select ono from orders where category != 'auction_product')
+		group by pno) o left outer join product p on o.pno = p.pno
+		where p.gender= #{gender}
+		and season between #{season} - 1 and #{season} + 1
+       <![CDATA[
+       and rownum <= 5
+		]]>
+		order by amount desc
+	</select>
+	
+	<!-- 장바구니 추천상품 이미지 -->
+	<select id="cartRecommendImg" resultType="ko.kostyle.domain.AuctionImgVO">
+		select * from product_img where pno = #{pno}
+	</select>
+	
+	<!-- 임시 상품 조회 -->
+	<select id="getProduct" resultType="ko.kostyle.domain.ProductVO">
+		select * from product where pno = #{pno}
+	</select>
+
+
+</mapper>

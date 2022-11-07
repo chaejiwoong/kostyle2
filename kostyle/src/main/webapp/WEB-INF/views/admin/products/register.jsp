@@ -97,7 +97,7 @@
 						<label>상품 가격</label>
 					</div>
 					<div class="form_section_content">
-						<input id="price" name="price" value="-">
+						<input id="price" name="price" value="-" >
 					</div>
 				</div>
 

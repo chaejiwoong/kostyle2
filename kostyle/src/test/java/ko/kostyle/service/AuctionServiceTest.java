@@ -9,6 +9,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ko.kostyle.domain.AuctionVO;
 import ko.kostyle.dto.AuctionDTO;
+import ko.kostyle.dto.BidDTO;
+import ko.kostyle.dto.Criteria;
 import ko.kostyle.mapper.AuctionMapper;
 import ko.kostyle.mapper.OrderCancelMapperTest;
 import lombok.extern.log4j.Log4j;
@@ -42,9 +44,13 @@ public class AuctionServiceTest {
 //		
 //	}
 	
+	
+	//입찰 테스트
 	@Test
-	public void getListTest() {
+	public void bidTest() {
 		
-		service.getAuctionList().forEach(log::info);
+		BidDTO dto = new BidDTO();
+		dto.setApno(29L);
+		dto.setPrice(140000);
 	}
 }

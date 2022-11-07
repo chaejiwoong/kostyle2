@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import ko.kostyle.domain.AuctionVO;
+import ko.kostyle.dto.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,7 +35,7 @@ public class AuctionMapperTest {
 	
 	@Test
 	public void findTest() {
-		mapper.auctionList().forEach(log::info);
+		mapper.auctionList(new Criteria()).forEach(log::info);
 		log.info(mapper.auctionImgDetail(8L));
 	}
 }

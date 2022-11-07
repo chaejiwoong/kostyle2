@@ -84,7 +84,7 @@
             <li>리뷰 관리</li>
             <li>장바구니</li>
             <li>위시리스트 / 코디</li>
-            <li>내 경매 조회</li>
+            <li onclick="location.replace('/members/bidHistory')">내 경매 조회</li>
             <li>1:1 문의</li>
 
         </ul>

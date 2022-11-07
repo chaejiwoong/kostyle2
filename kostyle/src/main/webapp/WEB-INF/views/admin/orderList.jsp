@@ -57,6 +57,12 @@ font-weight: bold;
 			<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
 				<button id="search" class='btn btn-default'>Search</button>
 				<button id="default" class='btn btn-default'>Default</button>
+				
+				<span>구분</span>
+				<label for="product">상품</label><input type="radio" id="product" class="form-control filter" name="filter" value="P"
+				<c:out value="${pageMaker.cri.filter eq 'P'?'checked':''}"/>>
+				<label for="auction_product">경매</label><input type="radio" id="auction_product" class="form-control filter" name="filter" value="A"
+				<c:out value="${pageMaker.cri.filter eq 'A'?'checked':''}"/>>				
 			</div>
 			<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 			<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
@@ -75,6 +81,7 @@ font-weight: bold;
 					<th>결제방식</th>
 					<th>가격</th>
 					<th>배송상태</th>
+					<th>구분</th>					
 					<th>주문일자</th>
 					<th>배송버튼</th>
 				</tr>
@@ -89,10 +96,12 @@ font-weight: bold;
 					<td><c:out value="${order.payment}" /></td>
 					<td><c:out value="${order.totalPrice}" /></td>
 					<td><c:out value="${order.status}" /></td>
+					<td><c:out value="${order.category}" /></td>						
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${order.created_date}" /></td>
+	
 					<td><c:if test="${order.status eq '상품준비중' }">
-							<a class="btn btn-primary delivery" data-ono="${order.ono }">배송</a>
+								<a class="btn btn-primary delivery" data-ono="${order.ono }">배송</a>
 						</c:if></td>
 				</tr>
 			</c:forEach>
@@ -132,6 +141,8 @@ font-weight: bold;
 				value='<c:out value="${ pageMaker.cri.type }"/>'> <input
 				type='hidden' name='keyword'
 				value='<c:out value="${ pageMaker.cri.keyword }"/>'>
+			<input type='hidden' name='filter'
+				value='<c:out value="${ pageMaker.cri.filter }"/>'>				
 		</form>
 	</div>
 	<script>
@@ -203,6 +214,14 @@ font-weight: bold;
 				e.preventDefault();
 				self.location="/admin/orders";
 			})
+			
+			$("#product, #auction_product").on('change', function(){
+				// 1페이지로 바꾸고 submit.
+				searchForm.find("input[name='pageNum']")
+						.val("1");
+
+				searchForm.submit();
+			})			
 	})
 	
 </script>

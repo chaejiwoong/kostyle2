@@ -18,6 +18,7 @@ public class OrderVO implements Serializable {
     private Long mno;
     private String payment;
     private int totalPrice;
+    private String category;
     private String status;
     private Date created_date;
 

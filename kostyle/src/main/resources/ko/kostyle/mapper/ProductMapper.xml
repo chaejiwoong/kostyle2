@@ -46,30 +46,31 @@
  	<select id="stockList" resultType="ko.kostyle.domain.StockVO">
 	select * from stock where pno = #{pno}
 	</select> 
-	<select id="productList" resultType="ko.kostyle.domain.ProductVO">
-		SELECT * FROM PRODUCT order by pno
-	</select>
-	
-	
+
 	<select id="productGet" resultType="ko.kostyle.domain.ProductVO">
 		SELECT * FROM PRODUCT where pno = #{pno}
 	</select>
 	
 
-	
-	
 
-	
 	<update id="productUpdate">
 		UPDATE PRODUCT
 		SET name = #{name}, price = #{price}, season = #{season},color = #{color}, gender = #{gender},LAST_MODIFIED_DATE = sysdate
 		where pno = #{pno}
 	</update>
+	
 	<update id="stockUpdate">
 		UPDATE STOCK
 		SET amount = #{amount}
 		where pno = #{pno} and p_size = #{p_size}
 	</update>
+	
+	<!-- 조회수 증가 -->
+   <update id="updateHitcount">
+      update product
+      set hitcount = hitcount + 1
+      where pno = #{pno}
+   </update>
 	
 	<delete id="productDelete">
 		DELETE FROM PRODUCT WHERE pno = #{pno}
@@ -112,10 +113,10 @@
 	
  	<select id="getListWithPaging" resultType="ko.kostyle.domain.ProductVO">
 		<![CDATA[
-			select pno,name,price,color,gender,season,CREATED_DATE
+			select pno,name,price,color,gender,season,CREATED_DATE, hitcount
 			FROM(
 				select /*+INDEX_DESC(PRODUCT SYS_C007221)*/
-				rownum rn,pno,name,price,color,gender,season,CREATED_DATE
+				rownum rn,pno,name,price,color,gender,season,CREATED_DATE,hitcount
 				from PRODUCT
 				where
 					]]>

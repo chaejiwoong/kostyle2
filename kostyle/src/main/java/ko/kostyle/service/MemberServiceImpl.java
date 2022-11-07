@@ -90,8 +90,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int getTotal() {
-        return mapper.getTotal();
+    public int getTotal(Criteria cri) {
+        return mapper.getTotal(cri);
     }
 
 }

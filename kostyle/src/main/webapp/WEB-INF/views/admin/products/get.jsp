@@ -37,6 +37,7 @@
                    		              
                    		<div class="form_section">
                    			<div class="form_section_title">
+                   				
                    				<label>상품 이름</label>
                    			</div>
                    			<div class="form_section_content">
@@ -66,7 +67,7 @@
                    				<label>가격</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<textarea class="input_block" name="price" readonly="readonly"><c:out value='${product.price }'/></textarea>
+                   				<textarea class="input_block" name="price" readonly="readonly" ><c:out value='${product.price }'/></textarea>
                    			</div>
                    		</div>
 
@@ -169,17 +170,19 @@ let modify_result = '${modify_result}';
 if(modify_result == 1){
 	alert("수정 완료");
 }	
+
+//이미지 출력
 $(document).ready(function() {
 	let pno = '<c:out value="${product.pno }"/>';
 	let uploadReslut = $("#uploadReslut");
 	
-	console.log("ddddddddddddddddddddddddddddddddddddddddddddddddd");
+	
 	
 	$.getJSON("/member/products/getImgList", {pno : pno}, function(arr){	
 		let str = "";
 		let obj = arr[0];
 		
-		console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+		
 		
 		if(arr.length === 0){	
 			let str = "";
@@ -197,7 +200,7 @@ $(document).ready(function() {
 		str += ">";
 		str += "<img src='/member/products/display?fileName=" + fileCallPath + "'>";
 		str += "</div>";		
-		console.log("경롱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+fileCallPath);
+	
 		
 		uploadReslut.html(str);		
 	});	

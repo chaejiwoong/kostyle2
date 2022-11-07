@@ -5,9 +5,18 @@
 
 
 
-	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
-	
-		select * from PRODUCT_IMG where pno= #{pno}
-	
+
+	<select id="productGetHit" resultType="ko.kostyle.domain.ProductVO">
+		SELECT * FROM PRODUCT where
+		<![CDATA[
+		rownum <= 4 
+		]]>
+		order by hitcount
 	</select>
+	 
+	<select id="getImgList" resultType="ko.kostyle.domain.Product_ImgVO">
+		select * from PRODUCT_IMG where pno= #{pno}
+	</select>
+	
+
 </mapper>

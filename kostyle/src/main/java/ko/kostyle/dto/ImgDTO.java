@@ -27,7 +27,7 @@ public class ImgDTO {
 	private String uuid;
 	private boolean is_default;
 
-	public static List<ImgDTO> of(List<AuctionImgVO> imgs) {
+	public static List<ImgDTO> ofList(List<AuctionImgVO> imgs) {
 		List<ImgDTO> dtos = new ArrayList<ImgDTO>();
 		
 		for(AuctionImgVO img : imgs) {
@@ -40,6 +40,16 @@ public class ImgDTO {
 		}
 		
 		return dtos;
+
+	}
+	
+	public static ImgDTO of(AuctionImgVO img) {
+		
+		return ImgDTO.builder()
+					.filepath(img.getFilepath())
+					.filename(img.getFilename())
+					.uuid(img.getUuid())
+					.build();
 
 	}
 }

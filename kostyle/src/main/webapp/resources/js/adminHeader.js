@@ -16,8 +16,8 @@ $(function () {
                     "</div>")
             } else if (title == "auction") {
                 $(".bottom-category").html("<div>" +
-                    "<span><a href='#'>경매목록</a></span>" +
-                    "<span><a href='#'>경매등록</a></span>" +
+                    "<span><a href='/admin/auctions'>경매목록</a></span>" +
+                    "<span><a href='/admin/auctions/register'>경매등록</a></span>" +
 
                     "</div>")
             } else if(title == "order"){

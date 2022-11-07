@@ -57,6 +57,7 @@ public class AdminProductController {
 		int total = service.getTotal(cri);
 		model.addAttribute("product", service.productList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
 
 		return "admin/products/list";
 
@@ -67,7 +68,7 @@ public class AdminProductController {
 		// 페이지 정보
 		model.addAttribute("cri", cri);
 		// 선택상품정보
-		log.info(service.get(pno));
+		
 		
 		model.addAttribute("product", service.get(pno));
 		
@@ -201,7 +202,7 @@ public class AdminProductController {
 			} 
 			list.add(imgDTO);
 		}
-		log.info("dddddddddddddddddddddddddddddddddddddd111"+list);
+		
 		return new ResponseEntity<List<Product_ImgDTO>>(list, HttpStatus.OK);
 		
 	}

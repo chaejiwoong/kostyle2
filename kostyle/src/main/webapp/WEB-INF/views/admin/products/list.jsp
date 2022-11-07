@@ -22,23 +22,28 @@
 	                    		<thead>
 	                    			<tr>
 										<td class="th_column_1">상품번호</td>
-	                    				<td class="th_column_2">상품이름</td>
-	                    				<td class="th_column_3">상품색상</td>
+										<td class="th_column_2">상품</td>
+	                    				<td class="th_column_3">상품이름</td>
+	                    				<td class="th_column_4">상품색상</td>
 	                    				<!-- <td class="th_column_4">상품 재고</td> -->
 	                    				<td class="th_column_5">상품가격</td>
-	                    				<td class="th_column_5">성별</td>
-	                    				<td class="th_column_6">등록날짜</td>
+	                    				<td class="th_column_6">성별</td>
+	                    				<td class="th_column_7">등록날짜</td>
+	                    				<td class="th_column_8">조회수</td>
 	                    			</tr>
 	                    		</thead>	
 	                    		<c:forEach items="${product}" var="list">
 	                    		<tr>
 	                    			<td><c:out value="${list.pno}"></c:out></td>
+	                    			<td><img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
+	                    			data-filename="${list.imageList[0].fileName}"></td>
 	                    			<td><a class="move" href ='<c:out value="${list.pno}"/>'><c:out value="${list.name}"/></a></td>
 	                    			<td><c:out value="${list.color}"></c:out></td>
-	                    			<td><c:out value="${list.price}"></c:out></td>
-	                    			<td><c:out value="${list.gender}"></c:out></td>
+	                    			<td><fmt:formatNumber value="${list.price}" pattern="#,### 원" /></td>
+	                    			<td><c:out value="${list.gender}" ></c:out></td>
 	                    			<td><fmt:formatDate value="${list.created_date}" pattern="yyyy-MM-dd"/></td>
 	                    			<td><fmt:formatDate value="${list.last_modified_date}" pattern="yyyy-MM-dd"/></td>
+	                    			<td><c:out value="${list.hitCount}" ></c:out></td>
 	                    		</tr>
 	                    		</c:forEach>
 	                    	</table>
@@ -65,11 +70,13 @@
 									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>색상</option>
 									
 
-							</select> <input type='text' name='keyword'
-								value='<c:out value="${pageMaker.cri.keyword}"/>' />
+							</select>
+							 <input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
 								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 							<button class='btn btn-default'>Search</button>
+							
+							<button id="default" class='btn btn-default'>초기화</button>
 						</form>
 					
 				</div>
@@ -110,6 +117,12 @@
 			
 			
 	<script type="text/javascript">
+	
+		
+	$("#default").on('click', function(e){
+		e.preventDefault();
+		self.location="/products";
+	})
 		let enrollForm = $("#enrollForm")
 
 
@@ -151,6 +164,17 @@
 		if(delete_result == 1){
 			alert("삭제 완료");
 		}
+		
+		var aa = (function loadThumbnail() {
+			var uploadResultArr = $('.thumb');
+			
+			$(uploadResultArr).each(function (i, obj) {
+				//섬네일 파일을 불러오기 위한 경로
+				var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+				// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
+				$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
+				})
+			})();
 
 		
 

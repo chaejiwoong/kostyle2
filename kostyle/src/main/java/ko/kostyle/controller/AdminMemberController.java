@@ -27,7 +27,7 @@ public class AdminMemberController {
         List<MemberDTO> list = memberService.memberList(cri);
 
         model.addAttribute("list", list);
-        int total = memberService.getTotal();
+        int total = memberService.getTotal(cri);
         System.out.println("total = " + total);
         model.addAttribute("pageMaker", new PageDTO(cri, total));
         log.info(cri);

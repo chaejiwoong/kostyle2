@@ -1,7 +1,7 @@
 package ko.kostyle.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import ko.kostyle.domain.OrderCancelVO.OrderCancelVOBuilder;
 import lombok.AllArgsConstructor;

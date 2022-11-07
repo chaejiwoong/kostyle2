@@ -14,7 +14,8 @@
     #left-sidebar{
         position: relative;
         float: left;
-        margin-left: 50px;
+        margin-left: 30px;
+        margin-right: 30px;
         font-size: 17px;
         border: solid 1px #ebebeb;
         vertical-align: center;
@@ -38,6 +39,16 @@
         height: 50px;
         padding-left: 10px;
         padding-top: 10px;
+    }
+    
+	.selected-li{
+    	background-color: black;
+    	color: white;
+    }
+    
+    #menu li:hover{
+        background-color: black;
+    	color: white;
     }
 
     .update-contents{
@@ -69,15 +80,7 @@
         margin: 15px;
     }
     
-    .selected-li{
-    	background-color: black;
-    	color: white;
-    }
-    
-    #menu li:hover{
-        background-color: black;
-    	color: white;
-    }
+
 </style>
     </head>
 <body>
@@ -105,7 +108,7 @@
             </div>
             <div class="form-inline form-group form-div">
                 <label for="password">비밀번호</label>
-                <input id="password" type="password" name="password" class="form-control"></span><br>
+                <input id="password" type="password" name="password" class="form-control"><br>
             </div>
             <div class="form-inline form-group form-div">
                 <label for="chkPassword">비밀번호 확인</label>

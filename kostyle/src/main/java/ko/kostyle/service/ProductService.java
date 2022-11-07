@@ -11,6 +11,7 @@ import ko.kostyle.dto.StockDTO;
 public interface ProductService {
 	
 	public List<ProductDTO> productList(Criteria cri); //상품목록
+	public List<ProductDTO> productListHit(); //히트카운터에 따른 상품목록
 	
 	public void register(ProductDTO proDTO);//상품등록
 	
@@ -22,6 +23,10 @@ public interface ProductService {
 	
 	public int getTotal(Criteria cri);
 	
+	public void updateHitcount(Long pno);//조회수 증가
+	
+	
+	 
 
 	
 	

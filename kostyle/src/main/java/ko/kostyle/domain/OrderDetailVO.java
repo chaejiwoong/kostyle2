@@ -15,6 +15,7 @@ public class OrderDetailVO implements Serializable{
     private Long odno;
     private Long ono;
     private Long pno;
+    private String p_size;
     private int amount;
     private int price;
 
