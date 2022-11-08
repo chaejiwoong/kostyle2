@@ -60,6 +60,14 @@
 	text-align: center;
 	vertical-align:middle;
 } 
+
+.orders-title{
+	height:50px;
+	font-weight:bold;
+	font-size:15px;
+	border-bottom: 1px solid black;
+}
+
 </style>
 </head>
 <body>
@@ -70,13 +78,13 @@
     <h1>MyPage</h1>
 
 	<ul>
-		<li onclick="location.replace('/orders')">주문배송조회</li>
+		<li onclick="location.replace('/orders')"  class="selected">주문배송조회</li>
 		<li onclick="location.replace('/members')">회원정보수정</li>
 		<li onclick="location.replace('/members/address')">배송지관리</li>
 		<li onclick="location.replace('/reviews/unwritten')">리뷰관리</li>
 		<li>장바구니</li>
 		<li>위시리스트/코디</li>
-		<li onclick="location.replace('/members/bidHistory')" class="selected">내경매조회</li>
+		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
 		<li>1:1문의</li>
 	</ul>  		
 	
@@ -86,7 +94,7 @@
 	<div class="order-section">
 	<div class="selectBox row">
 		<form id='searchForm' class="form-horizontal" action="/orders" method='get'>
-	<div class="form-inline form-group">
+			<div class="form-inline form-group">
 				<button id="default" class='btn btn-default'>Default</button>
 				
 				<span>필터</span>
@@ -103,55 +111,56 @@
 			<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
 
 		</form>
-		</div>	
+	</div>	
+	<div class="row orders-title">
+		<span class="col-md-2">주문일자</span>
+		<span class="col-md-1">주문번호</span>
+		<span class="col-md-2">이미지</span>
+		<span class="col-md-2">상품명</span>
+		<span class="col-md-2">총 가격</span>
+		<span class="col-md-1">결제방식</span>
+		<span class="col-md-1">배송상태</span>					
+		<span class="col-md-1">주문상세</span>
+	</div>
 
-
-	
-				<div class="row">
-					<span>주문번호</span>
-					<span>이미지</span>
-					<span>상품명</span>
-					<span>총 가격</span>
-					<span>결제방식</span>
-					<span>배송상태</span>					
-					<span>주문일자</span>
-					<span>주문상세</span>
-				</div>
-
-			<c:forEach items="${orders}" var="order">
-			<div>
-				<div class="row">
-					<span><c:out value="${order.ono}" /></span>
-					<c:if test="${order.category eq '구매' }">
-						<span><img data-filepath ="${order.orderDetail.product.img.filepath}"class="thumb" src='' data-uuid="${order.orderDetail.product.img.uuid}" data-filename="${order.orderDetail.product.img.filename}"></span>
-					</c:if>
-					<c:if test="${order.category eq '낙찰' }">
-						<span><img data-filepath ="${order.winningBid.img.filepath}"class="thumb" src='' data-uuid="${order.winningBid.img.uuid}" data-filename="${order.winningBid.img.filename}"></span>
-					</c:if>
-					<span><c:out value="${order.name}" /></span>
-								
-					<span><c:out value="${order.totalPrice}" /></span>
-					<span><c:out value="${order.payment}" /></span>			
-					<span><c:out value="${order.status}" /></span>				
-					<span><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${order.created_date}" /></span>
-					
-					<span><a href="${order.ono }" class="btn btn-primary detailBtn" data-category="${order.category }" data-status="${order.status }">상세보기</a></span>
-					<span hidden="hidden"><a href="${order.ono }" class="btn btn-primary closeBtn">상세닫기</a></span>
-				</div>
-				<div class="row address" hidden="hidden">
-					<span>배송지</span>
-					<span>전화번호</span>					
-				</div>
-				<div class="row address" hidden="hidden">
-					<span>${order.address.address }</span>
-					<span>${order.address.tel }</span>					
-				</div>
-				<div id="${order.ono }">
-				</div>
+	<c:forEach items="${orders}" var="order">
+	<div>
+		<div class="row">
+			<span class="col-md-2"><fmt:formatDate pattern="yyyy-MM-dd"
+					value="${order.created_date}" /></span>
+			<span class="col-md-1"><c:out value="${order.ono}" /></span>
+			<c:if test="${order.category eq '구매' }">
+				<span class="col-md-2"><img data-filepath ="${order.orderDetail.product.img.filepath}"class="thumb" src='' data-uuid="${order.orderDetail.product.img.uuid}" data-filename="${order.orderDetail.product.img.filename}" style="width: 100px; height: 100px;"></span>
+			</c:if>
+			<c:if test="${order.category eq '낙찰' }">
+				<span class="col-md-2"><img data-filepath ="${order.winningBid.img.filepath}"class="thumb" src='' data-uuid="${order.winningBid.img.uuid}" data-filename="${order.winningBid.img.filename}" style="width: 100px; height: 100px;"></span>
+			</c:if>
+			<span class="col-md-2"><c:out value="${order.name}" /></span>
+							
+			<fmt:formatNumber var="totalPrice" value="${order.totalPrice }" type="number"/>
+			<span class="col-md-2"><c:out value="${totalPrice}" /></span>
+			<span class="col-md-1"><c:out value="${order.payment}" /></span>			
+			<span class="col-md-1"><c:out value="${order.status}" /></span>				
+			
+			
+			<span class="col-md-1"><a href="${order.ono }" class="btn btn-primary detailBtn" data-category="${order.category }" data-status="${order.status }">상세보기</a></span>
+			<span class="col-md-1" hidden="hidden"><a href="${order.ono }" class="btn btn-primary closeBtn">상세닫기</a></span>
+		</div>
+		
+		<div class="address-section">
+			<div class="row address" hidden="hidden">
+				<h1>배송지 정보</h1>			
 			</div>
+			<div class="row address" hidden="hidden">
+				<span class="">배송지 : ${order.address.address }</span>
+				<span class="">전화번호 : ${order.address.tel }</span>					
+			</div>			
+		
+		</div>
 
-			</c:forEach>
+		<div id="${order.ono }" class="detail-section"></div>
+	</div>
+	</c:forEach>
 
 
 	
@@ -191,7 +200,7 @@
 			<input type='hidden' name='filter'
 				value='<c:out value="${ pageMaker.cri.filter }"/>'>				
 		</form>
-		</div>
+	</div>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
@@ -251,7 +260,7 @@ $(document).ready(function(){
             		$('#' + ono).append(title)    
             		
                 	$.each(data, function(index, item){
-                		var fileCallPath = encodeURIComponent(item.product.img.filepath + "/s_" + item.product.img.uuid + "_" + item.product.img.filename);
+                		var fileCallPath = encodeURIComponent(item.product.img.filepath + "/" + item.product.img.uuid + "_" + item.product.img.filename);
                 		
                 		
                 		
@@ -259,7 +268,7 @@ $(document).ready(function(){
                     	var result = "";
                     	result += '<div class="row">'
                     	result += '<span>' + item.odno + '</span>'; 
-                        result += '<span><img class="thumb" src="/commons/display?fileName=' + fileCallPath + '"></span>';                				
+                        result += '<span><img class="thumb" src="/commons/display?fileName=' + fileCallPath + '" style="width: 100px; height: 100px;"></span>';                				
                 		result += '<span>' + item.product.name + '</span>';
                 		result += '<span>' + item.p_size + '</span>';
                 		result += '<span>' + item.amount+ '</span>';

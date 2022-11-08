@@ -577,6 +577,12 @@ $(document).ready(function(){
     		}
     	})
     })
+    
+    $("#orderCancel-btn").on('click', function(e){
+    	e.preventDefault();
+    	
+    	self.location="/orders";
+    })
    
 
 })
