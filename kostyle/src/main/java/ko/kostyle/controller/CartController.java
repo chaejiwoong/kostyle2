@@ -69,8 +69,11 @@ public class CartController {
 		
 		vo.setMno(mno);
 		List<CartListVO> cartArr = service.getCartList(mno);
+		
+		log.info(cartArr);
 
 		model.addAttribute("cartList", cartArr);
+		model.addAttribute("vo", vo);
 		log.info(cartArr);
 		return "shop/cartList";
 	}

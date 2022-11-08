@@ -18,6 +18,8 @@ public class CartListVO implements Serializable {
 	private long mno; // 회원 번호
 	private long pno; // 상품 번호
 	private int amount; // 장바구니 수량
+	private String p_size; //상품 사이즈
+	
 
 	private String name; // 옷 이름
 	private int price; // 가격
@@ -26,12 +28,20 @@ public class CartListVO implements Serializable {
 	private int totalPoint; // 총 포인트
 	private int totalPrice; // 총 가격
 	
+	private int finalTotalPrice;
+	private int finalTotalPoint;
+
+
+		
 	public void initTotal() {
 		this.totalPrice = this.price * this.amount;
 		this.point = (int) (Math.floor(this.price * 0.05));
 		this.totalPoint = this.point * this.amount;
 	}
 	
-
+	public void finalTotal() {
+		this.finalTotalPrice = totalPrice;
+		this.finalTotalPoint = totalPoint;
+	}
 
 }

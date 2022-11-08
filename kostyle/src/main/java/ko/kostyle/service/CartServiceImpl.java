@@ -63,11 +63,13 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartListVO> getCartList(Long mno) throws Exception {
 		List<CartListVO> cart = cartMapper.getCart(mno);
-		log.info(cart);
+
 
 		for (CartListVO vo : cart) {
 			vo.initTotal();
+			vo.finalTotal();
 		}
+		log.info(cart);
 		return cart;
 	}
 
