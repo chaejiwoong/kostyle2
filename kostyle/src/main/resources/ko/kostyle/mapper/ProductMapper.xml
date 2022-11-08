@@ -53,6 +53,7 @@
 	
 
 
+
 	<update id="productUpdate">
 		UPDATE PRODUCT
 		SET name = #{name}, price = #{price}, season = #{season},color = #{color}, gender = #{gender},LAST_MODIFIED_DATE = sysdate
@@ -94,7 +95,7 @@
 							name like '%'||#{keyword}||'%' 
 						</when>
 						<when test="type == 'W'.toString()">
-							color like '%'||#{keyword}||'%' 
+							scno = #{keyword}
 						</when>
 					</choose>
 				</trim>

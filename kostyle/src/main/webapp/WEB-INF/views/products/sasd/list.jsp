@@ -6,18 +6,21 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
+<style type="text/css">
+#wrap {
+          min-height: 100%;
+          position: relative;
+          padding-bottom: 100px;
+      }
+</style>
 </head>
 <body>
+<div id="wrap">
+<!--  -->
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Kostyle</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
-                </div>
-            </div>
-        </header>
         
         <!-- Section-->
         <section class="py-5">
@@ -34,12 +37,11 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">${list.pno}.${list.name}</h5>
+                                    <h5 class="fw-bolder">NO.${list.pno}<br>${list.name}</h5>
                                     
                                     <br>
                                     <form action="" method="get" >
-                                     <div class="text-center" ><a class="btn btn-outline-dark mt-auto"  id = "move" 
-                                     href='<c:out value="${list.pno}"/>' >상세보기</a></div>
+                                     <div class="text-center" ><a class="move" href ='<c:out value="${list.pno}"/>'><span class = "btn btn-outline-dark mt-auto" >상세보기</span></a></div>
                                     </form>
                                     <br>
                                    가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
@@ -77,13 +79,14 @@
 									<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>상품명</option>
 									
 								<option value="W"
-									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>색상</option>
+									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>카테고리</option>
 									
 
 							</select>
 							 <input class="search_input" type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>' />
 								 <input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
 								  <input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
+								  
 							<button class='btn btn-default'>Search</button>
 							
 							<button id="default" class='btn btn-default'>초기화</button>
@@ -125,6 +128,8 @@
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
+</div>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
             
 <script type="text/javascript">
 /* 상품 등록 폼 */
@@ -155,12 +160,12 @@ $("#default").on('click', function(e){
 		});
 		
 		/* 상품 상세 페이지 이동 */
-		$("#move").on("click", function(e){
+		$(".move").on("click", function(e){
 			
-			console.log("dddd")
+			
 			e.preventDefault();
 			
-			console.log("ngngngngngn")
+			
 			moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
 			moveForm.attr("action", "/admin/products/get");
 			moveForm.submit();

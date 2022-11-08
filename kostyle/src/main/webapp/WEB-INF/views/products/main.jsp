@@ -4,20 +4,23 @@
 <html>
 <head>
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/header.js"></script>
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet" />
+
 </head>
 <body>
-
-        <!-- Header-->
-        <header class="bg-dark py-5">
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+       
+       <div>
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Kostyle</h1>
                     <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
                 </div>
             </div>
-        </header>
+        </div>
         
         <!-- Section-->
         <section class="py-5">
@@ -46,7 +49,7 @@
                                    가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
                                     <br>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill">상품설명
+                                        <div class="bi-star-fill">
                                         <br>
                                         색상 : <c:out value="${list.color}"></c:out>
                                         <br>
@@ -84,7 +87,7 @@
                                    가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
                                     <br>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill">상품설명
+                                        <div class="bi-star-fill">
                                         <br>
                                         색상 : <c:out value="${list.color}"></c:out>
                                         <br>
@@ -123,7 +126,7 @@
                                    가격 : <fmt:formatNumber value="${list.price}" pattern="#,### 원" />
                                     <br>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill">상품설명
+                                        <div class="bi-star-fill">
                                         <br>
                                         색상 : <c:out value="${list.color}"></c:out>
                                         <br>
@@ -140,8 +143,14 @@
                     </div>
                </c:forEach>
                
-               
                    
+                   
+                     <form id="moveForm" action="/main" method="get" >
+ 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+                	</form>
                                 
                           
                     
@@ -159,6 +168,31 @@ var aa = (function loadThumbnail() {
 		$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
 		})
 	})();
+	
+/*상품 페이지  */
+let moveForm = $('#moveForm');
+$(".pageMaker_btn a").on("click", function(e){
+	
+	e.preventDefault();
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	moveForm.submit();
+	
+});
+
+/* 상품 상세 페이지 이동 */
+$(".move").on("click", function(e){
+	
+	
+	e.preventDefault();
+	
+	console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
+	moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
+	moveForm.attr("action", "/main/product");
+	moveForm.submit();
+	
+});
 
 
 </script>

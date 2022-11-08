@@ -6,18 +6,21 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
+<style type="text/css">
+#wrap {
+          min-height: 100%;
+          position: relative;
+          padding-bottom: 100px;
+      }
+</style>
 </head>
 <body>
+<div id="wrap">
+<!--  -->
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Kostyle</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
-                </div>
-            </div>
-        </header>
         
         <!-- Section-->
         <section class="py-5">
@@ -76,7 +79,7 @@
 									<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>상품명</option>
 									
 								<option value="W"
-									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>색상</option>
+									<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>카테고리</option>
 									
 
 							</select>
@@ -125,6 +128,8 @@
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
+</div>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
             
 <script type="text/javascript">
 /* 상품 등록 폼 */

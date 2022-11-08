@@ -27,12 +27,13 @@ public interface ProductMapper {
 	public ProductVO productGet(Long pno);//상품 상세정보
 	public List<ProductVO> getListWithPaging(Criteria cri); //페이징 처리
 	
+	
 	public int productGetTotal(Criteria cri);
 	
 	public void updateHitcount(@Param("pno") Long pno);   
 	
 	/* 상품 정보 */
-	public ProductVO getProductInfo(long pno);	
+	public ProductVO getProductInfo(Long pno);	
 	
 	
 

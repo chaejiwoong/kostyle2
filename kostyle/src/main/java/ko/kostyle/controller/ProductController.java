@@ -18,7 +18,7 @@ import ko.kostyle.service.ProductService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/main")
 @Log4j
 public class ProductController {
 	
@@ -41,14 +41,14 @@ public class ProductController {
 	      cookie.setPath("/");
 	      response.addCookie(cookie);
 	      
-		return "/products/productList";
+		return "/products/main";
 
 	}
 	
-	@GetMapping("/get")
+	@GetMapping("/product")
 
 	public String get(@RequestParam("pno") Long pno, Model model, Criteria cri,   @CookieValue(name = "listCookie", required = false) Cookie cookie, HttpServletResponse response) {
-	      
+	      cri.setAmount(4);
 	   
 		 if (cookie != null) {
 	         service.updateHitcount(pno);
@@ -73,10 +73,12 @@ public class ProductController {
 			
 
 
-		return "/products/productGet";
+		return "/products/mainGet";
 	
 	}
 	
+
+
 	
 	
 }

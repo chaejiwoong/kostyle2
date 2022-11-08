@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
 			ProductDTO dto = new ProductDTO();
 			
 			dto.setPno(prolist.getPno());
+			dto.setScno(prolist.getScno());
 			dto.setName(prolist.getName());
 			dto.setColor(prolist.getColor());
 			dto.setGender(prolist.getGender());
@@ -247,7 +248,12 @@ public class ProductServiceImpl implements ProductService {
 			}
 			
 			return proDTO;
-		}   
+		}
+
+	
+	
+	
+
 
 
 //	   private ProductDTO toDto(ProductVO vo) {

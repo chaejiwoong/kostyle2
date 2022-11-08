@@ -485,9 +485,9 @@ progress {
   vertical-align: baseline;
 }
 
-[hidden] {
+/* [hidden] {
   display: none !important;
-}
+} */
 
 .lead {
   font-size: 1.25rem;
@@ -11291,6 +11291,5 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
 
 
