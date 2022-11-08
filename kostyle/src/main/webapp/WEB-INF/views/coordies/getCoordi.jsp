@@ -8,11 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>코디 세부 글 보기</title>
-<!-- <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+ <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/footer.css" rel="stylesheet"/>
+
+<script src="https://kit.fontawesome.com/89998ce003.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -47,16 +49,48 @@
 
 
 	<!-- 본문 -->
-		<div class="panel-body">
+	<div class="panel-body">
+	
 		<div class="form-group">
 			<label>글번호</label> <input class="form-control" name='cno'
 				value='<c:out value="${coordi.cno }"/>' readonly="readonly">
 		</div>
 		
+		
+		<div class="form-group">
+			<label>작성자</label> <input class="form-control" name='email'
+				value='<c:out value="${coordi.email }"/>' readonly="readonly">
+		</div>
+		
+		
+		<div class="form-group">
+			<c:if test="${!coordi.like}"><!-- 빈하트일때 -->
+				<button class="like-btn" id="${coordi.cno }" type="button">
+					<i class="fa-regular fa-heart"></i><!-- svg 하트 아이콘 -->좋아요							
+					<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
+				</button>
+			</c:if>
+						
+			<c:if test="${coordi.like}"><!-- 꽉찬 하트일때 -->
+				<button class="like-btn" id="${coordi.cno }" type="button">
+					<i class="fa-solid fa-heart"></i><!-- svg 하트 아이콘 -->좋아요
+					<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
+				</button>
+			</c:if>													
+		</div>
+		
+
+		
 		<div class="form-group">
 			<label>조회수</label> <input class="form-control" name='hitcount'
 				value='<c:out value="${coordi.hitcount }"/>' readonly="readonly">
 		</div>
+		
+		
+		<div class="form-group"> 
+			<img class="thumb"  data-filepath="${coordi.filepath }" data-filename="${coordi.filename }" data-uuid="${coordi.uuid }">	
+		</div>
+		
 
 		<div class="form-group">
 			<label>제목</label> <input class="form-control" name='title'
@@ -69,38 +103,12 @@
 				readonly="readonly"><c:out value="${coordi.content}" /></textarea>
 		</div>
 
-		<div class="form-group">
-			<label>작성자</label> <input class="form-control" name='email'
-				value='<c:out value="${coordi.email }"/>' readonly="readonly">
-		</div>
 		
 		<div class="form-group">
 			<label>작성일</label> <input class="form-control" name='created_date'
 				value='<fmt:formatDate pattern="yyyy-MM-dd" value="${coordi.created_date }"/>' readonly="readonly">
 		</div> 
-
-
-
-
-
-<%-- 		<sec:authentication property="principal" var="pinfo" />
-		<sec:authorize access="isAuthenticated()">
-			<c:if test="${pinfo.username eq board.writer}">
-				<button data-oper='modify' class="btn btn-default">Modify</button>
-			</c:if>
-		</sec:authorize> --%>
-
-<%-- 		<button data-oper='list' class="btn btn-info">List</button>
-
-		<form id='operForm' action="/boad/modify" method="get">
-			<input type='hidden' id='bno' name='bno'
-				value='<c:out value="${board.bno}"/>'> <input type='hidden'
-				name='pageNum' value='<c:out value="${cri.pageNum}"/>'> <input
-				type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-			<input type='hidden' name='keyword'
-				value='<c:out value="${cri.keyword}"/>'> <input
-				type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
-		</form> --%>
+		
 	</div>
 	
 	
@@ -134,8 +142,7 @@
             </ul>
             
             <!-- 페이지 버튼 -->
-            <div class="page-footer">
-            
+            <div class="page-footer">         
             </div>
             
 
@@ -144,7 +151,21 @@
  
  <script type="text/javascript" src="/resources/js/coordiComment.js"></script> 
 
-<script>      
+<script>  
+	var aa = (function loadThumbnail() {
+		var uploadResultArr = $('.thumb');
+	   
+	   $(uploadResultArr).each(function (i, obj) {
+	      //섬네일 파일을 불러오기 위한 경로
+	      var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+	      // 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
+	      $(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
+	      })
+	   })();
+
+
+
+
 	$(document).ready(function () {
 		
 		//비회원 버전
@@ -236,11 +257,11 @@
 			      var prev = startNum != 1;
 			      var next = false;
 			      
-			      if(endNum * 10 >= c_count){
+			      if(endNum * 5 >= c_count){
 			        endNum = Math.ceil(c_count/10.0);
 			      }
 			      
-			      if(endNum * 10 < c_count){
+			      if(endNum * 5 < c_count){
 			        next = true;
 			      }
 			      
@@ -310,11 +331,50 @@
 				});
 
 			});//댓글 삭제 끝
-        
-            
-            
+	})  
+	
+	
+	//좋아요 버튼 클릭
+ 	$(".like-btn").on("click" , function () {
+    	
+    	var mno = '${sessionScope.user.mno}'; //사용자
+    	
+        //해당 글 번호 받아 저장
+        var cno = $(this).attr("id");
+        console.log("좋아요 클릭");
 
-	})     
+        //빈하트 눌렀을 때 (빈하트 꽉찬하트 svg아이콘 클래스명 다르게)
+       // if($(this).children("i").attr("class") == "fa-regular fa-heart"){
+        //    console.log("빈하트 클릭 / 게시물 번호 :" + cno);
+        
+        $.ajax({		        	
+        	url:"/coordies/like?cno="+cno+"&mno="+mno,
+        	type:"get",
+        	success:function (result) {
+        		let lk_count = '${coordi.lk_count}';
+    		
+        		//페이지에 하트 수 갱신
+        		$(".like_count").text(lk_count);
+        		
+        		console.log("하트 추가, 삭제 성공")
+        		if(result == "꽉찬 하트"){
+        			console.log("꽉찬하트")
+        			$(this).html("<i class='fa-solid fa-heart'></i>"); 
+        		}else if(result = "텅빈 하트"){
+        			console.log("텅빈 하트")
+        			$(this).html("<i class='fa-regular fa-heart'></i>");
+        		}                    
+                    self.location="/coordies/get?cno="+cno;
+			},
+			error:function (xhr) {
+				self.location = "/auth/login"
+				console.log(xhr)   
+			}
+		}); //end ajax	        
+}) //end 좋아요 버튼 클릭		
+	
+	
+	
 </script>   
 	
 	

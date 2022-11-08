@@ -4,11 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>코디 글 목록</title>
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/header.js"></script>
+<link href="/resources/css/header.css" rel="stylesheet"/>
+<link href="/resources/css/footer.css" rel="stylesheet"/>
+
+
+<script src="https://kit.fontawesome.com/89998ce003.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
 
 <c:forEach items="${getCoordiList}" var="coordi">
-	<div class="form-group">
-		<div class="form-group-feed">
-		
+	<li class="form-group-li">
+
 			<!-- 글번호 -->
 			<div class="feed-no">
 				<span>글번호 : ${coordi.cno }</span>
@@ -19,9 +34,11 @@
 				작성자: <a class="" href=""><c:out value="${coordi.email}" /></a>
 			</div>
 			
+				
 			<!-- 코디 사진 -->
 			<div class="feed-img">
-				<!-- img src="./코디 사진 경로 -->
+				<img class="thumb" id="${coordi.cno }" data-filepath="${coordi.filepath }" data-filename="${coordi.filename }" data-uuid="${coordi.uuid }"
+			 style="width: 400px; height: 400px;">
 			</div>
 			
 			<!-- 좋아요, 댓글, 조회수 -->
@@ -46,18 +63,6 @@
 						</c:if>									
 					
 				</div>
-				<!-- 로그인 상태 아닐 때 -> 빈하트, 하트클릭 -> 튕겨져 나감 -->
-				<!-- 아싸리 권한 확인으로 튕기기 -->
-				<%-- <c:otherwise>
-					<!-- 빈하트 이미지 -->
-					<button class="like-btn" id="${coordi.cno }" type="button">
-							<!-- svg 하트 아이콘 -->좋아요
-							<span class="like-count">${coordi.lk_count}</span>
-					</button>
-				</c:otherwise> --%>
-				
-				
-				
 		
 				<a class="comment-link" href="">
 					<!-- svg 댓글 아이콘 -->댓글
@@ -73,22 +78,14 @@
 			<!-- 제목 -->
 			<div class="feed-title">
 				<!-- a링크 혹은 button 타입으로? (오늘의 집은 버튼임) -->
-				<a href="/coordies/get?cno=${coordi.cno}">	제목: <c:out value="${coordi.title}" /> </a>
+				<a href="/coordies/get?cno=${coordi.cno}" class="feed-title-a">	제목: <c:out value="${coordi.title}" /> </a>
 			</div>
 		
 			====================================================	
-		</div>
-		
-		
-		
-		<!-- 로딩이미지? 할까 말까 -->
-		<!-- <div class="form-group-loading">
-			<div class="back-drop">
-			<img src="./로딩이미지 사진 경로"> 
-			</div>
-		</div> -->
-		
-		
-	</div>	
-</c:forEach>		
+
+	</li>
+</c:forEach>
+
+</body>
+</html>
 

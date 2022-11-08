@@ -17,8 +17,10 @@ public interface CoordiMapper {
 	public void delete(Long cno);
 	public void updateCommentCount(@Param("cno") Long cno, @Param("amount") int amount);
 	public void updateHitcount(@Param("cno") Long cno);	
-	
 	public void updateLikeCoutnt(Long cno);
-	
 	public int getTotalCount(Criteria cri);
+	
+	public List<CoordiVO> getSortList(Criteria cri);
+	
+	public List<CoordiVO> myPage(Long mno);
 }

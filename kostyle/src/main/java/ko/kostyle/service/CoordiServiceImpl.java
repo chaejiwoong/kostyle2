@@ -164,5 +164,14 @@ public class CoordiServiceImpl implements CoordiService {
 		return mapper.getTotalCount(cri);
 	}
 
+	//마이페이지
+	@Override
+	public List<CoordiDTO> myPage(Long mno) {
+		return mapper.myPage(mno).stream()
+				.map(vo -> coordiDTO(vo))
+				.collect(Collectors.toList());
+	}
+
+
 
 }

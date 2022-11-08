@@ -1,5 +1,8 @@
 package ko.kostyle.dto;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -16,6 +19,7 @@ public class PageDTO {
 	private int total;
 
 	private Criteria cri;
+	
 
 	public PageDTO(Criteria cri, int total) {
 
@@ -36,6 +40,15 @@ public class PageDTO {
 		this.prev = this.startPage > 1; // 이전 페이지가 있는가
 
 		this.next = this.endPage < realEnd; // 다음 페이지가 있는가
+	}
+	
+	
+	public String makeSearch(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+				.queryParam("sort", cri.getSort())
+				.build();
+		
+		return uriComponents.toUriString();
 	}
 
 }

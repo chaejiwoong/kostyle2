@@ -42,29 +42,82 @@
 		]]>
 	</select> -->
 
+
+
+
 	<!-- 코디 글 목록 -->
-	<!-- 정렬 처리 각 마다 인덱스 생성해서? -->
+	<!-- 정렬 처리 각 마다 인덱스 생성해서? --> <!-- 추후 인덱스 생성해서 조회하는 것으로 수정하기 -->
+	<!-- 인덱스 -->
 	<!-- <sql id="sort">
-		<if test="sort == ">
-			
+	INDEX_DESC(coordi SYS_C007442)	
+		<if test="sort == ''">	
+			INDEX_DESC(coordi SYS_C007442)		
 		</if>
+		<if test="sort == created_date"> 최신순
+			INDEX_DESC(coordi DATE_IDX)		
+		</if>
+		<if test="sort == lk_count"> 인기순
+			INDEX_DESC(coordi LK_COUNT_IDX)
+		</if>
+		<if test="sort == hitcount"> 조회순
+			INDEX_DESC(coordi HITCOUNT_IDX)			
+		</if>
+		<if test="sort == c_count"> 댓글순
+			INDEX_DESC(coordi C_COUNT_IDX)
+		</if>		
 	</sql> -->
 	
-	
-	
+	<!-- orderby  -->
+	<sql id="sort">
+		<if test="sort == ''"> 
+			order by cno desc
+		</if>
+		<if test="sort == 'created_date'"> 
+			order by created_date desc
+		</if>
+		<if test="sort == 'lk_count'"> 
+			order by lk_count desc
+		</if>
+		<if test="sort == 'hitcount'"> 
+			order by hitcount desc
+		</if>
+		<if test="sort == 'c_count'">
+			order by c_count desc
+		</if>		
+	</sql>
+
+
 	<!--페이징 처리 -->
-	<select id="getList"
+	<!-- 인덱스 -->
+	<!-- <select id="getList"
 		resultType="ko.kostyle.domain.CoordiVO">
 		<![CDATA[
 			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
 				from(
-						select /*+INDEX_DESC(	coordi SYS_C007442) */
+						select /*+INDEX_DESC(coordi SYS_C007442)	*/
 						 rownum rn, cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
 							from coordi
 							where rownum <= #{pageNum} * #{amount}
-					) where rn > (#{pageNum}-1) * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}		
 		]]>
-	</select> 
+	</select> -->
+	
+	<!-- 정렬 필터 게시글 조회 -->
+	<select id="getList"
+		resultType="ko.kostyle.domain.CoordiVO" parameterType="ko.kostyle.dto.Criteria">
+		<![CDATA[
+			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+				from( /*+INDEX_DESC(coordi SYS_C007442)	*/
+						select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count, row_number() over(]]>
+						<include refid="sort" /> 
+		<![CDATA[
+							) as rn          
+							from coordi
+							where rownum <= #{pageNum} * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}		
+		]]>
+	</select>
+	
 
 
 	<!-- 코디 글 작성 -->
@@ -122,6 +175,20 @@
 				from coordi
 				where cno > 0
 		]]>
+	</select>
+	
+	<!-- 마이페이지 코디글 -->
+	<select id="myPage" resultType="ko.kostyle.domain.CoordiVO">
+		<!-- <![CDATA[
+				select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+					from(
+							select /*+INDEX_DESC(	coordi SYS_C007442) */
+							 rownum rn, cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+								from coordi
+								where rownum <= #{pageNum} * #{amount}
+								and mno = #{mno}
+						) where rn > (#{pageNum}-1) * #{amount}
+			]]> -->
 	</select>
 
 	

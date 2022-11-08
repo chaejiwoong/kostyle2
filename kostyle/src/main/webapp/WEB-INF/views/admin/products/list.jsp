@@ -10,6 +10,8 @@
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/productList.css" rel="stylesheet" />
 
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
+
 
 </head>
 <body>
