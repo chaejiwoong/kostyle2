@@ -26,10 +26,7 @@
 <body>
 
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<!-- page preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+
 
 
 	<div class="container" style="text-align: center">
@@ -86,7 +83,7 @@
 										</td>
 										<td>
 											<%-- <img src="../product_images/${cart.pimage1}" width="100"> --%>
-											${cart.name}
+											${cart.totalPrice}
 										</td>
 										<td>
 											<!--수량--------------  -->
@@ -117,7 +114,9 @@
 
 										</td>
 										<td>
-											<a href="javascript:goDel('${cart.cpno}')">삭제</a>
+											<a href="javascript:goDel('${cart.cpno}')"
+												class="btn btn-warning"
+											>삭제</a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -125,20 +124,23 @@
 							<!-- --------------------------- -->
 							<tr>
 								<td colspan="4">
-									
+
 									<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber
 												value="${cart.finalTotalPrice }" pattern="###,###"
 											/>원
-									</b> </span><br> <b>총 포인트</b>: <span style="color: red"><b>
+									</b> </span> <br> <b>총 포인트</b>: <span style="color: red"> <b>
 											<fmt:formatNumber value="${cart.finalTotalPoint}"
 												pattern="###,###"
 											/> POINT
-									</b> </span><br> <b>배송비</b>: <b> <fmt:formatNumber value="3000"
-											pattern="###,###"
-										/> 원
 									</b>
+									</span> <br> <b>배송비</b>: <span style="color: yellow"> <b>
+											<fmt:formatNumber value="3000" pattern="###,###" />
+											원
+									</b>
+									</span>
 
 								</td>
+
 								<td colspan="2">
 									<button type="button" onclick="goOrder()"
 										class="btn btn-primary"
@@ -164,21 +166,22 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<%-- 	<%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
 </body>
 </html>
 <script>
-
 	$(function() {
 		$('#allChk').click(function() {
 			let chkList = $('input[name="pno"]')
 			if ($(this).is(":checked")) {
 				chkList.each(function(i, ck) {
 					ck.checked = true;
+					itemSum();
 				})
 			} else {
 				chkList.each(function(i, ck) {
 					ck.checked = false;
+					itemSum();
 				})
 			}
 		})

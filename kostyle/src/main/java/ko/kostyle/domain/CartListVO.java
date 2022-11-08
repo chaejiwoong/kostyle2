@@ -27,21 +27,16 @@ public class CartListVO implements Serializable {
 		
 	private int totalPoint; // 총 포인트
 	private int totalPrice; // 총 가격
-	
-	private int finalTotalPrice;
+
 	private int finalTotalPoint;
-
-
-		
+	private int finalTotalPrice;
+	
 	public void initTotal() {
 		this.totalPrice = this.price * this.amount;
 		this.point = (int) (Math.floor(this.price * 0.05));
 		this.totalPoint = this.point * this.amount;
-	}
-	
-	public void finalTotal() {
-		this.finalTotalPrice = totalPrice;
-		this.finalTotalPoint = totalPoint;
+		this.finalTotalPoint += totalPoint;
+		this.finalTotalPrice += totalPrice;
 	}
 
 }

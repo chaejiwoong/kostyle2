@@ -64,11 +64,11 @@ public class CartServiceImpl implements CartService {
 	public List<CartListVO> getCartList(Long mno) throws Exception {
 		List<CartListVO> cart = cartMapper.getCart(mno);
 
-
+		
 		for (CartListVO vo : cart) {
 			vo.initTotal();
-			vo.finalTotal();
 		}
+		
 		log.info(cart);
 		return cart;
 	}

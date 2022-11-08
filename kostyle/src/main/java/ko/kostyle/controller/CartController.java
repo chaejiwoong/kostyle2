@@ -40,7 +40,7 @@ public class CartController {
 		// 로그인한 회원을 세션에서 꺼내오기
 		MemberVO vo = (MemberVO) session.getAttribute("loginUser");
 		Long mno = vo.getMno(); // 로그인한 사람꺼로 카트 들어감.
-		// Long mno = 2; //회원번호가 2인 사람으로 테스트
+		// Long mno = 1; //회원번호가 1인 사람으로 테스트
 
 		CartListVO CartListVO = new CartListVO();
 		CartListVO.setPno(pno);
@@ -64,16 +64,25 @@ public class CartController {
 	@GetMapping("/cartList")
 	public String showCart(Model model, CartListVO vo) throws Exception {
 		log.info("cartList...");
-
 		Long mno = SecurityUtil.getCurrentMemberId();
 		
 		vo.setMno(mno);
 		List<CartListVO> cartArr = service.getCartList(mno);
+		int finalTotalPrice =0;
+		int finalTotalPoint =0;		
 		
-		log.info(cartArr);
+		
+		for (CartListVO vo2 : cartArr) {
+			vo.initTotal();
+			finalTotalPrice += vo2.getTotalPrice();
+			finalTotalPoint += vo2.getTotalPoint();
+		}
+		
+		log.info(finalTotalPrice);
+		log.info(finalTotalPoint);
 
 		model.addAttribute("cartList", cartArr);
-		model.addAttribute("vo", vo);
+		model.addAttribute("cartTotal", cartArr);
 		log.info(cartArr);
 		return "shop/cartList";
 	}
