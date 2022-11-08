@@ -190,10 +190,15 @@ dl:hover{
 		<h1>결제수단</h1>
     	<form class="form-horizonal">
     		<div class="form-inline form-group"> 	
+    		<span id="payPoint" >
     			<label>포인트</label>    
-    			<input type="radio" name="pay" value="point" checked>
+    			<input type="radio" name="pay" value="point" checked>   		
+    		</span>
+			<span id="payCard" >
     			<label>신용카드</label>
-    			<input type="radio" name="pay" value="card">
+    			<input type="radio"  name="pay" value="card">			
+			</span>
+
     		</div>
     		<div id="card" hidden="hidden">
     			<div class="form-inline form-group">
@@ -269,10 +274,7 @@ var display = (function loadThumbnail() {
 	})();
 
 $(document).ready(function(){
-	
 
-	
-	
 	var total = 0;
 	var delivery = 0;
 
@@ -314,6 +316,14 @@ $(document).ready(function(){
 		}
 		
 		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt($('#point').val())).toLocaleString()+ "원")
+		
+		// 결제금액이 0원일 경우에는 신용카드 결제 막기
+		if($("#total").text() == "결제금액 : 0원"){
+			$('#payPoint').find('input[name="pay"]').attr('checked', true)
+			$('#payCard').hide();
+		}else{
+			$('#payCard').show();
+		}
 	})
 	
 	$('#point').on('change', function(e){
@@ -328,11 +338,16 @@ $(document).ready(function(){
 		}
 		
 		var point = $(this).val()
-		console.log()
-		console.log(delivery)
-		console.log(point)
 		
 		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt(point)).toLocaleString()+ "원")
+		
+		// 결제금액이 0원일 경우에는 신용카드 결제 막기
+		if($("#total").text() == "결제금액 : 0원"){
+			$('#payPoint').find('input[name="pay"]').attr('checked', true)
+			$('#payCard').hide();
+		}else{
+			$('#payCard').show();
+		}
 	})
 
 	

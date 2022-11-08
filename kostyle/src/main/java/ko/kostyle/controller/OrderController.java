@@ -93,31 +93,19 @@ public class OrderController {
 	public String orderPayForm(OrderPayDTO dto, Model model) {
 		
 		log.info("member orderPay Controller.....");
-		
-		// 주문 상세 목록 출력
-		List<OrderPayDTO> list = new ArrayList<>();
-		
-		OrderPayDTO orderPay = OrderPayDTO.builder()
-			.pno(17L)
-			.p_size("S")
-			.amount(2)
-			.price(40000)
-			.build();
-		OrderPayDTO orderPay2 = OrderPayDTO.builder()
-				.pno(21L)
-				.p_size("M")
-				.amount(1)
-				.price(20000)
-				.build();
-		list.add(orderPay);
-		list.add(orderPay2);
-//		model.addAttribute("details", orderService.OrderPayList(dto.getPayList()));
-		model.addAttribute("details", orderService.OrderPayList(list));
-		// 주문에 출력할 기본 배송지
-		model.addAttribute("address", addressService.findDefaultAddress());
-		
-		// 주문에 출력할 회원 포인트
-		model.addAttribute("member",memberService.getMyInfo());
+		try {
+			// 주문 상세 리스트
+			model.addAttribute("details", orderService.OrderPayList(dto));
+			// 주문에 출력할 기본 배송지
+			model.addAttribute("address", addressService.findDefaultAddress());
+			
+			// 주문에 출력할 회원 포인트
+			model.addAttribute("member",memberService.getMyInfo());			
+		//잘못된 접근 시 메인페이지로 보내기.	
+		}catch(Exception e) {
+			return "redirect:/main";
+		}
+
 		return "orders/pay";
 	}
 	

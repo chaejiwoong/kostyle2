@@ -109,6 +109,9 @@ label{
     font-weight:bold;
     border:1px solid #ebebeb;
 }
+.essential{
+	color:red;
+}
 </style>
     </head>
 <body>
@@ -135,12 +138,12 @@ label{
 		<input type="hidden" id="ano" value="${address.ano }">
         <form id="address-form" class="form-horizontal">
             <div class="form-inline form-group">
-                <label for="name">배송지명</label>
+                <label for="name">배송지명<strong class="essential"> * </strong></label>
                 <input type="text" id="name" name="name" class="form-control" value="${address.name }">
             </div>
             
             <div class="form-inline form-group">
-                <label for="address-num">배송지 주소</label>
+                <label for="address-num">배송지 주소<strong class="essential"> * </strong></label>
                 <input type="text" id="address-num" name="address-num" class="form-control" readonly>
                 <button id="findAddress" type="button" class="btn btn-secondary">우편번호</button>
             </div>
@@ -157,11 +160,11 @@ label{
             
                                                 
             <div class="form-inline form-group">
-                <label for="tel">휴대폰번호</label>
+                <label for="tel">휴대폰번호<strong class="essential"> * </strong></label>
                 <input id="tel" type="text" name="tel" class="form-control">
             </div>
             <div class="form-inline form-group">
-                <label for="recipient">수령인</label>
+                <label for="recipient">수령인<strong class="essential"> * </strong></label>
                 <input id="recipient" type="text" class="form-control" name="recipient" value="${address.recipient }">
             </div>
             <div class="form-inline form-group">

@@ -10,6 +10,8 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ 
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -3011,21 +3013,7 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-#buy{
-background-color : #ff7d9e;
-color: #fff;
-    width: 304px;
-    height: 78px;
-    font-size: 26px;
-}
 
-#cart{
-background-color : #39373a;
-color: #fff;
-    width: 304px;
-    height: 78px;
-    font-size: 26px;
-}
 
 
 @media (prefers-reduced-motion: reduce) {
@@ -11303,3 +11291,6 @@ color: #fff;
     display: none !important;
   }
 }
+
+
+

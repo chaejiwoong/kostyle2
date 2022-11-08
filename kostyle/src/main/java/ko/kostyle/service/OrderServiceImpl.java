@@ -222,43 +222,49 @@ public class OrderServiceImpl implements OrderService{
 
 	// 주문결제창에 출력할 상품상세 리스트
 	@Override
-	public List<OrderDetailDTO> OrderPayList(List<OrderPayDTO> list) {
+	public List<OrderDetailDTO> OrderPayList(OrderPayDTO orderPay) {
 		
 		List<OrderDetailDTO> dtos = new ArrayList<OrderDetailDTO>();
 		
-		log.info("list : " + list);
-		for(OrderPayDTO dto : list) {
-			
-	    	// 주문상세에 출력할 상품 조회
-	    	ProductVO product = productMapper.productGet(dto.getPno());
-	    	AdminProductDTO productDto = AdminProductDTO.builder()
-	    									.pno(product.getPno())
-	    									.name(product.getName())
-	    									.build();
-	    	
-	    	// 해당 상품의 이미지 조회 후 DTO로 변환
-	    	ProductImgVO img = imgMapper.selectImg(product.getPno());
-	    	ImgDTO imgDto = null;
-	    	if(img != null) {
-				imgDto = ImgDTO.builder()
-						.filename(img.getFilename())
-						.filepath(img.getFilepath())
-						.uuid(img.getUuid()).build();
-	    	}
-	    	
-	    	productDto.setImg(imgDto);
-			
-			OrderDetailDTO orderDetail = OrderDetailDTO.builder()
-				.p_size(dto.getP_size())
-				.price(dto.getPrice())
-				.amount(dto.getAmount())
-				.product(productDto)
-				.build();
-
-			dtos.add(orderDetail);
+		// 주문 상세에서 넘어온 경우
+		if(orderPay.getPayList().size() == 0) {
+			dtos.add(ofDetail(orderPay));
+			return dtos;
+		// 장바구니에서 넘어온 경우
+		}else {
+			return orderPay.getPayList().stream().map(pay -> ofDetail(pay)).collect(Collectors.toList());
 		}
 		
-		return dtos;
+	}
+	
+	// OrderDetailDTO 변환 로직
+	private OrderDetailDTO ofDetail(OrderPayDTO dto) {
+    	// 주문상세에 출력할 상품 조회
+    	ProductVO product = productMapper.productGet(dto.getPno());
+    	AdminProductDTO productDto = AdminProductDTO.builder()
+    									.pno(product.getPno())
+    									.name(product.getName())
+    									.build();
+    	
+    	// 해당 상품의 이미지 조회 후 DTO로 변환
+    	ProductImgVO img = imgMapper.selectImg(product.getPno());
+    	ImgDTO imgDto = null;
+    	if(img != null) {
+			imgDto = ImgDTO.builder()
+					.filename(img.getFilename())
+					.filepath(img.getFilepath())
+					.uuid(img.getUuid()).build();
+    	}
+    	
+    	productDto.setImg(imgDto);
+		
+		return  OrderDetailDTO.builder()
+			.p_size(dto.getP_size())
+			.price(dto.getPrice())
+			.amount(dto.getAmount())
+			.product(productDto)
+			.build();
+		
 	}
 
 
@@ -271,7 +277,10 @@ public class OrderServiceImpl implements OrderService{
 		MemberVO member = memberMapper.memberDetailById(mno);
 		// 총합 구하기
 		List<OrderDetailDTO> list = dto.getOrderDetails();
-		int totalPrice = list.stream().mapToInt(OrderDetailDTO::getPrice).sum();
+		
+		int totalPrice = list.stream()
+				.mapToInt(OrderDetailDTO::getPrice).sum();
+		
 		
 		if(dto.getPay().equals("point")) {			
 			// 포인트 검증

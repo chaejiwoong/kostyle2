@@ -26,3 +26,4 @@ public class OrderPayDTO {
     
     private List<OrderPayDTO> payList = new ArrayList<OrderPayDTO>();
 }
+

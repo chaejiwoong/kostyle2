@@ -45,7 +45,5 @@ public class OrderServiceTest {
 				.build();
 		list.add(orderPay);
 		list.add(orderPay2);
-		
-		orderService.OrderPayList(list).forEach(log::info);
 	}
 }

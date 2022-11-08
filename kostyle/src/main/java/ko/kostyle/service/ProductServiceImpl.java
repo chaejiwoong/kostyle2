@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
 			ProductDTO dto = new ProductDTO();
 			
 			dto.setPno(prolist.getPno());
+			dto.setScno(prolist.getScno());
 			dto.setName(prolist.getName());
 			dto.setColor(prolist.getColor());
 			dto.setGender(prolist.getGender());
@@ -46,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
 			dto.setPrice(prolist.getPrice());
 			dto.setSeason(prolist.getSeason());
 			dto.setCreated_date(prolist.getCreated_date());
+			dto.setLast_modified_date(prolist.getLast_modified_date());
 			
 			List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
 			dto.setImageList(imgList);
@@ -64,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 		log.info("dto : " + proDTO);
 		ProductVO proVO = new ProductVO();
 		
-	
+		proVO.setPno(proDTO.getPno());
 		proVO.setName(proDTO.getName());
 		proVO.setPrice(proDTO.getPrice());
 		proVO.setColor(proDTO.getColor());
@@ -197,7 +199,7 @@ public class ProductServiceImpl implements ProductService {
 				dto.setPrice(prolist.getPrice());
 				dto.setSeason(prolist.getSeason());
 				dto.setCreated_date(prolist.getCreated_date());
-				log.info("이건 찍히는가.....");
+				
 				
 				
 				List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
@@ -212,6 +214,46 @@ public class ProductServiceImpl implements ProductService {
 			
 			return proDTO;
 		}   
+	   
+	   
+	 //신상에 따른 상품 출력
+	   @Override
+		public List<ProductDTO> productListDay() {
+			List<ProductVO> proVO = imgMapper.productGetDay();
+			List<ProductDTO> proDTO =new ArrayList<ProductDTO>();
+			
+			for(ProductVO prolist : proVO) {
+				
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setPno(prolist.getPno());
+				dto.setName(prolist.getName());
+				dto.setColor(prolist.getColor());
+				dto.setGender(prolist.getGender());
+				dto.setHitCount(prolist.getHitCount());
+				dto.setPrice(prolist.getPrice());
+				dto.setSeason(prolist.getSeason());
+				dto.setCreated_date(prolist.getCreated_date());
+				log.info("이건 찍히는가.....");
+				
+				
+				List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
+				
+				dto.setImageList(imgList);
+				
+				
+				
+				proDTO.add(dto);
+			
+			}
+			
+			return proDTO;
+		}
+
+	
+	
+	
+
 
 
 //	   private ProductDTO toDto(ProductVO vo) {

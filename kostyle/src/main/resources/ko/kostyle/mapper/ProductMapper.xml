@@ -53,6 +53,7 @@
 	
 
 
+
 	<update id="productUpdate">
 		UPDATE PRODUCT
 		SET name = #{name}, price = #{price}, season = #{season},color = #{color}, gender = #{gender},LAST_MODIFIED_DATE = sysdate
@@ -94,7 +95,7 @@
 							name like '%'||#{keyword}||'%' 
 						</when>
 						<when test="type == 'W'.toString()">
-							color like '%'||#{keyword}||'%' 
+							scno = #{keyword}
 						</when>
 					</choose>
 				</trim>
@@ -115,7 +116,7 @@
 		<![CDATA[
 			select pno,name,price,color,gender,season,CREATED_DATE, hitcount
 			FROM(
-				select /*+INDEX_DESC(PRODUCT SYS_C007221)*/
+				select /*+INDEX_ASC(PRODUCT SYS_C007221)*/
 				rownum rn,pno,name,price,color,gender,season,CREATED_DATE,hitcount
 				from PRODUCT
 				where

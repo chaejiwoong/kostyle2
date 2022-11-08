@@ -51,12 +51,13 @@
                    			</c:forEach>
                         </div>
 							
-                        <div class="d-flex">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "list"><span class = "list">목록</span>  </button>
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "modify"><span class = "modify"> 수정</span> </button>
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "delete"><span class = "delete"> 삭제</span> </button>
+                          <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="" style="max-width: 5rem" name ="amount">
+                            <p>
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "buy"><span class = "buy">구매</span>  </button>
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "cart"><span class = "cart"> 장바구니담기</span> </button>
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "list"><span class = "list">목록</span>  </button>
                         </div>
-
                     </div>
                 </div>
             </div>

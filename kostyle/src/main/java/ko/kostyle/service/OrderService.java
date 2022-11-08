@@ -30,7 +30,7 @@ public interface OrderService {
     void orderCancel(OrderCancelDTO dto);
     
     // 주문결제창에 출력할 상품 리스트
-    List<OrderDetailDTO> OrderPayList(List<OrderPayDTO> list);
+    List<OrderDetailDTO> OrderPayList(OrderPayDTO orderPay);
     
     // 주문결제
     void orderPayService(OrderRequestDTO dto) throws Exception;
