@@ -10,23 +10,16 @@
 <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
 <link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
+
 <style>
+
+
 #wrap {
     min-height: 100%;
     position: relative;
     padding-bottom: 100px;
 }
 
-.auction {
-	color: #35C5F0;
-}
-		
-.bottom-category {
-	display: block;
-}
-.title-auctionList {
-	color: #35C5F0;
-}
 h1{
 margin-top: 25px;
 margin-bottom: 25px;
@@ -57,70 +50,76 @@ label{
 </style>
 </head>
 <body>
-	<div id="wrap">
-		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+<div id="wrap">
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-		<h1>관리자 경매 상세</h1>
-		<div class="container">
-			<div class="detail-section">
-			        <form id="auction-form" class="form-horizontal">
-		            <div class="form-inline form-group">
-		                <label for="apno">경매상품번호</label>
-		                <input type="text" id="apno" name="apno" class="form-control" value="${auction.apno}" readonly/><br>
-		            </div>
-		            
-		            <div class="form-inline form-group">
-		                <label for="name">상품명</label>
-		                <input type="text" id="name" name="name" class="form-control" value="${auction.name}" readonly/><br>
-		            </div>
-		         	<div class="form-inline form-group">
-		         	    <label>상품 이미지</label>
-		            	<div class="img-result">
-		            	    <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}"
-		            	 data-filename="${auction.imgs[0].filename}" style="width:300px; height:200px;">
-		            	</div>        	
-		         	</div>
-		
-		            
-		            <div id="img-div" class="form-inline form-group" hidden>
-						<label class="file-serch" for="uploadFile">이미지</label>
-						  					<input style="display:inline-block;" id="uploadFile" name="uploadFile" type="file" accept="image/*" class="input-name" onchange="setThumbnail(event)" multiple/>
-					</div>
-		            
-		            <div class="form-inline form-group">
-		                <label for="start_price">입찰시작가</label>
-		                <input type="text" id="start_price" name="start_price" class="form-control" value="${auction.start_price}" readonly/><br>
-		            </div>
-		            
-		            <div class="form-inline form-group">
-		                <label for="best_bid_price">최고입찰가</label>
-		                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${auction.best_bid_price}" readonly/><br>
-		            </div>
-		
-		            <div class="form-inline form-group">
-		                <label for="bid_unit">경매입찰단위</label>
-		                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${auction.bid_unit}" readonly/><br>
-		            </div>
-		
-		            <div class="form-inline form-group">
-		                <label for="start_date">경매시작일자</label>
-		                <input type="text" id="start_date" name="start_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.start_date}" />" readonly/><br>
-		            </div>
-		            <div class="form-inline form-group">
-		                <label for="end_date">경매종료일자</label>
-		                <input type="text" id="end_date" name="end_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.end_date}" />" readonly/><br>
-		            </div>
-		            <div class="form-inline form-group">
-		                <button type="button" class="btn btn-primary" id="update-btn">수정</button>
-		                <button type="button" class="btn btn-primary" id="completion-btn">완료</button>
-		                <button type="button" class="btn btn-secondary" id="prev-btn">이전</button>
-		                <button type="button" class="btn btn-danger" id="delete-btn">삭제</button>
-		            </div>
-		        </form>
-				
+	<h1>관리자 경매 상세</h1>
+	<div class="container">
+	<div class="detail-section">
+	        <form id="auction-form" class="form-horizontal">
+            <div class="form-inline form-group">
+                <label for="apno">경매상품번호</label>
+                <input type="text" id="apno" name="apno" class="form-control" value="${auction.apno}" readonly/><br>
+            </div>
+            
+            <div class="form-inline form-group">
+                <label for="name">상품명</label>
+                <input type="text" id="name" name="name" class="form-control" value="${auction.name}" readonly/><br>
+            </div>
+         	<div class="form-inline form-group">
+         	    <label>상품 이미지</label>
+            	<div class="img-result">
+            	    <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}"
+            	 data-filename="${auction.imgs[0].filename}" style="width:300px; height:200px;">
+            	</div>        	
+         	</div>
+
+            
+            <div id="img-div" class="form-inline form-group" hidden>
+				<label for="uploadFile">이미지</label>
+				<input  id="uploadFile" name="uploadFile" type="file" accept="image/*" class="form-control" onchange="setThumbnail(event)" multiple>
 			</div>
-		</div>
+            
+            <div class="form-inline form-group">
+                <label for="start_price">입찰시작가</label>
+                <input type="text" id="start_price" name="start_price" class="form-control" value="${auction.start_price}" readonly/><br>
+            </div>
+            
+            <div class="form-inline form-group">
+                <label for="best_bid_price">최고입찰가</label>
+                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${auction.best_bid_price}" readonly/><br>
+            </div>
+
+            <div class="form-inline form-group">
+                <label for="bid_unit">경매입찰단위</label>
+                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${auction.bid_unit}" readonly/><br>
+            </div>
+
+            <div class="form-inline form-group">
+                <label for="start_date">경매시작일자</label>
+                <input type="text" id="start_date" name="start_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.start_date}" />" readonly/><br>
+            </div>
+            <div class="form-inline form-group">
+                <label for="end_date">경매종료일자</label>
+                <input type="text" id="end_date" name="end_date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd/HH-mm-ss" value="${auction.end_date}" />" readonly/><br>
+            </div>
+            <div class="form-inline form-group">
+                <button type="button" class="btn btn-primary" id="update-btn">수정</button>
+                <button type="button" class="btn btn-primary" id="completion-btn">완료</button>
+                <button type="button" class="btn btn-secondary" id="prev-btn">이전</button>
+                <button type="button" class="btn btn-danger" id="delete-btn">삭제</button>
+            </div>
+        </form>
+		
 	</div>
+
+		
+	</div>
+
+</div>
+
+
+
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="/resources/js/auctionService.js"></script>
 <script>

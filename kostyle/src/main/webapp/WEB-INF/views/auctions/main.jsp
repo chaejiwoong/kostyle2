@@ -1,82 +1,123 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cowld
-  Date: 2022-10-22
-  Time: 오전 3:54
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-<title>Title</title>
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+<!-- Core theme CSS (includes Bootstrap)-->
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
-<style>
-h1{
-margin-top: 25px;
-margin-bottom: 25px;
-font-size: 30px;
-font-weight: bold;
- text-align: center;
-        }
-        
-	.btn-section a{
-		margin: 5px;
-	}
-</style>
+
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<div class="container">
-		<div class="row col-md-12"><h1>마감임박 상품</h1></div>
-			<div class = "row">		
-			<c:forEach items="${auctionDeadlineList}" var="auction">
-					<div class="col-md-3">
-						<img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
-							style="width: 180px; height: 200px;">
-						<div><a href='<c:out value="auctions/${auction.apno}"/>'> <c:out value="상품명 : ${auction.name}" /></a></div>
-						<div>최고입찰가 : <c:out value="${auction.best_bid_price}" /></div>
-						<div class="btn-section">
-							<a class="btn btn-primary" href='<c:out value="/auctions/${auction.apno}"/>'>상세보기</a>
-							<c:if test="${auction.attention}">
-								<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심해제</a>
-							</c:if>
-							<c:if test="${!auction.attention}">
-								<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심등록</a>
-							</c:if>
-						</div>
-					</div>
-		
-			</c:forEach>
-		</div>
-		
-		<div class="row col-md-12"><h1>전체 경매 상품</h1></div>
-			<div class = "row">		
-			<c:forEach items="${auctionProgressList}" var="auction">
-					<div class="col-md-3">
-						<img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
-							style="width: 180px; height: 200px;">
-						<div><c:out value='상품명 : ${auction.name}' /></div>
-						<div>최고입찰가 : <c:out value="${auction.best_bid_price}" /></div>
-						<div class="btn-section">
-							<a class="btn btn-primary" href='<c:out value="/auctions/${auction.apno}"/>'>상세보기</a>
-							<c:if test="${auction.attention}">
-								<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심해제</a>
-							</c:if>
-							<c:if test="${!auction.attention}">
-								<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심등록</a>
-							</c:if>
-						</div>				
-					</div>
-		
-			</c:forEach>
-		</div>		
-	</div>
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+       
+
+        
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                
+                
+                             <c:forEach items="${auctionDeadlineList}" var="auction">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">마감</div>
+                            <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
+							style="width : 267px; height : 150px;">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder"><a href='<c:out value="auctions/${auction.apno}"/>'> <c:out value="상품명 : ${auction.name}" /></a></h5>
+                                    
+                                    <br>
+                                   
+                                     <div class="text-center" ><a class="btn btn-outline-dark mt-auto"  href='<c:out value="/auctions/${auction.apno}"/>'>상세보기</a></div>
+                     
+                                    <br>
+                                 <c:if test="${auction.attention}">
+									<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심해제</a>
+								</c:if>
+								<c:if test="${!auction.attention}">
+									<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심등록</a>
+								</c:if>
+			
+                                    <br>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">
+                                        <br>
+                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <br>
+                                        
+                                    	
+                                    	
+                                 
+	                    				</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </c:forEach>
+               
+
+	
+               
+             <c:forEach items="${auctionProgressList}" var="auction">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">최신</div>
+                            <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
+							style="width : 267px; height : 150px;">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder"><a href='<c:out value="auctions/${auction.apno}"/>'> <c:out value="상품명 : ${auction.name}" /></a></h5>
+                                    
+                                    <br>
+                                   
+                                     <div class="text-center" ><a class="btn btn-outline-dark mt-auto"  href='<c:out value="/auctions/${auction.apno}"/>'>상세보기</a></div>
+                     
+                                    <br>
+                                 <c:if test="${auction.attention}">
+									<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심해제</a>
+								</c:if>
+								<c:if test="${!auction.attention}">
+									<a class="btn btn-default attention" href="/auctions/attention/${auction.apno}">관심등록</a>
+								</c:if>
+			
+                                    <br>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">
+                                        <br>
+                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <br>
+                                        
+                                    	
+                                    	
+                                 
+	                    				</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </c:forEach>
+               
+                   
+                   
+              
+                          
+                    
+                </div>
+            </div>
+
 <script>
 	var display = (function loadThumbnail() {
 		var uploadResultArr = $('.thumb');
@@ -114,5 +155,7 @@ font-weight: bold;
 		})
 	})
 </script>
-</body>
+       
+
+    </body>
 </html>
