@@ -350,7 +350,7 @@ $(document).ready(function(){
             		'<span class="col-md-1">사이즈</span>' +
             		'<span class="col-md-1">수량</span>' +
             		'<span class="col-md-2">가격</span>' +
-            		'<span class="col-md-2">취소</span>' +
+            		'<span class="col-md-2">기타</span>' +
             		'</div>'
 
             		$('#' + ono).append(title)    

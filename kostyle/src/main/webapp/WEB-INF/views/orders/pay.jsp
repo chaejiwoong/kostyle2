@@ -22,6 +22,11 @@
         
 <style>
 
+input{
+	border:none;
+	border-bottom:1px solid black;
+}
+
 
 .order-title{
 	text-align: center;
@@ -36,20 +41,39 @@ label{
 }
 
 .address-section{
-/*  	display:flex;
-	justify-content:center;  */ 
-	margin:0 auto;
+  	display:flex;
+	justify-content:center;   
+		border:1px solid black;
+	/* margin:0 auto; */
 }
 
 .detail-section{
-/* 	margin:0 auto;
-	text-align:center; */
+	margin:0 auto;
+	text-align:center; 
 	vertical-align: middle;
+	border:1px solid black;
+	
 
 }
 
-#address-info{
-	width:300px;
+.total-section{
+  	display:flex;
+	justify-content:center;   
+	border:1px solid black;
+}
+
+
+#address-info, #address-detail{
+	width:280px;
+	
+}
+
+#address-form{
+	margin-right:70px;
+}
+
+#pay-form{
+	text-align:center;
 }
 
 /* modal */
@@ -98,6 +122,34 @@ dl:hover{
     border:1px solid #ebebeb;
     cursor: pointer;
 }
+
+h1{
+	text-align: center;
+    font-size : 20px;
+    margin: 30px;
+    font-weight:bold;
+    margin-bottom: 50px;
+}
+
+/* 버튼 영역 */
+.order-btn{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.order-btn:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+
+.order-btn:active{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
 </style>
     </head>
 <body>
@@ -105,59 +157,21 @@ dl:hover{
 
 <div class="container">
     <h1 class="order-title">주문 신청</h1>
-    
-    	<div class="address-section">
-            <form id="address-form" class="form-horizontal">
-            <input id="ano" name="ano" type="hidden" value="${address.ano }">
-            <div class="form-inline form-group">
-                <label for="name">배송지명</label>
-                <input type="text" id="name" name="name" class="form-control" value="${address.name }" readonly>
-            </div>
-            
-            <div class="form-inline form-group">
-                <label for="address-num">배송지 주소</label>
-                <input type="text" id="address-num" name="address-num" class="form-control" style="width:100px;" readonly>
-                <button id="changeAddress" type="button" class="btn btn-secondary">배송지변경</button>
-                <button id="registerAddress" type="button" class="btn btn-secondary">배송지추가</button>
-            </div>
-            
-            <div class="form-inline form-group">
-                <label for="address-info"></label>
-                <input type="text" id="address-info" name="address-info" class="form-control" readonly>
-                <input type="text" id="address-detail" name="address-detail" class="form-control" readonly>
-            </div>
-            
-            <div class="form-inline form-group">
 
-                
-            </div>
-            
-                                                
-            <div class="form-inline form-group">
-                <label for="tel">휴대폰번호</label>
-                <input id="tel" type="text" name="tel" class="form-control"  readonly>
-                <label for="recipient">수령인</label>
-                <input id="recipient" type="text" class="form-control" name="recipient" value="${address.recipient }" readonly>
-            </div>
-            <div class="form-inline form-group">
-
-            </div>
-        </form>    	
-
-    </div>
     <div class="detail-section">
+    <h1>상품정보</h1>
         <div class="row">
-        	<span class="col-md-2">이미지</span>
-         	<span class="col-md-2">상품명</span>
+        	<span class="col-md-3">이미지</span>
+         	<span class="col-md-3">상품명</span>
          	<span class="col-md-2">사이즈</span>
           	<span class="col-md-2">수량</span>
         	<span class="col-md-2">가격</span>
 		</div>
 		<c:forEach items="${details }" var="detail">
 			<div class="row">
-				<span class="col-md-2"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
+				<span class="col-md-3"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
 							style="width: 100px; height: 100px;"></span>
-				<span class="col-md-2">${detail.product.name }</span>
+				<span class="col-md-3">${detail.product.name }</span>
 				<span class="col-md-2">${detail.p_size }</span>
 				<span class="col-md-2">${detail.amount }</span>
 				<fmt:formatNumber var="price" value="${detail.price}" type="number"/>
@@ -165,37 +179,91 @@ dl:hover{
 			</div>
 		</c:forEach>
 
-    </div>
-    
-    <div class="total-section">
-    <h1>결제정보</h1>
+    </div>    
+    	<div class="address-section">
+    	
+            <form id="address-form" class="form-horizontal">
+            <h1>배송지 정보</h1>
+            <input id="ano" name="ano" type="hidden" value="${address.ano }">
+            <div class="form-inline form-group">
+                <label for="name">배송지명</label>
+                <input type="text" id="name" name="name" class="" value="${address.name }" style="width:100px;" readonly>
+            </div>
+            
+            <div class="form-inline form-group">
+                <label for="address-num">배송지 주소</label>
+                <input type="text" id="address-num" name="address-num" style="width:100px; margin-right:20px;" readonly>
+                <button id="changeAddress" type="button" class="btn btn-secondary">배송지변경</button>
+                <button id="registerAddress" type="button" class="btn btn-secondary">배송지추가</button>
+            </div>
+            
+            
+            
+            <div class="form-inline form-group">
+                <label for="address-info"></label>
+                <input type="text" id="address-info" name="address-info"readonly>
+            </div>
+            <div class="form-inline form-group">
+                <label for="address-detail"></label>
+                <input type="text" id="address-detail" name="address-detail" readonly>
+            </div>          
+
+                                                
+            <div class="form-inline form-group">
+                <label for="tel">휴대폰번호</label>
+                <input id="tel" type="text" name="tel" readonly>
+                <label for="recipient" style="margin-left:10px; width:50px;">수령인</label>
+                <input id="recipient" type="text" name="recipient" value="${address.recipient }" readonly>
+            </div>
+            <div class="form-inline form-group">
+
+            </div>
+        </form>   
     	<form class="form-horizonal">
-    		<div id="sub-total">주문 금액 : </div>
-    		<div id="delivery-price">배송비 : </div>
-    		<div id="accumulate-point">적립 포인트 : </div>
+    		<h1>결제정보</h1>
+            <div class="form-inline form-group">
+                <label for="sub-total">주문 금액 :</label>
+                <input type="text" id="sub-total" name="sub-total" class="" value="" style="width:100px;" readonly>
+            </div>    		    	
+<!--     		<div id="sub-total">주문 금액 : </div> -->
+            <div class="form-inline form-group">
+                <label for="delivery-price">배송비 :</label>
+                <input type="text" id="delivery-price" name="delivery-price" class="" value="" style="width:100px;" readonly>
+            </div>  
+            <div class="form-inline form-group">
+                <label for="accumulate-point">적립 포인트 :</label>
+                <input type="text" id="accumulate-point" name="accumulate-point" class="" value="" style="width:100px;" readonly>
+            </div>             
     		<div class="form-inline form-group">
     			<label>포인트</label>
-    			<input id="point" type="text" class="form-control" value="0">
+    			<input id="point" type="text" value="0" style="width:100px;">
     			<button id="useAll" type="button" class="btn btn-default">전액 사용</button>
     			<span>(사용가능한 포인트 : </span>
     			<fmt:formatNumber var="point" value="${member.point}" type="number"/>
     			<span id="availablePoint">${point}</span>
     			<span>)</span>
     		</div>
-    		<div id="total">결제 금액 : </div>
-    	</form>
+            <div class="form-inline form-group">
+                <label for="total">결제 금액 :</label>
+                <input type="text" id="total" name="total" class="" value="" style="width:100px;" readonly>
+            </div>    		
+    	</form>         	
+
     </div>
 
-	<div class="pay-section">
-		<h1>결제수단</h1>
-    	<form class="form-horizonal">
+    
+    <div class="total-section">
+
+
+    	<form id="pay-form" class="form-horizonal">
+    			<h1>결제수단</h1>
     		<div class="form-inline form-group"> 	
     		<span id="payPoint" >
-    			<label>포인트</label>    
+    			<label style="width:70px">포인트</label>    
     			<input type="radio" name="pay" value="point" checked>   		
     		</span>
 			<span id="payCard" >
-    			<label>신용카드</label>
+    			<label style="width:70px">신용카드</label>
     			<input type="radio"  name="pay" value="card">			
 			</span>
 
@@ -230,10 +298,15 @@ dl:hover{
     		</div>
     		
     		<div class="form-inline form-group">
-    			<button id="order-btn" type="button" class="btn btn-primary">주문하기</button>
-    			<button id="orderCancel-btn" type="button" class="btn btn-default">주문취소</button>    		
+    			<button id="order-btn" type="button" class="btn order-btn">주문하기</button>
+    			<button id="orderCancel-btn" type="button" class="btn orderCancel-btn">주문취소</button>    		
     		</div>
-    	</form>		
+    	</form>	    	
+    </div>
+
+	<div class="pay-section">
+
+	
 	</div>
 </div>
 
@@ -296,11 +369,11 @@ $(document).ready(function(){
 		if(total < 30000){
 			delivery=3000;
 		}
-		deliveryPrice.innerText = "배송비 :" + parseInt(delivery) + "원";
+		$(deliveryPrice).val(parseInt(delivery).toLocaleString() + "원")
 		
-		totalPrice.innerText=  "결제금액 : "+(parseInt(total + delivery)).toLocaleString()+ "원";		 
-		$('#accumulate-point').text("적립 포인트 : " + Math.ceil(total/20).toLocaleString() + "포인트")		
-		subTotal.innerText = "주문 금액:" +total.toLocaleString()+"원";
+		$(totalPrice).val((parseInt(total + delivery)).toLocaleString()+ "원");		 
+		$('#accumulate-point').val(Math.ceil(total/20).toLocaleString() + "포인트")		
+		$(subTotal).val(total.toLocaleString()+"원");
 
 		})();
 
@@ -457,28 +530,28 @@ $(document).ready(function(){
         
         var str = '<div class="form-inline form-group">'+
             '<label for="modalName">배송지명</label>' +
-            '<input type="text" id="modalName" name="modalName" class="form-control">' +
+            '<input type="text" id="modalName" name="modalName" >' +
         '</div>' +     
         '<div class="form-inline form-group">' +
             '<label for="modalAddress-num">배송지 주소</label>' +
-            '<input type="text" id="modalAddress-num" name="modalAddress-num" class="form-control" style="width:100px; margin-right:20px;">' +
+            '<input type="text" id="modalAddress-num" name="modalAddress-num" style="width:100px; margin-right:20px;">' +
             '<button id="findAddress" type="button" class="btn btn-secondary">우편번호</button>' +
         '</div>' +     
         '<div class="form-inline form-group">' +
             '<label for="modalAddress-info"></label>' +
-            '<input type="text" id="modalAddress-info" name="modalAddress-info" class="form-control" style="width:300px;">' +
+            '<input type="text" id="modalAddress-info" name="modalAddress-info" style="width:300px;">' +
         '</div>' +
         '<div class="form-inline form-group">' +
         	'<label for="modalAddress-detail"></label>' +
-        	'<input type="text" id="modalAddress-detail" name="modalAddress-detail" class="form-control" style="width:300px;" placeholder="상세주소를 입력하세요.">' +
+        	'<input type="text" id="modalAddress-detail" name="modalAddress-detail" style="width:300px;" placeholder="상세주소를 입력하세요.">' +
     	'</div>' +                                          
         '<div class="form-inline form-group">' +
             '<label for="modalTel">휴대폰번호</label>' +
-            '<input id="modalTel" type="text" name="modalTel" class="form-control" placeholder="- 빼고 입력" >' +
+            '<input id="modalTel" type="text" name="modalTel" placeholder="- 빼고 입력" >' +
         '</div>' +
         '<div class="form-inline form-group">' +
         	'<label for="modalRecipient">수령인</label>' +
-        	'<input id="modalRecipient" type="text" class="form-control" name="modalRecipient">' +
+        	'<input id="modalRecipient" type="text" name="modalRecipient">' +
         '</div>' +
              '<div class="form-inline form-group">' +
         	'<label>기본배송지</label>' +

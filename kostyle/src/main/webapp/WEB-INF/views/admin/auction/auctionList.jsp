@@ -139,7 +139,7 @@ font-weight: bold;
 	</div>
 
 
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');

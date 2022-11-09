@@ -5,7 +5,7 @@
 
 	<sql id="criteria">
 		<trim prefix="(" suffix=") and" prefixOverrides="and">
-		<if test="filter != null">
+		<if test="filter == ''.toString()">
 			and created_date between sysdate - #{filter} and sysdate
 		</if>
 		</trim>

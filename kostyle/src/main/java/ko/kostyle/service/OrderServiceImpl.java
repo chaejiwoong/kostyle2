@@ -61,7 +61,20 @@ public class OrderServiceImpl implements OrderService{
 	// 회원의 주문리스트 가져오기
 	@Override
 	public List<OrderDTO> orderList(Criteria cri) {
-        List<OrderVO> orders = orderMapper.orderList(cri,cri.getFilter(), SecurityUtil.getCurrentMemberId());
+		// 크리테리아 filter 검증
+		String filter = "";
+		if(cri.getFilter()!=null) {
+			if(cri.getFilter().equals("")) {
+				filter=null;
+			}else {
+				filter=cri.getFilter();
+			}
+		}else {
+			filter=null;
+		}
+		
+        List<OrderVO> orders = 
+        		orderMapper.orderList(cri,filter, SecurityUtil.getCurrentMemberId());
         List<OrderDTO> dtos = new ArrayList<>();
         for (OrderVO order : orders) {
             // 주문에 해당하는 배송지
@@ -180,8 +193,18 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public int getTotal(Criteria cri) {
-		// TODO Auto-generated method stub
-		return orderMapper.getTotal(cri);
+		// 크리테리아 filter 검증
+		String filter = "";
+		if(cri.getFilter()!=null) {
+			if(cri.getFilter().equals("")) {
+				filter=null;
+			}else {
+				filter=cri.getFilter();
+			}
+		}else {
+			filter=null;
+		}
+		return orderMapper.getTotal(cri, filter);
 	}
 
 	@Override
