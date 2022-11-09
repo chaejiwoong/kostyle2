@@ -9,6 +9,11 @@
     <link href="/resources/css/footer.css" rel="stylesheet"/>
 
     <style>
+	    #wrap {
+		    min-height: 100%;
+		    position: relative;
+		    padding-bottom: 100px;
+		}
     	label{
     		width:100px;
     	}    
@@ -98,44 +103,43 @@
 </head>
 
 <body>
-
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
-
-<div class="container">
-<h1 class="login-title">로그인</h1>
-<div class="hello">
-    <form id="loginForm" class="form-horizonal" action="/auth/login">
-			<div class="row form-group form-inline">
-			    <label for="email">email</label>
-            	<input class="form-control" type="text" name="email" id="email">
-			</div>
-
-
-			<div class="row form-group form-inline">
-            	<label for="password">password</label>
-            	<input id="password" type="password" class="form-control" name="password">
-			</div>
-        	<div class="row button form-group form-inline form-check">
-                <label for="remember-id" class="form-check-label">아이디 기억</label>
-                <input id="remember-id" type="checkbox" class="form-check-input" value="remember-id">
-
-            </div>
-
-
-            <div class="row last button">
-                <button type="submit" id="login" >로그인</button>
-            </div>
-            <div class="row button">
-                <a id="signin" class="register btn btn-primary" href="/auth/register">회원가입</a>	
-            </div>
-            <div class="row button">
-                <a id="find" href="/auth/find" class="btn btn-default">id/pw찾기</a>
-            </div>
-    </form>
+<div id="wrap">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<div class="container">
+		<h1 class="login-title">로그인</h1>
+		<div class="hello">
+		    <form id="loginForm" class="form-horizonal" action="/auth/login">
+					<div class="row form-group form-inline">
+					    <label for="email">email</label>
+		            	<input class="form-control" type="text" name="email" id="email">
+					</div>
+		
+		
+					<div class="row form-group form-inline">
+		            	<label for="password">password</label>
+		            	<input id="password" type="password" class="form-control" name="password">
+					</div>
+		        	<div class="row button form-group form-inline form-check">
+		                <label for="remember-id" class="form-check-label">아이디 기억</label>
+		                <input id="remember-id" type="checkbox" class="form-check-input" value="remember-id">
+		
+		            </div>
+		
+		
+		            <div class="row last button">
+		                <button type="submit" id="login" >로그인</button>
+		            </div>
+		            <div class="row button">
+		                <a id="signin" class="register btn btn-primary" href="/auth/register">회원가입</a>	
+		            </div>
+		            <div class="row button">
+		                <a id="find" href="/auth/find" class="btn btn-default">id/pw찾기</a>
+		            </div>
+		    </form>
+		</div>
+	</div>
 </div>
 
-
-</div>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="/resources/js/authService.js"></script>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ko.kostyle.domain.AnswerVO;
 import ko.kostyle.domain.MemberVO;
 import ko.kostyle.domain.QuestionVO;
+import ko.kostyle.dto.AnswerDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.QuestionDTO;
 import ko.kostyle.mapper.QuestionMapper;
@@ -76,6 +77,12 @@ public class QuestionServiceImpl implements QuestionService{
 	public QuestionVO showQuestion(Long qno) {
 		return mapper.insertInquiry(qno);
 		
+	}
+
+	@Override
+	public AnswerDTO answer2(Long qno) {
+		// TODO Auto-generated method stub
+		return mapper.Answer(qno);
 	}
 
 

@@ -77,6 +77,9 @@
 .register {
     color: #000000;
 }
+.update {
+	margin-right: 4px;
+}
 .admin-qna {
 	width: 100%;
     height: auto;
@@ -148,7 +151,7 @@
     display: inline-block;
 }
 .list-category {
-    width: auto;
+    width: 102px;
     height: auto;
 }
 .list-title {

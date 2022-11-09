@@ -15,6 +15,26 @@ $(document).ready(function () {
 	      });
 	   });
 	} else if(replace[1] == "admin") {
+	
+		$(".insert-insert").click(function(){
+			var content = $(".content").val();
+			var title = $("#title").val();
+					
+			if(title.replace(/\s| /gi).length == 0) {
+				alert("제목을 입력해주세요.");
+				$(".title").focus();
+				return false;
+			} else if (content.replace(/\s| /gi).length == 0) {
+				alert("내용을 입력해주세요");
+				$(".content").focus();
+				return false;
+			}
+		});
+	
+	
+		var pageNum = $(".pageNum").val();
+		var amount = $(".amount").val();
+		
 		var html = "<div>" +
 	    	"<span class='bottom-title'><a class='title-qna' data-title='customerCenter' href='/admin/customercenter/qnaList'>Q&A</a></span>" +
 	    	"<span class='bottom-title'><a class='title-notice' data-title='customerCenter' href='/admin/customercenter/noticeList'>공지사항</a></span>" +
@@ -34,7 +54,7 @@ $(document).ready(function () {
 			
 			$(this).find(".update").click(function(){
 			var parmeter = $(this).data("nno");
-    		alert(parmeter);
+    		
 				location.href = "/admin/customercenter/qndetail?nno=" + parmeter;
 			});
 			
@@ -76,8 +96,7 @@ $(document).ready(function () {
 			var parmeter = $(this).find(".td-right").children().data("qno");
 			
 			$(this).find(".td-right").children().click(function(){
-				alert(parmeter);
-				location.href = "/admin/customercenter/insertInquiry?qno=" + parmeter;
+				location.href = "/admin/customercenter/insertInquiry?qno=" + parmeter + "&pageNum=" +pageNum + "&amount=" + amount;
 			});
 		});
 		
@@ -85,12 +104,12 @@ $(document).ready(function () {
 			var parmeter = $(this).find(".answer-btn").data("qno");
 			var btn = $(this).find(".answer-btn");
 			$(btn).click(function(){
-				location.href = "/admin/customercenter/answerdetail?qno=" + parmeter;
+				location.href = "/admin/customercenter/answerdetail?qno=" + parmeter + "&pageNum=" +pageNum + "&amount=" + amount;
 			});
 		});
 		
 		$(".detail-btn").click(function(){
-			location.href = "/admin/customercenter/inquiryList";
+			location.href = "/admin/customercenter/inquiryList?pageNum=" +pageNum + "&amount=" + amount;
 		});
 		
 		//문의 답변 끝

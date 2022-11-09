@@ -58,7 +58,7 @@
 	                    </tr>
 	                    <tr class="admin-box">
 							<td class="answer" colspan="3"><span><c:out value="${list.content}"/></span></td>
-							<td class="answer" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+							<td class="answer right" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
 						</tr>
                     </c:forEach>
                     </tbody>
@@ -92,8 +92,8 @@
 
     </div>
     <form id='actionForm' action="/customerCenter/register" method='get'>
-	    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-	    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+	    <input type='hidden' class='pageNum' name='pageNum' value='${pageMaker.cri.pageNum}'>
+	    <input type='hidden' class='amount' name='amount' value='${pageMaker.cri.amount}'>
     </form>
     
     
@@ -105,13 +105,14 @@
         $(document)
             .ready(
                 function() {
-                	
+                	var pageNum = $(".pageNum").val();
+                	var amount = $(".amount").val();
                 	$(".admin-box").each(function(){
             			var parmeter = $(this).find(".answer-btn").data("qno");
             			var btn = $(this).find(".answer-btn");
+            			
             			$(btn).click(function(){
-            				alert("asd");
-            				location.href = "/customerCenter/answerdetail?qno=" + parmeter;
+            				location.href = "/customerCenter/answerdetail?qno=" + parmeter + "&pageNum=" + pageNum + "&amount=" + amount;
             			});
             		});
                 	

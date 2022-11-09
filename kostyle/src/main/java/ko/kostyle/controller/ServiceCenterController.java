@@ -85,7 +85,7 @@ public class ServiceCenterController {
 //        model.addAttribute("name", service2.getname());
     }
     @GetMapping("/answerdetail")
-	public void getAnswer(@RequestParam("qno") Long qno, Model model) {
+	public void getAnswer(@RequestParam("qno") Long qno, @ModelAttribute("cri") Criteria criteria, Model model) {
 		model.addAttribute("list", service2.get(qno));
 		model.addAttribute("showList", service2.showQuestion(qno));
 	}

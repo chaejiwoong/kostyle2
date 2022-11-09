@@ -17,14 +17,14 @@ $(document).ready(function () {
                     "</div>")
             } else if (title == "auction") {
                 $(".bottom-category").html("<div>" +
-                    "<span class='bottom-title'><a data-title='auction' href='/admin/auctions'>경매목록</a></span>" +
-                    "<span class='bottom-title'><a data-title='auction' href='/admin/auctions/register'>경매등록</a></span>" +
+                    "<span class='bottom-title'><a class='title-auctionList' data-title='auction' href='/admin/auctions'>경매목록</a></span>" +
+                    "<span class='bottom-title'><a class='title-auctionInsert' data-title='auction' href='/admin/auctions/register'>경매등록</a></span>" +
 
                     "</div>")
             } else if(title == "order"){
                 $(".bottom-category").html("<div>" +
-                    "<span class='bottom-title'><a data-title='order' href='/admin/orders'>주문목록</a></span>" +
-                    "<span class='bottom-title'><a data-title='order' href='/admin/orderCancels'>주문취소목록</a></span>" +
+                    "<span class='bottom-title'><a class='title-orderList' data-title='order' href='/admin/orders'>주문목록</a></span>" +
+                    "<span class='bottom-title'><a class='title-orderCansel' data-title='order' href='/admin/orderCancels'>주문취소목록</a></span>" +
                     "</div>")
             }else if(title == "customerCenter"){
                 $(".bottom-category").html("<div>" +

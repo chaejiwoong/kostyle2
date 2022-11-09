@@ -140,3 +140,7 @@
     height: auto;
     text-align: center;
 }
+.right {
+	width:140px;
+	text-align: right;
+}

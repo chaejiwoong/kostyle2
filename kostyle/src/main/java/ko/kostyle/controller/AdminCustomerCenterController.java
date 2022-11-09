@@ -17,6 +17,7 @@ import com.sun.net.httpserver.Authenticator.Result;
 import ko.kostyle.domain.AnswerVO;
 import ko.kostyle.domain.QuestionVO;
 import ko.kostyle.domain.ServiceCenterVo;
+import ko.kostyle.dto.AnswerDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.PageDTO;
 import ko.kostyle.service.QuestionService;
@@ -42,7 +43,7 @@ public class AdminCustomerCenterController {
 	}
 	
 	@GetMapping("/noticeList")
-	public void getNoticeList(Criteria criteria ,Model model) {
+	public void getNoticeList(Criteria criteria , Model model) {
 		int total = service.noticeTotal(criteria);
 		log.info("어드민공지사항: " + service.getNoticeList(criteria));
 		model.addAttribute("noticeList", service.getNoticeList(criteria));
@@ -56,12 +57,12 @@ public class AdminCustomerCenterController {
 
 	
 	@GetMapping("/qndetail")
-	public void detailQN(@RequestParam("nno") Long nno, Model model) {
+	public void detailQN(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria criteria, Model model) {
 		log.info("Qn 상세보기");
         model.addAttribute("boarddetail", service.getNoticeDetail(nno));
 	}
 	@GetMapping("/noticedetail")
-	public void detailNotice(@RequestParam("nno") Long nno, Model model) {
+	public void detailNotice(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria criteria, Model model) {
 		log.info("공지사항 상세보기");
         model.addAttribute("boarddetail", service.getNoticeDetail(nno));
 	}
@@ -96,13 +97,13 @@ public class AdminCustomerCenterController {
 		
 	}
 	@PostMapping("/noticedetail")
-	public String postNoticeUpdate(ServiceCenterVo vo, RedirectAttributes rttr) {
+	public String postNoticeUpdate(ServiceCenterVo vo, @ModelAttribute("cri") Criteria criteria, RedirectAttributes rttr) {
 		log.info("업데이트 페이지: " + vo);
-		
+		log.info(criteria);
 		if (service.updateAdminNotice(vo)) {
 			rttr.addFlashAttribute("result", "succes");
 		}
-		return "redirect:/admin/customercenter/noticeList";
+		return "redirect:/admin/customercenter/noticeList?nno=" + vo.getNno() + "&pageNum=" + criteria.getPageNum() + "&amount=" + criteria.getAmount();
 		
 	}
 	
@@ -117,34 +118,41 @@ public class AdminCustomerCenterController {
 	}
 	
 	@PostMapping("noticeList")
-	public String posNoticetDelete(@RequestParam("nno") Long nno, RedirectAttributes rttr) {
+	public String posNoticetDelete(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria criteria, RedirectAttributes rttr) {
 		log.info("삭제페이지: " + nno);
 		
 		if (service.removeAdminNotice(nno)) {
 			rttr.addFlashAttribute("result", "succes");
 		}
-		return "redirect:/admin/customercenter/noticeList";
+		return "redirect:/admin/customercenter/noticeList?pageNum=" + criteria.getPageNum() + "&amount=" + criteria.getAmount();
 	}
 
 //	문의 그리고 문의 답변
 	
 	@GetMapping("/inquiryList")
-	public void getInquiryList(Criteria criteria, Model model) {
+	public void getInquiryList( Criteria criteria, Model model, AnswerDTO answerDTO, AnswerVO answerVO) {
+//		AnswerDTO answerDTO = service2.answer2(null);
+		
+		log.info("답변확인:" + answerDTO.getAsno());
+		log.info("답변확인:" + answerVO.getAsno());
+		
 		int total = service2.questionTotal(criteria);
 		log.info("문의 리스트: " + service2.getList(criteria));
+		
+		
 		
 		model.addAttribute("registerList", service2.getList(criteria));
 		model.addAttribute("pageMaker", new PageDTO(criteria,total));
 	}
 	
 	@GetMapping("/insertInquiry")
-	public void getInsertInquiry(@RequestParam("qno") Long qno, Model model) {
+	public void getInsertInquiry(@RequestParam("qno") Long qno, @ModelAttribute("cri") Criteria criteria, Model model) {
 		log.info("문의 답볍 등록");
 		model.addAttribute("showList", service2.showQuestion(qno));
 	}
 	
 	@PostMapping("/insertInquiry")
-	public String postInquiry(RedirectAttributes rttr, AnswerVO vo, @RequestParam("qno") Long qno, @RequestParam("content") String content) {
+	public String postInquiry(RedirectAttributes rttr, AnswerVO vo, @RequestParam("qno") Long qno, @RequestParam("content") String content, @ModelAttribute("cri") Criteria criteria) {
 		vo.setQno(qno);
 		vo.setContent(content);
 		log.info("어드민 문의 답변 페이지 답변 번호" + vo.getAsno());
@@ -156,11 +164,11 @@ public class AdminCustomerCenterController {
 		rttr.addFlashAttribute("qno", vo);
 		rttr.addFlashAttribute("result", vo.getContent());
 		
-		return "redirect:/admin/customercenter/inquiryList";
+		return "redirect:/admin/customercenter/inquiryList?qno=" + vo.getQno() + "&pageNum=" + criteria.getPageNum() + "&amount=" + criteria.getAmount();
 	}
 	
 	@GetMapping("/answerdetail")
-	public void getAnswer(@RequestParam("qno") Long qno, Model model) {
+	public void getAnswer(@RequestParam("qno") Long qno, Model model, @ModelAttribute("cri") Criteria criteria) {
 		model.addAttribute("list", service2.get(qno));
 		model.addAttribute("showList", service2.showQuestion(qno));
 	}

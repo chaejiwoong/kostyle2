@@ -44,13 +44,11 @@
             	<button type="button"><span>목록보기</span></button>
         	</div>
 		</div>
-<%--            <form id='operForm' action="/admin/customerCenter/inquiryList" method="get">
-            <input type="hidden"  id='qno' name='qno'
-                   value='<c:out value="${showList.qno}"/>'> <input
-                type='hidden' name='pageNum'
-                value='<c:out value="${cri.pageNum}"/>'> <input
-                type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-        </form> --%>
+      <form id='operForm' action="/admin/customerCenter/inquiryList" method="get">
+            <input type="hidden"  id='qno' name='qno' value='<c:out value="${showList.qno}"/>'> 
+            <input class="pageNum" type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
+            <input class="amount" type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+        </form>
 
     </div>
 </div>
