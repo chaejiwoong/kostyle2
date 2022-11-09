@@ -40,6 +40,41 @@
 .table-primary th:nth-child(8) {
 	width: 190px !important;
 }
+/* 사이드바 */
+#left-sidebar {
+	position: absolute;
+	left: 0px;
+	text-align: center;
+	width: 200px;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 20px;
+}
+
+#left-sidebar h1 {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 20px;
+	border-bottom: 1px solid black;
+}
+
+#left-sidebar li {
+	display: block;
+	padding: 15px;
+	font-weight: bold;
+}
+
+#left-sidebar li:hover {
+	background-color: #f891aa;
+	color: white;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: #f891aa;
+	color: white;
+}
+/* 사이드바 끝 */
 </style>
 
 
@@ -49,26 +84,28 @@
 		<%@ include file="/WEB-INF/views/include/header.jsp"%>
 		<div class="container" style="text-align: center">
 
-			<ul>
-				<li onclick="location.replace('/orders')" class="selected">주문배송조회</li>
-				<li onclick="location.replace('/members')" class="selected">회원정보수정</li>
-				<li onclick="location.replace('/members/address')" class="selected">배송지관리</li>
-				<li onclick="location.replace('/reviews/unwritten')"
-					class="selected"
-				>리뷰관리</li>
-				<li onclick="loaction.replace('/shop/cartList')" class="selected">장바구니</li>
-				<li class="selected">위시리스트/코디</li>
-				<li onclick="location.replace('/members/bidHistory')"
-					class="selected"
-				>내경매조회</li>
-				<li class="selected">1:1문의</li>
-			</ul>
+			<div id="left-sidebar">
+				<h1>MyPage</h1>
+
+				<ul>
+					<li onclick="location.replace('/orders')">주문배송조회</li>
+					<li onclick="location.replace('/members')">회원정보수정</li>
+					<li onclick="location.replace('/members/address')">배송지관리</li>
+					<li onclick="location.replace('/reviews/unwritten')"
+						class="selected"
+					>리뷰관리</li>
+					<li onclick="loaction.replace('/shop/cartList')">장바구니</li>
+					<li>위시리스트/코디</li>
+					<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
+					<li>1:1문의</li>
+				</ul>
+			</div>
 			<!-- 센터 말고 컨테이너만 넣으면 왼쪽 줄 맞춰서 됨 -->
 
 			<div class="row">
 				<div align="center" class="col-md-12">
 					<!--주문 form 시작===================  -->
-					<form name="orderF" id="orderF" action="/orders" method="post">
+					<form name="searchForm" id="searchForm" action="../orders/orderList" method="post">
 						<table class="table table-hover">
 							<!-- 					<table class="table table-condensed"> -->
 							<thead>
@@ -86,7 +123,7 @@
 									<th>이미지</th>
 									<th>수량</th>
 									<th>사이즈</th>
-									<th>단가</th>
+									<th>가격</th>
 									<th>적립 포인트</th>
 									<th>삭제</th>
 								</tr>
@@ -117,7 +154,7 @@
 												</a>${cart.name}
 											</td>
 											<td>
-												<%-- <img src="../product_images/${cart.pimage1}" width="100"> --%>
+												<%-- <img src="../product_images/" width="100"> --%>
 												aa
 											</td>
 											<td>
@@ -161,27 +198,31 @@
 								<!-- --------------------------- -->
 								<tr>
 									<td colspan="7">
-
+										<div>
 										<b>장바구니 총액</b>: <span style="color: blue"><b> <fmt:formatNumber
-													value="${cart.finalTotalPrice }" pattern="###,###"
-												/>원
-										</b> </span> <br> <b>총 포인트</b>: <span style="color: red"> <b>
-												<fmt:formatNumber value="${cart.finalTotalPoint}"
+													value="${finalTotalPrice }" pattern="###,###"
+
+													/>원 
+													</b> </span> <br> <b>총 포인트</b>: <span style="color: red">
+											<b> <fmt:formatNumber value="${finalTotalPoint}"
 													pattern="###,###"
-												/> POINT
+
+											/> POINT
 										</b>
-										</span> <br> <b>배송비</b>: <span style="color: yellow"> <b>
+										
+										</span> 
+										<br> <b>배송비</b>: <span style="color: yellow"> <b>
 												<fmt:formatNumber value="3000" pattern="###,###" /> 원
 										</b>
 										</span>
-
+										</div>
 									</td>
 
 									<td colspan="1">
 										<button type="button" onclick="goOrder()"
 											class="btn btn-primary"
 										>주문하기</button>
-										<button type="button" onclick="history.go(-2)"
+										<button type="button" onclick="history.go(-1)"
 											class="btn btn-warning"
 										>계속쇼핑</button>
 									</td>
@@ -241,7 +282,7 @@
 
 	// 체크박스에 체크한 상품정보(상품번호-pno, 수량-amount)를 가지고 주문폼 페이지로 이동
 	function goOrder() {
-		let chk = orderF.pno; // $('input[name="opnum"]')
+		let chk = searchForm.pno; // $('input[name="pno"]')
 		if (chk == null)
 			return;
 		// alert(chk.length)
@@ -272,8 +313,8 @@
 				return;
 			}
 		}//else--
-		orderF.method = 'post';
-		orderF.submit();
+		searchForm.method = 'post';
+		searchForm.submit();
 	}
 
 	function goEdit(cpno, index) {

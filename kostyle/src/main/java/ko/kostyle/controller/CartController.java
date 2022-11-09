@@ -74,14 +74,18 @@ public class CartController {
 		
 		
 		for (CartListVO vo2 : cartArr) {
-			vo.initTotal();
-			finalTotalPrice += vo2.getTotalPrice();
+			vo2.initTotal();
 			finalTotalPoint += vo2.getTotalPoint();
+			finalTotalPrice += vo2.getFinalTotalPrice();
 		}
 		
 		log.info(finalTotalPrice);
 		log.info(finalTotalPoint);
+		
 		model.addAttribute("cartList", cartArr);
+		model.addAttribute("finalTotalPrice", finalTotalPrice);
+		model.addAttribute("finalTotalPoint", finalTotalPoint);
+		
 
 		log.info(cartArr);
 		return "shop/cartList";
