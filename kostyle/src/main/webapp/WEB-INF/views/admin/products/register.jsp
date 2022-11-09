@@ -21,7 +21,7 @@
 
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/vendor/bootstrap/css/styles.css" rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/styles2.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 
@@ -334,7 +334,6 @@
 			dataType : 'json',
 			success : function(result) {
 				list = result;
-				alert("제발.............");
 				showUploadImage(result);
 			},
 			error : function(result) {

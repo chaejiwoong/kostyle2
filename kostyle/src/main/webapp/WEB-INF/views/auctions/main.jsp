@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
-
+<link href="/resources/css/footer.css" rel="stylesheet" />
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -118,7 +118,7 @@
                     
                 </div>
             </div>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 	var display = (function loadThumbnail() {
 		var uploadResultArr = $('.thumb');

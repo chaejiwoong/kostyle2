@@ -204,9 +204,7 @@
                 	}
                     alert( "회원님 반갑습니다." + result);
 
-                    self.location = "/members/myPage";
-
-/*                     self.location = "/kostyle4u"; */
+                    self.location = "/main"; 
                 }
                 
             });

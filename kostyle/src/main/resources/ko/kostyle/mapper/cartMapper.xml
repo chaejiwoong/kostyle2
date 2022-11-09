@@ -30,35 +30,35 @@
 
 	<!-- 특정회원 특정상품의 개수 가져오기 -->
 	<select id="selectCartByPnum"
-		resultType="ko.kostyle.domain.CartListVO">
+		resultType="int">
 		select count(cpno) from cart_product
 		where mno=#{mno}
 		and
 		pno=#{pno}
 	</select>
 
-	<!-- 장바구니 상품 수량 수정 -->
+ 	<!-- 장바구니 상품 수량 수정 -->
 	<update id="updateCartOqty"
 		parameterType="ko.kostyle.domain.CartListVO">
 		update cart_product
 		set amount=#{amount} where cpno =
 		#{cpno}
-	</update>
+	</update> 
 
 	<!-- 장바구니에 상품 추가 -->
 	<insert id="addCart"
 		parameterType="ko.kostyle.domain.CartListVO">
 		insert into
-		cart_product(cpno, mno, pno, amount)
-		values(cart_product_seq.nextval,
+		cart_product(cpno, mno, pno, amount, p_size)
+		values(cno_seq.nextval,
 		#{mno},
-		#{pno}, #{amount})
+		#{pno}, #{amount}, #{p_size})
 	</insert>
 
 	<!-- 회원번호로 장바구니 목록 가져오기 -->
 	<select id="getCart"
 		resultType="ko.kostyle.domain.CartListVO">
-		select c.cpno,c.mno, c.pno, c.amount, p.p_size, p.name, p.price, m.point
+		select c.cpno,c.mno, c.pno, c.amount, c.p_size, p.name, p.price, m.point
 		from cart_product c left outer join product p
 		on c.pno = p.pno left outer join member m on c.mno = m.mno where p.pno =
 		c.pno

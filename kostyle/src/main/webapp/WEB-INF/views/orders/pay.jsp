@@ -332,7 +332,7 @@ h1{
 </div>
 <!-- /.modal -->
 </div>
-<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 var display = (function loadThumbnail() {
@@ -416,7 +416,7 @@ $(document).ready(function(){
 		
 		// 결제금액이 0원일 경우에는 신용카드 결제 막기
 		if($("#total").text() == "결제금액 : 0원"){
-			$('#payPoint').find('input[name="pay"]').attr('checked', true)
+			$('#payPoint').find('input[id="pay"]')[0].attr('checked', true)
 			$('#payCard').hide();
 		}else{
 			$('#payCard').show();
@@ -668,8 +668,8 @@ $(document).ready(function(){
     
     $("#orderCancel-btn").on('click', function(e){
     	e.preventDefault();
-    	
-    	self.location="/orders";
+    	alert("메인 페이지로 이동합니다.")
+    	self.location="/main";
     })
    
 

@@ -321,7 +321,7 @@ public class OrderServiceImpl implements OrderService{
 			}
 
 			// 사용포인트만큼 포인트 차감
-			memberMapper.updatePoint(mno, dto.getPoint()); 
+			memberMapper.updatePoint(mno, dto.getPoint()-dto.getAccumulate()); 
 		}
 		
 		OrderVO order = OrderVO.builder()

@@ -4,7 +4,7 @@
 <header>
 	<div class="header-box">
 		<div class="text-logo">
-			<a href="#"><span><i>KoStyle4U</i></span></a>
+			<a href="/main"><span><i>KoStyle4U</i></span></a>
 		</div>
 		<div class="search-form-box">
 			<div>

@@ -20,7 +20,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" >
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0">
                     	<div id="uploadReslut">							
 						</div>
                     </div>
@@ -145,7 +145,7 @@
 		
 		$(uploadResultArr).each(function (i, obj) {
 			//섬네일 파일을 불러오기 위한 경로
-			var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+			var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 			// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
 			$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
 			})
@@ -194,7 +194,7 @@
 			str += "<div id='result_card'";
 			str += "data-path='" + obj.filePath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
 			str += ">";
-			str += "<img src='/member/products/display?fileName=" + fileCallPath + "'>";
+			str += "<img src='/member/products/display?fileName=" + fileCallPath + "' style='width:800px; height:600px'>";
 			str += "</div>";		
 		
 			
@@ -212,6 +212,20 @@
 		})
 		
 	})
+	
+	// 장바구니 담기
+	$('#cart').on('click', function(){
+		
+		$.ajax({
+			url:"/shop/cartAdd?pno=" + $('#pno').val() + "&amount=" + $('#amount').val() + "&p_size=" + $('#selectBox').val(),
+			type:'post',
+			success:function(){
+				alert('장바구니에 상품이 담겼습니다.')
+			}
+		})
+	})
+	
+	
 /* 상품 상세 페이지 이동 */
 $(".move").on("click", function(e){
 	

@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService{
     public String joinEmail(String email) {
         makeRandomNumber();
         String setFrom = "cowldnd2@gmail.com";  // 이메일 전송자
-        String title = "회원 가입 인증 이메일"; // 이메일 제목
+        String title = "본인확인 인증 이메일"; // 이메일 제목
         String content = "홈페이지를 방문해주셔서 감사합니다." +
                 "<br><br>" +
                 "인증 번호는 " + authNumber + "입니다." +

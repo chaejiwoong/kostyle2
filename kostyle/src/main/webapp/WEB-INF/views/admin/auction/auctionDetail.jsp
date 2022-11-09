@@ -195,7 +195,6 @@ var display = (function loadThumbnail() {
 					type: 'post',
                 dataType: 'json',
 					success: function (result) {
-						alert("Uploaded");
                         console.log(result);
         				var auction = {
         						"apno" : form.find("input[name='apno']").val(),

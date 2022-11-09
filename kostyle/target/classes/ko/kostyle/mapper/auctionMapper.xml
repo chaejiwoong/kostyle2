@@ -38,7 +38,7 @@
 		insert into auction_product
 		values (#{apno},#{name},#{start_price},
 		#{best_bid_price}, #{bid_unit},
-		sysdate, sysdate+1)
+		sysdate, sysdate+3)
 	</insert>
 
 

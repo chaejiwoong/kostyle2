@@ -31,13 +31,13 @@ public class CartServiceImpl implements CartService {
 		System.out.println("count= " + count);
 
 		int n = 0;
-		if (count > 0) {
-			// [2] 해당 상품이 이미 장바구니에 있다면 수량만 추가
-			n = cartMapper.updateCart(CartListVO);
-			// [3] 해당 상품이 장바구니에 없는 상품이라면 insert
-		} else {
+		/*
+		 * if (count > 0) { // [2] 해당 상품이 이미 장바구니에 있다면 수량만 추가 n =
+		 * cartMapper.updateCart(CartListVO); // [3] 해당 상품이 장바구니에 없는 상품이라면 insert } else
+		 * {
+		 */
 			n = cartMapper.addCart(CartListVO);
-		}
+//		}
 
 		return n;
 	}

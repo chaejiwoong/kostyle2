@@ -12,9 +12,7 @@
 			<ul>
 
 				<li>${sessionScope.user.name }님반가워요 !</li>
-				<li><a href="/members/myPage"><span>메인페이지</span></a></li>
-				<li><a href="/members/myPage"><span>마이페이지</span></a></li>
-
+				<li><a href="/main"><span>메인페이지</span></a></li>
 				<li class="line"></li>
 				<li><a id="logout" href="/auth/logout"><span>로그아웃</span></a></li>
 

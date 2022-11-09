@@ -222,7 +222,7 @@
 										<button type="button" onclick="goOrder()"
 											class="btn btn-primary"
 										>주문하기</button>
-										<button type="button" onclick="history.go(-1)"
+										<button type="button" onclick="self.location='/main'"
 											class="btn btn-warning"
 										>계속쇼핑</button>
 									</td>

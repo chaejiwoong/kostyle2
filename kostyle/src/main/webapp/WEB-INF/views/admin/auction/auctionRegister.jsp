@@ -145,7 +145,6 @@ function setThumbnail(event) {
                   type: 'post',
                     dataType: 'json',
                   success: function (result) {
-                     alert("Uploaded");
                             console.log(result);
                         var auction = {
                                    "name": form.find("input[name='name']").val(),
