@@ -79,10 +79,16 @@ public class QuestionServiceImpl implements QuestionService{
 		
 	}
 
+//	@Override
+//	public List<QuestionVO> answer2(Long qno) {
+//		// TODO Auto-generated method stub
+//		return mapper.Answer(qno);
+//	}
+
 	@Override
-	public AnswerDTO answer2(Long qno) {
-		// TODO Auto-generated method stub
-		return mapper.Answer(qno);
+	public AnswerDTO checkReply(Long qno) {
+
+		return mapper.checkReply(qno);
 	}
 
 

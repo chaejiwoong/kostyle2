@@ -26,19 +26,15 @@ public class AnswerDTO {
 	private String content;
 	private Date created_date;
 	
-//	private QuestionDTO questionDTO;
-	public ArrayList<QuestionDTO> checkAnswer(Long qno) {
-		ArrayList<QuestionDTO> list = new ArrayList<QuestionDTO>();
-		try {
-			
-			for (int i = 0; i < list.size(); i++) {
-				var a = list.get(i).getContent();
-				System.out.println("답변" + a);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		return list;
-	}
+	/*
+	 * // private QuestionDTO questionDTO; public ArrayList<QuestionDTO>
+	 * checkAnswer(Long qno) { ArrayList<QuestionDTO> list = new
+	 * ArrayList<QuestionDTO>(); try {
+	 * 
+	 * for (int i = 0; i < list.size(); i++) { var a = list.get(i).getContent();
+	 * System.out.println("답변" + a); } } catch (Exception e) { // TODO: handle
+	 * exception }
+	 * 
+	 * return list; }
+	 */
 }

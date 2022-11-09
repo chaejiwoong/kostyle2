@@ -9,45 +9,51 @@
 <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
 <link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet"/>
-   <style type="text/css">
-      #wrap {
-          min-height: 100%;
-          position: relative;
-          padding-bottom: 100px;
-      }
-      
-      .title-auctionInsert {
-         color: #35C5F0;
-      }
-      .container {
-         padding-top: 25px;
-      }
-      .input-name {
-         display: inline-block;
-            width: auto;
-      }
-      .form-inline {
-         padding-top: 10px;
-      }
-      /* .filebox .upload-name {
-          display: inline-block;
-          height: 40px;
-          padding: 0 10px;
-          vertical-align: middle;
-          border: 1px solid #dddddd;
-          width: 78%;
-          color: #999999;
-      }
-      .filebox .file-serch {
-          display: inline-block;
-          padding: 10px 20px;
-          color: #fff;
-          vertical-align: middle;
-          background-color: #999999;
-          cursor: pointer;
-          height: 40px;
-          margin-left: 10px;
-      } */
+
+	<style type="text/css">
+		#wrap {
+		    min-height: 100%;
+		    position: relative;
+		    padding-bottom: 100px;
+		}
+		.bottom-category {
+			display: block;
+		}
+		.title-auctionInsert {
+			color: #35C5F0;
+		}
+		.container {
+			padding-top: 25px;
+		}
+		.auction {
+			color: #35C5F0;
+		}
+		.input-name {
+			display: inline-block;
+   			width: auto;
+		}
+		.form-inline {
+			padding-top: 10px;
+		}
+		/* .filebox .upload-name {
+		    display: inline-block;
+		    height: 40px;
+		    padding: 0 10px;
+		    vertical-align: middle;
+		    border: 1px solid #dddddd;
+		    width: 78%;
+		    color: #999999;
+		}
+		.filebox .file-serch {
+		    display: inline-block;
+		    padding: 10px 20px;
+		    color: #fff;
+		    vertical-align: middle;
+		    background-color: #999999;
+		    cursor: pointer;
+		    height: 40px;
+		    margin-left: 10px;
+		} */
 
 /*       .filebox input[type="file"] {
           position: absolute;

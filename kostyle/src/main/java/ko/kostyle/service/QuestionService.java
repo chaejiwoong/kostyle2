@@ -20,7 +20,10 @@ public interface QuestionService {
 	
 	public int register(AnswerVO answerVO, Long qno, String content);
 	public AnswerVO get(Long qno);
-	public AnswerDTO answer2(Long qno);
+	
+//	댓글체크
+	public AnswerDTO checkReply(Long qno);
+	
 	public int modify(AnswerVO answerVO);
 	public int remove(Long asno);
 	public List<AnswerVO> getList(Criteria criteria, Long qno);
