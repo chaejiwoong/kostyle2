@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-<div id="wrap">
+
 <!--  -->
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
@@ -128,7 +128,6 @@
 						<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
-</div>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
             
 <script type="text/javascript">

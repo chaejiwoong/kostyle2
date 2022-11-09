@@ -103,7 +103,7 @@
 </head>
 
 <body>
-<div id="wrap">
+
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
 		<h1 class="login-title">로그인</h1>
@@ -138,7 +138,6 @@
 		    </form>
 		</div>
 	</div>
-</div>
 
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

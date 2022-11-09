@@ -46,7 +46,6 @@
     </style>
 </head>
 <body>
-<div id="wrap">
 	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 	<div class="container memberpd">
@@ -94,7 +93,6 @@
 	        </form>
 	    </div>
 	</div>
-</div>
 <script>
 var memberService = (function(){
     function updateInfo(member, callback, error) {

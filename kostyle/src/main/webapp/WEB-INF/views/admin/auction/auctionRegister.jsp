@@ -60,7 +60,7 @@
    </style>
 </head>
 <body>
-   <div id="wrap">
+   
       <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
       <div class="container" style="width:230px;">
          <form id=register-form class="form-horizonal">
@@ -102,7 +102,6 @@
             <a href="/admin/auctions" class="btn btn-secondary">목록으로</a>
          </form>
       </div>
-   </div>
    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="/resources/js/auctionService.js"></script>
 <script>

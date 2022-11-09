@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-
+<div id="wrap">
 <header>
 	<div class="header-box">
 		<div class="text-logo">
@@ -36,6 +36,7 @@
 	</div>
 	<div class="bottom-category"></div>
 </div>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {

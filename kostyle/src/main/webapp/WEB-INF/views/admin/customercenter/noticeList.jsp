@@ -13,7 +13,6 @@
 <link href="/resources/css/footer.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="wrap">
 		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 		<form id="delete"  method="post">
 			<div class="feq-box">
@@ -66,7 +65,6 @@
 			</ul>
 		</div>
 		<!--  end Pagination -->
-	</div>
 	<form id='actionForm' action="/admin/customercenter/noticeList" method='get'>
 		<input type="hidden" class="pageNum" name='pageNum' value='${pageMaker.cri.pageNum}'>
 		<input type="hidden" class="amount" name='amount' value='${pageMaker.cri.amount}'>

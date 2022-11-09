@@ -38,7 +38,6 @@ font-weight: bold;
 </style>
 </head>
 <body>
-<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 	<h1>관리자 경매 목록</h1>
@@ -147,7 +146,6 @@ font-weight: bold;
 		</form>
 	</div>
 
-</div>
 
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

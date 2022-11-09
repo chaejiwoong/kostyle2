@@ -24,7 +24,6 @@
     <link href="/resources/css/noticedetail.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="wrap">
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
     <div class="detail-box">
@@ -50,7 +49,6 @@
             <button type="submit"><span>목록보기</span></button>
         </div>
     </div>
-</div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

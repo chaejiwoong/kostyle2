@@ -22,7 +22,6 @@
     <link href="/resources/css/qna.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="wrap">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
 	 <nav class="qna-nav">
@@ -58,7 +57,6 @@
 	     
 	     <!--  end Pagination -->
 	 </div>
-</div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

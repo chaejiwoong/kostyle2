@@ -21,7 +21,6 @@
     <link href="/resources/css/notice.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="wrap">
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
 	    <div class="feq-box">
@@ -57,7 +56,6 @@
 	            </ul>
 	        </div>
 	        <!--  end Pagination -->
-	    </div>
     <form id='actionForm' action="/customerCenter/notice" method='get'>
         <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
         <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>

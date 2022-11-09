@@ -10,6 +10,7 @@
         <link href="/resources/css/header.css" rel="stylesheet"/>
         <link href="/resources/css/footer.css" rel="stylesheet"/>
 <style>
+
 label{
 	width:100px;
 }
@@ -166,6 +167,7 @@ label{
 </style>
 </head>
 <body>
+
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <div class="container">
 
@@ -252,7 +254,7 @@ label{
 
 	
 </div>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');

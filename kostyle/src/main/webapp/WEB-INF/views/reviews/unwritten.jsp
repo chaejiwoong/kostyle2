@@ -170,6 +170,7 @@
 
 </div>
 
+
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');

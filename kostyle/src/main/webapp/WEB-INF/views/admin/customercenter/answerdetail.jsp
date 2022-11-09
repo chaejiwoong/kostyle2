@@ -24,7 +24,6 @@
 </head>
 <body>
 <body>
-<div id="wrap">
 	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
     <div class="detail-box">
         <div class="box">
@@ -51,7 +50,6 @@
         </form>
 
     </div>
-</div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

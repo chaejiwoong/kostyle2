@@ -13,12 +13,17 @@
 
 <style>
 
-
-#wrap {
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 100px;
+.auction {
+   color: #35C5F0;
 }
+      
+.bottom-category {
+   display: block;
+}
+.title-auctionList {
+   color: #35C5F0;
+}
+
 
 h1{
 margin-top: 25px;
@@ -50,7 +55,6 @@ label{
 </style>
 </head>
 <body>
-<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 	<h1>관리자 경매 상세</h1>
@@ -116,7 +120,6 @@ label{
 		
 	</div>
 
-</div>
 
 
 

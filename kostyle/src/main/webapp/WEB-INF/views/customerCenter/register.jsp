@@ -20,7 +20,6 @@
     <link href="/resources/css/register.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="wrap">
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
     	<div class="chat-box">
@@ -90,7 +89,6 @@
             </ul>
         </div>
 
-    </div>
     <form id='actionForm' action="/customerCenter/register" method='get'>
 	    <input type='hidden' class='pageNum' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	    <input type='hidden' class='amount' name='amount' value='${pageMaker.cri.amount}'>

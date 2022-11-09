@@ -93,7 +93,6 @@
 </head>
 
 <body>
-<div id="wrap">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
 	    <div id="info" class="row">
@@ -148,7 +147,6 @@
 	    </div>
 	
 	</div>
-</div>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

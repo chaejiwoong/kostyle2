@@ -17,7 +17,6 @@
     <link href="/resources/css/register.css" rel="stylesheet"/>
 </head>
 <body>
-	<div id="wrap">
 		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 		<div class="admin-inquiry-box">
 			<div class="inquiry-box-bottom">
@@ -73,7 +72,6 @@
 				</c:if>
 			</ul>
 		</div>
-	</div>
 	<form id='actionForm' action="/admin/customercenter/inquiryList" method='get'>
 		<input class="pageNum" type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 		<input class="amount" type='hidden' name='amount' value='${pageMaker.cri.amount}'>

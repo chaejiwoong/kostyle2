@@ -39,7 +39,6 @@
 </style>
 </head>
 <body>
-<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<h1>관리자 회원 목록</h1>
 
@@ -123,7 +122,6 @@
 				type='hidden' name='keyword'
 				value='<c:out value="${ pageMaker.cri.keyword }"/>'>
 		</form>
-	</div>
 
 
 	<script>

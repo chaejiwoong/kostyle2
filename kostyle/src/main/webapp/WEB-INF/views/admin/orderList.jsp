@@ -51,7 +51,6 @@ font-weight: bold;
 </style>
 </head>
 <body>
-	<div id="wrap">
 		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 		<h1>주문 목록</h1>
@@ -162,7 +161,6 @@ font-weight: bold;
 			</form>
 		</div>
 	
-	</div>
 	<script>
 	
 	$(document).ready(function(){
