@@ -153,16 +153,16 @@
     	
     	let moveForm = $("#moveForm");
 
-/* 상품목록이동 버튼 */
-$("#list").on("click", function(e){
-	
-	e.preventDefault();
-	
-	$("input[name=pno]").remove();
-	moveForm.attr("action", "/admin/products")
-	moveForm.submit();
-	
-});
+    	/* 상품목록이동 버튼 */
+    	$("#list").on("click", function(e){
+    		
+    		e.preventDefault();
+    		
+    		$("input[name=pno]").remove();
+    		moveForm.attr("action", "/main")
+    		moveForm.submit();
+    		
+    	});
 
 
 
@@ -202,7 +202,23 @@ $("#list").on("click", function(e){
 		});	
 		
 	})
-      
+/* 상품 상세 페이지 이동 */
+$(".move").on("click", function(e){
+	
+	
+	e.preventDefault();
+	
+	var pno = moveForm.find('input[name *= pno]');
+	if(pno){
+		pno.remove();
+	}	
+	
+	
+	moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
+	moveForm.attr("action", "/main/product");
+	moveForm.submit();
+	
+});
 </script>
 
 

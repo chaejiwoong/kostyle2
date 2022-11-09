@@ -28,7 +28,7 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 
                
-                                   <c:forEach  items="${product}" var="list" >
+               <c:forEach  items="${product}" var="list" >
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -187,9 +187,16 @@ $(".move").on("click", function(e){
 	
 	e.preventDefault();
 	
-	console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
+	
+	
+	
 	moveForm.append("<input type='hidden' name='pno' value='"+ $(this).attr("href") + "'>");
+	
+	//alert(moveForm.html());
+	
+	
 	moveForm.attr("action", "/main/product");
+	
 	moveForm.submit();
 	
 });
