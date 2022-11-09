@@ -73,7 +73,7 @@
 			order by cno desc
 		</if>
 		<if test="sort == 'created_date'"> 
-			order by created_date desc
+			order by cno desc
 		</if>
 		<if test="sort == 'lk_count'"> 
 			order by lk_count desc
@@ -107,15 +107,16 @@
 		resultType="ko.kostyle.domain.CoordiVO" parameterType="ko.kostyle.dto.Criteria">
 		<![CDATA[
 			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
-				from( /*+INDEX_DESC(coordi SYS_C007442)	*/
-						select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count, row_number() over(]]>
+				from( select /*+INDEX_DESC(coordi SYS_C007442)	*/
+						 cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count, row_number() over(]]>
 						<include refid="sort" /> 
 		<![CDATA[
 							) as rn          
 							from coordi
 							where rownum <= #{pageNum} * #{amount}
 					) where rn > (#{pageNum}-1) * #{amount}		
-		]]>
+		]]>	
+		
 	</select>
 	
 
@@ -137,8 +138,9 @@
 	
 	<!-- 코디 글 수정 -->
 	<update id="update">
-		update coordi set title= #{title},content=#{content}
-		where cno =#{cno}
+		update coordi 
+			set title= #{title},content=#{content}, filepath=#{filepath}, filename=#{filename}, uuid=#{uuid}
+			where cno =#{cno}
 	</update>
 	
 	<!-- 코디 글 삭제 -->

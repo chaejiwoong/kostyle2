@@ -8,111 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>코디 글 목록</title>
-<!-- <link href="/resources/vendor/bootstrap/css/styles.css" rel="stylesheet"> -->
 
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet"/>
-<link href="/resources/css/footer.css" rel="stylesheet"/>
+<link href="/resources/css/footer.css" rel="stylesheet"/> 
+<link href="/resources/css/coordies.css" rel="stylesheet"/>
 
 <script src="https://kit.fontawesome.com/89998ce003.js" crossorigin="anonymous"></script>
-
-<style type="text/css">
-
-*,
-*::after,
-*::before {
-	box-sizing: border-box;
-}
-body {
-	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	overflow-x: hidden;
-	background: #e9ecef;
-}
-.page--static {
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	flex-direction: column;
-	-webkit-align-items: center;
-	align-items: center;
-	max-width: 1220px;
-	margin: 0 auto;
-	padding: 2em 0 0;
-	text-align: center;
-}
-.sort {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: none;
-    font: inherit;
-    font-size: 14px;
-    line-height: 18px;
-    width: auto;
-    height: 40px;
-    border-radius: 4px;
-    padding: 0 16px;
-    font-weight: 400;
-    box-sizing: border-box;
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #f891aa;
-    outline: none;
-    overflow: hidden;
-}
-
-.form-group-feed-ul{
-	position: relative;
-	z-index: 100;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-wrap: wrap;
-	flex-wrap: wrap;
-	-webkit-justify-content: center;
-	justify-content: center;
-	-webkit-align-items: center;
-	align-items: center;
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 0 0 6em;
-	list-style: none;
-}
-.form-group-feed-li {
-	display: block;
-	-webkit-flex: none;
-	flex: none;
-	width: 33.33%;
-	padding: 50px;
-}
-.thumb{
-	display: block;
-	width: 100%;
-	margin-right: 50px;
-}
-.feed-title-a {
-	font-family: 'Caveat', cursive;
-	line-height: 1;
-	position: relative;
-	overflow: hidden;
-	margin: 0;
-	padding: 1em 0.5em;
-	text-align: left;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #698b8d;
-	background: #fff;
-}
-
-</style>
-
-
 
 </head>
 <body>
 <!-- 헤더 -->
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
 
 <!-- 바디 -->
@@ -120,46 +28,39 @@ body {
 
 
 	<!-- 글쓰기 버튼 회원/비회원 구분 -->
-	<div class="form-group">
+	<div class="form-group-top">
 		<div class="form-group-sort">
-			<ul style="display: inline;">
+			<ul class="sort-ul" style="display: inline;">
 				<li>
-					<button class="sort" type="button" value="created_date">최신순</button>
+					<button class="top-btn" type="button" value="created_date" onclick="/coordies/ajaxCoordies?sort=created_date">최신순</button>
 				</li>
 				<li>
-					<button class="sort" type="button" value="lk_count" >인기순</button>
+					<button class="top-btn" type="button" value="lk_count" >인기순</button>
 				</li>
 				<li>
-					<button class="sort" type="button" value="hitcount">조회순</button>
+					<button class="top-btn" type="button" value="hitcount">조회순</button>
 				</li>
 				<li>
-					<button class="sort" type="button" value="c_count">댓글순</button>
+					<button class="top-btn" type="button" value="c_count">댓글순</button>
+					<!-- onclick="location.href='/coordies/ajaxCoordies?page=${pageMaker.cri.pageNum}&sort=c_count'" -->
 				</li>
 			</ul>
 		</div>
 	
 		<div class="form-group-btn">
-			<button  type="button" class="register" id="register-btn" >글쓰기</button>
+			<button  type="button" class="top-btn" id="register-btn" >글쓰기</button>
+			
 		</div>
 			
 	</div>
-	
+
 <section class="page page--static">
 	<!-- 코디사진 메인 (무한스크롤) -->
 	<div class="form-group" id="form-group-feed">
 		<ul class="form-group-feed-ul">
 			<!-- 게시글 목록 -->
 		</ul>
-		
 
-		<!-- 로딩이미지? 할까 말까 -->
-		<!-- <div class="form-group-loading">
-			<div class="back-drop">
-			<img src="./로딩이미지 사진 경로"> 
-			</div>
-		</div> -->
-		
-		
 	</div>	
 	
 </section>
@@ -175,10 +76,12 @@ body {
 	var feedList =$(".form-group-feed-ul");
 	var scrollPage = 1;
 	var sort = "";
+	var totalCount;
+	var endPage;
 	
-	//이미지 불러오기
+	//이미지 불러오기 card-img-top
 	var display = (function loadThumbnail() {
-		var uploadResultArr = $('.thumb');
+		var uploadResultArr = $('.card-img-top');
 		
 		$(uploadResultArr).each(function (i, obj) {
 			//섬네일 파일을 불러오기 위한 경로
@@ -191,45 +94,54 @@ body {
 	
 	//페이지 처음 창
 	$(document).ready(function () {
-		console.log("창 열림")	
+		console.log("창 열림")
 		
-		var totalCount = '${pageMaker.total}'
+		totalCount = '${pageMaker.total}'	
+		endPage = '${pageMaker.endPage}'	
 		console.log("총 글 갯수 " + totalCount);	
-		
-		console.log("처음 페이지 " + scrollPage)
+		console.log("마지막 페이지 " + totalCount);	
 		
 		getCoordiList(scrollPage); //글 목록 1페이지
-		
-		//스크롤 했을 때
-		$(window).scroll(function () {
-			
-			var scrollTop = $(window).scrollTop() + $(window).height() + 1; //위로 스크롤된 길이		
-			var documentHeight = $(document).height(); //문서 전체의 높이 
-			
-			console.log("스크롤한 길이  " + scrollTop)
-			console.log("비교할 값 " + documentHeight)
-			
-		    if (scrollTop >= documentHeight){
-	
-		    	scrollTop -= documentHeight;
-
-		    	console.log("그다음 불러올 페이지" + scrollPage)
-		    	getCoordiList(scrollPage); //ajax로 게시글 가져오기	
-		    }		
-		})	    
+ 
 	})//end document
+	
+	//스크롤 했을 때
+	$(window).scroll(function () {
+		
+		var scrollTop = $(window).scrollTop() + $(window).height() + 1; //위로 스크롤된 길이		
+		var documentHeight = $(document).height(); //문서 전체의 높이 
+		
+		console.log("스크롤한 길이  " + scrollTop)
+		console.log("비교할 값 " + documentHeight)
+		
+	    if (scrollTop >= documentHeight){
+				
+	    	scrollTop -= documentHeight;
+	    	
+	    	console.log("그다음 불러올 페이지" + scrollPage)
+
+	    	if(scrollPage == endPage){
+	    		getCoordiList(scrollPage);
+	    		return;
+	    	}
+	    	getCoordiList(scrollPage); //ajax로 게시글 가져오기	
+
+	    }		
+	})	 
 	
 	
 	//게시글 목록
 	function getCoordiList(page) {
+		//sort ='${pageMaker.cri.sort}' 
 
 		console.log("현재 페이지" + page)
 	
+		console.log("정렬 누른 후 들어오는 솔트값은 :" + sort)
+		
 	    $.ajax({
 	    	url:'/coordies/ajaxCoordies?page='+page+"&sort="+sort,
 	    	type:'get',
 	    	success:function (htmlList) {
-    		
 	    		$(".form-group-feed-ul").append(htmlList);
 	    		display(); //이미지 출력
 	    		scrollPage ++; //페이지 수 증가
@@ -294,16 +206,19 @@ body {
 	});
 	
 	
-	//정렬 클릭
-	$(".sort").on("click", function () {
+	//정렬 클릭 //@집가서 다시보기 => 정렬은 모든 페이지 내에서 전체 데이터를 조회해서 1페이지만을 출력해야하는데 1페이지 내에서만 조회하고 출력해버리는 문제 발생
+	$("ul .top-btn").on("click", function () {
 		sort = $(this).val();
 		console.log("정렬 솔트값" + sort)
 		
 		$(".form-group-feed-ul").empty(); //기존 값 비워주고
 		
-		getCoordiList(scrollPage); //해당하는 새로운 데이터 가져오기
+		console.log("정렬 총 페이지: " + scrollPage)
+		
+		
+		getCoordiList('${pageMaker.cri.pageNum}'); //해당하는 새로운 데이터 가져오기
 	});
-
+ 
 </script> 
 
 

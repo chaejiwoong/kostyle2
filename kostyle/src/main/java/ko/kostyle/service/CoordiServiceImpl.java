@@ -125,12 +125,15 @@ public class CoordiServiceImpl implements CoordiService {
 	public void update(CoordiDTO coordiDTO) {
 		
 		CoordiVO coordiVO = CoordiVO.builder()
+														.cno(coordiDTO.getCno())
 														.title(coordiDTO.getTitle())
 														.content(coordiDTO.getTitle())
 														.filepath(coordiDTO.getFilepath())
 														.filename(coordiDTO.getFilename())
 														.uuid(coordiDTO.getUuid())
 														.build();
+		
+		mapper.update(coordiVO);
 	}
 
 

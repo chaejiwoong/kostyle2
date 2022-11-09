@@ -12,7 +12,7 @@
 <link href="/resources/css/footer.css" rel="stylesheet"/>
 
 
- <style>
+ <!-- <style>
  html {
     color: #424242;
     background: #fff;
@@ -69,9 +69,9 @@ element.style {
     overflow: hidden;
     overflow-wrap: break-word;
     height: 145px;
-}
+} 
 
- </style>
+ </style>-->
 
 
 

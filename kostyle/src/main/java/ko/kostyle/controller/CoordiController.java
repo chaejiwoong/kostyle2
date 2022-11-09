@@ -72,9 +72,12 @@ public class CoordiController {
 	@GetMapping
 	public String list(Criteria cri, Model model){
 		log.info("list Coordies.....................................");
-		
+
+
 		int total = service.getTotalCount(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		PageDTO pageDTO = new PageDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageDTO);
 		
 		return "/coordies/coordies";
 	}
@@ -83,13 +86,18 @@ public class CoordiController {
 	public String getList(Criteria cri,  int page, Model model,
 														HttpServletRequest request, HttpServletResponse response){
 		
+		
+		log.info("정렬 누른 후 솔트 내놩ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + cri.getSort());
+		
+		
+		
 		// 쿠키 주기
 		Cookie cookie = new Cookie("listCookie", "");
 		cookie.setPath("/");
 		response.addCookie(cookie);
 
 		//무한스크롤	
-		cri.setAmount(6);
+		cri.setAmount(12);
 		cri.setPageNum(page);
 		
 		log.info("페이지는 " + cri.getPageNum());
@@ -105,30 +113,6 @@ public class CoordiController {
 		return service.getList(cri);
 	}
 	
-	
-	
-
-//
-//	// 코디 글 목록 무한스크롤로 ajax 보내기
-//	@GetMapping("/coordiCollections")
-//	@ResponseBody
-//	public ResponseEntity<List<CoordiDTO>> scrollList(Model model, @RequestBody  Criteria cri) {
-////		cri.setAmount(5);
-////		cri.setPageNum(1);
-//
-//		log.info("에이작스 리스트---------");
-//		log.info("페이지넘" + cri.getPageNum());
-//		log.info("어마운트" + cri.getAmount());
-//		
-//		//보여줄 페이지의 시작 rownum 0부터 시작?
-//		int startRowNum = 0 + (cri.getPageNum() -1)  * cri.getAmount();
-//		//보여줄 페이지의 끝
-//		int endRowNum = cri.getPageNum() * cri.getAmount();
-//		
-//		int rowCount = cri.getAmount();
-//		
-//		return new ResponseEntity<List<CoordiDTO>>(service.getList(cri), HttpStatus.OK);
-//	}
 
 	
 	// 코디 글 세부 보기
@@ -252,21 +236,26 @@ public class CoordiController {
 	
 
 	
-//	// 글 수정 
-//	@GetMapping("/modify")
-//	public String update(@RequestParam("cno") Long cno, Model model) {
-//		model.addAttribute("coordi", service.getCoordi(cno));
-//		return "/coordies/modifyCoordi";
-//	}
-//	//미완성
-//	@ResponseBody   
-//	@PutMapping("/{cno}")   
-//	public String update(@PathVariable("cno") Long cno, @RequestBody CoordiDTO coordiDTO, RedirectAttributes rttr) {
-//		service.update(coordiDTO)
-//		rttr.addFlashAttribute("result", "success");
-//		
-//		return "ok";
-//	}
+	// 글 수정 
+	@GetMapping("/modify")
+	public String update(@RequestParam("cno") Long cno, Model model) {
+		model.addAttribute("coordi", service.getCoordi(cno));
+		return "/coordies/modifyCoordi";
+	}
+	//미완성
+	@ResponseBody   
+	@PutMapping("/{cno}")   
+	public String update(@PathVariable("cno") Long cno, @RequestBody CoordiDTO coordiDTO, RedirectAttributes rttr) {
+		
+		coordiDTO.setCno(cno);
+		
+		log.info("내가 수정한 코디==========" + coordiDTO);
+		
+		service.update(coordiDTO);
+		rttr.addFlashAttribute("result", "success");
+		
+		return "ok";
+	}
 
 	
 	//글 삭제
