@@ -67,6 +67,7 @@ public class CartController {
 		Long mno = SecurityUtil.getCurrentMemberId();
 		
 		vo.setMno(mno);
+		
 		List<CartListVO> cartArr = service.getCartList(mno);
 		int finalTotalPrice =0;
 		int finalTotalPoint =0;		
@@ -80,9 +81,8 @@ public class CartController {
 		
 		log.info(finalTotalPrice);
 		log.info(finalTotalPoint);
-
 		model.addAttribute("cartList", cartArr);
-		model.addAttribute("cartTotal", cartArr);
+
 		log.info(cartArr);
 		return "shop/cartList";
 	}
