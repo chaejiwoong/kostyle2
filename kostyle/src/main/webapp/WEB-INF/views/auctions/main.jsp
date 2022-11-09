@@ -96,7 +96,8 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill">
                                         <br>
-                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+                                       최고입찰가 : <c:out value="${best_bid_price}" />
                                         <br>
                                         
                                     	
@@ -124,7 +125,7 @@
 		
 		$(uploadResultArr).each(function (i, obj) {
 			//섬네일 파일을 불러오기 위한 경로
-			var fileCallPath = encodeURIComponent($(obj).data('filepath') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+			var fileCallPath = encodeURIComponent($(obj).data('filepath') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 			// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
 			$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 			})

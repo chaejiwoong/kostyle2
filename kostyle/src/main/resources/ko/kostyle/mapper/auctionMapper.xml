@@ -46,7 +46,7 @@
 		resultType="ko.kostyle.domain.AuctionVO">
     	    <![CDATA[
         select * from(
-            select rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
+            select /*+INDEX_DESC(AUCTION_PRODUCT SYS_C007759)*/ rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
             from auction_product
             where
             ]]>

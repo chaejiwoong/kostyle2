@@ -107,12 +107,14 @@
 <script>
 function setThumbnail(event) {
  var reader = new FileReader();
-
+		
        reader.onload = function(event) {
                var img = document.createElement("img");
                img.setAttribute("src", event.target.result)
                $("#img-result").empty();
              document.querySelector("div#img-result").appendChild(img);
+             
+             console.log($(this).text())
        };
 
      reader.readAsDataURL(event.target.files[0]);

@@ -125,12 +125,15 @@ public class CoordiServiceImpl implements CoordiService {
 	public void update(CoordiDTO coordiDTO) {
 		
 		CoordiVO coordiVO = CoordiVO.builder()
+														.cno(coordiDTO.getCno())
 														.title(coordiDTO.getTitle())
 														.content(coordiDTO.getTitle())
 														.filepath(coordiDTO.getFilepath())
 														.filename(coordiDTO.getFilename())
 														.uuid(coordiDTO.getUuid())
 														.build();
+		
+		mapper.update(coordiVO);
 	}
 
 
@@ -163,6 +166,15 @@ public class CoordiServiceImpl implements CoordiService {
 	public int getTotalCount(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
+
+	//마이페이지
+	@Override
+	public List<CoordiDTO> myPage(Long mno) {
+		return mapper.myPage(mno).stream()
+				.map(vo -> coordiDTO(vo))
+				.collect(Collectors.toList());
+	}
+
 
 
 }

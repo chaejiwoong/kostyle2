@@ -15,7 +15,9 @@ public class Criteria {
     private String type;
     private String keyword;
     private String filter;
-
+    
+    private String sort;
+    
     public Criteria() {
         this(1, 10);
     }
@@ -24,6 +26,7 @@ public class Criteria {
     	System.out.println("pageNum = ");
         this.pageNum = pageNum;
         this.amount = amount;
+        this.sort = "";
     }
 
     public String[] getTypeArr() {

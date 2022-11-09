@@ -1,26 +1,113 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+
 
 <html>
 <head>
-<meta charset="UTF-8">
-<title>코디 세부 글 보기</title>
-<!-- <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/js/header.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet"/>
-<link href="/resources/css/footer.css" rel="stylesheet"/>
+<link href="/resources/css/header.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/89998ce003.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-	<h1>코디 세부 글 보기</h1>
-	
-	<!-- 수정, 삭제, 목록 버튼 -->
+ <!-- Section-->
+       <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                
+                
+                    <div class="col mb-5" style="width: 700px; height: 1000px;">
+                    
+                    <div class="form-group">
+						<input class="form-control" name='cno' hidden=""
+						value='<c:out value="${coordi.cno }"/>' readonly="readonly">
+					</div>
+					
+                    	<ul>
+                    		<li>
+                    			<!-- 작성자 -->
+                    			<div class="text-center">
+                    				<a class="btn btn-outline-dark mt-auto" href="#">
+                    					<input class="form-control" name='email'
+										value='<c:out value="${coordi.email }"/>' readonly="readonly">
+                   					</a>                   
+                   				 </div>
+                    		</li>
+                    		
+                    		<li>        
+	                    		<!-- 좋아요 -->        		
+								<c:if test="${!coordi.like}"><!-- 빈하트일때 -->
+									<button class="like-btn" id="${coordi.cno }" type="button">
+										<i class="fa-regular fa-heart"></i><!-- svg 하트 아이콘 -->좋아요							
+										<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
+									</button>
+								</c:if>
+											
+								<c:if test="${coordi.like}"><!-- 꽉찬 하트일때 -->
+									<button class="like-btn" id="${coordi.cno }" type="button">
+										<i class="fa-solid fa-heart"></i><!-- svg 하트 아이콘 -->좋아요
+										<span class="like-count"><c:out value="${coordi.lk_count}" /></span>
+									</button>
+								</c:if>													
+                    		</li>
+                    		
+                    		<li>
+                    			<!-- 조회수 -->
+                    			<div class="form-group">
+									<label>조회수</label> <input class="form-control" name='hitcount'
+									value='<c:out value="${coordi.hitcount }"/>' readonly="readonly">
+								</div>
+                    		</li>
+                    	</ul>
+                    
+                    
+                    
+
+
+                        <div class="card h-100">
+                            <!-- 코디 사진 -->
+                           <img class="card-img-top" 
+								data-filepath="${coordi.filepath }"
+								data-filename="${coordi.filename }" data-uuid="${coordi.uuid }"
+								style="width: 700px; height: 700px; border-radius: 15px;" />
+                           
+                           
+
+                           
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">                             
+                                    <!-- 제목 -->
+                                    <h5 class="fw-bolder">
+       									<input class="form-control" name='title' value='<c:out value="${coordi.title }"/>' readonly="readonly">
+	           						</h5>
+                                    <br>
+                                    
+                                    <!-- 내용 -->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill">
+                                        	<textarea class="form-control" rows="3" name='content'
+											readonly="readonly"><c:out value="${coordi.content}" /></textarea>        					
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                
+                        </div>
+                        
+                        
+                        <!-- 수정, 삭제, 목록 버튼 -->
 	<div class="">
 	
 		<span class="list">
@@ -44,109 +131,88 @@
 			<input type="hidden" id="cno" name="cno" value="<c:out value="${coordi.cno }"/>">
 		</form>
 	</div>
-
-
-	<!-- 본문 -->
-		<div class="panel-body">
-		<div class="form-group">
-			<label>글번호</label> <input class="form-control" name='cno'
-				value='<c:out value="${coordi.cno }"/>' readonly="readonly">
-		</div>
-		
-		<div class="form-group">
-			<label>조회수</label> <input class="form-control" name='hitcount'
-				value='<c:out value="${coordi.hitcount }"/>' readonly="readonly">
-		</div>
-
-		<div class="form-group">
-			<label>제목</label> <input class="form-control" name='title'
-				value='<c:out value="${coordi.title }"/>' readonly="readonly">
-		</div>
-
-		<div class="form-group">
-			<label>내용</label>
-			<textarea class="form-control" rows="3" name='content'
-				readonly="readonly"><c:out value="${coordi.content}" /></textarea>
-		</div>
-
-		<div class="form-group">
-			<label>작성자</label> <input class="form-control" name='email'
-				value='<c:out value="${coordi.email }"/>' readonly="readonly">
-		</div>
-		
-		<div class="form-group">
-			<label>작성일</label> <input class="form-control" name='created_date'
-				value='<fmt:formatDate pattern="yyyy-MM-dd" value="${coordi.created_date }"/>' readonly="readonly">
-		</div> 
-
-
-
-
-
-<%-- 		<sec:authentication property="principal" var="pinfo" />
-		<sec:authorize access="isAuthenticated()">
-			<c:if test="${pinfo.username eq board.writer}">
-				<button data-oper='modify' class="btn btn-default">Modify</button>
-			</c:if>
-		</sec:authorize> --%>
-
-<%-- 		<button data-oper='list' class="btn btn-info">List</button>
-
-		<form id='operForm' action="/boad/modify" method="get">
-			<input type='hidden' id='bno' name='bno'
-				value='<c:out value="${board.bno}"/>'> <input type='hidden'
-				name='pageNum' value='<c:out value="${cri.pageNum}"/>'> <input
-				type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-			<input type='hidden' name='keyword'
-				value='<c:out value="${cri.keyword}"/>'> <input
-				type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
-		</form> --%>
-	</div>
-	
-	
-	
-	
-	
-    <!-- 댓글 -->
-    <div class="" id="comment">
-        <section class="modal-section">
-            <P>
-               댓글
-               <span class="comment-count"> ${coordi.c_count}</span> 
-            </P>
-
-            <!-- 댓글 작성 (로그인한 사람만) -->
-            <form class="comment-write" method="post">
-                <div class="comment-writer">
-                    작성자: <a href="그사람 마이페이지">${sessionScope.user.email}</a>
-                </div>
-                <div class="comment-content">
-                    <input class="comment-content-text"  type="text" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다!">
-                </div>
-                <div class="comment-btn">
-                    <button class="write-btn" type="button" >댓글 등록</button>
-                </div>   
-            </form>
-
-
-             <!-- 댓글 목록 -->
-            <ul class="comment-list">
-            </ul>
-            
-            <!-- 페이지 버튼 -->
-            <div class="page-footer">
-            
-            </div>
-            
-
-        </section>
-    </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                       <!-- 댓글 -->
+					    <div class="" id="comment">
+					        <section class="modal-section">
+					            <P>
+					            	<i class="fa-regular fa-comment-dots fa-2x"></i>
+									<span class="comment-count"><c:out value="${coordi.c_count}" /></span>    
+					            </P>
+					
+					            <!-- 댓글 작성 (로그인한 사람만) -->
+					            <form class="comment-write" method="post">
+					            	<ul>
+					            		<li>
+					            			<div class="comment-writer">
+					                   			작성자: <a href="그사람 마이페이지">${sessionScope.user.email}</a>
+					                			<%-- <c:if test="로그인 안 했을때">
+					                			로그인을 해주세요
+					                			</c:if> --%>
+					                		</div>
+					            		</li>
+					            		
+					            		<li>
+					            			<div class="comment-content">
+					                   		 <input class="comment-content-text"  type="text" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다!">
+					                		</div>
+					            		</li>
+					            		
+					            		<li>
+					            			<div class="comment-btn">
+					                    		<button class="write-btn" type="button" >댓글 등록</button>
+					               	 		</div> 
+					            		</li>
+					            	</ul>					      
+					            </form>
+					            
+					            
+					            
+					            
+					            
+					
+					
+					             <!-- 댓글 목록 -->
+					            <ul class="comment-list">
+					            </ul>
+					            
+					            <!-- 페이지 버튼 -->
+					            <div class="page-footer">         
+					            </div>
+					            
+					
+					        </section>
+					    </div>  
+                    </div>
+   
+                    
+ </div>
+ </div>
+ </section>
  
- <script type="text/javascript" src="/resources/js/coordiComment.js"></script> 
 
-<script>      
+<script type="text/javascript" src="/resources/js/coordiComment.js"></script> 
+
+<script>  
+	var thumbnail = (function loadThumbnail() {
+		var uploadResultArr = $('.card-img-top');
+	   
+	   $(uploadResultArr).each(function (i, obj) {
+	      //섬네일 파일을 불러오기 위한 경로
+	      var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+	      // 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
+	      $(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
+	      })
+	   })();
+
+	
 	$(document).ready(function () {
-		
 		//비회원 버전
 		//회원 인증 후
 		//수정하기,삭제하기(버튼 숨겨놨다가 본인이랑 작성자랑 같으면 버튼 드러나도록),목록보기 버튼 이벤트
@@ -182,8 +248,8 @@
 		
 		//댓글 목록 가져오기
         //회원x버전
-            var cno = '<c:out value="${coordi.cno }"/>';
-            var commentList = $(".comment-list");
+        var cno = '<c:out value="${coordi.cno }"/>';
+        var commentList = $(".comment-list");
 
             showList(1);
             
@@ -209,13 +275,13 @@
                     
                     for(var i = 0, len = list.length||0; i<len; i++){
                         str +="<li class='comment-li'>";
-                        str +="<div>작성자: <a href='그사람 마이페이지'>" + list[i].email + "</a></div>";
-                        str +="<div><p>" + list[i].content + "</p></div>";
+                        str +="<div><a href='그사람 마이페이지'>" + list[i].email + "</a></div></li>";
+                        str +="<li><div><p>" + list[i].content + "</p></div></li>";
                         str +="<div><span>" + commentService.displayTime(list[i].date) + "</span></div>";            
                         
              			//작성자별 댓글 삭제 버튼
              			if("${sessionScope.user.email}" == list[i].email ||  "${sessionScope.user.authority}" == "ROLE_ADMIN"){
-             				str += "<div class='remove-btn'><button class='comment-remove-btn' type='button' value=" + list[i].ccno + ">삭제</button></div>"
+             				str += "<li><div class='remove-btn'><button class='comment-remove-btn' type='button' value=" + list[i].ccno + ">삭제</button></div></li>"
              			}	
                     }
                     commentList.html(str);          
@@ -236,11 +302,11 @@
 			      var prev = startNum != 1;
 			      var next = false;
 			      
-			      if(endNum * 10 >= c_count){
+			      if(endNum * 5 >= c_count){
 			        endNum = Math.ceil(c_count/10.0);
 			      }
 			      
-			      if(endNum * 10 < c_count){
+			      if(endNum * 5 < c_count){
 			        next = true;
 			      }
 			      
@@ -310,16 +376,64 @@
 				});
 
 			});//댓글 삭제 끝
+	})  
+	
+	
+	//좋아요 버튼 클릭
+ 	$(".like-btn").on("click" , function () {
+    	
+    	var mno = '${sessionScope.user.mno}'; //사용자
+    	
+        //해당 글 번호 받아 저장
+        var cno = $(this).attr("id");
+        console.log("좋아요 클릭");
+
+        //빈하트 눌렀을 때 (빈하트 꽉찬하트 svg아이콘 클래스명 다르게)
+       // if($(this).children("i").attr("class") == "fa-regular fa-heart"){
+        //    console.log("빈하트 클릭 / 게시물 번호 :" + cno);
         
-            
-            
-
-	})     
+        $.ajax({		        	
+        	url:"/coordies/like?cno="+cno+"&mno="+mno,
+        	type:"get",
+        	success:function (result) {
+        		let lk_count = '${coordi.lk_count}';
+    		
+        		//페이지에 하트 수 갱신
+        		$(".like_count").text(lk_count);
+        		
+        		console.log("하트 추가, 삭제 성공")
+        		if(result == "꽉찬 하트"){
+        			console.log("꽉찬하트")
+        			$(this).html("<i class='fa-solid fa-heart'></i>"); 
+        		}else if(result = "텅빈 하트"){
+        			console.log("텅빈 하트")
+        			$(this).html("<i class='fa-regular fa-heart'></i>");
+        		}                    
+                    self.location="/coordies/get?cno="+cno;
+			},
+			error:function (xhr) {
+				self.location = "/auth/login"
+				console.log(xhr)   
+			}
+		}); //end ajax	        
+	}) //end 좋아요 버튼 클릭		
+	
+	
+	
 </script>   
-	
-	
 
-	
-<%-- <%@ include file="/WEB-INF/views/include/footer.jsp" %> --%>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

@@ -68,12 +68,16 @@ public class CoordiController {
 	}
 	
 
-
-
 	// 코디 글 목록(메인)
 	@GetMapping
-	public String list(){
-		log.info("dndndndnndddddddddddddddd");
+	public String list(Criteria cri, Model model){
+		log.info("list Coordies.....................................");
+
+
+		int total = service.getTotalCount(cri);
+		PageDTO pageDTO = new PageDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageDTO);
 		
 		return "/coordies/coordies";
 	}
@@ -82,7 +86,10 @@ public class CoordiController {
 	public String getList(Criteria cri,  int page, Model model,
 														HttpServletRequest request, HttpServletResponse response){
 		
-		log.info("ㅇ우우우ㅜ우우웅우우우ㅜㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		
+		log.info("정렬 누른 후 솔트 내놩ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + cri.getSort());
+		
+		
 		
 		// 쿠키 주기
 		Cookie cookie = new Cookie("listCookie", "");
@@ -90,69 +97,22 @@ public class CoordiController {
 		response.addCookie(cookie);
 
 		//무한스크롤	
-		cri.setAmount(5);
+		cri.setAmount(12);
 		cri.setPageNum(page);
 		
 		log.info("페이지는 " + cri.getPageNum());
 		model.addAttribute("getCoordiList", service.getList(cri));
-				
-		int total = service.getTotalCount(cri);
-		log.info("총 게시글은" + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		//@이미지 파일 왜 안보여지냐...
-		log.info("파일왜 안넘어오냐===================  " + service.getList(cri));
 		
 		return "/coordies/ajaxCoordies";
 	}
 	
 	
-//	@GetMapping
-//	public String list(Model model, Criteria cri , HttpServletRequest request, HttpServletResponse response) {
-//
-//		// session.getAttribute("member")
-//		cri.setAmount(100);
-//		cri.setPageNum(1);
-//		
-//
-//		int total = service.getTotalCount(cri);
-//		log.info("총 게시글 갯수======" + total);
-//
-//		log.info("컨트롤러 리스트 페이지 메이커 크리는=====" + cri);
-//
-//								//@모델에 담은 getCoordiList에는 like 테이블도 있어야 한다
-//									
-//		model.addAttribute("getCoordiList", service.getList(cri));
-//		model.addAttribute("pageMaker", new PageDTO(cri, total));
-//
-//		// 쿠키 주기
-//		Cookie cookie = new Cookie("listCookie", "");
-//		cookie.setPath("/");
-//		response.addCookie(cookie);
-//
-//		return "/coordies/coordies";
-//	}
-//
-//	// 코디 글 목록 무한스크롤로 ajax 보내기
-//	@GetMapping("/coordiCollections")
-//	@ResponseBody
-//	public ResponseEntity<List<CoordiDTO>> scrollList(Model model, @RequestBody  Criteria cri) {
-////		cri.setAmount(5);
-////		cri.setPageNum(1);
-//
-//		log.info("에이작스 리스트---------");
-//		log.info("페이지넘" + cri.getPageNum());
-//		log.info("어마운트" + cri.getAmount());
-//		
-//		//보여줄 페이지의 시작 rownum 0부터 시작?
-//		int startRowNum = 0 + (cri.getPageNum() -1)  * cri.getAmount();
-//		//보여줄 페이지의 끝
-//		int endRowNum = cri.getPageNum() * cri.getAmount();
-//		
-//		int rowCount = cri.getAmount();
-//		
-//		return new ResponseEntity<List<CoordiDTO>>(service.getList(cri), HttpStatus.OK);
-//	}
+	//이미지 가져오기
+	@GetMapping("/ajaxImge")
+	public List<CoordiDTO> ajaxImg(Criteria cri) {
+		return service.getList(cri);
+	}
+	
 
 	
 	// 코디 글 세부 보기
@@ -195,12 +155,13 @@ public class CoordiController {
 		return "ok";
 	}
 	
+	
 	//파일 업로드
 	@PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public CoordiDTO uploadFile(MultipartFile file) {
 		
-		String uploadFolder = "C:\\kosta247\\kostyle4u-server\\coordi_upload"; //서버에 파일 업로드할 폴더 경로
+		String uploadFolder = "C:\\upload"; //서버에 파일 업로드할 폴더 경로
 		
 		//폴더 만들기
 		File filePath = new File(uploadFolder, getFolder());
@@ -213,14 +174,15 @@ public class CoordiController {
 		log.info("파일이름 " + file.getOriginalFilename());
 		log.info("파일 크키" + file.getSize());
 		
+		CoordiDTO coordiDTO = new CoordiDTO();
 		
 		String fileName = file.getOriginalFilename();
+		coordiDTO.setFilename(fileName);
 		fileName = fileName.substring(fileName.lastIndexOf("\\") + 1); //IE의 경우 전체 파일 경로가 전송되므로 수정 필요 
 		
 		UUID uuid = UUID.randomUUID();
 		fileName = uuid.toString() + "_" + fileName; //UUID를 통한 파일명 중복 방지
 		
-		CoordiDTO coordiDTO = new CoordiDTO();
 		
 		try {
 			File saveFile = new File(filePath, fileName);
@@ -230,8 +192,8 @@ public class CoordiController {
 			Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100); //썸네일 생성			
 			thumbnail.close();		
 					
-			coordiDTO.setFilepath(filePath.toString());
-			coordiDTO.setFilename(fileName);
+			coordiDTO.setFilepath(getFolder().toString());
+			
 			coordiDTO.setUuid(uuid.toString());	
 			
 		} catch (Exception e) {
@@ -239,11 +201,6 @@ public class CoordiController {
 		}
 		return coordiDTO;
 	}
-	
-	
-	//이미지 출력 //지웅씨꺼 가져오기
-	
-	
 	
 	
 	//이미지 파일 삭제  -> @미완성
@@ -277,26 +234,28 @@ public class CoordiController {
 	   }
 
 	
-	
-	
-	
 
 	
-//	// 글 수정 
-//	@GetMapping("/modify")
-//	public String update(@RequestParam("cno") Long cno, Model model) {
-//		model.addAttribute("coordi", service.getCoordi(cno));
-//		return "/coordies/modifyCoordi";
-//	}
-//	//미완성
-//	@ResponseBody   
-//	@PutMapping("/{cno}")   
-//	public String update(@PathVariable("cno") Long cno, @RequestBody CoordiDTO coordiDTO, RedirectAttributes rttr) {
-//		service.update(coordiDTO)
-//		rttr.addFlashAttribute("result", "success");
-//		
-//		return "ok";
-//	}
+	// 글 수정 
+	@GetMapping("/modify")
+	public String update(@RequestParam("cno") Long cno, Model model) {
+		model.addAttribute("coordi", service.getCoordi(cno));
+		return "/coordies/modifyCoordi";
+	}
+	//미완성
+	@ResponseBody   
+	@PutMapping("/{cno}")   
+	public String update(@PathVariable("cno") Long cno, @RequestBody CoordiDTO coordiDTO, RedirectAttributes rttr) {
+		
+		coordiDTO.setCno(cno);
+		
+		log.info("내가 수정한 코디==========" + coordiDTO);
+		
+		service.update(coordiDTO);
+		rttr.addFlashAttribute("result", "success");
+		
+		return "ok";
+	}
 
 	
 	//글 삭제
@@ -315,23 +274,39 @@ public class CoordiController {
 	//좋아요
 	@GetMapping("/like")
 	@ResponseBody
-	public String likeUp(@RequestBody CoordiLikeDTO likeDTO) {
+	public String likeUp(CoordiLikeDTO likeDTO) {
+		
+		log.info("좋아요 클릭");
+		
+		String result;
 		
 		if(likeService.findLike(likeDTO) == 0) { //좋아요 아닌 상태
 			likeService.likeUp(likeDTO);
 			service.updateLikeCount(likeDTO.getCno());
 			
+			log.info("좋아요 아닌 상태");
+			
 			//화면에 꽉찬 하트 보이게 출력할 데이터 전송
-			return "꽉찬 하트";
-		}else {
+			result = "꽉찬 하트";
+			return result;
+		}else{
 			likeService.likeDown(likeDTO);
 			service.updateLikeCount(likeDTO.getCno());
 			
+			log.info("좋아요 누른 상태");
+			
 			//빈하트 출력해야
-			return "텅빈 하트";
-		}	
+			result = "텅빈 하트";
+			return result;
+		}
 	}
 	
+	
+	//마이페이지 - 코디
+//	@GetMapping("/{mno}")
+//	public String myPageCoordi(@PathVariable("mno") Long mno) {
+//		return "";
+//	}
 
 	
 	

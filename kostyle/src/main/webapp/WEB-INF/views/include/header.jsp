@@ -38,10 +38,10 @@
 <nav>
 	<div>
 		<ul class="nav-ul">
-			<li class="li-list" data-list="shop"><a href="#"><span
+			<li class="li-list" data-list="shop"><a href="/main"><span
 					class="list-color">상품</span></a></li>
-			<li class="li-list"><a href="#"><span>코디</span></a></li>
-			<li class="li-list"><a href="#"><span>경매</span></a></li>
+			<li class="li-list"><a href="/coordies"><span>코디</span></a></li>
+			<li class="li-list"><a href="/auctions"><span>경매</span></a></li>
 			<li class="li-list"><a class="customerCenter"
 				href="/customerCenter/qna?category=all"><span>고객센터</span></a></li>
 			<li class="li-list"><a href="#"><span>About Us</span></a></li>

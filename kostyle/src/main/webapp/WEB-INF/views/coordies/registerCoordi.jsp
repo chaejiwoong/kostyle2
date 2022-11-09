@@ -5,14 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>코디 글 등록</title>
-<!-- <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/footer.css" rel="stylesheet"/>
 
 
- <style>
+ <!-- <style>
+ html {
+    color: #424242;
+    background: #fff;
+}
  .modal {
         position: absolute;
         top: 0;
@@ -25,8 +29,50 @@
 
         background-color: rgba(0, 0, 0, 0.4);
       }
+body, html {
+    line-height: 1;
+    font-family: OhouseSans,Noto Sans KR,Apple SD Gothic Neo,ë§‘ì€ ê³ ë”•,Malgun Gothic,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -.4px;
+    font-size: 15px;
+}
+      
+body, div, form, input, li, ol, textarea, ul {
+    margin: 0;
+    padding: 0;
+}
+ol{
+    list-style: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.form-group-div1{
+	padding: 0px 0px 40px;
+    width:768px
+}
+.file-upload-btn {
+    margin: 0px;
+    padding: 0px 0px 60%;
+    border: none;
+    background: none;
+    font: inherit;
+    display: block;
+    position: relative;
+    width: 100%;
+    transition: opacity 0.1s ease 0s;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+element.style {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    height: 145px;
+} 
 
- </style>
+ </style>-->
+
 
 
 
@@ -37,12 +83,15 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 <h1>코디 글쓰기</h1>
+<ol><li></li></ol>
 	
 <form class="register-form" role="form" method="post" enctype="multipart/form-data">
 	<div class="panel-body">
-		
+<ol>
+<li>
+	<div class="form-group-1">
 		<!-- 제목, 내용 -->
-		<div class="form-group">
+		<div class="form-group-1">
 		
 			<div class="form-group-title">
 				<input title="제목" class="" name="title"  placeholder="제목을 입력해주세요(필수)" >
@@ -58,7 +107,7 @@
 		
 		
 		<!-- 파일 업로드 -->
-		<div class="form-group">
+		<div class="form-group-1">
 			
 			<!-- 업로드 버튼 -->
 			<div class="form-group-upload">
@@ -96,7 +145,9 @@
 			</div>
 			
 		</div>
-
+	</div>
+</li>
+</ol>
 
 
 		<!-- 상품태그 -->
@@ -122,23 +173,6 @@
 </form>
 	
 <script>
-
-/* var btnCheck = function () {
-	
-	if($("span#img-result").html()){
-		console.log("썸네일 있다")
-		$(".thumbnail-btn").hide();
-		$("span.upload-notice").show();
-	}else if(!($("span#img-result").html())){
-		console.log("썸네일 없다")
-		$(".thumbnail-btn").show();
-		$("span.upload-notice").hide();	
-	}
-	
-}(); */
-
-
-
 $(document).ready(function () {
 
     var formData;
@@ -207,6 +241,7 @@ $("input[type='file']").on("change", function(e) {
     reader.onload = function(event) {
     	var img = document.createElement("img");
 		 img.setAttribute("src", event.target.result)
+		 img.setAttribute("style", "width:200px; height:300px;")
 		 $("#img-result").empty();
 		 document.querySelector("span#img-result").appendChild(img);
 		 $(".thumbnail-btn").show();
@@ -292,8 +327,8 @@ $(".file-remove").on("click", "button" ,function () {
 
 
 </script>
-
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<script type="text/javascript" src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
 </body>
 </html>
 

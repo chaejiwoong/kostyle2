@@ -15,10 +15,10 @@ public interface CoordiService {
 	public void register(CoordiDTO CoordiDTO);
 	public void updateCommentCount(Long cno, int amount);
 	public void updateHitcount(Long cno);
-	
 	public void updateLikeCount(Long cno);
-	
 	public int getTotalCount(Criteria cri); 
+	
+	public List<CoordiDTO> myPage(Long mno);
 	
 	
 	
