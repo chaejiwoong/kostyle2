@@ -41,19 +41,23 @@
             <div class="user-content font-size">
                 답변 : <c:out value="${list.content}"/>
             </div>
+            <form id='operForm' action="/customerCenter/register" method="get">
+            	<input type="hidden"  id='qno' name='qno' value='<c:out value="${showList.qno}"/>'>
+				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
+				<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+        	</form>
 			<div class="detail-btn">
-            	<button type="button"><span>목록보기</span></button>
+            	<button type="submit"><span>목록보기</span></button>
         	</div>
 		</div>
-
     </div>
 </div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
     <script>
     $(document).ready(function(){
-    	$(".detail-btn").click(function(){
+    	/* $(".detail-btn").click(function(){
 			location.href = "/customerCenter/register";
-		});
+		}); */
     	
     })
     </script>

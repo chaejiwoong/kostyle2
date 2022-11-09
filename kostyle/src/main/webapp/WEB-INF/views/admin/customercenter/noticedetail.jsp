@@ -32,20 +32,22 @@
     	<div class="wrap-box">
 	    	<div class="insert-name">이름:<span><c:out value="${sessionScope.user.name}"/></span></div>
 	    	<form action="/admin/customercenter/noticedetail" method="post">
-	    	<input name="nno" type="hidden" value="<c:out value='${boarddetail.nno}'/>"/>
+	    		<input name="nno" type="hidden" value="<c:out value='${boarddetail.nno}'/>"/>
+				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
+				<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 		    	<div class="insert-box">
 		    		<div class="insert-text">
-		    			<label for="title">제목</label><input id="title" type="text" name="title" value="<c:out value='${boarddetail.title}'/>"/>
+		    			<label for="title">제목</label><input class="title" id="title" type="text" name="title" value="<c:out value='${boarddetail.title}'/>"/>
 		    		</div>
 		    		<div class="insert-textarea">
-		    			<label for="content">내용</label><textarea id="content" name="content">${fn:replace(boarddetail.content, replaceChar, "<br/>")}</textarea>
+		    			<label for="content">내용</label><textarea class="content" id="content" name="content">${fn:replace(boarddetail.content, replaceChar, "<br/>")}</textarea>
 		    		</div>
 		    		<div class="select-box">
 		    			<span class="category-name">카테고리 : 공지사항</span>
 	    				<input type="hidden" class="category-ch" name="category" value="notice"/>
     				</div>
 		    		<div class="insert-btn">
-		    			<button type="submit">수정</button>
+		    			<button class="insert-insert" type="submit">수정</button>
 		    		</div>
 		    	</div>
 	    	</form>

@@ -5,6 +5,7 @@ import java.util.List;
 import ko.kostyle.domain.AnswerVO;
 import ko.kostyle.domain.MemberVO;
 import ko.kostyle.domain.QuestionVO;
+import ko.kostyle.dto.AnswerDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.QuestionDTO;
 
@@ -19,6 +20,7 @@ public interface QuestionService {
 	
 	public int register(AnswerVO answerVO, Long qno, String content);
 	public AnswerVO get(Long qno);
+	public AnswerDTO answer2(Long qno);
 	public int modify(AnswerVO answerVO);
 	public int remove(Long asno);
 	public List<AnswerVO> getList(Criteria criteria, Long qno);

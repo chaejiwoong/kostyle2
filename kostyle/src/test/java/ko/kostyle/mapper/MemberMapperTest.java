@@ -50,7 +50,7 @@ public class MemberMapperTest {
 			MemberVO vo = new MemberVO();
 			vo.setEmail("admin");
 			vo.setName("admin");
-			vo.setBirth(111111);
+			vo.setBirth(971001);
 			vo.setAuthority("ROLE_ADMIN");
 			vo.setGender(i%2==0?"M":"F");
 			vo.setPassword(passwordEncoder.encode("admin"));

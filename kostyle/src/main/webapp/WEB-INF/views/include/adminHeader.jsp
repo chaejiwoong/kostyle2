@@ -26,12 +26,12 @@
 <div class="all-category">
 	<div class="top-category">
 		<div class='top-category01'>
-			<span class='title' data-title='member'><a href='#'>회원</a></span>
-			<span class='title' data-title='product'><a href='#'>상품</a></span> 
-			<span class='title' data-title='auction'><a href='#'>경매</a></span> 
-			<span class='title' data-title='order'><a href='#'>주문</a></span> 
+			<span class='title' data-title='member'><a class="member" href='/admin/members'>회원</a></span>
+			<span class='title' data-title='product'><a class="product" href='/admin/products'>상품</a></span> 
+			<span class='title' data-title='auction'><a class="auction" href='/admin/auctions'>경매</a></span> 
+			<span class='title' data-title='order'><a class="order" href='/admin/orders'>주문</a></span> 
 			<span class='title' data-title='customerCenter'><a class="customerCenter-a" href='/admin/customercenter/qnaList'>고객센터</a></span>
-			<span class='title' data-title='statistics'><a href='#'>통계</a></span>
+			<span class='title' data-title='statistics'><a class="statistics" href='#'>통계</a></span>
 		</div>
 	</div>
 	<div class="bottom-category"></div>

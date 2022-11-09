@@ -8,10 +8,25 @@
 	rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet"/>
 <style>
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
+.auction {
+	color: #35C5F0;
+}
 
+.bottom-category {
+	display: block;
+}
+.title-auctionList {
+	color: #35C5F0;
+}
 h1{
 margin-top: 25px;
 margin-bottom: 25px;
@@ -30,7 +45,8 @@ font-weight: bold;
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+<div id="wrap">
+	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 	<h1>관리자 경매 목록</h1>
 	<div class="container">
@@ -137,9 +153,10 @@ font-weight: bold;
 				value='<c:out value="${ pageMaker.cri.filter }"/>'>
 		</form>
 	</div>
+</div>
 
 
-<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
