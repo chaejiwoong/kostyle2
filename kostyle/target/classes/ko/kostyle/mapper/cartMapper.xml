@@ -58,7 +58,7 @@
 	<!-- 회원번호로 장바구니 목록 가져오기 -->
 	<select id="getCart"
 		resultType="ko.kostyle.domain.CartListVO">
-		select c.cpno,c.mno, c.pno, c.amount, p.name, p.price, m.point
+		select c.cpno,c.mno, c.pno, c.amount, p.p_size, p.name, p.price, m.point
 		from cart_product c left outer join product p
 		on c.pno = p.pno left outer join member m on c.mno = m.mno where p.pno =
 		c.pno

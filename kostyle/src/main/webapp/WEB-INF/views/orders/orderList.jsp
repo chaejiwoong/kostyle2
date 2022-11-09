@@ -172,7 +172,7 @@
 		<li onclick="location.replace('/members')">회원정보수정</li>
 		<li onclick="location.replace('/members/address')">배송지관리</li>
 		<li onclick="location.replace('/reviews/unwritten')">리뷰관리</li>
-		<li>장바구니</li>
+		<li onclick="loaction.replace('/shop/cartList')" >장바구니</li>
 		<li>위시리스트/코디</li>
 		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
 		<li>1:1문의</li>
