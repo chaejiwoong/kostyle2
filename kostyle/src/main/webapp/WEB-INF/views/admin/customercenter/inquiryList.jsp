@@ -38,15 +38,21 @@
 								<td scope="row"><span class="tbody-td"><c:out value="${list.qno}"/></span></td>
 								<td><span class="tbody-td"><c:out value="${list.memberVO.name}"/></span></td>
 								<td><span class="tbody-td"><c:out value="${list.title}"/></span></td>
-								<td><span class="tbody-td"><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${list.created_date}"/></span></td>
+								<td><span class="tbody-td"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></span></td>
 								<td class="td-right">
-									<button type="button" class="tbody-btn btn btn-primary" id="openModalBtn" data-toggle="modal" data-qno ="<c:out value="${list.qno}"/>">답변 작성하기</button>
+									<c:if test="${check.answer ne 'yes'}">
+										<button type="button" class="tbody-btn btn btn-primary" id="openModalBtn" data-toggle="modal" data-qno ="<c:out value="${list.qno}"/>">답변 작성하기</button>
+									</c:if>
 								</td>
+								
 							</tr>
 							<tr class="answer-box admin-box">
 								<td class="answer" colspan="4"><span><c:out value="${list.content}"/></span></td>
-								<td class="answer right" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+								<td class="answer right" colspan="1">
+									<c:if test="${check.qno == list.qno}">
+										<button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

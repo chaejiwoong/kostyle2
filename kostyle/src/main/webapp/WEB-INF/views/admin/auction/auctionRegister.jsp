@@ -15,12 +15,17 @@
 		    position: relative;
 		    padding-bottom: 100px;
 		}
-		
+		.bottom-category {
+			display: block;
+		}
 		.title-auctionInsert {
 			color: #35C5F0;
 		}
 		.container {
 			padding-top: 25px;
+		}
+		.auction {
+			color: #35C5F0;
 		}
 		.input-name {
 			display: inline-block;

@@ -7,6 +7,7 @@ $(document).ready(function () {
 	
 	if(replace[1] == "admin") {
 		if(replace[2] == "members") {
+		alert(replace[2]);
 			var html = "<div>" +
 		    	"<span class='bottom-title'><a class='title-memberList' data-title='member' href='/admin/members'>회원목록</a></span>" +
 		        "</div>"

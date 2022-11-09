@@ -62,7 +62,7 @@
 		SELECT * FROM answer WHERE qno = #{qno}
 	</select>
 	
-	<select id="Answer" parameterType="ko.kostyle.dto.AnswerDTO" resultType="ko.kostyle.dto.AnswerDTO">
+	<select id="checkReply"  resultType="ko.kostyle.dto.AnswerDTO">
 		SELECT * FROM answer WHERE qno = #{qno}
 	</select>
 	
