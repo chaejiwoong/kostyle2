@@ -139,7 +139,7 @@ tbody tr:hover{
 		<li>장바구니</li>
 		<li>위시리스트/코디</li>
 		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
-		<li>1:1문의</li>
+		<li onclick="location.replace('/customerCenter/register')">1:1문의</li>
 	</ul>  		
 </div>
     <h1 class="address-title">배송지 관리</h1>

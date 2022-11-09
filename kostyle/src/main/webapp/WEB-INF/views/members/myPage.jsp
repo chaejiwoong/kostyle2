@@ -137,10 +137,10 @@
 	            <li onclick="location.replace('/members')"><strong>회원정보 수정</strong><div>고객님의 개인정보 및 비밀번호를 변경할 수 있어요.</div></li>
 	            <li onclick="location.replace('/members/address')"><strong>배송지 관리</strong><div>주문한 상품이 배송되는 배송지를 변경/삭제할 수 있어요.</div></li>
 	            <li onclick="location.replace('/reviews/unwritten')"><strong>리뷰 관리</strong><div>고객님께서 구매하신 상품의 리뷰를 작성할 수 있어요.</div></li>
-	            <li><strong>장바구니</strong><div>고객님이 장바구니에 담아둔 상품 목록을 확인하실 수 있어요.</div></li>
+	            <li onclick="location.replace('/shop/cartList')"><strong>장바구니</strong><div>고객님이 장바구니에 담아둔 상품 목록을 확인하실 수 있어요.</div></li>
 	            <li ><strong>위시리스트 / 코디</strong><div>코디를 자랑하거나 위시리스트를 관리할 수 있어요.</div></li>
 	            <li onclick="location.replace('/members/bidHistory')"><strong>내 경매 조회</strong><div>고객님의 경매 입찰 내역을 확인하실 수 있어요.</div></li>
-	            <li><strong>1:1 문의</strong><div>궁금하신 문의사항은 1:1로 문의해보세요.</div></li>
+	            <li onclick="location.replace('/customerCenter/register')"><strong>1:1 문의</strong><div>궁금하신 문의사항은 1:1로 문의해보세요.</div></li>
 	
 	        </ul>
 	
