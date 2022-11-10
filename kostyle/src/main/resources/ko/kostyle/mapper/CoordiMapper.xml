@@ -48,22 +48,21 @@
 	<!-- 코디 글 목록 -->
 	<!-- 정렬 처리 각 마다 인덱스 생성해서? --> <!-- 추후 인덱스 생성해서 조회하는 것으로 수정하기 -->
 	<!-- 인덱스 -->
-	<!-- <sql id="sort">
-	INDEX_DESC(coordi SYS_C007442)	
+	<!-- <sql id="sort">	
 		<if test="sort == ''">	
-			INDEX_DESC(coordi SYS_C007442)		
+			/*+INDEX_DESC(coordi SYS_C007442) */		
 		</if>
-		<if test="sort == created_date"> 최신순
-			INDEX_DESC(coordi DATE_IDX)		
+		<if test="sort == 'created_date'.toString()"> 
+			/*+INDEX_DESC(coordi DATE_IDX)	*/
 		</if>
-		<if test="sort == lk_count"> 인기순
-			INDEX_DESC(coordi LK_COUNT_IDX)
+		<if test="sort == 'lk_count'.toString()"> 
+			/*+INDEX_DESC(coordi LK_COUNT_IDX) */
 		</if>
-		<if test="sort == hitcount"> 조회순
-			INDEX_DESC(coordi HITCOUNT_IDX)			
+		<if test="sort == 'hitcount'.toString()"> 
+			/*+INDEX_DESC(coordi HITCOUNT_IDX)	 */		
 		</if>
-		<if test="sort == c_count"> 댓글순
-			INDEX_DESC(coordi C_COUNT_IDX)
+		<if test="sort == 'c_count'.toString()"> 
+			/*+INDEX_DESC(coordi C_COUNT_IDX) */
 		</if>		
 	</sql> -->
 	
@@ -108,17 +107,27 @@
 		<![CDATA[
 			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
 				from( select /*+INDEX_DESC(coordi SYS_C007442)	*/
-						 cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count, row_number() over(]]>
+						 rownum rn, cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+						 	from coordi
+							where rownum <= #{pageNum} * #{amount}]]>
 						<include refid="sort" /> 
-		<![CDATA[
-							) as rn          
-							from coordi
-							where rownum <= #{pageNum} * #{amount}
+		<![CDATA[		
 					) where rn > (#{pageNum}-1) * #{amount}		
 		]]>	
 		
 	</select>
 	
+	<!-- <select id="getList"
+		resultType="ko.kostyle.domain.CoordiVO" parameterType="ko.kostyle.dto.Criteria">
+		<![CDATA[
+			select cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count
+				from( select ]]> <include refid="sort" />
+					<![CDATA[ rownum rn, cno, mno, title, content, c_count, hitcount, filepath, filename, uuid, created_date, lk_count         
+							from coordi
+							where rownum <= #{pageNum} * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}		
+		]]>	
+	</select> -->
 
 
 	<!-- 코디 글 작성 -->
@@ -174,10 +183,14 @@
 	<select id="getTotalCount" resultType="int">
 		<![CDATA[
 			select count(*)
-				from coordi
+				from coordi			
 				where cno > 0
-		]]>
+		]]> 	<include refid="sort" /> 
 	</select>
+	
+	
+
+	
 	
 	<!-- 마이페이지 코디글 -->
 	<select id="myPage" resultType="ko.kostyle.domain.CoordiVO">

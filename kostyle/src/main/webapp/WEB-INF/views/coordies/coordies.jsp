@@ -26,7 +26,6 @@
 <!-- 바디 -->
 <div class="panel-body">
 
-
 	<!-- 글쓰기 버튼 회원/비회원 구분 -->
 	<div class="form-group-top">
 		<div class="form-group-sort">
@@ -78,6 +77,8 @@
 	var sort = "";
 	var totalCount;
 	var endPage;
+	var cno;
+	var pageNum;
 	
 	//이미지 불러오기 card-img-top
 	var display = (function loadThumbnail() {
@@ -97,9 +98,11 @@
 		console.log("창 열림")
 		
 		totalCount = '${pageMaker.total}'	
-		endPage = '${pageMaker.endPage}'	
+		endPage = '${pageMaker.endPage}'
+		pageNum = '${pageMaker.cri.pageNum}'
 		console.log("총 글 갯수 " + totalCount);	
-		console.log("마지막 페이지 " + totalCount);	
+		console.log("마지막 페이지 " + endPage);	
+		console.log("페이지넘" + pageNum);	
 		
 		getCoordiList(scrollPage); //글 목록 1페이지
  
@@ -131,15 +134,16 @@
 	
 	
 	//게시글 목록
-	function getCoordiList(page) {
+	function getCoordiList(pageNum) {
 		//sort ='${pageMaker.cri.sort}' 
 
-		console.log("현재 페이지" + page)
+		console.log("현재 페이지" + pageNum)
 	
 		console.log("정렬 누른 후 들어오는 솔트값은 :" + sort)
+		console.log("넘길 총 토탈 카운트" + totalCount)
 		
 	    $.ajax({
-	    	url:'/coordies/ajaxCoordies?page='+page+"&sort="+sort,
+	    	url:'/coordies/ajaxCoordies?pageNum='+pageNum+'&amount='+totalCount+'&sort='+sort,
 	    	type:'get',
 	    	success:function (htmlList) {
 	    		$(".form-group-feed-ul").append(htmlList);
@@ -167,7 +171,7 @@
 	    	var mno = '${sessionScope.user.mno}';
 	    	
 	        //해당 글 번호 받아 저장
-	        var cno = $(this).attr("id");
+	        cno = $(this).attr("id");
 	        console.log("좋아요 클릭");
 	        
 	        $.ajax({        	
@@ -201,7 +205,7 @@
 	$(".form-group-feed-ul").on("click", "img" , function (){
 		
 		console.log("이미지 클릭")
-		var cno = $(this).attr("id");
+		cno = $(this).attr("id");
 		self.location ="/coordies/get?cno="+cno;
 	});
 	
@@ -213,11 +217,28 @@
 		
 		$(".form-group-feed-ul").empty(); //기존 값 비워주고
 		
-		console.log("정렬 총 페이지: " + scrollPage)
+		console.log("정렬 페이지: " + '${pageMaker.cri.pageNum}')
+		console.log("총 글 갯수 " + totalCount);	
+		console.log("마지막 페이지 " + endPage);	
 		
 		
-		getCoordiList('${pageMaker.cri.pageNum}'); //해당하는 새로운 데이터 가져오기
+		//getCoordiList('${pageMaker.cri.pageNum}'); //해당하는 새로운 데이터 가져오기
+		getCoordiList(pageNum); //해당하는 새로운 데이터 가져오기
 	});
+	
+	
+	//댓글 클릭
+	$(".form-group-feed-ul").on("click", ".comment-link", function () {
+		
+		cno = $(this).attr("id");
+		console.log("씨엔" +cno)
+		
+		$(this).attr("href", "/coordies/get?cno="+cno);
+		//좌표 구하기
+		//console.log("댓글 좌표는" + document.querySelector("#comment").offsetTop); //503
+		//window.scrollTo({ left: 0, top: 503, behavior: "smooth" });
+		
+	})
  
 </script> 
 

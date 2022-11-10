@@ -1,89 +1,4 @@
 /* 코디 메인 페이지 */
-/* 
-*,
-*::after,
-*::before {
-	box-sizing: border-box;
-}
-body {
-	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	overflow-x: hidden;
-	background: #e9ecef;
-}
-.page--static {
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	flex-direction: column;
-	-webkit-align-items: center;
-	align-items: center;
-	max-width: 1220px;
-	margin: 0 auto;
-	padding: 2em 0 0;
-	text-align: center;
-}
-
-
-
-.form-group-sort{
-	margin-left: 50px;
-	margin-top: 50px;
-}
-.sort-ul li{
-	margin-right: 5px;
-}
-
-.form-group-feed-ul{
-	position: relative;
-	z-index: 100;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-wrap: wrap;
-	flex-wrap: wrap;
-	-webkit-justify-content: center;
-	justify-content: center;
-	-webkit-align-items: center;
-	align-items: center;
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 0 0 6em;
-	list-style: none;
-}
-.form-group-feed-li {
-	display: block;
-	-webkit-flex: none;
-	flex: none;
-	width: 33.33%;
-	padding: 50px;
-}
-
-
-
-
-
-피드
-.feed{
-	width: 100%;
-}
-
-
-.thumb{
-	display: inline-block;
-	width: 100%;
-}
-.feed-title-a {
-	font-family: 'Caveat', cursive;
-	line-height: 1;
-	position: relative;
-	overflow: hidden;
-	margin: 0;
-	padding: 1em 0.5em;
-	text-align: left;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #698b8d;
-	background: #fff;
-} */
 
 /* 크기 지정 */
 .row-cols-md-3 > * {
@@ -113,13 +28,13 @@ body {
     border: none;
     background: none;
     font: inherit;
+    font-weight:bold;
     font-size: 14px;
     line-height: 18px;
     width: auto;
     height: 40px;
     border-radius: 4px;
     padding: 0 16px;
-    font-weight: 400;
     box-sizing: border-box;
     text-align: center;
     color: #FFFFFF;
@@ -127,8 +42,6 @@ body {
     outline: none;
     overflow: hidden;
 }
-
-
 
 
 /* 좋아요 */
