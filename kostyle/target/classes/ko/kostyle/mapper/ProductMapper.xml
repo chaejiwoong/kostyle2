@@ -116,7 +116,7 @@
 		<![CDATA[
 			select pno,name,price,color,gender,season,CREATED_DATE, hitcount
 			FROM(
-				select /*+INDEX_ASC(PRODUCT SYS_C007221)*/
+				select /*+INDEX_DESC(PRODUCT SYS_C007221)*/
 				rownum rn,pno,name,price,color,gender,season,CREATED_DATE,hitcount
 				from PRODUCT
 				where

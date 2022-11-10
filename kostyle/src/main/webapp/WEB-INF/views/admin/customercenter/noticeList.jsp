@@ -28,8 +28,8 @@
 									</div>
 								</div>
 								<div class="qna-btn">
-									<button type="button" class="update" data-nno ="<c:out value="${list.nno}"/>">수정</button>
-									<button type="submit" class="delete" data-nno ="<c:out value="${list.nno}"/>">제거</button>
+									<button type="button" class="update btn btn-primary" data-nno ="<c:out value="${list.nno}"/>">수정</button>
+									<button type="submit" class="delete btn btn-primary" data-nno ="<c:out value="${list.nno}"/>">제거</button>
 								</div>
 							</div>
 						</li>
@@ -68,8 +68,8 @@
 		<!--  end Pagination -->
 	</div>
 	<form id='actionForm' action="/admin/customercenter/noticeList" method='get'>
-		<input type="hidden" name='pageNum' value='${pageMaker.cri.pageNum}'>
-		<input type="hidden" name='amount' value='${pageMaker.cri.amount}'>
+		<input type="hidden" class="pageNum" name='pageNum' value='${pageMaker.cri.pageNum}'>
+		<input type="hidden" class="amount" name='amount' value='${pageMaker.cri.amount}'>
 	</form>
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -105,23 +105,7 @@
                             actionForm.submit();
                         });
 
-                    $(".move")
-                        .on(
-                            "click",
-                            function(e) {
-                            	alert("AD");
-                                e.preventDefault();
-                                actionForm.append("<input type='hidden' name='nno' value='"
-                                    + $(this).attr(
-                                        "href")
-                                    + "'>")
-                                //alert($(this).attr("href"));
-                                actionForm.attr("action", "/admin/customercenter/noticedetail");
-                                // alert("두번째" + actionForm.attr("action"));
-                                // alert("두번째" + actionForm.attr("action","/customerCenter/noticedetail"));
-                                actionForm.submit();
-
-                            });
+                    
                 });
     </script>
 </body>

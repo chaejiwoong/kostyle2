@@ -37,8 +37,8 @@ $(document).ready(function(){
 	                	str += '</a>';
 	                	str += '</div>';
 	                	str += '<div class="qna-btn">';
-	                	str += '<button type="button" class="update" data-nno="'+value.nno+'">' +'수정'+'</button>';
-	                	str += '<button type="submit" class="delete" data-nno="'+value.nno+'">' +'제거'+'</button>';
+	                	str += '<button type="button" class="update btn btn-primary" data-nno="'+value.nno+'">' +'수정'+'</button>';
+	                	str += '<button type="submit" class="delete btn btn-primary" data-nno="'+value.nno+'">' +'제거'+'</button>';
 	                	str += '</div>';
 						str += '</div>';
 						str += '<div class="qna-bottom">';

@@ -12,6 +12,14 @@ import ko.kostyle.dto.Criteria;
 
 public interface OrderMapper {
 	
+	//주문 추가
+	void insertOrder(OrderVO vo);
+	
+	
+	//주문 상세 추가
+	void insertOrderDetail(OrderDetailVO vo);
+	
+	
     List<OrderVO> orderList(@Param("cri")Criteria cri, @Param("filter")String filter, @Param("mno") Long mno);
     
     List<String> memberOrderStatus(Long mno); 
@@ -29,7 +37,7 @@ public interface OrderMapper {
     
     ProductVO productDetail(Long odno);
     
-    int getTotal(Criteria cri);
+    int getTotal(@Param("filter") Criteria cri,@Param("filter") String filter);
     
     //주문 삭제
     void deleteOrder(Long ono);

@@ -3,49 +3,107 @@
 <html>
 <head>
 <title>KoStyle4U</title>
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-   rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet"/>
+   <style type="text/css">
+      #wrap {
+          min-height: 100%;
+          position: relative;
+          padding-bottom: 100px;
+      }
+      
+      .title-auctionInsert {
+         color: #35C5F0;
+      }
+      .container {
+         padding-top: 25px;
+      }
+      .input-name {
+         display: inline-block;
+            width: auto;
+      }
+      .form-inline {
+         padding-top: 10px;
+      }
+      /* .filebox .upload-name {
+          display: inline-block;
+          height: 40px;
+          padding: 0 10px;
+          vertical-align: middle;
+          border: 1px solid #dddddd;
+          width: 78%;
+          color: #999999;
+      }
+      .filebox .file-serch {
+          display: inline-block;
+          padding: 10px 20px;
+          color: #fff;
+          vertical-align: middle;
+          background-color: #999999;
+          cursor: pointer;
+          height: 40px;
+          margin-left: 10px;
+      } */
 
+/*       .filebox input[type="file"] {
+          position: absolute;
+          width: 0;
+          height: 0;
+          padding: 0;
+          overflow: hidden;
+          border: 0;
+      } */
+   </style>
 </head>
 <body>
-   <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
-   <form id=register-form class="form-horizonal">
-   <div class="form-inline form-group">
-         <label for="name">상품명</label>
-      <input id="name" name="name" class="form-control">
-   </div>
-   
-   <div id="img-result">
-   </div>
-   
-   
-   <div class="form-inline form-group">
+   <div id="wrap">
+      <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+      <div class="container" style="width:230px;">
+         <form id=register-form class="form-horizonal">
+            <div class="form-inline form-group">
+                  <label for="name">상품명</label>
+               <input id="name" name="name" class="form-control"/>
+            </div>
+            
+            <div id="img-result">
+            </div>
+            
+            
+            <div class="form-inline form-group filebox">
+
+                <label class="file-serch" for="uploadFile">파일</label>
+                 <input style="display:inline-block;" id="uploadFile" name="uploadFile" type="file" accept="image/*" class="input-name" onchange="setThumbnail(event)" multiple/>
+            </div>
+            
+<!--                <div class="form-inline form-group">
       <label for="uploadFile">파일</label>
       <input id="uploadFile" name="uploadFile" type="file" accept="image/*" class="form-control" onchange="setThumbnail(event)" multiple>
+   </div> -->
+            
+            
+            
+            
+            <div class="form-inline form-group">
+               <label for="start_price">입찰시작가</label>
+               <input id="name" name="start_price" class="form-control"/>
+               
+            </div>
+            <div class="form-inline form-group">
+               <label for="bid_unit">입찰단위</label>
+               <input id="name" name="bid_unit" class="form-control"/>
+            </div>
+         
+         
+            <button id="register-btn" type="button" class="btn btn-primary">상품등록</button>
+            <a href="/admin/auctions" class="btn btn-secondary">목록으로</a>
+         </form>
+      </div>
    </div>
-   
-   
-   
-   <div class="form-inline form-group">
-      <label for="start_price">입찰시작가</label>
-      <input id="name" name="start_price" class="form-control">
-      
-   </div>
-   <div class="form-inline form-group">
-      <label for="bid_unit">입찰단위</label>
-      <input id="name" name="bid_unit" class="form-control">
-   </div>
-
-
-      <button id="register-btn" type="button" class="btn btn-primary">상품등록</button>
-      <a href="/admin/auctions" class="btn btn-secondary">목록으로</a>
-   </form>
    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-   
 <script src="/resources/js/auctionService.js"></script>
 <script>
 function setThumbnail(event) {

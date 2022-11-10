@@ -50,7 +50,7 @@
                    			</c:forEach>
                         </div> --%>
                         
-                        <form action="/orders/pay" method = "get">
+                        <form id="orderForm" action="/orders/pay" method = "get">
                         <select name="p_size" class="form-control empty error"
 								id="selectBox">
 								<option value="none">사이즈 선택(필수)</option>
@@ -61,9 +61,9 @@
 						</select>
 							
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="" style="max-width: 5rem" name ="amount">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="hidden" value="${product.price }" style="max-width: 5rem" name ="price">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="hidden" value="${product.pno }" style="max-width: 5rem" name ="pno">
+                            <input class="form-control text-center me-3" id="amount" type="num" value="" style="max-width: 5rem" name ="amount">
+                            <input class="form-control text-center me-3" id="price" type="hidden" value="${product.price }" style="max-width: 5rem" name ="price">
+                            <input class="form-control text-center me-3" id="pno" type="hidden" value="${product.pno }" style="max-width: 5rem" name ="pno">
                             <button class="btn btn-outline-dark flex-shrink-0" type="submit" id = "buy"><span class = "buy">구매</span>  </button>                       
                             <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "cart"><span class = "cart"> 장바구니담기</span> </button>
                              <button class="btn btn-outline-dark flex-shrink-0" type="button" id = "list"><span class = "list">목록</span>  </button>
@@ -194,12 +194,22 @@
 			str += "<div id='result_card'";
 			str += "data-path='" + obj.filePath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
 			str += ">";
-			str += "<img src='/member/products/display?fileName=" + fileCallPath + "'>";
+			str += "<img style='width:500px; height:300px;' src='/member/products/display?fileName=" + fileCallPath + "'>";
 			str += "</div>";		
 		
 			
 			uploadReslut.html(str);		
 		});	
+		
+		var orderForm = $('#orderForm');
+		$('#buy').on('click', function(e){
+			e.preventDefault();
+			
+			$('#price').val($("#price").val() * $('#amount').val());
+			
+			orderForm.submit();
+			
+		})
 		
 	})
 /* 상품 상세 페이지 이동 */

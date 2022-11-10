@@ -99,6 +99,19 @@ label{
 
 #cancel-btn{
 	width:80px;
+    display: inline-block;
+    padding: 6px 12px;
+	line-height: 1.42857143;    	
+	border-radius: 4px;        	
+    width:80px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-weight:bold;
+    border:1px solid #ebebeb;
+}
+
+.essential{
+	color:red;
 }
 </style>
     </head>
@@ -126,19 +139,19 @@ label{
 
         <form id="address-form" class="form-horizontal">
             <div class="form-inline form-group">
-                <label for="name">배송지명</label>
+                <label for="name">배송지명<strong class="essential"> * </strong></label>
                 <input type="text" id="name" name="name" class="form-control">
             </div>
             
             <div class="form-inline form-group">
-                <label for="address-num">배송지 주소</label>
-                <input type="text" id="address-num" name="address-num" class="form-control">
+                <label for="address-num">배송지 주소<strong class="essential"> * </strong></label>
+                <input type="text" id="address-num" name="address-num" class="form-control" readonly>
                 <button id="findAddress" type="button" class="btn btn-secondary">우편번호</button>
             </div>
             
             <div class="form-inline form-group">
                 <label for="address-info"></label>
-                <input type="text" id="address-info" name="address-info" class="form-control">
+                <input type="text" id="address-info" name="address-info" class="form-control" readonly placeholder="우편번호로 검색">
             </div>
             
             <div class="form-inline form-group">
@@ -148,11 +161,11 @@ label{
             
                                                 
             <div class="form-inline form-group">
-                <label for="tel">휴대폰번호</label>
+                <label for="tel">휴대폰번호<strong class="essential"> * </strong></label>
                 <input id="tel" type="text" name="tel" class="form-control" placeholder="-빼고 입력">
             </div>
             <div class="form-inline form-group">
-                <label for="recipient">수령인</label>
+                <label for="recipient">수령인<strong class="essential"> * </strong></label>
                 <input id="recipient" type="text" class="form-control" name="recipient">
             </div>
             <div class="form-inline form-group">
@@ -164,7 +177,7 @@ label{
             </div>            
             <div class="form-group form-inline">
                 <button id="register-btn" type="button">등록</button>
-            	<button id="cancel-btn" class="btn btn-secondary" type="button">취소</button>
+            	<button id="cancel-btn" class="btn-secondary" type="button">취소</button>
             </div>
 
         </form>

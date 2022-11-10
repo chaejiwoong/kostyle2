@@ -69,12 +69,14 @@ public class ServiceCenterController {
 
         log.info("공지사항");
     }
+    
     @GetMapping("/noticedetail")
     public void getnoticedetile(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria criteria, Model model) {
         log.info("공지사항 상세보기");
         model.addAttribute("boarddetail", service.getNoticeDetail(nno));
     }
 
+    // 로그인
     @GetMapping("/register")
     public void getRegister(Criteria criteria, Model model) {
     	int total = service2.questionTotal(criteria);
@@ -84,8 +86,10 @@ public class ServiceCenterController {
         model.addAttribute("pageMaker", new PageDTO(criteria, total));
 //        model.addAttribute("name", service2.getname());
     }
+    
+    // 로그인
     @GetMapping("/answerdetail")
-	public void getAnswer(@RequestParam("qno") Long qno, Model model) {
+	public void getAnswer(@RequestParam("qno") Long qno, @ModelAttribute("cri") Criteria criteria, Model model) {
 		model.addAttribute("list", service2.get(qno));
 		model.addAttribute("showList", service2.showQuestion(qno));
 	}

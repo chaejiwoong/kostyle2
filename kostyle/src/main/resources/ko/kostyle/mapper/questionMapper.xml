@@ -60,7 +60,10 @@
 	
 	<select id="readAnswer" resultType="ko.kostyle.domain.AnswerVO">
 		SELECT * FROM answer WHERE qno = #{qno}
-		
+	</select>
+	
+	<select id="Answer" parameterType="ko.kostyle.dto.AnswerDTO" resultType="ko.kostyle.dto.AnswerDTO">
+		SELECT * FROM answer WHERE qno = #{qno}
 	</select>
 	
 	<delete id="deleteAnswer">
@@ -78,4 +81,6 @@
 			 WHERE rownum <= #{pageNum} * #{amount})
 		WHERE rn > (#{pageNum} -1) * #{amount} -->
 	</select>
+	
+	<!-- 답변있는지 확인 -->
 </mapper>

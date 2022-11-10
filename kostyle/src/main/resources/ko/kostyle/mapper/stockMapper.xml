@@ -8,6 +8,10 @@
 		update stock set amount = amount + #{amount} where pno=#{pno}
 		and p_size=#{p_size}
 	</update>
+	
+	<select id="stockAmount" resultType="int">
+		select amount from stock where pno=#{pno} and p_size=#{p_size}
+	</select>
 
 </mapper>
 

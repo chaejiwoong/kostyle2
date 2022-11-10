@@ -113,7 +113,7 @@
 .auction-title{
 	height:50px;
 	font-weight:bold;
-	font-size:17px;
+	font-size:18px;
 	border-bottom: 1px solid black;
 }
 

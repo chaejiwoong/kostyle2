@@ -33,10 +33,10 @@
 	    	<form action="/admin/customercenter/insert" method="post">
 		    	<div class="insert-box">
 		    		<div class="insert-text">
-		    			<label for="title">제목</label><input id="title" type="text" name="title"/>
+		    			<label for="title">제목</label><input id="title" class="title" type="text" name="title" value=""/>
 		    		</div>
 		    		<div class="insert-textarea">
-		    			<label for="content">내용</label><textarea id="content" name="content"></textarea>
+		    			<label for="content">내용</label><textarea id="content" class="content" name="content"></textarea>
 		    		</div>
 		    		<div class="select-box">
 		    			<span class="category-name">카테고리</span>
@@ -47,7 +47,7 @@
 	    				</select>
     				</div>
 		    		<div class="insert-btn">
-		    			<button type="submit">등록</button>
+		    			<button type="submit" class="qna-insert insert-insert">등록</button>
 		    		</div>
 		    	</div>
 	    	</form>

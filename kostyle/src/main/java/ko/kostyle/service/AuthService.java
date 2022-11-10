@@ -1,5 +1,6 @@
 package ko.kostyle.service;
 
+import ko.kostyle.dto.OrderRequestDTO;
 import ko.kostyle.dto.members.MemberChangeDTO;
 import ko.kostyle.dto.members.MemberJoinDTO;
 
@@ -23,4 +24,6 @@ public interface AuthService {
     public boolean findPw(String email, String name);
 
     public void updatePw(MemberChangeDTO dto);
+    
+    public void orderEmail(OrderRequestDTO dto);
 }

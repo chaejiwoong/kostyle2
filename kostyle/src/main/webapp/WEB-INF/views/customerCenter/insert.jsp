@@ -35,16 +35,15 @@
 		    			<label for="title">제목</label><input id="title" type="text" name="title"/>
 		    		</div>
 		    		<div class="insert-textarea">
-		    			<label for="content">내용</label><textarea id="content" name="content"></textarea>
+		    			<label for="content">내용</label><textarea class="content" id="content" name="content"></textarea>
 		    		</div>
 		    		<div class="insert-btn">
-		    			<button type="submit">등록</button>
+		    			<button class="insert" type="submit">등록</button>
 		    		</div>
 		    	</div>
 	    	</form>
     	</div>
     </div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-    
 </body>
 </html>

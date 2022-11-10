@@ -46,18 +46,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+                // 로그인 관련
                 .antMatchers("/auth/**").permitAll()
-                
-                
+                // 회원 관련
                 .antMatchers("/members/**").authenticated()
 
+                // 관리자 관련
                 .antMatchers("/admin/**").hasRole("ADMIN")           
-                .antMatchers("/customerCenter/**").permitAll()
                 
-                
+                // 경매 관련
                 .antMatchers("/auctions/attention/**").authenticated()
                 .antMatchers("/auctions/**").permitAll()
-
+                
+                // 입찰 관련
+                .antMatchers("/bids/**").authenticated()
+                
+                // 장바구니 관련
+                .antMatchers("/shop/**").authenticated()
+                
+                // 주문 관련
+                .antMatchers("/orders/**").authenticated()
+                
+                // 메인 페이지
+                .antMatchers("/main/**").permitAll()
+                
+                // 리뷰 관련
+                .antMatchers("/reviews/**").authenticated()
+                
+                //문의사항 관련
+                .antMatchers("/customerCenter/register").authenticated()
+                .antMatchers("/customerCenter/answerdetail").authenticated()
+                .antMatchers("/customerCenter/insert").authenticated()
+                .antMatchers("/customerCenter/**").permitAll()
+                
+                // 코디 관련
                 .antMatchers("/coordies/register").authenticated()
                // .antMatchers("/coordies/like").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/coordies/**").permitAll()

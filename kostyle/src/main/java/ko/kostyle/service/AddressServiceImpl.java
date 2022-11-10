@@ -27,7 +27,7 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	@Transactional
-	public void insertAddresse(AddressDTO dto) {
+	public Long insertAddresse(AddressDTO dto) {
 		log.info("insertAddress service........");
 		
 		log.info("dto : " +dto);
@@ -40,6 +40,8 @@ public class AddressServiceImpl implements AddressService{
 		}
 		
 		addressMapper.insertAddress(address);
+		
+		return address.getAno();
 	}
 
 	// 회원의 배송지 목록 조회
@@ -96,6 +98,18 @@ public class AddressServiceImpl implements AddressService{
 		log.info("deleteAddress service........");
 		
 		addressMapper.deleteAddress(ano);
+	}
+
+	// 기본 배송지 조회
+	@Override
+	public AddressDTO findDefaultAddress() {
+		AddressVO address = addressMapper.findDefaultAddress(SecurityUtil.getCurrentMemberId());
+		if(address != null) {
+			return AddressDTO.of(address);
+		}else {
+			return new AddressDTO();
+		}
+		
 	}
 
 

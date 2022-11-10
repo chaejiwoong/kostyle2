@@ -38,7 +38,7 @@
 				<ul class="list admin-list">
 				
 					<c:forEach items="${qnaList}" var="list">
-						<li class="qna-title">
+						<li class="qna-title qna-admin">
 							<div class="qna-top qna-admin">
 								<div class="qna-top2">
 									<div class="list-category">
@@ -55,8 +55,8 @@
 									<a class="img admin-img"></a>
 								</div>
 								<div class="qna-btn">
-									<button type="button" class="update" data-nno ="<c:out value="${list.nno}"/>">수정</button>
-									<button type="submit" class="delete" data-nno ="<c:out value="${list.nno}"/>">제거</button>
+									<button type="button" class="update btn btn-primary" data-nno ="<c:out value="${list.nno}"/>">수정</button>
+									<button type="submit" class="delete btn btn-primary" data-nno ="<c:out value="${list.nno}"/>">제거</button>
 								</div>
 							</div>
 							

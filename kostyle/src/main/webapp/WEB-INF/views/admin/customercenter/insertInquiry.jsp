@@ -38,13 +38,15 @@
             </div>
 
 			<form action="/admin/customercenter/insertInquiry" method="post" class="form-horizontal">
-				<input type="text" name="qno" value='<c:out value="${showList.qno }"/>'/>
+				<input type="hidden" name="qno" value='<c:out value="${showList.qno }"/>'/>
+				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
+				<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 				<div class="admin-answer-box form-horizontal">
 					<span class="admin-answer-text">답변</span>
 					<textarea class="content" name="content"></textarea>
 				</div>
 				<div class="btn-box">
-					<button type="submit" class="insert-btn">등록</button>
+					<button type="submit" class="insert-btn insert-Inquiry">등록</button>
 				</div>
 			</form>
 

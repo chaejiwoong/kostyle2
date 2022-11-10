@@ -21,7 +21,7 @@ label{
     font-size : 25px;
     margin: 30px;
     font-weight:bold;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .address-section{
@@ -68,6 +68,56 @@ label{
 	position:relative;
 }
 
+th{
+	text-align:center;
+}
+
+td:not(.delivery-address){
+	text-align:center;
+}
+tbody tr:hover{
+	background-color: #fff7f9;
+}
+.table>tbody>tr>td{
+	vertical-align:middle;
+}
+
+/* 버튼 영역 */
+.updateBtn{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.updateBtn:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.updateBtn:active{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+.defaultBtn{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.defaultBtn:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.defaultBtn:active{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
 </style>
     </head>
 <body>
@@ -94,25 +144,26 @@ label{
 <div class="address-section">
 	<div class="row address-menu">
 	<span class="col-md-9"></span>
-		<a href="#" id="changeDefault" class="btn btn-primary">기본 배송지로 설정</a>
+		<a href="#" id="changeDefault" class="btn btn-primary defaultBtn">기본 배송지로 설정</a>
 		<a href="/members/address/register" class="btn btn-default">배송지 추가 +</a>
 	</div>
-		<table class="table table-hover">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>선택</th>
-					<th>배송지 이름</th>
-					<th>배송지</th>
+					<th>배송지명</th>
+					<th>배송지 정보</th>
 					<th>수정 / 삭제</th>
 				</tr>
 			</thead>
+			<tbody>
 
 			<c:forEach items="${addresses}" var="address">
 				<tr>
 					<td><input type="radio" name="default" value="${address.ano }"<c:out value="${address._default?'checked':''}"/>></td>
 					<td>${address.name}</td>
 
-					<td>
+					<td class='delivery-address'>
 						<dl>
 							<dt>${address.recipient }</dt>
 							<dd>${address.tel }</dd>
@@ -120,15 +171,15 @@ label{
 						</dl>
 					</td>
 					<td>
-						<span class="btn btn-primary updateBtn" data-ano="${address.ano }">수정</span>
+						<span class="btn updateBtn" data-ano="${address.ano }">수정</span>
 						<c:if test="${!address._default }">
-							<span class="btn btn-primary deleteBtn" data-ano="${address.ano }">삭제</span>						
+							<span class="btn btn-danger deleteBtn" data-ano="${address.ano }">삭제</span>						
 						</c:if>
 
 					</td>
 				</tr>
 			</c:forEach>
-
+			</tbody>
 		</table>
 
 </div>

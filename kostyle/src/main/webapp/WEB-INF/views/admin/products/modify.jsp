@@ -234,7 +234,6 @@
 				
 		var list;
 				let enrollForm = $("#enrollForm")
-
 				$('#selectBox').change(function() {
 					var result = $("select[name='pcno']").val();
 					if (result == '1') {
@@ -288,7 +287,6 @@
 				
 			});// GetJSON
 				
-
 			});
 	
 	
@@ -310,7 +308,6 @@
 		let genderCk = false;
 		let seasonCk = false;
 		let priceCk = false; 
-
 		
 		/* 체크 대상 변수 */
  		let name = $('#name').val();
@@ -318,7 +315,6 @@
 		let gender = $("#gender").val();
 		let season = $("#season").val();
 		let price = $("#price").val(); 
-
 		
 		/* 공란 체크 */
  		if(name){
@@ -373,7 +369,6 @@
 		} else {
 			scno = $('#option4').val()
 		}
-
 		var data = {
 		'scno' : 	scno,	
 		'name' : $('.form_section_content').find($('#name')).val(),
@@ -464,7 +459,6 @@
                 	location.href = "/admin/products/"
                 		
                 }
-
 	});
 	}); 
  	/* 이미지 다시 업로드 */
@@ -478,16 +472,12 @@
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
 		let fileObj = fileList[0];
-
 		if (!fileCheck(fileObj.name, fileObj.size)) {
-
 			return false;
 		}
-
 		for (let i = 0; i < fileList.length; i++) {
 			formData.append("uploadFile", fileList[i]);
 		}
-
 		$.ajax({
 			url : '/admin/products/upload',
 			processData : false,
@@ -503,45 +493,32 @@
 			error : function(result) {
 				alert("이미지 파일이 아닙니다.");
 			}
-
 		});
-
 	});
 	//조건체크
 	let regex = new RegExp("(.*?)\.(jpg|png)$");
 	let maxSize = 1048576; //1MB	
-
 	function fileCheck(fileName, fileSize) {
-
 		if (fileSize >= maxSize) {
 			alert("파일 사이즈 초과");
 			return false;
 		}
-
 		if (!regex.test(fileName)) {
 			alert("해당 종류의 파일은 업로드할 수 없습니다.");
 			$('input[name="uploadFile"]').val("");
 			return false;
 		}
-
 		return true;
-
 	}
-
 	/* 이미지 출력 */
 	function showUploadImage(uploadResultArr) {
-
 		/* 전달받은 데이터 검증 */
 		if (!uploadResultArr || uploadResultArr.length == 0) {
 			return
 		}
-
 		let uploadResult = $("#uploadResult");
-
 		let obj = uploadResultArr[0];
-
 		let str = "";
-
 		let fileCallPath = encodeURIComponent(obj.filePath.replace(/\\/g,'/')+ "/s_" + obj.uuid + "_" + obj.fileName);
 		console.log(fileCallPath)
 		str += "<div id='result_card'>";
@@ -554,18 +531,12 @@
 		
 		console.log(str);
 		uploadResult.append(str);
-
 	}
 	
 	
 	
 	
-
-
 	
-
-
-
  	</script>				
 
 

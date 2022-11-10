@@ -39,7 +39,7 @@
 		    			<label for="title">제목</label><input id="title" type="text" name="title" value="<c:out value='${boarddetail.title}'/>"/>
 		    		</div>
 		    		<div class="insert-textarea">
-		    			<label for="content">내용</label><textarea id="content" name="content">${fn:replace(boarddetail.content, replaceChar, "<br/>")}</textarea>
+		    			<label for="content">내용</label><textarea class="content" id="content" name="content">${fn:replace(boarddetail.content, replaceChar, "<br/>")}</textarea>
 		    		</div>
 		    		<div class="select-box">
 		    			<span class="category-name">카테고리</span>
@@ -50,7 +50,7 @@
 	    				</select>
     				</div>
 		    		<div class="insert-btn">
-		    			<button type="submit">수정</button>
+		    			<button class="insert-insert" type="submit">수정</button>
 		    		</div>
 		    	</div>
 	    	</form>

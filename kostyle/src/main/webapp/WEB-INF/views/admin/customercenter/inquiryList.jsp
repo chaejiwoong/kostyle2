@@ -33,6 +33,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${registerList}" var="list">
+						<input type='hidden' name='qno' value='${list.qno}'>
 							<tr class="admin-tr-list">
 								<td scope="row"><span class="tbody-td"><c:out value="${list.qno}"/></span></td>
 								<td><span class="tbody-td"><c:out value="${list.memberVO.name}"/></span></td>
@@ -45,7 +46,7 @@
 							</tr>
 							<tr class="answer-box admin-box">
 								<td class="answer" colspan="4"><span><c:out value="${list.content}"/></span></td>
-								<td class="answer" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+								<td class="answer right" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -74,8 +75,9 @@
 		</div>
 	</div>
 	<form id='actionForm' action="/admin/customercenter/inquiryList" method='get'>
-		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-		<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+		<input class="pageNum" type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+		<input class="amount" type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+		<%-- <input type='hidden' name='qno' value='${registerList.qno}'> --%>
 	</form>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	

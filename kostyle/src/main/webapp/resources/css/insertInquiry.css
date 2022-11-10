@@ -25,7 +25,14 @@ textarea:focus {
 	font-size: 20px;
 	font-weight: normal;
 	padding: 10px 0;
-	
+	border-bottom: 1px solid;
+}
+.font-size:nth-child(1) {
+	border-top: 1px solid;
+}
+.detail-btn {
+	padding-top: 20px;
+	text-align: right; 
 }
 
 .admin-answer-box {

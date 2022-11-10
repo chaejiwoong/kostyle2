@@ -20,7 +20,7 @@
 	rel="stylesheet">
 <link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
-<link href="/resources/css/insert.css" rel="stylesheet"/>
+<link href="/resources/css/insertNotice.css" rel="stylesheet"/>
     
 </head>
 <body>
@@ -33,17 +33,17 @@
 	    	<form action="/admin/customercenter/insertNotice" method="post">
 		    	<div class="insert-box">
 		    		<div class="insert-text">
-		    			<label for="title">제목</label><input id="title" type="text" name="title"/>
+		    			<label for="title">제목</label><input class="title" id="title" type="text" name="title"/>
 		    		</div>
 		    		<div class="insert-textarea">
-		    			<label for="content">내용</label><textarea id="content" name="content"></textarea>
+		    			<label for="content">내용</label><textarea class="content" id="content" name="content"></textarea>
 		    		</div>
 		    		<div class="select-box">
 		    			<span class="category-name">카테고리 : 공지사항</span>
 	    				<input type="hidden" class="category-ch" name="category" value="notice"/>
     				</div>
 		    		<div class="insert-btn">
-		    			<button type="submit">등록</button>
+		    			<button class="insert-insert" type="submit">등록</button>
 		    		</div>
 		    	</div>
 	    	</form>

@@ -15,9 +15,24 @@
 	rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet"/>
 <style>
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
+.order {
+	color: #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.title-orderList {
+	color: #35C5F0;
+}
 
 h1{
 margin-top: 25px;
@@ -36,114 +51,117 @@ font-weight: bold;
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+	<div id="wrap">
+		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-	<h1>주문 목록</h1>
-	<div class="container">
-		<div class="selectBox">
-		<form id='searchForm' class="form-horizontal" action="/admin/orders" method='get'>
-	<div class="form-inline form-group">
-				<select class="form-control" name='type'>
-				<option value=""
-					<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-				<option value="K"
-					<c:out value="${pageMaker.cri.type eq 'K'?'selected':''}"/>>주문번호</option>
-				<option value="E"
-					<c:out value="${pageMaker.cri.type eq 'E'?'selected':''}"/>>이메일</option>
-				<option value="S"
-					<c:out value="${pageMaker.cri.type eq 'S'?'selected':''}"/>>배송상태</option>
-
-			</select>
-			<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
-				<button id="search" class='btn btn-default'>Search</button>
-				<button id="default" class='btn btn-default'>Default</button>
-				
-				<span>구분</span>
-				<label for="product">상품</label><input type="radio" id="product" class="form-control filter" name="filter" value="P"
-				<c:out value="${pageMaker.cri.filter eq 'P'?'checked':''}"/>>
-				<label for="auction_product">경매</label><input type="radio" id="auction_product" class="form-control filter" name="filter" value="A"
-				<c:out value="${pageMaker.cri.filter eq 'A'?'checked':''}"/>>				
+		<h1>주문 목록</h1>
+		<div class="container">
+			<div class="selectBox">
+			<form id='searchForm' class="form-horizontal" action="/admin/orders" method='get'>
+		<div class="form-inline form-group">
+					<select class="form-control" name='type'>
+					<option value=""
+						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+					<option value="K"
+						<c:out value="${pageMaker.cri.type eq 'K'?'selected':''}"/>>주문번호</option>
+					<option value="E"
+						<c:out value="${pageMaker.cri.type eq 'E'?'selected':''}"/>>이메일</option>
+					<option value="S"
+						<c:out value="${pageMaker.cri.type eq 'S'?'selected':''}"/>>배송상태</option>
+	
+				</select>
+				<input type='text' id='keyword' name='keyword' class='form-control' value='<c:out value="${pageMaker.cri.keyword}"/>' />
+					<button id="search" class='btn btn-default'>Search</button>
+					<button id="default" class='btn btn-default'>Default</button>
+					
+					<span>구분</span>
+					<label for="product">상품</label><input type="radio" id="product" class="form-control filter" name="filter" value="P"
+					<c:out value="${pageMaker.cri.filter eq 'P'?'checked':''}"/>>
+					<label for="auction_product">경매</label><input type="radio" id="auction_product" class="form-control filter" name="filter" value="A"
+					<c:out value="${pageMaker.cri.filter eq 'A'?'checked':''}"/>>				
+				</div>
+				<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
+				<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
+	
+			</form>
+			
+			
 			</div>
-			<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' />
-			<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
-
-		</form>
 		
-		
-		</div>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>주문번호</th>
+						<th>이메일</th>
+						<th>결제방식</th>
+						<th>가격</th>
+						<th>배송상태</th>
+						<th>구분</th>					
+						<th>주문일자</th>
+						<th>배송버튼</th>
+					</tr>
+				</thead>
 	
+				<c:forEach items="${orders}" var="order">
+					<tr>
+						<td><c:out value="${order.ono}" /></td>
+						<td><a href='<c:out value="/admin/orders/${order.ono}"/>'>
+								<c:out value="${order.member.email}" />
+						</a></td>
+						<td><c:out value="${order.payment}" /></td>
+						<td><c:out value="${order.totalPrice}" /></td>
+						<td><c:out value="${order.status}" /></td>
+						<td><c:out value="${order.category}" /></td>						
+						<td><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${order.created_date}" /></td>
 		
-		<table class="table">
-			<thead>
-				<tr>
-					<th>주문번호</th>
-					<th>이메일</th>
-					<th>결제방식</th>
-					<th>가격</th>
-					<th>배송상태</th>
-					<th>구분</th>					
-					<th>주문일자</th>
-					<th>배송버튼</th>
-				</tr>
-			</thead>
-
-			<c:forEach items="${orders}" var="order">
-				<tr>
-					<td><c:out value="${order.ono}" /></td>
-					<td><a href='<c:out value="/admin/orders/${order.ono}"/>'>
-							<c:out value="${order.member.email}" />
-					</a></td>
-					<td><c:out value="${order.payment}" /></td>
-					<td><c:out value="${order.totalPrice}" /></td>
-					<td><c:out value="${order.status}" /></td>
-					<td><c:out value="${order.category}" /></td>						
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${order.created_date}" /></td>
-	
-					<td><c:if test="${order.status eq '상품준비중' }">
-								<a class="btn btn-primary delivery" data-ono="${order.ono }">배송</a>
-						</c:if></td>
-				</tr>
-			</c:forEach>
-
-
-		</table>
-
-		<div class="paging">
-			<ul class="pagination">
-				<!-- 페이징 구현 부분 -->
-				<c:if test="${pageMaker.prev}">
-					<li class="paginate_button previous"><a
-						href="${pageMaker.startPage -1}">Previous</a></li>
-				</c:if>
-
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-						<a href="${num}">${num}</a>
-					</li>
+						<td><c:if test="${order.status eq '상품준비중' }">
+									<a class="btn btn-primary delivery" data-ono="${order.ono }">배송</a>
+							</c:if></td>
+					</tr>
 				</c:forEach>
-
-				<c:if test="${pageMaker.next}">
-					<li class="paginate_button next"><a
-						href="${pageMaker.endPage +1 }">Next</a></li>
-				</c:if>
-			</ul>
-
+	
+	
+			</table>
+	
+			<div class="paging">
+				<ul class="pagination">
+					<!-- 페이징 구현 부분 -->
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button previous"><a
+							href="${pageMaker.startPage -1}">Previous</a></li>
+					</c:if>
+	
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+							<a href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+	
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button next"><a
+							href="${pageMaker.endPage +1 }">Next</a></li>
+					</c:if>
+				</ul>
+	
+			</div>
+	
+			<!-- 페이징 번호 요청 시에 submit되는 form -->
+			<form id='actionForm' action="/admin/orders" method='get'>
+				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+	
+				<input type='hidden' name='type'
+					value='<c:out value="${ pageMaker.cri.type }"/>'> <input
+					type='hidden' name='keyword'
+					value='<c:out value="${ pageMaker.cri.keyword }"/>'>
+				<input type='hidden' name='filter'
+					value='<c:out value="${ pageMaker.cri.filter }"/>'>				
+			</form>
 		</div>
-
-		<!-- 페이징 번호 요청 시에 submit되는 form -->
-		<form id='actionForm' action="/admin/orders" method='get'>
-			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-			<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-
-			<input type='hidden' name='type'
-				value='<c:out value="${ pageMaker.cri.type }"/>'> <input
-				type='hidden' name='keyword'
-				value='<c:out value="${ pageMaker.cri.keyword }"/>'>
-			<input type='hidden' name='filter'
-				value='<c:out value="${ pageMaker.cri.filter }"/>'>				
-		</form>
+	
 	</div>
 	<script>
 	

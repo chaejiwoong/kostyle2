@@ -4,20 +4,44 @@
 <html>
 <head>
 <title>KoStyle4U</title>
-
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-	<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
+   rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/css/header.css" rel="stylesheet" />
-<link href="/resources/css/footer.css" rel="stylesheet" />
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet"/>
 
+<style>
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
+
+h1{
+margin-top: 25px;
+margin-bottom: 25px;
+font-size: 30px;
+font-weight: bold;
+ text-align: center;
+        }
+        
+ .selectBox{
+	text-align: center;
+}
+.paging {
+	text-align: center;
+}
+
+</style>
 </head>
 <body>
+<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-	
+	<h1>관리자 경매 목록</h1>
 	<div class="container">
 			<div class="selectBox">
 		<form id='searchForm' class="form-horizontal" action="/admin/auctions" method='get'>
@@ -47,63 +71,43 @@
 
 		</form>
 		
+		
 		</div>
 		
-		
-		        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-		
-               <c:forEach items="${auctions}" var="auction">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                      <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" 
-					data-filename="${auction.imgs[0].filename}" style="width : 253px; height : 150px;">
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">NO.${auction.apno}<br>${auction.name}</h5>
-                                    
-                                    <br>
-                                    <form action="" method="get" >
-                                     <div class="text-center" ><a href='<c:out value="auctions/${auction.apno}"/>'><span class = "btn btn-outline-dark mt-auto" >상세보기</span></a></div>
-                                    </form>
-                                    <br>
-                                   가격 : <fmt:formatNumber value="${auction.start_price}" pattern="#,### 원" />
-                                    <br>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill">상품설명
-                                        <br>
-                                        최고입찰가 :<fmt:formatNumber value="${auction.best_bid_price}" pattern="#,### 원" />
-                                        <br>
-                                        입찰단위 : <fmt:formatNumber value="${auction.bid_unit}" pattern="#,### 원" />
-                                        <br>
-                                    	경매상태 : <c:out value="${auction.status}" />
-                                    	<br>
-                                    	시작일: <fmt:formatDate pattern="yyyy-MM-dd"
-							value="${auction.start_date}" /><br>
-                                    	종료일:<fmt:formatDate pattern="yyyy-MM-dd"
-							value="${auction.end_date}" />
-                                    	
-                                 
-	                    				</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               </c:forEach>        
-                </div>
-            </div>
-		
- 
-		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>경매번호</th>
+					<th>이미지</th>
+					<th>상품명</th>
+					<th>입찰시작가</th>
+					<th>최고입찰가</th>
+					<th>입찰단위</th>
+					<th>진행여부</th>
+					<th>시작일자</th>
+					<th>종료일자</th>
+				</tr>
+			</thead>
 
+			<c:forEach items="${auctions}" var="auction">
+				<tr>
+					<td><c:out value="${auction.apno}" /></td>
+					<td><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"></td>
+					<td><a href='<c:out value="auctions/${auction.apno}"/>'> <c:out
+								value="${auction.name}" /></a></td>
+					<td><c:out value="${auction.start_price}" /></td>
+					<td><c:out value="${auction.best_bid_price}" /></td>
+					<td><c:out value="${auction.bid_unit}" /></td>
+					<td><c:out value="${auction.status}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${auction.start_date}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${auction.end_date}" /></td>
+				</tr>
+			</c:forEach>
 
-
-
+		</table>
+		
 
 		<div class="paging">
 	
@@ -143,8 +147,10 @@
 		</form>
 	</div>
 
+</div>
 
 
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
