@@ -53,11 +53,11 @@
 	<div class="top-category">
 		<div class='top-category01'>
 			<span class='title-name' data-title='clothes'><a class="title"
-				href='#'>상의</a></span> <span class="title-name" data-title='outerwear'><a
-				class="title" href='#'>아우터</a></span> <span class="title-name"
-				data-title='pants'><a class="title" href='#'>바지</a></span> <span
+				href='1'>상의</a></span> <span class="title-name" data-title='outerwear'><a
+				class="title" href='2'>아우터</a></span> <span class="title-name"
+				data-title='pants'><a class="title" href='3'>바지</a></span> <span
 				class="title-name" data-title='dress-skirt'><a class="title"
-				href='#'>원피스/스커트</a></span>
+				href='4'>원피스/스커트</a></span>
 		</div>
 	</div>
 	<div class="bottom-category"></div>
@@ -76,6 +76,19 @@
 				}
 			})
 
+		})
+		
+		$('.top-category01 a').on('click', function(e){
+			e.preventDefault();
+			console.log($(this).attr('href'))
+			location.href="/main?pcno=" + $(this).attr('href')
+			
+		})
+		
+		$(document).on('click','.bottom-category a', function(e){
+			e.preventDefault();
+			console.log($(this).attr('href'))
+			location.href="/main?scno=" + $(this).attr('href')
 		})
 	})
 </script>

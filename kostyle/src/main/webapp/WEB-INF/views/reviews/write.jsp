@@ -9,6 +9,10 @@
         <script type="text/javascript" src="/resources/js/header.js"></script>
         <link href="/resources/css/header.css" rel="stylesheet"/>
         <link href="/resources/css/footer.css" rel="stylesheet"/>
+        
+        		<!-- 모달창 스크립트 -->
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 /* 사이드바 */
 #left-sidebar{
@@ -87,14 +91,20 @@
 }
 
 
-.register{
+.reviewDetail{
 	
 	color:white;     	
     background-color:#f891aa;
     border:1px solid #ebebeb;
 }
 
-.register:hover{
+.reviewDetail:hover{
+	color:white;
+    background-color:#f891aa;
+    border:1px solid #ebebeb;
+}
+
+.reviewDetail:active{
 	color:white;
     background-color:#f891aa;
     border:1px solid #ebebeb;
@@ -157,19 +167,39 @@
 		<div class="row result">
 			<span class="col-md-2 img"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
 							style="width: 100px; height: 100px;"></span>
-			<span class="col-md-2"><a href="/main/products?pno=${detail.product.pno}">${detail.product.name}</a></span>
+			<span class="col-md-2"><a href="/main/product?pno=${detail.product.pno}">${detail.product.name}</a></span>
 			<span class="col-md-2"><c:out value="${detail.p_size}" /></span>
 			<span class="col-md-2"><c:out value="${detail.amount}" /></span>
 			<fmt:formatNumber var="price" value="${detail.price}" type="number"/>
 			<span class="col-md-2"><c:out value="${price}" /></span>
-			<span class="col-md-2">작성완료</span>
+			<span class="col-md-2"><a data-odno="${detail.odno }" class="btn reviewDetail">리뷰보기</a></span>
 		</div>	
 	</c:forEach>
 
 	</div>
 	
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">리뷰 내용</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-danger modalClose">닫기</button>
+      </div>          
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</div>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
@@ -181,6 +211,39 @@ var display = (function loadThumbnail() {
 		$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 		})
 	})();
+	
+	$(document).ready(function(){
+
+	    var modal = $(".modal");
+
+		$('.reviewDetail').on('click', function(e){
+			e.preventDefault();
+			$('.modal-body').empty();
+			$.ajax({
+				url:"/reviews/detail?odno=" + $(this).data('odno'),
+				type:'get',
+				success:function(result){
+					console.log(result)			      
+		    			var str = "<dl>" +
+		    			"<dt>댓글번호 : " + result.rno + "</dt>" + 
+		    			"<dd>댓글내용 : " + result.content + "</dd>" + 	
+		    			"<dd>별점 : " + result.starPoint + "</dd>" + 
+						"<dd>작성일자 : " + new Intl.DateTimeFormat('kr').format(new Date(result.last_modified_date)) + "</dd>" + 
+						"</dl>" 
+				      
+				      $('.modal-body').append(str);
+					  
+				}
+			})
+			$(".modal").modal("show");
+		})
+		
+		$('.modalClose').on('click', function(e){
+			e.preventDefault();
+			modal.modal("hide")
+		})
+	})
+	
 </script>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

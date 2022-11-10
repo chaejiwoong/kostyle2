@@ -99,6 +99,7 @@ public class OrderController {
 			// 주문에 출력할 기본 배송지
 			model.addAttribute("address", addressService.findDefaultAddress());
 			
+			
 			// 주문에 출력할 회원 포인트
 			model.addAttribute("member",memberService.getMyInfo());			
 		//잘못된 접근 시 메인페이지로 보내기.	

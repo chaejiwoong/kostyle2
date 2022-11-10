@@ -147,7 +147,7 @@
 			//섬네일 파일을 불러오기 위한 경로
 			var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 			// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
-			$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
+			$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 			})
 		})();
     	
@@ -174,7 +174,7 @@
 		
 		
 		
-		$.getJSON("/member/products/getImgList", {pno : pno}, function(arr){	
+		$.getJSON("/commons/getImgList", {pno : pno}, function(arr){	
 			let str = "";
 			let obj = arr[0];
 			
@@ -190,17 +190,18 @@
 				return;
 			}	
 			
-			let fileCallPath = encodeURIComponent(obj.filePath.replace(/\\/g,'/')+ "/s_" + obj.uuid + "_" + obj.fileName);
+			let fileCallPath = encodeURIComponent(obj.filePath.replace(/\\/g,'/')+ "/" + obj.uuid + "_" + obj.fileName);
 			str += "<div id='result_card'";
 			str += "data-path='" + obj.filePath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
 			str += ">";
-			str += "<img src='/member/products/display?fileName=" + fileCallPath + "' style='width:800px; height:600px'>";
+			str += "<img src='/commons/display?fileName=" + fileCallPath + "' style='width:800px; height:600px;'>";
 			str += "</div>";		
 		
 			
 			uploadReslut.html(str);		
 		});	
 		
+		//주문하기
 		var orderForm = $('#orderForm');
 		$('#buy').on('click', function(e){
 			e.preventDefault();

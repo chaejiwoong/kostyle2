@@ -42,7 +42,8 @@
 			<td><c:out value="${order.ono}" /></td>
 			<td><c:out value="${order.member.email}" /></td>
 			<td><c:out value="${order.payment}" /></td>
-			<td><c:out value="${order.totalPrice}" /></td>
+			<fmt:formatNumber var="totalPrice" value="${order.totalPrice}" type="number"/>
+						<td><c:out value="${totalPrice}" /></td>
 			<td><c:out value="${order.status}" /></td>
 			<td><c:out value="${order.category}" /></td>	
 			<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -88,7 +89,9 @@
 				<td><c:out value="${detail.product.name}" /></td>
 				<td><c:out value="${detail.p_size}" /></td>
 				<td><c:out value="${detail.amount}" /></td>
-				<td><c:out value="${detail.price}" /></td>
+				<fmt:formatNumber var="price" value="${detail.price}" type="number"/>
+						
+				<td><c:out value="${price}" /></td>
 				<td>
 				<c:if test="${order.status eq '상품준비중' }">
 				
@@ -112,7 +115,8 @@
 			<tr>
 				<td><c:out value="${winningBid.wbno}" /></td>
 				<td><c:out value="${winningBid.name}" /></td>
-				<td><c:out value="${winningBid.price}" /></td>
+				<fmt:formatNumber var="price2" value="${winningBid.price}" type="number"/>
+				<td><c:out value="${price2}" /></td>
 			</tr>
 	</table>	
 	

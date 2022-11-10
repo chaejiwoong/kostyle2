@@ -13,6 +13,7 @@ import ko.kostyle.dto.StockDTO;
 public interface ProductService {
 	
 	public List<ProductDTO> productList(Criteria cri); //상품목록
+	public List<ProductDTO> productList2(Criteria cri, int scno, int pcno); //상품목록
 	public List<ProductDTO> productListHit(); //히트카운터에 따른 상품목록
 	public List<ProductDTO> productListDay(); //신상품에 따른 상품목록
 
@@ -26,6 +27,7 @@ public interface ProductService {
 	public ProductDTO get(Long pno);
 	
 	public int getTotal(Criteria cri);
+	public int getTotal2(Criteria cri, int scno, int pcno);
 	
 	public void updateHitcount(Long pno);//조회수 증가
 }

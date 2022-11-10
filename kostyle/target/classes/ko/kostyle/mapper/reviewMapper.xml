@@ -31,6 +31,9 @@
 		and odno not in(select odno from order_cancel)
 	</select>
 
+	<select id="reviewDetail" resultType="ko.kostyle.domain.ReviewVO">
+		select * from review where mno=#{mno} and odno=#{odno}
+	</select>
 
 
 

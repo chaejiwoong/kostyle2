@@ -5,7 +5,7 @@
 
 	<sql id="criteria">
 		<trim prefix="(" suffix=") and" prefixOverrides="and">
-		<if test="filter == ''.toString()">
+		<if test="filter != null">
 			and created_date between sysdate - #{filter} and sysdate
 		</if>
 		</trim>
@@ -35,7 +35,7 @@
 	<select id="orderList" resultType="ko.kostyle.domain.OrderVO">
 		<![CDATA[
         select * from(
-            select rownum rn, ono, ano, mno, payment, totalprice, status, created_date, category
+            select /*+INDEX_DESC(ORDERS SYS_C007695)*/ rownum rn, ono, ano, mno, payment, totalprice, status, created_date, category
             from orders
             where
              ]]>
@@ -87,7 +87,11 @@
 		select count(*) from orders
 		where
 		<include refid="criteria"></include>
+		mno=#{mno}
+		<![CDATA[
+		and totalPrice > 0 and
 		ono > 0
+		 ]]>
 	</select>
 
 	<select id="getOrder" resultType="ko.kostyle.domain.OrderVO">

@@ -91,7 +91,7 @@ public class SchedulerService {
 			OrderVO order = OrderVO.builder()
 					.ano(address.getAno())
 					.mno(mno)
-					.payment("포인트")
+					.payment("auction")
 					.totalPrice(bid.getPrice())
 					.status("상품준비중")
 					.category("auction_product")

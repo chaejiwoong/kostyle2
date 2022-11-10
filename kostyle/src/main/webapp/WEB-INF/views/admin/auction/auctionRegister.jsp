@@ -162,15 +162,10 @@ function setThumbnail(event) {
                            alert('상품 등록이 완료되었습니다.');
                            self.location="/admin/auctions";
                         })
-
                }
             }); //$.ajax
 
-            
-
          })
-         
-         
       })
    </script>
 </body>

@@ -1,6 +1,7 @@
 package ko.kostyle.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,8 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewMapper.insertReview(vo);
 		
 	}
+	
+	
 
 	// 리뷰를 남기지 않은 주문상세 조회
 	@Override
@@ -112,5 +115,22 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 
-
+	//리뷰 조회
+	@Override
+	public ReviewDTO reviewDetail(Long odno) {
+		
+		return toDto(reviewMapper.reviewDetail(odno, SecurityUtil.getCurrentMemberId()));
+	}
+	
+	private ReviewDTO toDto(ReviewVO vo) {
+		return ReviewDTO.builder()
+				.rno(vo.getRno())
+				.mno(vo.getMno())
+				.odno(vo.getOdno())
+				.pno(vo.getPno())
+				.starPoint(vo.getStarPoint())
+				.content(vo.getContent())
+				.last_modified_date(vo.getLast_modified_date())
+				.build();
+	}
 }
