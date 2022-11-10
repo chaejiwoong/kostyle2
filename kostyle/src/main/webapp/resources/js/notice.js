@@ -23,4 +23,5 @@ $(function(){
 			e.preventDefault();
 			location.href = "/admin/customercenter/insertNotice";
 		});	
+
 });

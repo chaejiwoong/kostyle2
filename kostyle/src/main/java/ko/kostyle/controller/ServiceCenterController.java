@@ -2,6 +2,7 @@ package ko.kostyle.controller;
 
 import ko.kostyle.domain.QuestionVO;
 import ko.kostyle.domain.ServiceCenterVo;
+import ko.kostyle.dto.AnswerDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.PageDTO;
 import ko.kostyle.dto.QnaAjaxDTO;
@@ -79,10 +80,23 @@ public class ServiceCenterController {
     // 로그인
     @GetMapping("/register")
     public void getRegister(Criteria criteria, Model model) {
+    	
+    	List<QuestionVO> list = service2.getList(criteria);
+		log.info("list확인" + list);
+		for(QuestionVO vo : list) {
+			AnswerDTO answer = (AnswerDTO) service2.checkReply(vo.getQno());
+			log.info("answer: " + answer);
+			if(answer != null ) {
+				vo.setAnswer("yes");
+				log.info("답변 있음" + vo);
+				model.addAttribute("check", vo);
+			}
+		}
+    	
     	int total = service2.questionTotal(criteria);
     	log.info("계수:"+total);
         log.info("문의");
-        model.addAttribute("registerList", service2.getList(criteria));
+        model.addAttribute("registerList", list);
         model.addAttribute("pageMaker", new PageDTO(criteria, total));
 //        model.addAttribute("name", service2.getname());
     }

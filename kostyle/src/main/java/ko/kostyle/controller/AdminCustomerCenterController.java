@@ -139,16 +139,20 @@ public class AdminCustomerCenterController {
 		for(QuestionVO vo : list) {
 			AnswerDTO answer = (AnswerDTO) service2.checkReply(vo.getQno());
 			log.info("answer: " + answer);
-			if(answer != null) {
+			if(answer != null ) {
 				vo.setAnswer("yes");
 				log.info("답변 있음" + vo);
 				model.addAttribute("check", vo);
+			} else if (answer == null) {
+				vo.setAnswer("no");
+				log.info("답변 없음" + vo);
+				model.addAttribute("checkNo", vo);
 			}
 		}
 		
 		int total = service2.questionTotal(criteria);
 		log.info("문의 리스트: " + service2.getList(criteria));
-		model.addAttribute("registerList", service2.getList(criteria));
+		model.addAttribute("registerList", list);
 		model.addAttribute("pageMaker", new PageDTO(criteria,total));
 	}
 	
