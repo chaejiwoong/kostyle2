@@ -6,171 +6,159 @@
 <meta charset="UTF-8">
 <title>코디 글 등록</title>
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/footer.css" rel="stylesheet"/>
 
 
- <!-- <style>
- html {
-    color: #424242;
-    background: #fff;
-}
- .modal {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-
-        display: none;
-
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-body, html {
-    line-height: 1;
-    font-family: OhouseSans,Noto Sans KR,Apple SD Gothic Neo,ë§‘ì€ ê³ ë”•,Malgun Gothic,sans-serif;
-    -webkit-font-smoothing: antialiased;
-    letter-spacing: -.4px;
-    font-size: 15px;
-}
-      
-body, div, form, input, li, ol, textarea, ul {
-    margin: 0;
-    padding: 0;
-}
-ol{
-    list-style: none;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-.form-group-div1{
-	padding: 0px 0px 40px;
-    width:768px
-}
-.file-upload-btn {
-    margin: 0px;
-    padding: 0px 0px 60%;
-    border: none;
-    background: none;
-    font: inherit;
-    display: block;
-    position: relative;
-    width: 100%;
-    transition: opacity 0.1s ease 0s;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-element.style {
-    overflow: hidden;
-    overflow-wrap: break-word;
-    height: 145px;
-} 
-
- </style>-->
-
-
-
-
-
+ <style type="text/css">
+ 	.container {
+ 		width: 80% !important;
+ 		margin-top: 100px;
+ 		position: relative;
+ 	}
+ 	.col-6 {
+	    width: 40%;
+	    height: 85%;
+	    display: inline-block;
+	    margin-left: 5%;
+ 	}
+ 	#upload-btn{
+ 		width: 100%; 
+ 		height: 100%;
+ 		background-color: rgb(247, 248, 250);
+    	border-radius: 4px;
+    	text-align: center;
+ 	}
+ 	.title{
+ 		width: 100%;
+ 		height: 100%;
+ 	}
+ 	.content{
+ 		width: 100%;
+ 	}
+	.col-6-box {
+	    position: relative;
+	    top: 60px;
+    }
+    .row-2-btn{
+    	margin-top: -110px;
+    	margin-left: 80px;
+    	background-color: none;
+    } 
+    #register-btn {
+	    width: 100%;
+	    height: 10%;
+	    display: block;
+	    margin: auto;
+	    background-color: #f891aa;
+	    border-color:#f891aa;
+	    font-weight: bold;
+    }
+     .thumbnail-btn{
+		border: none;
+	    background: none;
+	    font: inherit;
+	    font-size: 14px;
+	    line-height: 18px;
+	    width: auto;
+	    color: #FFFFFF;
+    } 
+    #remove-btn{
+    	background-color: none;
+    }
+    #tag-btn{
+    	background-color: #f891aa;
+    	height: 30px;
+    	font-weight: bold;
+    }
+ </style>
 
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-<h1>코디 글쓰기</h1>
-<ol><li></li></ol>
-	
+<div class="container">
 <form class="register-form" role="form" method="post" enctype="multipart/form-data">
-	<div class="panel-body">
-<ol>
-<li>
-	<div class="form-group-1">
-		<!-- 제목, 내용 -->
-		<div class="form-group-1">
-		
-			<div class="form-group-title">
-				<input title="제목" class="" name="title"  placeholder="제목을 입력해주세요(필수)" >
-			</div>
-			
-			<div class="form-group-content">
-				<textarea title="내용" rows="6" name="content" placeholder="코디에 대해 설명해주세요" 
-					style="overflow: hidden; overflow-wrap: break-word; height: 145px;"></textarea>
-			</div>
-			
-		</div>
-		
-		
+	<div class="row-1">
 		
 		<!-- 파일 업로드 -->
-		<div class="form-group-1">
-			
+		<div class="col-6">
 			<!-- 업로드 버튼 -->
-			<div class="form-group-upload">
+			<div style="width: 90%; height: 100%;">
 				<input id="uploadFile" name="file" type="file" accept="image/*" class="form-control"  
 					style="display: none" multiple>
-				<button id="upload-btn" class="file-upload-btn">
-				
-					<!-- svg 카메라 아이콘 -->
-					<span class="upload-notice">코디 사진을 올려주세요</span>
-					<span class="upload-notice">(*이미지 파일 1장만 가능)</span>	
-					
-					<!-- span 지우고 썸네일 이미지 덮어씌우기 -->
-					<span id="img-result">
-						<!-- img -->
-					</span>
-					
-				</button>	
-			</div>
-			
-			
-			<!-- 썸네일 버튼 -> 동적 생성 되게? or 숨겼다 보이게-->
-			<div class="form-group-btn">
-			
-				<div class="form-group-inline" >
-				<span class="file-tag">
-					<!-- tag-btn -->
-					<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
-				</span>
-				
-				<span class="file-remove">	
-					<!-- remove-btn (버튼 안에 휴지통 아이콘) -->
-					<button class="thumbnail-btn" id='remove-btn' type='button' title='파일삭제' hidden="">휴지통</button>
-				</span>
-			</div>	
-			</div>
-			
-		</div>
-	</div>
-</li>
-</ol>
-
-
-		<!-- 상품태그 -->
-		<div class="form-group">
-				
-		</div>
-			
-			
-			
-		<!-- 하단 버튼 -->
-		<div class="form-group">
-		
-			<div class="form-group-btn">
-				<button id="register-btn" type="button">
-					<span>올리기</span>
+				<button id="upload-btn" class="file-upload-btn" >
+						
+						<span class="upload-notice">코디 사진을 올려주세요</span>
+						<span class="upload-notice">(*이미지 파일 1장만 가능)</span>	
+						
+						<!-- span 지우고 썸네일 이미지 덮어씌우기 -->
+						<span id="img-result">
+							<!-- img -->
+						</span>
 				</button>
-			</div>
-			
+			</div>				
 		</div>
-			
-			
+		
+		<!-- 제목, 내용 -->
+		<div class="col-6 col-6-box">
+			<div class="form-group" >
+			<!-- 제목 -->
+				<div class="form-group-title" style="width: 90%; height: 50px;">
+					<input title="제목" class="title" name="title"  placeholder="제목을 입력해주세요(필수)"  >
+				</div>
+			<!-- 내용 -->
+				<div class="form-group-content"  style="width: 90%; height: 150px; position: relative;  top: 25px;">
+					<textarea title="내용" class="content" name="content" placeholder="코디에 대해 설명해주세요" 
+						style=" overflow-x: hidden; overflow-wrap: break-word; height: 200px; resize: none;"></textarea>
+				</div>
+			</div>
+		</div>
+		
+	</div>	
+	
+	<!-- 썸네일 버튼 -> 동적 생성 되게? or 숨겼다 보이게-->
+	<div class="row-2">
+		<div class="form-group-btn row-2-btn">	
+	
+			<span class="file-tag">
+				<!-- tag-btn -->
+				<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
+			</span>
+				
+			<span class="file-remove">	
+				<!-- remove-btn (버튼 안에 휴지통 아이콘) -->
+				<button class="thumbnail-btn" id='remove-btn' type='button' title='파일삭제' hidden="">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+					  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+					  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+					</svg>
+				</button>
+			</span>
+
+		</div>
 	</div>
+	
+	<!-- 상품 태그 -->
+	<div class="row-3">
+	</div>
+	
+	<!-- 하단 버튼 -->
+	<div class="row-4" style="margin-top:100px; margin-bottom: 50px;">
+		<div class="form-group-btn row-4-btn">
+			<button type="button" class="btn btn-primary btn-lg" id="register-btn" >올리기</button>
+		</div>
+	</div>
+
+	
 </form>
+</div>
+
+
 	
 <script>
 $(document).ready(function () {
@@ -241,24 +229,13 @@ $("input[type='file']").on("change", function(e) {
     reader.onload = function(event) {
     	var img = document.createElement("img");
 		 img.setAttribute("src", event.target.result)
-		 img.setAttribute("style", "width:200px; height:300px;")
+		 img.setAttribute("style", "width:100%; height:100%;")
 		 $("#img-result").empty();
 		 document.querySelector("span#img-result").appendChild(img);
 		 $(".thumbnail-btn").show();
 		 $("span.upload-notice").hide();
 	};
 	reader.readAsDataURL(event.target.files[0])
-
-	
-	//썸네일 올라가면 파일 삭제 버튼, 상품태그 버튼 동적 -> 
-	//@계속 버튼이 생성되는 문제점 => 썸네일 지울때마다 버튼도 지운다 or 버튼을 숨겼다가 보이게 한다
-	//
-	/* let tagBtn = "<button id='tag-btn' type='button' title='상품태그'>+ 상품 태그하기</button>";	
-	$(".file-tag").append(tagBtn);
-	let removeBtn = "<button id='remove-btn' type='button' title='파일삭제'>휴지통</button>";
-	$(".file-remove").append(removeBtn); */
-	
-	
 
 }); //end 파일 업로드 on change
 
@@ -328,7 +305,7 @@ $(".file-remove").on("click", "button" ,function () {
 
 </script>
 <script type="text/javascript" src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%> --%>
+<%-- <%@ include file="/WEB-INF/views/include/footer.jsp"%>  --%>
 </body>
 </html>
 

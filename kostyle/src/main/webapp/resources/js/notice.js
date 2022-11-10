@@ -17,8 +17,10 @@ $(function(){
 		    $(".bottom-category").html(html)
 		});
 		
-		$(".write-btn").click(function() {
-			location.href = "/admin/customercenter/insertNotice";
-		});
+
 	});
+		$("#write-btn").click(function(e) {
+			e.preventDefault();
+			location.href = "/admin/customercenter/insertNotice";
+		});	
 });
