@@ -90,6 +90,12 @@ body {
     width:300px !important;
     flex: 0 0 auto;
 }
+.coordies {
+	color:#35C5F0;
+}
+.all-category  {
+	display: none;
+}
 .img-box {
 	width: 300px;
 	border-radius: 15px;

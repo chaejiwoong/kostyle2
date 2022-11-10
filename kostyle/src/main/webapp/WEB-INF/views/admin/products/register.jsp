@@ -19,15 +19,26 @@
 	}
 </style>
 
+<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<link href="/resources/vendor/bootstrap/css/styles2.css" rel="stylesheet">
-<link href="/resources/css/header.css" rel="stylesheet" />
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
+<link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
-
+<style type="text/css">
+.product {
+	color : #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.title-productsInsert {
+	color : #35C5F0;
+}
+</style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 
 

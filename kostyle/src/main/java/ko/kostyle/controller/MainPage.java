@@ -12,8 +12,8 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MainPage {
 	
-	@GetMapping("/kostyle4u")
-	public void Page() {
-		log.info("메인");
-	}
+//	@GetMapping("/kostyle4u")
+//	public void Page() {
+//		log.info("메인");
+//	}
 }

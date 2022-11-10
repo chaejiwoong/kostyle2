@@ -19,7 +19,15 @@
     position: relative;
     padding-bottom: 100px;
 }
-
+.auction{
+	color: #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.title-auctionList {
+	color : #35C5F0;;
+}
 h1{
 margin-top: 25px;
 margin-bottom: 25px;

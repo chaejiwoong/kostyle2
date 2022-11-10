@@ -4,10 +4,8 @@ $(document).ready(function () {
 	
 	var replace = uri.split("/");
 	
-	
 	if(replace[1] == "admin") {
 		if(replace[2] == "members") {
-		alert(replace[2]);
 			var html = "<div>" +
 		    	"<span class='bottom-title'><a class='title-memberList' data-title='member' href='/admin/members'>회원목록</a></span>" +
 		        "</div>"
@@ -16,6 +14,18 @@ $(document).ready(function () {
 		    $(".bottom-category").mouseleave(function () {
 		    	$(".bottom-category").html(html)
 			});
+		} else if (replace[2] == "products") {
+			
+			var html = "<div>" +
+                    "<span class='bottom-title'><a class='title-productsList' data-title='products' href='/admin/products'>상품목록</a></span>" +
+                    "<span class='bottom-title'><a class='title-productsInsert' data-title='products' href='/admin/products/register'>상품등록</a></span>" +
+	        "</div>"
+			$(".bottom-category").html(html)
+	        
+		    $(".bottom-category").mouseleave(function () {
+		    	$(".bottom-category").html(html)
+			});
+			
 		} else if (replace[2] == "auctions") {
 			var html = "<div>" +
                     "<span class='bottom-title'><a class='title-auctionList' data-title='auction' href='/admin/auctions'>경매목록</a></span>" +
@@ -27,10 +37,15 @@ $(document).ready(function () {
 		    	$(".bottom-category").html(html)
 			});
 		} else if(replace[2] == "orders" || replace[2] == "orderCancels") {
-			$(".bottom-category").html("<div>" +
+			var html = "<div>" +
                     "<span class='bottom-title'><a class='title-orderList' data-title='order' href='/admin/orders'>주문목록</a></span>" +
                     "<span class='bottom-title'><a class='title-orderCansel' data-title='order' href='/admin/orderCancels'>주문취소목록</a></span>" +
-            "</div>")
+            "</div>";
+            $(".bottom-category").html(html)
+	        
+		    $(".bottom-category").mouseleave(function () {
+		    	$(".bottom-category").html(html)
+			});
 		} else if (replace[3] == "qnaList" || replace[3] == "noticeList" || replace[3] == "inquiryList" || replace[3] == "chatList" || replace[3] == "insertInquiry") {
 			var html = "<div>" +
 	    	"<span class='bottom-title'><a class='title-qna' data-title='customerCenter' href='/admin/customercenter/qnaList'>Q&A</a></span>" +

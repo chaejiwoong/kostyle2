@@ -14,7 +14,14 @@
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/89998ce003.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
-
+<style type="text/css">
+.coordies {
+	color:#35C5F0;
+}
+.all-category {
+	display: none;
+}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
