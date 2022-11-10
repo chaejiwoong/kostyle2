@@ -7,6 +7,8 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/adminHeader.js"></script>
+<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
 <link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <style type="text/css">
@@ -15,13 +17,21 @@
           position: relative;
           padding-bottom: 100px;
       }
+.product{
+	color: #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.title-productsList {
+	color : #35C5F0;
+}
 </style>
 </head>
 <body>
 <!--  -->
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
-        
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
