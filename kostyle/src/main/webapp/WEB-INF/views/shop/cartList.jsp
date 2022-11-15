@@ -316,7 +316,7 @@ var display = (function loadThumbnail() {
 			}else{
 				orderForm.append('<input name="pno" value="'+ $("#pno0").val() +'">')
 				orderForm.append('<input name="p_size" value="'+ $("#p_size0").text() +'">')
-				orderForm.append('<input name="amount" value="'+ $("#pno0").val() +'">')
+				orderForm.append('<input name="amount" value="'+ $("#amount0").val() +'">')
 				orderForm.append('<input name="price" value="'+ $("#price0").data("value") +'">')
 				
 				seq++;				
@@ -339,7 +339,7 @@ var display = (function loadThumbnail() {
 				} else {
 					orderForm.append('<input name="payList['+ seq +'].pno" value="'+ $("#pno" + i).val() +'">')
 					orderForm.append('<input name="payList['+ seq +'].p_size" value="'+ $("#p_size" + i).text() +'">')
-					orderForm.append('<input name="payList['+ seq +'].amount" value="'+ $("#pno" + i).val() +'">')
+					orderForm.append('<input name="payList['+ seq +'].amount" value="'+ $("#amount" + i).val() +'">')
 					orderForm.append('<input name="payList['+ seq +'].price" value="'+ $("#price" + i).data("value") +'">')
 					
 					$.ajax({

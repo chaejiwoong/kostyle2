@@ -57,7 +57,11 @@
 	                    </tr>
 	                    <tr class="admin-box">
 							<td class="answer" colspan="3"><span><c:out value="${list.content}"/></span></td>
-							<td class="answer right" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+							<td class="answer right" colspan="1">
+								<c:if test="${list.answer eq 'yes'}">
+									<button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button>
+								</c:if>	
+							</td>
 						</tr>
                     </c:forEach>
                     </tbody>

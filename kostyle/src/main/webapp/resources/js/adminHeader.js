@@ -11,8 +11,8 @@ $(document).ready(function () {
                     "</div>")
             } else if (title == "product") {
                 $(".bottom-category").html("<div>" +
-                    "<span class='bottom-title'><a data-title='product' href='#'>상품목록</a></span>" +
-                    "<span class='bottom-title'><a data-title='product' href='#'>상품등록</a></span>" +
+                    "<span class='bottom-title'><a data-title='product' href='/admin/products'>상품목록</a></span>" +
+                    "<span class='bottom-title'><a data-title='product' href='/admin/products/register'>상품등록</a></span>" +
 
                     "</div>")
             } else if (title == "auction") {

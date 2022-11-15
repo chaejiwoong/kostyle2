@@ -25,7 +25,7 @@
 	<select id="getQuestionListWithPaging" resultMap="joinVO">
 		<![CDATA[
 			SELECT q.qno, q.title, q.content, q.created_date, m.name, m.mno
-				FROM (SELECT /*+INDEX_DESC(QUESTION SYS_C007798)*/ rownum rn, qno, mno, title, content, created_date FROM 
+				FROM (SELECT /*+INDEX_DESC(QUESTION SYS_C007601)*/ rownum rn, qno, mno, title, content, created_date FROM 
 					question WHERE rownum <= #{pageNum} * #{amount}) q 
 					LEFT JOIN member m ON m.mno = q.mno
 					WHERE rn > (#{pageNum} -1) * #{amount}

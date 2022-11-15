@@ -156,9 +156,9 @@ var display = (function loadThumbnail() {
 			e.preventDefault();
 			
 			var price= parseInt($('#bid-price').val())
-			var bestBidPrice = parseInt($('#best_bid_price').val())
-			var bidUnit = parseInt($('#bid_unit').val())
-			
+			var bestBidPrice = $('#best_bid_price').val().replaceAll(',',"")
+			var bidUnit = $('#bid_unit').val().replaceAll(',',"")
+			var bid = $('#bid_unit').val();
 			// 자바에서 받아온 Date를 js Date 객체로 변환
 			var endDate = $('#end_date').val()
 			endDate = new Date(endDate.split("/")[0]+ " " + endDate.split("/")[1].replaceAll("-",":"))
@@ -174,7 +174,7 @@ var display = (function loadThumbnail() {
 				alert("입찰금액은 최고입찰가보다 커야 합니다.");
 				return false;
 			}else if((price - bestBidPrice) % bidUnit != 0 ){
-				alert("입찰은 " + bidUnit + "포인트 단위로 가능합니다.");
+				alert("입찰은 " + bid + "포인트 단위로 가능합니다.");
 				return false;
 			}else if(now > endDate){
 				alert("입찰이 마감된 상품입니다.")

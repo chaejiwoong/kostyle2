@@ -13,6 +13,7 @@
 <title>KoStyle4U</title>
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
 <script type="text/javascript" src="/resources/js/customerCenter.js"></script>

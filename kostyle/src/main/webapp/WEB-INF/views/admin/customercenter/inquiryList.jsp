@@ -28,6 +28,7 @@
 							<th scope="col">제목</th>
 							<th scope="col">작성날짜</th>
 							<th scope="col"></th>
+							<c:out value="${check.answer }"/>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,16 +40,16 @@
 								<td><span class="tbody-td"><c:out value="${list.title}"/></span></td>
 								<td><span class="tbody-td"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.created_date}"/></span></td>
 								<td class="td-right">
-									<c:if test="${check.answer ne 'yes'}">
-										<button type="button" class="tbody-btn btn btn-primary" id="openModalBtn" data-toggle="modal" data-qno ="<c:out value="${list.qno}"/>">답변 작성하기</button>
-									</c:if>
+									<c:if test="${list.answer eq 'no'}">
+										<button type="button" class="tbody-btn btn btn-primary" id="openModalBtn" data-toggle="modal" data-qno ="<c:out value="${list.qno}"/>">답변 작성하기</button>	
+									</c:if>											
 								</td>
 								
 							</tr>
 							<tr class="answer-box admin-box">
 								<td class="answer" colspan="4"><span><c:out value="${list.content}"/></span></td>
 								<td class="answer right" colspan="1">
-									<c:if test="${check.qno == list.qno}">
+									<c:if test="${list.answer eq 'yes'}">
 										<button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button>
 									</c:if>
 								</td>

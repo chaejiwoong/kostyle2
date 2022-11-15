@@ -40,7 +40,7 @@
 	<select id="getNoticeListWithPaging" resultType="ko.kostyle.domain.ServiceCenterVo">
 		<![CDATA[
 		SELECT nno, title, content, category, created_date FROM
-			(SELECT/*+INDEX_DESC(NOTICE SYS_C007809)*/ rownum rn, nno, title, content, category, created_date FROM notice
+			(SELECT/*+INDEX_DESC(NOTICE SYS_C007612)*/ rownum rn, nno, title, content, category, created_date FROM notice
 			 WHERE rownum <= #{pageNum} * #{amount} AND category = 'notice')
 		WHERE rn > (#{pageNum} -1) * #{amount} 
 		]]>

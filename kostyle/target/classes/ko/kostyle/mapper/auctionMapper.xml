@@ -42,7 +42,7 @@
 	</insert>
 
 
-<!-- 	<select id="auctionList"
+ 	<select id="auctionList"
 		resultType="ko.kostyle.domain.AuctionVO">
     	    <![CDATA[
         select * from(
@@ -57,14 +57,14 @@
         where
          rn > (#{pageNum} - 1) * #{amount}
         ]]>
-	</select> -->
+	</select> 
 	
-	<select id="auctionList"
+<!-- 	<select id="auctionList"
 		resultType="ko.kostyle.domain.AuctionVO">
 
         select /*+INDEX_DESC(AUCTION_PRODUCT SYS_C007759)*/ * from auction_product
 
-	</select>	
+	</select>	 -->
 
 	<select id="auctionProgressList"
 		resultType="ko.kostyle.domain.AuctionVO">

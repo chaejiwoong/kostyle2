@@ -9,6 +9,14 @@
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
+<style type="text/css">
+.auctions {
+	color: #35C5F0;
+}
+.all-category {
+	display: none;
+}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
