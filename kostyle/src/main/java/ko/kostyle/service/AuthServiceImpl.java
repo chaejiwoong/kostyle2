@@ -38,6 +38,7 @@ public class AuthServiceImpl implements AuthService{
     private int authNumber;
     private final HttpSession session;
 
+    //회원가입
     @Override
     @Transactional
     public String memberInsert(MemberJoinDTO memberJoinDto) {
@@ -54,6 +55,7 @@ public class AuthServiceImpl implements AuthService{
         return member.getName();
     }
 
+    // 회원 로그인
     @Override
     @Transactional
     public String login(MemberJoinDTO memberJoinDto){
@@ -67,6 +69,7 @@ public class AuthServiceImpl implements AuthService{
         SecurityContextHolder.getContext().setAuthentication(authentication);
         Long mno = SecurityUtil.getCurrentMemberId();
         MemberVO vo = memberMapper.memberDetailById(mno);
+        // 세션에 해당 유저정보 저장
         session.setAttribute("user", vo);
 
         return memberJoinDto.getEmail();

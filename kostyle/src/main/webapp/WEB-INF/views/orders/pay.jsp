@@ -410,8 +410,7 @@ $(document).ready(function(){
 		}else{
 			$('#point').val(${member.point})
 		}
-		
-		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt($('#point').val())).toLocaleString()+ "원")
+		$("#total").val((parseInt(total) + parseInt(delivery) - parseInt($('#point').val())).toLocaleString()+ "원")
 		
 		// 결제금액이 0원일 경우에는 신용카드 결제 막기
 		if($("#total").text() == "결제금액 : 0원"){
@@ -435,7 +434,7 @@ $(document).ready(function(){
 		
 		var point = $(this).val()
 		
-		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt(point)).toLocaleString()+ "원")
+		$("#total").val((parseInt(total) + parseInt(delivery) - parseInt(point)).toLocaleString()+ "원")
 		
 		// 결제금액이 0원일 경우에는 신용카드 결제 막기
 		if($("#total").text() == "결제금액 : 0원"){
@@ -490,7 +489,6 @@ $(document).ready(function(){
 		e.preventDefault();
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-
 	            $('#modalAddress-num').val(data.zonecode).attr('readonly',true);
 	            $('#modalAddress-info').val(data.address).attr('readonly',true);
 	        }
