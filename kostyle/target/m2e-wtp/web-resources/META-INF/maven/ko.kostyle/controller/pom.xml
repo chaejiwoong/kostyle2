@@ -286,6 +286,25 @@
     <version>2.3.0</version>
 </dependency>
 
+<!-- YOUTUBE -->
+<dependency>
+    <groupId>com.google.apis</groupId>
+    <artifactId>google-api-services-youtube</artifactId>
+    <version>v3-rev211-1.25.0</version>
+</dependency>
+
+<dependency>
+    <groupId>com.google.api-client</groupId>
+    <artifactId>google-api-client</artifactId>
+    <version>1.25.0</version>
+</dependency>
+
+<dependency>
+	<groupId>org.jsoup</groupId>
+	<artifactId>jsoup</artifactId>
+	<version>1.11.3</version>
+</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

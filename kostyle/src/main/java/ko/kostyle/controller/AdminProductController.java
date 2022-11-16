@@ -53,7 +53,7 @@ public class AdminProductController {
 
 	@GetMapping
 	public String list(Model model, Criteria cri) {
-		cri.setAmount(2);
+		cri.setAmount(12);
 		int total = service.getTotal(cri);
 		model.addAttribute("product", service.productList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));

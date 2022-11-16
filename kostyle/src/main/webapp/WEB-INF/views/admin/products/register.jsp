@@ -282,12 +282,10 @@
 												}
 											],
 											'imageList' : list}
-											console.log("등록데이터............................."+data)
 											
 											$.ajax({
 														url : '/admin/products/register/',
-														data : JSON
-																.stringify(data),
+														data : JSON.stringify(data),
 														type : 'post',
 														contentType : "application/json; charset=UTF-8",
 														success : function(
