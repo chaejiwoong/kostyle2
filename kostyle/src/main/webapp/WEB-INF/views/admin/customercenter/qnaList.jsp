@@ -18,7 +18,6 @@
 <link href="/resources/css/qna.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="wrap">
 		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 		<nav class="qna-nav admin-qna">
 			<ul>
@@ -81,7 +80,6 @@
 				</button>
 			</div>
 		</div>
-	</div>
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

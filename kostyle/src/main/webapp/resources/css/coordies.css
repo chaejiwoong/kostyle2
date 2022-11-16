@@ -1,0 +1,73 @@
+/* 코디 메인 페이지 */
+
+/* 크기 지정 */
+.row-cols-md-3 > * {
+    width:300px !important;
+    flex: 0 0 auto;
+}
+.coordies {
+	color:#35C5F0;
+}
+.all-category  {
+	display: none;
+}
+.img-box {
+	width: 300px;
+	border-radius: 15px;
+}
+
+/* 상단 버튼 */
+.form-group-top{
+	margin-top: 50px;
+    margin-left: 140px;
+    margin-bottom: -70px;
+}
+#register-btn{
+	margin-left:1180px;
+	margin-top: -40;
+}
+.top-btn{
+    display: inline-block;
+    margin: 0;
+    margin-left:7px;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    font-weight:bold;
+    font-size: 14px;
+    line-height: 18px;
+    width: auto;
+    height: 40px;
+    border-radius: 4px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #f891aa;
+    outline: none;
+    overflow: hidden;
+}
+
+
+/* 좋아요 */
+.like-btn{
+	background: none;
+	border: none;
+}
+.fa-heart{
+	color: #f891aa;
+}
+.like-count{
+	color: #f891aa;
+}
+
+/* 댓글달기 */
+.fa-comment-dots{
+	color: #c0c0c0;
+} 
+.comment-link{
+	color: #c0c0c0;
+	text-decoration: none;
+}
+

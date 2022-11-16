@@ -1,20 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-
+<div id="wrap">
 <header>
 	<div class="header-box">
 		<div class="text-logo">
-			<a href="#"><span><i>KoStyle4U</i></span></a>
+			<a href="/main"><span><i>KoStyle4U</i></span></a>
 		</div>
 
 		<div class="ul-box">
 			<ul>
 
 				<li>${sessionScope.user.name }님반가워요 !</li>
-				<li><a href="/members/myPage"><span>메인페이지</span></a></li>
-				<li><a href="/members/myPage"><span>마이페이지</span></a></li>
-
+				<li><a href="/main"><span>메인페이지</span></a></li>
 				<li class="line"></li>
 				<li><a id="logout" href="/auth/logout"><span>로그아웃</span></a></li>
 
@@ -36,6 +34,7 @@
 	</div>
 	<div class="bottom-category"></div>
 </div>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {

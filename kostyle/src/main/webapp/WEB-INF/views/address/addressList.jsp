@@ -12,6 +12,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>        
         
 <style>
+
+
+
 label{
 	width:100px;
 }
@@ -136,7 +139,7 @@ tbody tr:hover{
 		<li>장바구니</li>
 		<li>위시리스트/코디</li>
 		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
-		<li>1:1문의</li>
+		<li onclick="location.replace('/customerCenter/register')">1:1문의</li>
 	</ul>  		
 </div>
     <h1 class="address-title">배송지 관리</h1>
@@ -144,7 +147,7 @@ tbody tr:hover{
 <div class="address-section">
 	<div class="row address-menu">
 	<span class="col-md-9"></span>
-		<a href="#" id="changeDefault" class="btn btn-primary defaultBtn">기본 배송지로 설정</a>
+		<a href="#" id="changeDefault" class="btn defaultBtn">기본 배송지로 설정</a>
 		<a href="/members/address/register" class="btn btn-default">배송지 추가 +</a>
 	</div>
 		<table class="table">

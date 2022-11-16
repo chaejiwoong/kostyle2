@@ -20,7 +20,6 @@
     <link href="/resources/css/register.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="wrap">
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
     	<div class="chat-box">
@@ -58,7 +57,11 @@
 	                    </tr>
 	                    <tr class="admin-box">
 							<td class="answer" colspan="3"><span><c:out value="${list.content}"/></span></td>
-							<td class="answer right" colspan="1"><button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button></td>
+							<td class="answer right" colspan="1">
+								<c:if test="${list.answer eq 'yes'}">
+									<button class="answer-btn" data-qno='<c:out value="${list.qno}"/>' type="button">답변보러가기</button>
+								</c:if>	
+							</td>
 						</tr>
                     </c:forEach>
                     </tbody>
@@ -90,7 +93,6 @@
             </ul>
         </div>
 
-    </div>
     <form id='actionForm' action="/customerCenter/register" method='get'>
 	    <input type='hidden' class='pageNum' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	    <input type='hidden' class='amount' name='amount' value='${pageMaker.cri.amount}'>

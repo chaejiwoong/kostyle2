@@ -38,15 +38,15 @@
 		insert into auction_product
 		values (#{apno},#{name},#{start_price},
 		#{best_bid_price}, #{bid_unit},
-		sysdate, sysdate+1)
+		sysdate, sysdate+3)
 	</insert>
 
 
-	<select id="auctionList"
+ 	<select id="auctionList"
 		resultType="ko.kostyle.domain.AuctionVO">
     	    <![CDATA[
         select * from(
-            select rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
+            select /*+INDEX_DESC(AUCTION_PRODUCT SYS_C007759)*/ rownum rn, apno, name, start_price, best_bid_price, bid_unit, start_date, end_date
             from auction_product
             where
             ]]>
@@ -57,7 +57,14 @@
         where
          rn > (#{pageNum} - 1) * #{amount}
         ]]>
-	</select>
+	</select> 
+	
+<!-- 	<select id="auctionList"
+		resultType="ko.kostyle.domain.AuctionVO">
+
+        select /*+INDEX_DESC(AUCTION_PRODUCT SYS_C007759)*/ * from auction_product
+
+	</select>	 -->
 
 	<select id="auctionProgressList"
 		resultType="ko.kostyle.domain.AuctionVO">

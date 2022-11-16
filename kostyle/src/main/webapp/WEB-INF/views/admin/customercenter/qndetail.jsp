@@ -26,7 +26,6 @@
     
 </head>
 <body>
-<div id="wrap">
     <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
     
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -55,7 +54,6 @@
 		    	</div>
 	    	</form>
     	</div>
-    </div>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

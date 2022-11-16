@@ -13,6 +13,7 @@
 <title>KoStyle4U</title>
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
 <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
@@ -51,7 +52,6 @@ font-weight: bold;
 </style>
 </head>
 <body>
-	<div id="wrap">
 		<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 		<h1>주문 목록</h1>
@@ -110,7 +110,8 @@ font-weight: bold;
 								<c:out value="${order.member.email}" />
 						</a></td>
 						<td><c:out value="${order.payment}" /></td>
-						<td><c:out value="${order.totalPrice}" /></td>
+						<fmt:formatNumber var="totalPrice" value="${order.totalPrice}" type="number"/>
+						<td><c:out value="${totalPrice}" /></td>
 						<td><c:out value="${order.status}" /></td>
 						<td><c:out value="${order.category}" /></td>						
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -162,7 +163,6 @@ font-weight: bold;
 			</form>
 		</div>
 	
-	</div>
 	<script>
 	
 	$(document).ready(function(){

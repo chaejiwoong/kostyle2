@@ -13,12 +13,17 @@
 
 <style>
 
-
-#wrap {
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 100px;
+.auction {
+   color: #35C5F0;
 }
+      
+.bottom-category {
+   display: block;
+}
+.title-auctionList {
+   color: #35C5F0;
+}
+
 
 h1{
 margin-top: 25px;
@@ -50,7 +55,6 @@ label{
 </style>
 </head>
 <body>
-<div id="wrap">
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 
 	<h1>관리자 경매 상세</h1>
@@ -82,17 +86,20 @@ label{
             
             <div class="form-inline form-group">
                 <label for="start_price">입찰시작가</label>
-                <input type="text" id="start_price" name="start_price" class="form-control" value="${auction.start_price}" readonly/><br>
+                <fmt:formatNumber var="start_price" value="${auction.start_price}" type="number"/>
+                <input type="text" id="start_price" name="start_price" class="form-control" value="${start_price}" readonly/><br>
             </div>
             
             <div class="form-inline form-group">
                 <label for="best_bid_price">최고입찰가</label>
-                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${auction.best_bid_price}" readonly/><br>
+                <fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${best_bid_price}" readonly/><br>
             </div>
 
             <div class="form-inline form-group">
                 <label for="bid_unit">경매입찰단위</label>
-                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${auction.bid_unit}" readonly/><br>
+                <fmt:formatNumber var="bid_unit" value="${auction.bid_unit}" type="number"/>
+                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${bid_unit}" readonly/><br>
             </div>
 
             <div class="form-inline form-group">
@@ -116,7 +123,6 @@ label{
 		
 	</div>
 
-</div>
 
 
 
@@ -192,7 +198,6 @@ var display = (function loadThumbnail() {
 					type: 'post',
                 dataType: 'json',
 					success: function (result) {
-						alert("Uploaded");
                         console.log(result);
         				var auction = {
         						"apno" : form.find("input[name='apno']").val(),

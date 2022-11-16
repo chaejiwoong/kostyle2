@@ -10,6 +10,7 @@
         <link href="/resources/css/header.css" rel="stylesheet"/>
         <link href="/resources/css/footer.css" rel="stylesheet"/>
 <style>
+
 label{
 	width:100px;
 }
@@ -166,6 +167,7 @@ label{
 </style>
 </head>
 <body>
+
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <div class="container">
 
@@ -177,10 +179,10 @@ label{
 		<li onclick="location.replace('/members')" >회원정보수정</li>
 		<li onclick="location.replace('/members/address')">배송지관리</li>
 		<li onclick="location.replace('/reviews/unwritten')" class="selected">리뷰관리</li>
-		<li>장바구니</li>
+		<li onclick="loaction.replace('/shop/cartList')">장바구니</li>
 		<li>위시리스트/코디</li>
 		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
-		<li>1:1문의</li>
+		<li onclick="location.replace('/customerCenter/register')">1:1문의</li>
 	</ul>  		
 </div>
 
@@ -252,7 +254,7 @@ label{
 
 	
 </div>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 var display = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');

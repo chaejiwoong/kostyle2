@@ -1,6 +1,7 @@
 package ko.kostyle.controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -130,18 +131,28 @@ public class AdminCustomerCenterController {
 //	문의 그리고 문의 답변
 	
 	@GetMapping("/inquiryList")
-	public void getInquiryList( Criteria criteria, Model model, AnswerDTO answerDTO, AnswerVO answerVO) {
+	public void getInquiryList( Criteria criteria, Model model, AnswerDTO answerDTO) {
 //		AnswerDTO answerDTO = service2.answer2(null);
 		
-		log.info("답변확인:" + answerDTO.getAsno());
-		log.info("답변확인:" + answerVO.getAsno());
+		List<QuestionVO> list = service2.getList(criteria);
+		log.info("list확인" + list);
+		for(QuestionVO vo : list) {
+			AnswerDTO answer = (AnswerDTO) service2.checkReply(vo.getQno());
+			log.info("answer: " + answer);
+			if(answer != null ) {
+				vo.setAnswer("yes");
+				log.info("답변 있음" + vo);
+				model.addAttribute("check", vo);
+			} else if (answer == null) {
+				vo.setAnswer("no");
+				log.info("답변 없음" + vo);
+				model.addAttribute("checkNo", vo);
+			}
+		}
 		
 		int total = service2.questionTotal(criteria);
 		log.info("문의 리스트: " + service2.getList(criteria));
-		
-		
-		
-		model.addAttribute("registerList", service2.getList(criteria));
+		model.addAttribute("registerList", list);
 		model.addAttribute("pageMaker", new PageDTO(criteria,total));
 	}
 	

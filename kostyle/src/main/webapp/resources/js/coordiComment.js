@@ -65,7 +65,11 @@ var commentService = (function(){
             success:function (data, status) {
             	console.log("댓글 등록 성공")
             	callback(data)             
-            }
+            },
+            error:function (xhr) {
+					self.location = "/auth/login"
+					console.log(xhr)   
+			}
         })        
     }
     
@@ -76,9 +80,7 @@ var commentService = (function(){
             type:'delete',
             success:function (data,status) {
             	console.log(data);
-			  	callback()
-               
-              
+			  	callback() 
             }
         });
     }

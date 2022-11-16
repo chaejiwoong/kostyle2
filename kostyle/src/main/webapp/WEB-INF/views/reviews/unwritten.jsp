@@ -131,10 +131,10 @@
 		<li onclick="location.replace('/members')">회원정보수정</li>
 		<li onclick="location.replace('/members/address')">배송지관리</li>
 		<li onclick="location.replace('/reviews/unwritten')" class="selected">리뷰관리</li>
-		<li>장바구니</li>
+		<li onclick="location.replace('/shop/cartList')">장바구니</li>
 		<li>위시리스트/코디</li>
 		<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
-		<li>1:1문의</li>
+		<li onclick="location.replace('/customerCenter/register')">1:1문의</li>
 	</ul>  		
 	
 </div>
@@ -157,7 +157,7 @@
 		<div class="row result">
 			<span class="col-md-2 img"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
 							style="width: 100px; height: 100px;"></span>
-			<span class="col-md-2"><a href="/products/get?pno=${detail.product.pno}">${detail.product.name}</a></span>
+			<span class="col-md-2"><a href="/main/product?pno=${detail.product.pno}">${detail.product.name}</a></span>
 			<span class="col-md-2"><c:out value="${detail.p_size}" /></span>
 			<span class="col-md-2"><c:out value="${detail.amount}" /></span>
 			<fmt:formatNumber var="price" value="${detail.price}" type="number"/>
@@ -169,6 +169,7 @@
 	</div>
 
 </div>
+
 
 <script>
 var display = (function loadThumbnail() {

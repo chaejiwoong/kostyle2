@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+</div>
 <footer id="footer">
     <div class="footer-box">
         <p>(주)<i>KoStyle4U</i>&nbsp; | &nbsp;서창훈</p>

@@ -27,14 +27,22 @@ public class ProductController {
 	
 	
 	@GetMapping
-	public String list(Model model, Criteria cri,HttpServletRequest request, HttpServletResponse response) {
-		cri.setAmount(4);
-		int total = service.getTotal(cri);
-		model.addAttribute("product", service.productList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		model.addAttribute("hitImg",service.productListHit());
-		model.addAttribute("day",service.productListDay());
-		
+	public String list(Model model, Criteria cri,@RequestParam(defaultValue = "0", required = false) int scno,@RequestParam(defaultValue = "0", required = false) int pcno, HttpServletRequest request, HttpServletResponse response) {
+
+		if(scno != 0 || pcno != 0) {
+			cri.setAmount(100);
+			int total = service.getTotal2(cri,scno,pcno);
+			model.addAttribute("product", service.productList2(cri, scno, pcno));
+			model.addAttribute("pageMaker", new PageDTO(cri, total));			
+		}else {
+			cri.setAmount(4);
+			int total = service.getTotal(cri);
+			model.addAttribute("product", service.productList(cri));
+			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			model.addAttribute("hitImg",service.productListHit());
+			model.addAttribute("day",service.productListDay());
+		}
+
 		
 		   // 쿠키 주기
 	      Cookie cookie = new Cookie("listCookie", "");

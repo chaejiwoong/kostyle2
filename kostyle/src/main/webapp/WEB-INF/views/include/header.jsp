@@ -1,9 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div id="wrap">
 <header>
 	<div class="header-box">
 		<div class="text-logo">
-			<a href="#"><span><i>KoStyle4U</i></span></a>
+			<a href="/main"><span><i>KoStyle4U</i></span></a>
 		</div>
 		<div class="search-form-box">
 			<div>
@@ -37,10 +38,10 @@
 <nav>
 	<div>
 		<ul class="nav-ul">
-			<li class="li-list" data-list="shop"><a href="#"><span
-					class="list-color">상품</span></a></li>
-			<li class="li-list"><a href="#"><span>코디</span></a></li>
-			<li class="li-list"><a href="#"><span>경매</span></a></li>
+			<li class="li-list" data-list="shop"><a href="/main"><span
+					class="products">상품</span></a></li>
+			<li class="li-list"><a href="/coordies"><span class="coordies">코디</span></a></li>
+			<li class="li-list"><a href="/auctions"><span class="auctions">경매</span></a></li>
 			<li class="li-list"><a class="customerCenter"
 				href="/customerCenter/qna?category=all"><span>고객센터</span></a></li>
 			<li class="li-list"><a href="#"><span>About Us</span></a></li>
@@ -52,11 +53,11 @@
 	<div class="top-category">
 		<div class='top-category01'>
 			<span class='title-name' data-title='clothes'><a class="title"
-				href='#'>상의</a></span> <span class="title-name" data-title='outerwear'><a
-				class="title" href='#'>아우터</a></span> <span class="title-name"
-				data-title='pants'><a class="title" href='#'>바지</a></span> <span
+				href='1'>상의</a></span> <span class="title-name" data-title='outerwear'><a
+				class="title" href='2'>아우터</a></span> <span class="title-name"
+				data-title='pants'><a class="title" href='3'>바지</a></span> <span
 				class="title-name" data-title='dress-skirt'><a class="title"
-				href='#'>원피스/스커트</a></span>
+				href='4'>원피스/스커트</a></span>
 		</div>
 	</div>
 	<div class="bottom-category"></div>
@@ -75,6 +76,19 @@
 				}
 			})
 
+		})
+		
+		$('.top-category01 a').on('click', function(e){
+			e.preventDefault();
+			console.log($(this).attr('href'))
+			location.href="/main?pcno=" + $(this).attr('href')
+			
+		})
+		
+		$(document).on('click','.bottom-category a', function(e){
+			e.preventDefault();
+			console.log($(this).attr('href'))
+			location.href="/main?scno=" + $(this).attr('href')
 		})
 	})
 </script>

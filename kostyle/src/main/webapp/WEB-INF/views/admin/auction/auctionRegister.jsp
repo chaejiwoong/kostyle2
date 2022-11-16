@@ -9,45 +9,51 @@
 <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
 <link href="/resources/css/adminHeader.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet"/>
-   <style type="text/css">
-      #wrap {
-          min-height: 100%;
-          position: relative;
-          padding-bottom: 100px;
-      }
-      
-      .title-auctionInsert {
-         color: #35C5F0;
-      }
-      .container {
-         padding-top: 25px;
-      }
-      .input-name {
-         display: inline-block;
-            width: auto;
-      }
-      .form-inline {
-         padding-top: 10px;
-      }
-      /* .filebox .upload-name {
-          display: inline-block;
-          height: 40px;
-          padding: 0 10px;
-          vertical-align: middle;
-          border: 1px solid #dddddd;
-          width: 78%;
-          color: #999999;
-      }
-      .filebox .file-serch {
-          display: inline-block;
-          padding: 10px 20px;
-          color: #fff;
-          vertical-align: middle;
-          background-color: #999999;
-          cursor: pointer;
-          height: 40px;
-          margin-left: 10px;
-      } */
+
+	<style type="text/css">
+		#wrap {
+		    min-height: 100%;
+		    position: relative;
+		    padding-bottom: 100px;
+		}
+		.bottom-category {
+			display: block;
+		}
+		.title-auctionInsert {
+			color: #35C5F0;
+		}
+		.container {
+			padding-top: 25px;
+		}
+		.auction {
+			color: #35C5F0;
+		}
+		.input-name {
+			display: inline-block;
+   			width: auto;
+		}
+		.form-inline {
+			padding-top: 10px;
+		}
+		/* .filebox .upload-name {
+		    display: inline-block;
+		    height: 40px;
+		    padding: 0 10px;
+		    vertical-align: middle;
+		    border: 1px solid #dddddd;
+		    width: 78%;
+		    color: #999999;
+		}
+		.filebox .file-serch {
+		    display: inline-block;
+		    padding: 10px 20px;
+		    color: #fff;
+		    vertical-align: middle;
+		    background-color: #999999;
+		    cursor: pointer;
+		    height: 40px;
+		    margin-left: 10px;
+		} */
 
 /*       .filebox input[type="file"] {
           position: absolute;
@@ -60,7 +66,7 @@
    </style>
 </head>
 <body>
-   <div id="wrap">
+   
       <%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
       <div class="container" style="width:230px;">
          <form id=register-form class="form-horizonal">
@@ -102,18 +108,19 @@
             <a href="/admin/auctions" class="btn btn-secondary">목록으로</a>
          </form>
       </div>
-   </div>
    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script src="/resources/js/auctionService.js"></script>
 <script>
 function setThumbnail(event) {
  var reader = new FileReader();
-
+		
        reader.onload = function(event) {
                var img = document.createElement("img");
                img.setAttribute("src", event.target.result)
                $("#img-result").empty();
              document.querySelector("div#img-result").appendChild(img);
+             
+             console.log($(this).text())
        };
 
      reader.readAsDataURL(event.target.files[0]);
@@ -144,7 +151,6 @@ function setThumbnail(event) {
                   type: 'post',
                     dataType: 'json',
                   success: function (result) {
-                     alert("Uploaded");
                             console.log(result);
                         var auction = {
                                    "name": form.find("input[name='name']").val(),
@@ -156,15 +162,10 @@ function setThumbnail(event) {
                            alert('상품 등록이 완료되었습니다.');
                            self.location="/admin/auctions";
                         })
-
                }
             }); //$.ajax
 
-            
-
          })
-         
-         
       })
    </script>
 </body>

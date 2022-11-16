@@ -168,7 +168,7 @@ label {
 						<form id="changePwForm" class="form-horizontal"
 							action="/auth/changePw" hidden>
 							<div class="form-inline form-group">
-								<label for="password">비밀번호</label> <input id="password"
+								<label for="password">변경 비밀번호</label> <input id="password"
 									type="password" name="password" class="form-control"><br>
 							</div>
 							<div class="form-inline form-group">
@@ -230,8 +230,12 @@ label {
                     alert("해당하는 회원이 존재하지 않습니다.");
                 } else {
                     alert("회원님의 이메일은 " + result + "입니다.");
+                    $("#pwsc").trigger("click");       
+                    pwForm.find("input[name='email']").val(result)
+                    pwForm.find("input[name='name']").val(member.name)
                     idForm.find("input[name='name']").val("")
                     idForm.find("input[name='birth']").val("")
+
                 }
             });
         });

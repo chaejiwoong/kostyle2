@@ -8,7 +8,13 @@
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
 
+<style type="text/css">
+.products {
+	color: #35C5F0;
+}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -156,7 +162,7 @@
                     
                 </div>
             </div>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script type="text/javascript">
 var aa = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
@@ -165,7 +171,7 @@ var aa = (function loadThumbnail() {
 		//섬네일 파일을 불러오기 위한 경로
 		var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 		// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
-		$(obj).attr('src',"/member/products/display?fileName=" + fileCallPath);
+		$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 		})
 	})();
 	
@@ -200,6 +206,8 @@ $(".move").on("click", function(e){
 	moveForm.submit();
 	
 });
+
+
 
 
 </script>

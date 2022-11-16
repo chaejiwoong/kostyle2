@@ -89,7 +89,7 @@
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
-							pno like '%'||#{keyword}||'%' 
+							pno like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'C'.toString()">
 							name like '%'||#{keyword}||'%' 
@@ -99,7 +99,7 @@
 						</when>
 					</choose>
 				</trim>
-			</foreach>
+			</foreach>		
 		</trim>
 	</sql>
 	
@@ -130,7 +130,60 @@
 	</select> 
 	
 	
-
+	<sql id="criteria2">
+		<trim prefixOverrides="OR" suffix=") AND " prefix="(">
+			<foreach collection="typeArr" item="type"> 
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							pno like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							name like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'W'.toString()">
+							scno = #{keyword}
+						</when>
+					</choose>
+				</trim>
+			</foreach>		
+		</trim>
+		<trim>
+			<if test="scno != 0">
+				scno = #{scno} and
+			</if>
+			<if test="pcno != 0">
+				
+				scno in (select scno from sub_category where pcno=#{pcno}) and
+			</if>			
+		</trim>
+	</sql>
+	
+	
+	<select id="productGetTotal2" resultType="int">
+		
+		select count(*) from
+		PRODUCT where
+		<include refid ="criteria2"/>
+		pno>0
+	</select> 
+	
+ 	<select id="getListWithPaging2" resultType="ko.kostyle.domain.ProductVO">
+		<![CDATA[
+			select pno,name,price,color,gender,season,CREATED_DATE, hitcount
+			FROM(
+				select /*+INDEX_DESC(PRODUCT SYS_C007221)*/
+				rownum rn,pno,name,price,color,gender,season,CREATED_DATE,hitcount
+				from PRODUCT
+				where
+					]]>
+				<include refid ="criteria2"/>
+				<![CDATA[
+					rownum <= #{pageNum} * #{amount}
+					) where rn > (#{pageNum}-1) * #{amount}
+				]]>
+				
+	</select> 
    
 
     

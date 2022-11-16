@@ -37,7 +37,7 @@ public class SchedulerService {
 	private final AddressMapper addressMapper;
 	
 	// 배송도착시간이 지난 상품들에 대해서 자동으로 배송완료 업데이트 쿼리
-	@Scheduled(cron = "0 0 0/1 * * *")
+	@Scheduled(cron = "0 0/1 * * * *")
 	@Transactional
 	public void updateOrderStatus() {
 		
@@ -65,7 +65,7 @@ public class SchedulerService {
 	
 	
 	// 낙찰 상품 주문 자동화 스케줄러
-	@Scheduled(cron = "0 0 0/1 * * *")
+	@Scheduled(cron = "0 0/1 * * * *")
 	@Transactional
 	public void addAuctionOrder() {
 		
@@ -79,24 +79,21 @@ public class SchedulerService {
 			if(bidList.size() == 0) {
 				continue;
 			}
-			
 			// 낙찰자 추출
 			BidVO bid = bidMapper.bestBidDetail(auction.getApno());
 			Long mno = bid.getMno();
 			
 			// 낙찰자의 기본 배송지 추출
 			AddressVO address = addressMapper.findDefaultAddress(mno);
-			
-			
+					
 			OrderVO order = OrderVO.builder()
 					.ano(address.getAno())
 					.mno(mno)
-					.payment("포인트")
+					.payment("auction")
 					.totalPrice(bid.getPrice())
 					.status("상품준비중")
 					.category("auction_product")
-					.build();
-			
+					.build();			
 			//주문 추가
 			orderMapper.insertAuctionOrder(order);
 			

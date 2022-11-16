@@ -33,22 +33,25 @@ public class CartController {
 	private final HttpSession session;
 
 	@PostMapping("/cartAdd")
-	public String addCart(@RequestParam(defaultValue = "0") Long pno, @RequestParam(defaultValue = "0") int amount) {
+	public String addCart(@RequestParam(defaultValue = "0") Long pno, @RequestParam(defaultValue = "0") int amount, String p_size) {
 
 		log.info(pno);
 		log.info(amount);
 		// 로그인한 회원을 세션에서 꺼내오기
-		MemberVO vo = (MemberVO) session.getAttribute("loginUser");
+		MemberVO vo = (MemberVO) session.getAttribute("user");
 		Long mno = vo.getMno(); // 로그인한 사람꺼로 카트 들어감.
-		// Long mno = 2; //회원번호가 2인 사람으로 테스트
+		// Long mno = 1; //회원번호가 1인 사람으로 테스트
 
-		CartListVO CartListVO = new CartListVO();
-		CartListVO.setPno(pno);
-		CartListVO.setAmount(amount);
-		CartListVO.setMno(mno);
+		CartListVO cartListVO = new CartListVO();
+		cartListVO.setPno(pno);
+		cartListVO.setAmount(amount);
+		cartListVO.setMno(mno);
+		cartListVO.setP_size(p_size);
+		
+		log.info(cartListVO);
 
 		// 장바구니에 상품 추가
-		service.addCart(CartListVO);
+		service.addCart(cartListVO);
 
 		// 장바구니 목록 가져오기
 		// List<CartListVO> cartArr=shopService.selectCartView(idx_fk);
@@ -64,13 +67,28 @@ public class CartController {
 	@GetMapping("/cartList")
 	public String showCart(Model model, CartListVO vo) throws Exception {
 		log.info("cartList...");
-
 		Long mno = SecurityUtil.getCurrentMemberId();
 		
 		vo.setMno(mno);
+		
 		List<CartListVO> cartArr = service.getCartList(mno);
-
+		int finalTotalPrice =0;
+		int finalTotalPoint =0;		
+		
+		
+		for (CartListVO vo2 : cartArr) {
+			finalTotalPoint += vo2.getTotalPoint();
+			finalTotalPrice += vo2.getFinalTotalPrice();
+		}
+		
+		log.info(finalTotalPrice);
+		log.info(finalTotalPoint);
+		
 		model.addAttribute("cartList", cartArr);
+		model.addAttribute("finalTotalPrice", finalTotalPrice);
+		model.addAttribute("finalTotalPoint", finalTotalPoint);
+		
+
 		log.info(cartArr);
 		return "shop/cartList";
 	}

@@ -8,7 +8,15 @@
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
-
+<link href="/resources/css/footer.css" rel="stylesheet" />
+<style type="text/css">
+.auctions {
+	color: #35C5F0;
+}
+.all-category {
+	display: none;
+}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -19,13 +27,13 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                
+
                 
                              <c:forEach items="${auctionDeadlineList}" var="auction">
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">마감</div>
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">마감임박</div>
                             <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
 							style="width : 267px; height : 150px;">
                             <!-- Product details-->
@@ -50,7 +58,8 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill">
                                         <br>
-                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <fmt:formatNumber var="best_bid_price2" value="${auction.best_bid_price}" type="number"/>
+                                       최고입찰가 : <c:out value="${best_bid_price2}" />
                                         <br>
                                         
                                     	
@@ -65,8 +74,6 @@
                </c:forEach>
                
 
-	
-               
              <c:forEach items="${auctionProgressList}" var="auction">
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -96,7 +103,8 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill">
                                         <br>
-                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+                                       최고입찰가 : <c:out value="${best_bid_price}" />
                                         <br>
                                         
                                     	
@@ -117,14 +125,15 @@
                     
                 </div>
             </div>
-
+            </section>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 	var display = (function loadThumbnail() {
 		var uploadResultArr = $('.thumb');
 		
 		$(uploadResultArr).each(function (i, obj) {
 			//섬네일 파일을 불러오기 위한 경로
-			var fileCallPath = encodeURIComponent($(obj).data('filepath') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+			var fileCallPath = encodeURIComponent($(obj).data('filepath') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 			// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
 			$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 			})

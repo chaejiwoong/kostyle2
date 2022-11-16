@@ -222,25 +222,20 @@ public class AuctionServiceImpl implements AuctionService{
 	// 경매 입찰
 	@Override
 	@Transactional
-	public void auctionBid(BidDTO dto) throws Exception {
-		
+	public void auctionBid(BidDTO dto) throws Exception {	
 		// 최초입찰인지 아닌지 검증(이전 회원의 포인트 반환 여부때문에)
 		List<BidVO> bidList = bidMapper.bidList(dto.getApno());
 		Long mno = SecurityUtil.getCurrentMemberId();
 		MemberVO findMember = memberMapper.memberDetailById(mno);
 		AddressVO address = addressMapper.findDefaultAddress(mno);
-
-		// 기본배송지가 있는지 검증
+		// 기본배송지가 있는지 검증(기본 배송지 없는 회원 입찰 불가)
 		if(address == null) {
 			throw new RuntimeException("기본배송지 등록 후 이용가능합니다.");
-		}
-		
+		}		
 		// 잔액이 충분한지 검증
 		if(findMember.getPoint() < dto.getPrice()) {
 			throw new RuntimeException("잔액이 부족합니다.");
 		}	
-		
-
 		// 최초입찰이라면 해당 회원이 포인트가 있는지 조회
 		if(bidList.size() == 0) {
 			
@@ -262,7 +257,6 @@ public class AuctionServiceImpl implements AuctionService{
 			changeBestBidPrice(mno, dto);
 		}
 	}
-	
 	// 최고가 업데이트
 	private void changeBestBidPrice(Long mno, BidDTO dto) {
 		
@@ -280,7 +274,4 @@ public class AuctionServiceImpl implements AuctionService{
 				.build();
 		bidMapper.insertBid(bid);				// 입찰내역 추가
 	}
-
-
-
 }

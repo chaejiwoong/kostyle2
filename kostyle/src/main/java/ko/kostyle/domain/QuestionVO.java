@@ -13,6 +13,7 @@ public class QuestionVO extends MemberVO{
 	private String title;
 	private String content;
 	private Date created_date;
+	private String answer;
 	
 	private MemberVO memberVO;
 }

@@ -12,6 +12,7 @@ import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.domain.StockVO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.ProductDTO;
+import ko.kostyle.dto.ProductFilterDTO;
 import ko.kostyle.dto.Product_ImgDTO;
 import ko.kostyle.dto.StockDTO;
 import ko.kostyle.mapper.ProductImgMapper;
@@ -31,6 +32,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDTO> productList(Criteria cri) {
+
+		
 		List<ProductVO> proVO = proMapper.getListWithPaging(cri);
 		List<ProductDTO> proDTO =new ArrayList<ProductDTO>();
 		
@@ -249,6 +252,46 @@ public class ProductServiceImpl implements ProductService {
 			
 			return proDTO;
 		}
+
+	@Override
+	public List<ProductDTO> productList2(Criteria cri, int scno, int pcno) {
+		// TODO Auto-generated method stub
+		ProductFilterDTO pf = new ProductFilterDTO(cri, pcno, scno);
+		List<ProductVO> proVO = proMapper.getListWithPaging2(pf);
+		List<ProductDTO> proDTO =new ArrayList<ProductDTO>();
+		
+		for(ProductVO prolist : proVO) {
+			
+			ProductDTO dto = new ProductDTO();
+			
+			dto.setPno(prolist.getPno());
+			dto.setScno(prolist.getScno());
+			dto.setName(prolist.getName());
+			dto.setColor(prolist.getColor());
+			dto.setGender(prolist.getGender());
+			dto.setHitCount(prolist.getHitCount());
+			dto.setPrice(prolist.getPrice());
+			dto.setSeason(prolist.getSeason());
+			dto.setCreated_date(prolist.getCreated_date());
+			dto.setLast_modified_date(prolist.getLast_modified_date());
+			
+			List<Product_ImgVO> imgList =imgMapper.getImgList(prolist.getPno());
+			dto.setImageList(imgList);
+
+			
+			proDTO.add(dto);
+		
+		}
+		
+		return proDTO;
+	}
+
+	@Override
+	public int getTotal2(Criteria cri, int scno, int pcno) {
+		// TODO Auto-generated method stub
+		ProductFilterDTO pf = new ProductFilterDTO(cri, pcno, scno);
+		return proMapper.productGetTotal2(pf);
+	}
 
 	
 	

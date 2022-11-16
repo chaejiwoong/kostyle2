@@ -23,8 +23,8 @@ public interface QuestionMapper {
 //	문의 댓글
 	public int insertAnswer(@Param("answerVO")AnswerVO answerVO, @Param("qno") Long qno, @Param("content") String content);
 	public AnswerVO readAnswer(Long qno);
-	public AnswerDTO Answer(Long qno);
-	
+//	댓글 체크
+	public AnswerDTO checkReply(Long qno);
 	public int deleteAnswer(Long asno);
 	public int updateAnswer(AnswerVO answerVO);
 	public List<AnswerVO> getListWithPaging(@Param("cri") Criteria cri, @Param("qno") Long qno);

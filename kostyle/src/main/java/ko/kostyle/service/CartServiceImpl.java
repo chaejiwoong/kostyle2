@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import ko.kostyle.domain.CartListVO;
 import ko.kostyle.domain.OrderVO;
+import ko.kostyle.domain.ProductImgVO;
 import ko.kostyle.domain.ProductVO;
+import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.mapper.CartMapper;
+import ko.kostyle.mapper.ProductImgMapper;
 import ko.kostyle.mapper.ProductMapper;
 import lombok.extern.log4j.Log4j;
 
@@ -22,6 +25,9 @@ public class CartServiceImpl implements CartService {
 	private CartMapper cartMapper;
 
 	@Autowired
+	private ProductImgMapper imgMapper;
+	
+	@Autowired
 	private ProductMapper productMapper;
 
 	@Override
@@ -31,13 +37,13 @@ public class CartServiceImpl implements CartService {
 		System.out.println("count= " + count);
 
 		int n = 0;
-		if (count > 0) {
-			// [2] 해당 상품이 이미 장바구니에 있다면 수량만 추가
-			n = cartMapper.updateCart(CartListVO);
-			// [3] 해당 상품이 장바구니에 없는 상품이라면 insert
-		} else {
+		/*
+		 * if (count > 0) { // [2] 해당 상품이 이미 장바구니에 있다면 수량만 추가 n =
+		 * cartMapper.updateCart(CartListVO); // [3] 해당 상품이 장바구니에 없는 상품이라면 insert } else
+		 * {
+		 */
 			n = cartMapper.addCart(CartListVO);
-		}
+//		}
 
 		return n;
 	}
@@ -63,11 +69,18 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartListVO> getCartList(Long mno) throws Exception {
 		List<CartListVO> cart = cartMapper.getCart(mno);
-		log.info(cart);
 
+		
 		for (CartListVO vo : cart) {
+			Long pno = vo.getPno();
+
+			ProductImgVO img =imgMapper.selectImg(pno);
+			String fileName = img.getFilepath() + "/" +img.getUuid() + "_"  +img.getFilename();
+			vo.setFileName(fileName);
 			vo.initTotal();
 		}
+		
+		log.info(cart);
 		return cart;
 	}
 
