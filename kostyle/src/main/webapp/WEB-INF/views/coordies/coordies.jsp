@@ -79,6 +79,7 @@
 	var endPage;
 	var cno;
 	var pageNum;
+	var amount;
 	
 	//이미지 불러오기 card-img-top
 	var display = (function loadThumbnail() {
@@ -100,9 +101,12 @@
 		totalCount = '${pageMaker.total}'	
 		endPage = '${pageMaker.endPage}'
 		pageNum = '${pageMaker.cri.pageNum}'
+		amount = '${pageMaker.cri.amount}'
 		console.log("총 글 갯수 " + totalCount);	
 		console.log("마지막 페이지 " + endPage);	
 		console.log("페이지넘" + pageNum);	
+		console.log("어마운트" + amount);
+		
 		
 		getCoordiList(scrollPage); //글 목록 1페이지
  
@@ -140,10 +144,10 @@
 		console.log("현재 페이지" + pageNum)
 	
 		console.log("정렬 누른 후 들어오는 솔트값은 :" + sort)
-		console.log("넘길 총 토탈 카운트" + totalCount)
+		console.log("넘길 총 어마운트" + amount)
 		
 	    $.ajax({
-	    	url:'/coordies/ajaxCoordies?pageNum='+pageNum+'&amount='+totalCount+'&sort='+sort,
+	    	url:'/coordies/ajaxCoordies?pageNum='+pageNum+'&amount='+amount+'&sort='+sort,
 	    	type:'get',
 	    	success:function (htmlList) {
 	    		$(".form-group-feed-ul").append(htmlList);
@@ -218,7 +222,7 @@
 		$(".form-group-feed-ul").empty(); //기존 값 비워주고
 		
 		console.log("정렬 페이지: " + '${pageMaker.cri.pageNum}')
-		console.log("총 글 갯수 " + totalCount);	
+		console.log("정렬 어마운트 " + amount);	
 		console.log("마지막 페이지 " + endPage);	
 		
 		

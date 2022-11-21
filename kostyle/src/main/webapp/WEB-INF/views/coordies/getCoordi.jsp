@@ -279,7 +279,6 @@
 		//console.log("댓글 좌표는" + document.querySelector("#comment").offsetTop);
 		
 		
-		
 		//수정하기
 		$("button[data-oper='modify']").on("click", function (e) {
 			operForm.attr("action", "/coordies/modify").submit();
@@ -479,7 +478,8 @@
 				console.log(xhr)   
 			}
 		}); //end ajax	        
-	}) //end 좋아요 버튼 클릭		
+	}) //end 좋아요 버튼 클릭
+	
 	
 	
 	

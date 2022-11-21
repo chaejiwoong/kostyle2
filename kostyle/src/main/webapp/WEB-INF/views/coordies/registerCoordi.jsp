@@ -124,12 +124,7 @@
 	<!-- 썸네일 버튼 -> 동적 생성 되게? or 숨겼다 보이게-->
 	<div class="row-2">
 		<div class="form-group-btn row-2-btn">	
-	
-			<span class="file-tag">
-				<!-- tag-btn -->
-				<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
-			</span>
-				
+		
 			<span class="file-remove">	
 				<!-- remove-btn (버튼 안에 휴지통 아이콘) -->
 				<button class="thumbnail-btn" id='remove-btn' type='button' title='파일삭제' hidden="">
@@ -138,6 +133,11 @@
 					  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 					</svg>
 				</button>
+			</span>
+	
+			<span class="file-tag">
+				<!-- tag-btn -->
+				<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
 			</span>
 
 		</div>
@@ -299,6 +299,33 @@ $(".file-remove").on("click", "button" ,function () {
 		$("span.upload-notice").show();
 
 });
+
+
+//상품 태그 버튼 클릭
+$("#tag-btn").on("click", function () {
+	console.log("상품태그 클릭")
+	
+	//텍스트만 변하고
+	$("#tag-btn").html("편집 완료");
+	$("#upload-btn").disabled = true;
+	
+	productTag();
+	
+	//이미지 클릭 div 생성
+    //$(".row-2-btn").prepend('<div>사진을 클릭하여 상품 태그를 등록해보세요.</div>');
+
+})
+
+//상품 태그 함수
+function productTag() {
+	
+	$("img").on("click", function () {
+		
+		console.log("모달창 생겨라")
+		
+	})
+	
+}
 
 
 

@@ -72,7 +72,8 @@ public class CoordiController {
 	@GetMapping
 	public String list(Criteria cri, Model model){
 		log.info("list Coordies.....................................");
-
+	
+		cri.setAmount(12);
 
 		int total = service.getTotalCount(cri);
 		PageDTO pageDTO = new PageDTO(cri, total);
@@ -85,11 +86,8 @@ public class CoordiController {
 	@GetMapping("/ajaxCoordies")
 	public String getList(Criteria cri, Model model,
 														HttpServletRequest request, HttpServletResponse response){
-		
-		
+				
 		log.info("정렬 누른 후 솔트 내놩ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + cri.getSort());
-		
-		
 		
 		// 쿠키 주기
 		Cookie cookie = new Cookie("listCookie", "");
@@ -97,7 +95,7 @@ public class CoordiController {
 		response.addCookie(cookie);
 
 		//무한스크롤	
-		cri.setAmount(12);
+		//cri.setAmount(12);
 		
 		log.info("페이지는 " + cri.getPageNum());
 		model.addAttribute("getCoordiList", service.getList(cri));
