@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/coordies/**").permitAll()
                 .antMatchers("/coordiComments/**").permitAll()
                 
-                //.antMatchers("/coordiComments/register").authenticated()
+               // .antMatchers("/coordiComments/register").authenticated()
 
                 
                 .anyRequest().authenticated(); 
