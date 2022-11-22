@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import ko.kostyle.domain.CartListVO;
 import ko.kostyle.domain.OrderVO;
+import ko.kostyle.domain.ProductImgVO;
 import ko.kostyle.domain.ProductVO;
+import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.mapper.CartMapper;
+import ko.kostyle.mapper.ProductImgMapper;
 import ko.kostyle.mapper.ProductMapper;
 import lombok.extern.log4j.Log4j;
 
@@ -21,6 +24,9 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartMapper cartMapper;
 
+	@Autowired
+	private ProductImgMapper imgMapper;
+	
 	@Autowired
 	private ProductMapper productMapper;
 
@@ -66,6 +72,11 @@ public class CartServiceImpl implements CartService {
 
 		
 		for (CartListVO vo : cart) {
+			Long pno = vo.getPno();
+
+			ProductImgVO img =imgMapper.selectImg(pno);
+			String fileName = img.getFilepath() + "/" +img.getUuid() + "_"  +img.getFilename();
+			vo.setFileName(fileName);
 			vo.initTotal();
 		}
 		

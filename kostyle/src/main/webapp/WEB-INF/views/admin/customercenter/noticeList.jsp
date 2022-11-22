@@ -40,7 +40,7 @@
 		</form>
 		<div class="qna-write">
 			<div class="notice-box">
-				<button class="write-btn" type="button">
+				<button id="write-btn" class="write-btn" type="button">
 					<span>작성하기</span>
 				</button>
 			</div>

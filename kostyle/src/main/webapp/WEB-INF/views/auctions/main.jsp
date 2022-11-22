@@ -27,13 +27,13 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                
+
                 
                              <c:forEach items="${auctionDeadlineList}" var="auction">
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">마감</div>
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">마감임박</div>
                             <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"
 							style="width : 267px; height : 150px;">
                             <!-- Product details-->
@@ -58,7 +58,8 @@
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill">
                                         <br>
-                                       최고입찰가 : <c:out value="${auction.best_bid_price}" />
+                                        <fmt:formatNumber var="best_bid_price2" value="${auction.best_bid_price}" type="number"/>
+                                       최고입찰가 : <c:out value="${best_bid_price2}" />
                                         <br>
                                         
                                     	
@@ -73,8 +74,6 @@
                </c:forEach>
                
 
-	
-               
              <c:forEach items="${auctionProgressList}" var="auction">
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -126,6 +125,7 @@
                     
                 </div>
             </div>
+            </section>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 	var display = (function loadThumbnail() {

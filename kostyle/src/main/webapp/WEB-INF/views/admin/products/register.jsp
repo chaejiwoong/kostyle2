@@ -17,28 +17,18 @@
 	#option4 {
 		display: none;		
 	}
+	
 </style>
 
-<link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/adminHeader.js"></script>
-<script type="text/javascript" src="/resources/js/customerCenter.js"></script>
-<link href="/resources/css/adminHeader.css" rel="stylesheet" />
+<link href="/resources/vendor/bootstrap/css/register.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
-<style type="text/css">
-.product {
-	color : #35C5F0;
-}
-.bottom-category {
-	display: block;
-}
-.title-productsInsert {
-	color : #35C5F0;
-}
-</style>
+
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 
 
@@ -73,7 +63,7 @@
 								<option value="3">바지</option>
 								<option value="4">원피스 & 스커트</option>
 							</select>
-							 <select name="scno" class="form-control empty error"
+							 <select name="scno" class="form-control empty error" hidden="hidden"
 								id="option1">
 								<option value="none">하위 카테고리 선택 (필수)</option>
 								<option value="1">긴팔 티셔츠</option>
@@ -219,13 +209,11 @@
 	$("#cancelBtn").click(function(e) {
 		e.preventDefault();
 		location.href = "/admin/products/"
-
 	});
 	
 	$(document).ready(function () {
 						var imgList;
 						let enrollForm = $("#enrollForm")
-
 						$('#selectBox').change(function() {
 							var result = $("select[name='pcno']").val();
 							if (result == '1') {
@@ -251,7 +239,6 @@
 								console.log(result);
 							}
 						});
-
 						/* 상품 등록 버튼 */
 						$("#enrollBtn")
 								.on("click",function(e) {
@@ -295,13 +282,10 @@
 												}
 											],
 											'imageList' : list}
-											console.log("등록데이터............................."+data)
 											
-
 											$.ajax({
 														url : '/admin/products/register/',
-														data : JSON
-																.stringify(data),
+														data : JSON.stringify(data),
 														type : 'post',
 														contentType : "application/json; charset=UTF-8",
 														success : function(
@@ -310,11 +294,8 @@
 															location.href = "/admin/products/"
 														}
 													});
-
 										});
-
 					})
-
 	/* 이미지 업로드 */
 	$("input[type='file']").on("change", function(e) {
 		
@@ -326,16 +307,12 @@
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
 		let fileObj = fileList[0];
-
 		if (!fileCheck(fileObj.name, fileObj.size)) {
-
 			return false;
 		}
-
 		for (let i = 0; i < fileList.length; i++) {
 			formData.append("uploadFile", fileList[i]);
 		}
-
 		$.ajax({
 			url : '/admin/products/upload',
 			processData : false,
@@ -345,50 +322,38 @@
 			dataType : 'json',
 			success : function(result) {
 				list = result;
+				alert("제발.............");
 				showUploadImage(result);
 			},
 			error : function(result) {
 				alert("이미지 파일이 아닙니다.");
 			}
-
 		});
-
 	});
 	//조건체크
 	let regex = new RegExp("(.*?)\.(jpg|png)$");
 	let maxSize = 1048576; //1MB	
-
 	function fileCheck(fileName, fileSize) {
-
 		if (fileSize >= maxSize) {
 			alert("파일 사이즈 초과");
 			return false;
 		}
-
 		if (!regex.test(fileName)) {
 			alert("해당 종류의 파일은 업로드할 수 없습니다.");
 			$('input[name="uploadFile"]').val("");
 			return false;
 		}
-
 		return true;
-
 	}
-
 	/* 이미지 출력 */
 	function showUploadImage(uploadResultArr) {
-
 		/* 전달받은 데이터 검증 */
 		if (!uploadResultArr || uploadResultArr.length == 0) {
 			return
 		}
-
 		let uploadResult = $("#uploadResult");
-
 		let obj = uploadResultArr[0];
-
 		let str = "";
-
 		let fileCallPath = encodeURIComponent(obj.filePath.replace(/\\/g,'/')+ "/s_" + obj.uuid + "_" + obj.fileName);
 		console.log(fileCallPath)
 		str += "<div id='result_card'>";
@@ -401,7 +366,6 @@
 		
 		console.log(str);
 		uploadResult.append(str);
-
 	}
 	/* 이미지 삭제 버튼 동작 */
 	$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
@@ -412,11 +376,8 @@
 	
 	//이미지 삭제 매서드
 	function deleteFile() {
-
 		let targetFile = $(".imgDeleteBtn").data("file");
-
 		let targetDiv = $("#result_card");
-
 		$.ajax({
 			url : '/admin/products/deleteImg',
 			data : {
@@ -426,14 +387,11 @@
 			type : 'POST',
 			success : function(result) {
 				console.log(result);
-
 				targetDiv.remove();
 				$("input[type='file']").val("");
-
 			},
 			error : function(result) {
 				console.log(result);
-
 				alert("파일을 삭제하지 못하였습니다.")
 			}
 		});

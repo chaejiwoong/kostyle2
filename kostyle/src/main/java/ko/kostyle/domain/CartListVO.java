@@ -20,6 +20,7 @@ public class CartListVO implements Serializable {
 	private int amount; // 장바구니 수량
 	private String p_size; //상품 사이즈
 	
+	private String fileName;	//파일
 
 	private String name; // 옷 이름
 	private int price; // 가격

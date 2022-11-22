@@ -157,7 +157,7 @@
 		<div class="row result">
 			<span class="col-md-2 img"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
 							style="width: 100px; height: 100px;"></span>
-			<span class="col-md-2"><a href="/main/products?pno=${detail.product.pno}">${detail.product.name}</a></span>
+			<span class="col-md-2"><a href="/main/product?pno=${detail.product.pno}">${detail.product.name}</a></span>
 			<span class="col-md-2"><c:out value="${detail.p_size}" /></span>
 			<span class="col-md-2"><c:out value="${detail.amount}" /></span>
 			<fmt:formatNumber var="price" value="${detail.price}" type="number"/>

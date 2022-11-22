@@ -14,4 +14,6 @@ public interface ReviewService {
 	List<AdminOrderDetailDTO> writeReviewList();
 	
 	AdminOrderDetailDTO orderDetails(Long odno);
+	
+	ReviewDTO reviewDetail(Long odno);
 }

@@ -110,7 +110,8 @@ font-weight: bold;
 								<c:out value="${order.member.email}" />
 						</a></td>
 						<td><c:out value="${order.payment}" /></td>
-						<td><c:out value="${order.totalPrice}" /></td>
+						<fmt:formatNumber var="totalPrice" value="${order.totalPrice}" type="number"/>
+						<td><c:out value="${totalPrice}" /></td>
 						<td><c:out value="${order.status}" /></td>
 						<td><c:out value="${order.category}" /></td>						
 						<td><fmt:formatDate pattern="yyyy-MM-dd"

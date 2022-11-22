@@ -17,8 +17,11 @@ $(function(){
 		    $(".bottom-category").html(html)
 		});
 		
+
 	});
-			$(".write-btn").click(function() {
+		$("#write-btn").click(function(e) {
+			e.preventDefault();
 			location.href = "/admin/customercenter/insertNotice";
-		});
+		});	
+
 });

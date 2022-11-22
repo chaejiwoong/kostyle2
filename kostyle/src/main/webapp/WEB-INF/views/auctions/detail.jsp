@@ -26,7 +26,7 @@
                     <img class="card-img-top mb-5 mb-md-0" >
                     	<div id="uploadReslut">				
                     <img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}"
-            	 data-filename="${auction.imgs[0].filename}" style="width:500px; height:700px;">				
+            	 data-filename="${auction.imgs[0].filename}" style="width:400px; height:550px;">				
 						</div>
                     </div>
             <div id="img-div" class="form-inline form-group" hidden>
@@ -46,15 +46,18 @@
                         </div>
                         <div class="fs-5 mb-5" name = "start_price"> 
                            <label for="start_price">입찰시작가</label>
-                <input type="text" id="start_price" name="start_price" class="form-control" value="${auction.start_price}" readonly/>
+                           <fmt:formatNumber var="start_price" value="${auction.start_price}" type="number"/>
+                <input type="text" id="start_price" name="start_price" class="form-control" value="${start_price}" readonly/>
                         </div>
                         <div class="fs-5 mb-5" name = "best_bid_price">
                             <label for="best_bid_price">최고입찰가</label>
-                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${auction.best_bid_price}" readonly/>
+                            <fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+                <input type="text" id="best_bid_price" name="best_bid_price" class="form-control" value="${best_bid_price}" readonly/>
                         </div>
                         <div class="fs-5 mb-5" name = "bid_unit">
                            <label for="bid_unit">경매입찰단위</label>
-                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${auction.bid_unit}" readonly/>
+                           <fmt:formatNumber var="bid_unit" value="${auction.bid_unit}" type="number"/>
+                <input type="text" id="bid_unit" name="bid_unit" class="form-control" value="${bid_unit}" readonly/>
                         </div>
                           <div class="fs-5 mb-5" name = "start_date">
                             <label for="start_date">경매시작일자</label>
@@ -92,7 +95,8 @@
 			<tr>
 				<td><c:out value="${bid.rank}" /></td>
 				<td><c:out value="${bid.email}" /></td>
-				<td><c:out value="${bid.price}" /></td>
+				<fmt:formatNumber var="price2" value="${bid.price}" type="number"/>
+				<td><c:out value="${price2}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${bid.created_date}" /></td>
 			</tr>
@@ -152,9 +156,9 @@ var display = (function loadThumbnail() {
 			e.preventDefault();
 			
 			var price= parseInt($('#bid-price').val())
-			var bestBidPrice = parseInt($('#best_bid_price').val())
-			var bidUnit = parseInt($('#bid_unit').val())
-			
+			var bestBidPrice = $('#best_bid_price').val().replaceAll(',',"")
+			var bidUnit = $('#bid_unit').val().replaceAll(',',"")
+			var bid = $('#bid_unit').val();
 			// 자바에서 받아온 Date를 js Date 객체로 변환
 			var endDate = $('#end_date').val()
 			endDate = new Date(endDate.split("/")[0]+ " " + endDate.split("/")[1].replaceAll("-",":"))
@@ -170,7 +174,7 @@ var display = (function loadThumbnail() {
 				alert("입찰금액은 최고입찰가보다 커야 합니다.");
 				return false;
 			}else if((price - bestBidPrice) % bidUnit != 0 ){
-				alert("입찰은 " + bidUnit + "포인트 단위로 가능합니다.");
+				alert("입찰은 " + bid + "포인트 단위로 가능합니다.");
 				return false;
 			}else if(now > endDate){
 				alert("입찰이 마감된 상품입니다.")

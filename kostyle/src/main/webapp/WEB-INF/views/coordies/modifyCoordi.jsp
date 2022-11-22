@@ -7,117 +7,169 @@
 <head>
 <meta charset="UTF-8">
 <title>코디 글 수정</title>
-<!-- <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/footer.css" rel="stylesheet"/>
 
+
+<style type="text/css">
+ 	.container {
+ 		width: 80% !important;
+ 		margin-top: 100px;
+ 		position: relative;
+ 	}
+ 	.col-6 {
+	    width: 40%;
+	    height: 85%;
+	    display: inline-block;
+	    margin-left: 5%;
+ 	}
+ 	#upload-btn{
+ 		width: 100%; 
+ 		height: 100%;
+ 		background-color: rgb(247, 248, 250);
+    	border-radius: 4px;
+    	text-align: center;
+ 	}
+ 	.title{
+ 		width: 100%;
+ 		height: 100%;
+ 	}
+ 	.content{
+ 		width: 100%;
+ 	}
+	.col-6-box {
+	    position: relative;
+	    top: 60px;
+    }
+    .row-2-btn{
+    	margin-top: -110px;
+    	margin-left: 80px;
+    	background-color: none;
+    } 
+    #modify-btn {
+	    width: 100%;
+	    height: 10%;
+	    display: block;
+	    margin: auto;
+	    background-color: #f891aa;
+	    border-color:#f891aa;
+	    font-weight: bold;
+    }
+     .thumbnail-btn{
+		border: none;
+	    background: none;
+	    font: inherit;
+	    font-size: 14px;
+	    line-height: 18px;
+	    width: auto;
+	    color: #FFFFFF;
+    } 
+    #remove-btn{
+    	background-color: none;
+    }
+    #tag-btn{
+    	background-color: #f891aa;
+    	height: 30px;
+    	font-weight: bold;
+    }
+ </style>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-<h1>글 수정</h1>	
-	<form role="form" action="/coordies/modify" method="post">
-		<div class="panel-body">
-			
-			
-			<!-- 중간 내용 -->
-			
-			<div class="form-group">
-			<label>글번호</label> <input class="form-control" name='cno'
-				value='<c:out value="${coordi.cno }"/>' readonly="readonly">
-		</div>
-			
-			
-			<ol>
-<li>
-	<div class="form-group-1">
-		<!-- 제목, 내용 -->
-		<div class="form-group-1">
-		
-			<div class="form-group-title">
-				<input class="title" name="title" value="${coordi.title}">
-			</div>
-			
-			<div class="form-group-content">
-			<textarea class="content" rows="6" name="content" style="overflow: hidden; overflow-wrap: break-word; height: 145px;">${coordi.content}"</textarea>	
-			</div>
-			
-		</div>
+
+<div class="container">
+<form role="form" action="/coordies/modify" method="post">
+
+	
+
+
+	<div class="row-1">
 		
 		<!-- 파일 업로드 -->
-		<div class="form-group-1">
-			
+		<div class="col-6">
 			<!-- 업로드 버튼 -->
-			<div class="form-group-upload">
+			<div class="form-group-upload" style="width: 90%; height: 100%;">
 				<input id="uploadFile" name="file" type="file" accept="image/*" class="form-control"  
 					style="display: none" multiple>
-				<button id="upload-btn" class="file-upload-btn">
-				
-					<!-- svg 카메라 아이콘 -->
-					<span class="upload-notice">코디 사진을 올려주세요</span>
-					<span class="upload-notice">(*이미지 파일 1장만 가능)</span>	
-					
-					<!-- span 지우고 썸네일 이미지 덮어씌우기 -->
-					<span id="img-result">
-						<!-- img -->
-						<img class="card-img-top" 
+				<button id="upload-btn" class="file-upload-btn" >
+						
+						<span class="upload-notice" hidden="">코디 사진을 올려주세요</span>
+						<span class="upload-notice" hidden="">(*이미지 파일 1장만 가능)</span>	
+						
+						<!-- span 지우고 썸네일 이미지 덮어씌우기 -->
+						<span id="img-result">
+							<!-- img -->
+							<img class="card-img-top" 
 								data-filepath="${coordi.filepath }"
 								data-filename="${coordi.filename }" data-uuid="${coordi.uuid }"
-								style="width: 700px; height: 700px; border-radius: 15px;" />	
-					</span>
-					
-				</button>	
-			</div>
-			
-			
-			<!-- 썸네일 버튼 -> 동적 생성 되게? or 숨겼다 보이게-->
-			<div class="form-group-btn">
-			
-				<div class="form-group-inline" >
-				<span class="file-tag">
-					<!-- tag-btn -->
-					<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
-				</span>
-				
-				<span class="file-remove">	
-					<!-- remove-btn (버튼 안에 휴지통 아이콘) -->
-					<button class="thumbnail-btn" id='remove-btn' type='button' title='파일삭제' hidden="">휴지통</button>
-				</span>
-			</div>	
-			</div>
-			
-		</div>
-	</div>
-</li>
-</ol>
-
-
-		<!-- 상품태그 -->
-		<div class="form-group">
-				
+								style="width: 100%; height: 100%; border-radius: 15px;" />
+						</span>
+				</button>
+			</div>				
 		</div>
 		
-		
-		
-		<!-- 상단 버튼 -->
-			<div class="form-group">
-					<button class="modify-btn" type="button">
-						<span>수정하기</span>
-					</button>
 
+		<!-- 제목, 내용 -->
+		<div class="col-6 col-6-box">
+			<div class="form-group" >
+			<!-- 제목 -->
+				<div class="form-group-title" style="width: 90%; height: 50px;">
+					<input title="제목" class="title" name="title" value="${coordi.title}">
+				</div>
+			<!-- 내용 -->
+				<div class="form-group-content"  style="width: 90%; height: 150px; position: relative;  top: 25px;">
+					<textarea title="내용" class="content" name="content" style=" overflow-x: hidden; overflow-wrap: break-word; height: 200px; resize: none;">
+						${coordi.content}
+					</textarea>
+				</div>
 			</div>
+		</div>
 		
-		
-			
+	</div>	
 	
+	<!-- 썸네일 버튼 -> 동적 생성 되게? or 숨겼다 보이게-->
+	<div class="row-2">
+		<div class="form-group-btn row-2-btn">	
 	
-	
+			<span class="file-tag">
+				<!-- tag-btn -->
+				<button class="thumbnail-btn" id='tag-btn' type='button' title='상품태그' hidden="" >+ 상품 태그하기</button>
+			</span>
+				
+			<span class="file-remove">	
+				<!-- remove-btn (버튼 안에 휴지통 아이콘) -->
+				<button class="thumbnail-btn" id='remove-btn' type='button' title='파일삭제' hidden="">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+					  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+					  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+					</svg>
+				</button>
+			</span>
+
+		</div>
 	</div>
-	</form>
 	
+	<!-- 상품 태그 -->
+	<div class="row-3">
+	</div>
 	
+	<!-- 하단 버튼 -->
+	<div class="row-4" style="margin-top:100px; margin-bottom: 50px;">
+		<div class="form-group-btn row-4-btn">
+			<button type="button" class="btn btn-primary btn-lg" id="modify-btn" >수정하기</button>
+		</div>
+	</div>
+
+	
+</form>
+</div>
+			
+
 <script>
 
 var cno = '${coordi.cno}';
@@ -192,7 +244,7 @@ $("input[type='file']").on("change", function(e) {
     reader.onload = function(event) {
     	var img = document.createElement("img");
 		 img.setAttribute("src", event.target.result)
-		 img.setAttribute("style", "width:200px; height:300px;")
+		 img.setAttribute("style", "width:100%; height:100%;")
 		 $("#img-result").empty();
 		 document.querySelector("span#img-result").appendChild(img);
 		 $(".thumbnail-btn").show();
@@ -204,7 +256,7 @@ $("input[type='file']").on("change", function(e) {
    
 
 //수정하기 버튼
-$(".modify-btn").on("click", function () {
+$("#modify-btn").on("click", function () {
 	
 	console.log("수정하기 버튼 클릭")
             

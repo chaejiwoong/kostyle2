@@ -37,7 +37,7 @@ public interface OrderMapper {
     
     ProductVO productDetail(Long odno);
     
-    int getTotal(@Param("filter") Criteria cri,@Param("filter") String filter);
+    int getTotal(@Param("cri") Criteria cri, @Param("filter")String filter, @Param("mno") Long mno);
     
     //주문 삭제
     void deleteOrder(Long ono);

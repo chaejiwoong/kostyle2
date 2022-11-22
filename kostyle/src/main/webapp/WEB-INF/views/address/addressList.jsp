@@ -147,7 +147,7 @@ tbody tr:hover{
 <div class="address-section">
 	<div class="row address-menu">
 	<span class="col-md-9"></span>
-		<a href="#" id="changeDefault" class="btn btn-primary defaultBtn">기본 배송지로 설정</a>
+		<a href="#" id="changeDefault" class="btn defaultBtn">기본 배송지로 설정</a>
 		<a href="/members/address/register" class="btn btn-default">배송지 추가 +</a>
 	</div>
 		<table class="table">

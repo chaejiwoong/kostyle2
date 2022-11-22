@@ -9,6 +9,7 @@ import ko.kostyle.domain.Product_ImgVO;
 import ko.kostyle.domain.StockVO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.ProductDTO;
+import ko.kostyle.dto.ProductFilterDTO;
 
 
 public interface ProductMapper {
@@ -26,9 +27,10 @@ public interface ProductMapper {
 	
 	public ProductVO productGet(Long pno);//상품 상세정보
 	public List<ProductVO> getListWithPaging(Criteria cri); //페이징 처리
-	
+	public List<ProductVO> getListWithPaging2(ProductFilterDTO pf);
 	
 	public int productGetTotal(Criteria cri);
+	public int productGetTotal2(ProductFilterDTO pf);
 	
 	public void updateHitcount(@Param("pno") Long pno);   
 	

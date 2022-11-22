@@ -21,7 +21,6 @@ import java.util.Collections;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final MemberMapper memberMapper;
-    private final HttpSession session;
 
     @Override
     @Transactional

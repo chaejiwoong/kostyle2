@@ -102,9 +102,13 @@ font-weight: bold;
 					<td><img data-filepath ="${auction.imgs[0].filepath}"class="thumb" src='' data-uuid="${auction.imgs[0].uuid}" data-filename="${auction.imgs[0].filename}"></td>
 					<td><a href='<c:out value="auctions/${auction.apno}"/>'> <c:out
 								value="${auction.name}" /></a></td>
-					<td><c:out value="${auction.start_price}" /></td>
-					<td><c:out value="${auction.best_bid_price}" /></td>
-					<td><c:out value="${auction.bid_unit}" /></td>
+					<fmt:formatNumber var="start_price" value="${auction.start_price}" type="number"/>
+					<td><c:out value="${start_price}" /></td>
+					<fmt:formatNumber var="best_bid_price" value="${auction.best_bid_price}" type="number"/>
+					<td><c:out value="${best_bid_price}" /></td>
+					<fmt:formatNumber var="bid_unit" value="${auction.bid_unit}" type="number"/>
+					<td><c:out value="${bid_unit}" /></td>
+					
 					<td><c:out value="${auction.status}" /></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${auction.start_date}" /></td>

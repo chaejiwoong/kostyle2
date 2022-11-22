@@ -34,7 +34,7 @@
 							<img class="card-img-top" id="${coordi.cno }"
 								data-filepath="${coordi.filepath }"
 								data-filename="${coordi.filename }" data-uuid="${coordi.uuid }"
-								style="width: 300px; height: 300px; border-radius: 15px;" />
+								style="width: 300px; height: 400px; border-radius: 15px;" />
 
 							<!-- 코디 피드 하단 내용 -->
 							<div class="card-body p-4">
@@ -64,8 +64,7 @@
 													<c:if test="${!coordi.like}">
 														<!-- 빈하트일때 -->
 														<button class="like-btn" id="${coordi.cno }" type="button">
-															<i class="fa-regular fa-heart fa-2x"></i>
-															<!-- svg 하트 아이콘 -->
+															<i class="fa-regular fa-heart fa-2x"></i>														
 															<span class="like-count"><c:out
 																	value="${coordi.lk_count}" /></span>
 														</button>
@@ -75,7 +74,6 @@
 														<!-- 꽉찬 하트일때 -->
 														<button class="like-btn" id="${coordi.cno }" type="button">
 															<i class="fa-solid fa-heart fa-2x"></i>
-															<!-- svg 하트 아이콘 -->
 															<span class="like-count"><c:out
 																	value="${coordi.lk_count}" /></span>
 														</button>
@@ -85,9 +83,9 @@
 											</li>
 																			
 											<li>
-												<a class="comment-link" href="">
+												<a class="comment-link" href="" id="${coordi.cno }">
 													<i class="fa-regular fa-comment-dots fa-2x"></i>
-													<span class="comment-count"><c:out value="${coordi.c_count}" /></span>
+													<span class="comment-count" ><c:out value="${coordi.c_count}" /></span>
 												</a>
 											</li>
 
@@ -100,7 +98,7 @@
 							<!-- Product actions-->
 							<!-- Sale badge-->
 							<div class="badge bg-dark text-white position-absolute"
-								style="top: 0.5rem; right: 0.5rem">
+								style="top: 0.5rem; right: 0.5rem; background: none !important" >
 								<span class="hitcount"> 조회수 <c:out
 										value="${coordi.hitcount}" />
 								</span>

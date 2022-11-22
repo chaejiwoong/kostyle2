@@ -74,7 +74,8 @@
 	            </div>
 	            <div class="form-inline form-group">
 	                <label for="point">포인트</label>
-	                <input type="text" id="point" name="point" class="form-control" value="${member.point}" readonly/><br>
+	                <fmt:formatNumber var="point" value="${member.point }" type="number"/>
+	                <input type="text" id="point" name="point" class="form-control" value="${point}" readonly/><br>
 	            </div>
 	            <div class="form-inline form-group">
 	                <label for="authority">권한</label>

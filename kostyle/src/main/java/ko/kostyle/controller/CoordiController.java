@@ -83,7 +83,7 @@ public class CoordiController {
 	}
 	
 	@GetMapping("/ajaxCoordies")
-	public String getList(Criteria cri,  int page, Model model,
+	public String getList(Criteria cri, Model model,
 														HttpServletRequest request, HttpServletResponse response){
 		
 		
@@ -98,10 +98,11 @@ public class CoordiController {
 
 		//무한스크롤	
 		cri.setAmount(12);
-		cri.setPageNum(page);
 		
 		log.info("페이지는 " + cri.getPageNum());
 		model.addAttribute("getCoordiList", service.getList(cri));
+		
+		
 		
 		return "/coordies/ajaxCoordies";
 	}

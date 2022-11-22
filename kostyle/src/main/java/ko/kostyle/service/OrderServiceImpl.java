@@ -204,7 +204,7 @@ public class OrderServiceImpl implements OrderService{
 		}else {
 			filter=null;
 		}
-		return orderMapper.getTotal(cri, filter);
+		return orderMapper.getTotal(cri, filter, SecurityUtil.getCurrentMemberId());
 	}
 
 	@Override

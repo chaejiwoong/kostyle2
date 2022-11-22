@@ -43,7 +43,7 @@ label{
 .address-section{
   	display:flex;
 	justify-content:center;   
-		border:1px solid black;
+		border:1px solid #ebebeb;
 	/* margin:0 auto; */
 }
 
@@ -51,7 +51,7 @@ label{
 	margin:0 auto;
 	text-align:center; 
 	vertical-align: middle;
-	border:1px solid black;
+	border:1px solid #ebebeb;
 	
 
 }
@@ -59,7 +59,7 @@ label{
 .total-section{
   	display:flex;
 	justify-content:center;   
-	border:1px solid black;
+	border:1px solid #ebebeb;
 }
 
 
@@ -150,6 +150,29 @@ h1{
     background-color:#f891aa;
     border:1px solid #ebebeb;
 }
+
+.detail-title{
+	width:auto;
+	height:50px;
+	font-weight:bold;
+	font-size:15px;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.detail-content{
+	height:150px;
+	vertical-align:middle;	
+	border-top: 1px solid #ebebeb;
+	font-size:15px;
+}
+
+.detail-content span:not(.img){
+	padding-top:70px;
+}
+
+.detail-content span(:first-child){
+	padding-top:30px;
+}
 </style>
     </head>
 <body>
@@ -160,7 +183,7 @@ h1{
 
     <div class="detail-section">
     <h1>상품정보</h1>
-        <div class="row">
+        <div class="detail-title">
         	<span class="col-md-3">이미지</span>
          	<span class="col-md-3">상품명</span>
          	<span class="col-md-2">사이즈</span>
@@ -168,9 +191,9 @@ h1{
         	<span class="col-md-2">가격</span>
 		</div>
 		<c:forEach items="${details }" var="detail">
-			<div class="row">
-				<span class="col-md-3"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}"
-							style="width: 100px; height: 100px;"></span>
+			<div class="detail-content">
+				<span  class="col-md-3 img"><img data-filepath ="${detail.product.img.filepath}"class="thumb" src='' data-uuid="${detail.product.img.uuid}" data-filename="${detail.product.img.filename}" 
+							style="width: 100px; height: 100px; margin-top:30px;"></span>
 				<span class="col-md-3">${detail.product.name }</span>
 				<span class="col-md-2">${detail.p_size }</span>
 				<span class="col-md-2">${detail.amount }</span>
@@ -387,8 +410,7 @@ $(document).ready(function(){
 		}else{
 			$('#point').val(${member.point})
 		}
-		
-		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt($('#point').val())).toLocaleString()+ "원")
+		$("#total").val((parseInt(total) + parseInt(delivery) - parseInt($('#point').val())).toLocaleString()+ "원")
 		
 		// 결제금액이 0원일 경우에는 신용카드 결제 막기
 		if($("#total").text() == "결제금액 : 0원"){
@@ -412,7 +434,7 @@ $(document).ready(function(){
 		
 		var point = $(this).val()
 		
-		$("#total").text("결제금액 : "+(parseInt(total) + parseInt(delivery) - parseInt(point)).toLocaleString()+ "원")
+		$("#total").val((parseInt(total) + parseInt(delivery) - parseInt(point)).toLocaleString()+ "원")
 		
 		// 결제금액이 0원일 경우에는 신용카드 결제 막기
 		if($("#total").text() == "결제금액 : 0원"){
@@ -467,7 +489,6 @@ $(document).ready(function(){
 		e.preventDefault();
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-
 	            $('#modalAddress-num').val(data.zonecode).attr('readonly',true);
 	            $('#modalAddress-info').val(data.address).attr('readonly',true);
 	        }

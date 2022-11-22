@@ -32,10 +32,6 @@
 	font-size: 15px;
 }
 
-.header-box {
-	background-color: #f891aa;
-	font-weight: bold;
-}
 
 .table-primary th:nth-child(8) {
 	width: 190px !important;
@@ -92,9 +88,9 @@
 					<li onclick="location.replace('/members')">회원정보수정</li>
 					<li onclick="location.replace('/members/address')">배송지관리</li>
 					<li onclick="location.replace('/reviews/unwritten')"
-						class="selected"
+						
 					>리뷰관리</li>
-					<li onclick="loaction.replace('/shop/cartList')">장바구니</li>
+					<li onclick="loaction.replace('/shop/cartList')" class="selected">장바구니</li>
 					<li>위시리스트/코디</li>
 					<li onclick="location.replace('/members/bidHistory')">내경매조회</li>
 					<li onclick="location.replace('/customerCenter/register')">1:1문의</li>
@@ -143,7 +139,11 @@
      	  state.count : 반복문 횟수
       -->
 										<tr>
+
 											<td>
+										<input type="text" name="cpno" id="cpno${state.index}"
+													value="${cart.cpno}" hidden
+												>											
 												<input type="checkbox" name="pno" id="pno${state.index}"
 													value="${cart.pno}"
 												>
@@ -154,8 +154,9 @@
 												</a>${cart.name}
 											</td>
 											<td>
-												<%-- <img src="../product_images/" width="100"> --%>
-												aa
+                            <img class="thumb" src='' data-filename="${cart.fileName }"
+							style="width : 100px; height : 100px;">											
+												
 											</td>
 											<td>
 												<!--수량--------------  -->
@@ -171,8 +172,8 @@
 												<!---------------------  -->
 											</td>
 
-											<td>${cart.p_size }</td>
-											<td class="totalPrice01" data-value="${cart.totalPrice}">
+											<td id="p_size${state.index}">${cart.p_size }</td>
+											<td id="price${state.index }" class="totalPrice01" data-value="${cart.totalPrice}">
 												<fmt:formatNumber value="${cart.totalPrice}"
 													pattern="###,###"
 												/>
@@ -212,14 +213,14 @@
 										
 										</span> 
 										<br> <b>배송비</b>: <span style="color: yellow"> <b>
-												<fmt:formatNumber value="3000" pattern="###,###" /> 원
+												<fmt:formatNumber value="${finalTotalPrice>=3000?0:3000}" pattern="###,###" /> 원
 										</b>
 										</span>
 										</div>
 									</td>
 
 									<td colspan="1">
-										<button type="button" onclick="goOrder()"
+										<button id="orderBtn" type="button"
 											class="btn btn-primary"
 										>주문하기</button>
 										<button type="button" onclick="self.location='/main'"
@@ -243,12 +244,29 @@
 			</div>
 		</div>
 	</div>
+	
+	<form id="orderForm" action="/orders/pay" method="get">
+		
+	</form>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
 <script>
-	$(function() {
+var display = (function loadThumbnail() {
+	var uploadResultArr = $('.thumb');
+	
+	$(uploadResultArr).each(function (i, obj) {
+		//섬네일 파일을 불러오기 위한 경로
+		var fileCallPath = encodeURIComponent($(obj).data('filename'));
+		// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
+		$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
+		})
+	})();
 
+	$(function() {
+		
+
+		
 		$("#allChk").click(function() {
 			if ($("#allChk").is(":checked"))
 				$("input[name=pno]").prop("checked", true);
@@ -281,7 +299,9 @@
 	}) // $() end-------
 
 	// 체크박스에 체크한 상품정보(상품번호-pno, 수량-amount)를 가지고 주문폼 페이지로 이동
-	function goOrder() {
+	var orderForm=$('#orderForm')
+	$('#orderBtn').on('click', function(e){
+		e.preventDefault();
 		let chk = searchForm.pno; // $('input[name="pno"]')
 		if (chk == null)
 			return;
@@ -293,10 +313,23 @@
 				alert('주문할 상품을 체크하세요')
 				chk.focus();
 				return;
+			}else{
+				orderForm.append('<input name="pno" value="'+ $("#pno0").val() +'">')
+				orderForm.append('<input name="p_size" value="'+ $("#p_size0").text() +'">')
+				orderForm.append('<input name="amount" value="'+ $("#amount0").val() +'">')
+				orderForm.append('<input name="price" value="'+ $("#price0").data("value") +'">')
+				
+				seq++;				
+				$.ajax({
+					url:"cartDel?cpno=" + $('#cpno0').val(),
+					type:'get'
+				})
+				orderForm.submit();
 			}
 		} else {
 			// 체크박스가 여러개 있다면 => check배열
 			let cnt = 0;
+			var seq = 0;
 			for (let i = 0; i < chk.length; i++) {
 				if (!chk[i].checked) {
 					cnt++; // 체크 안 된 체크박스 개수 세기
@@ -304,6 +337,17 @@
 					// 해당 상품의 수량이 서버에 전송되지 않도록 해야함.
 					$('#amount' + i).prop('disabled', true)
 				} else {
+					orderForm.append('<input name="payList['+ seq +'].pno" value="'+ $("#pno" + i).val() +'">')
+					orderForm.append('<input name="payList['+ seq +'].p_size" value="'+ $("#p_size" + i).text() +'">')
+					orderForm.append('<input name="payList['+ seq +'].amount" value="'+ $("#amount" + i).val() +'">')
+					orderForm.append('<input name="payList['+ seq +'].price" value="'+ $("#price" + i).data("value") +'">')
+					
+					$.ajax({
+						url:"cartDel?cpno=" + $('#cpno' +i).val(),
+						type:'get'
+					})					
+					seq++;
+					
 					$('#amount' + i).prop('disabled', false)
 				}
 			}// for--
@@ -312,10 +356,11 @@
 				$('#amount' + i).prop('disabled', false)
 				return;
 			}
+			orderForm.submit();
 		}//else--
-		searchForm.method = 'post';
-		searchForm.submit();
-	}
+		
+
+	}) 
 
 	function goEdit(cpno, index) {
 		//alert(index)
