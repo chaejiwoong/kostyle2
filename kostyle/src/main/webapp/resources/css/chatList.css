@@ -1,0 +1,152 @@
+@import "reset.css";
+.title-chat {
+	color: #35C5F0;
+}
+.bottom-category {
+	display: block;
+}
+.customerCenter-a {
+	color: #35C5F0;
+}
+.admin-table {
+	text-align: left;
+}
+.tbody-td {
+    display: inline-block;
+    position: relative;
+    padding: 10px 0;
+    font-size: 18px;
+}
+.td-right {
+	text-align: right;
+	padding: 8px 0 8px 8px !important;
+}
+
+.tbody-btn {
+    padding: 9px 12px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 22px;
+}
+.answer {
+	font-size: 18px;
+	font-weight: bold;
+}
+/*  */
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
+}
+.qa, .notice {
+    color: #000000;
+}
+.waiting-box {
+    width: 100%;
+    height: auto;
+    padding: 15px 0;
+    text-align: center;
+}
+.admin-inquiry-box {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-bottom: 45px;
+    padding-top: 60px;
+}
+.register {
+    color: #35C5F0;
+}
+.chat-box {
+    padding: 25px 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.chat-box .inquiry-content {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    bottom: -2px;
+    border-radius: 29px;
+    padding: 7px 20px;
+    background-color: #edf4f7;
+    color: #159dd1;
+    margin-right: 20px;
+}
+/*#5195bb*/
+.chat-box .inquiry-input {
+    width: 600px;
+    height: 35px;
+    padding-left: 20px;
+    font-size: 18px;
+    border-radius: 24px;
+    outline: 1px solid #8cd7f3;
+    border: none;
+    margin-right: 32px;
+}
+.chat-box .inquiry-btn {
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    width: 120px;
+    height: 39px;
+    background-color: #5195bb;
+}
+.text-box {
+    width: auto;
+    height: auto;
+    padding-top: 15px;
+}
+.text-box .clean-text {
+    color: red;
+    font-weight: bold;
+}
+.waiting-box {
+    width: 100%;
+    height: auto;
+    padding: 15px 0;
+    text-align: center;
+}
+.waiting-box .waiting-people {
+    font-size: 18px;
+    font-weight: bold;
+}
+.inquiry-box {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-bottom: 45px;
+}
+.inquiry-box-bottom {
+    position: relative;
+    width: 900px;
+    height: auto;
+    display: inline-block;
+}
+.table > thead > tr > th {
+    border-top: 2px solid #ddd;
+}
+.table tr > th {
+    background-color: #eaeaea;
+}
+.inquiry-box-bottom .create-btn {
+    position: absolute;
+    right: 0;
+    border-radius: 22px;
+    padding: 5px 20px;
+    background-color: #5195bb;
+    border: none;
+    color: #ffffff;
+}
+.pull-right {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.right {
+	width:140px;
+	text-align: right;
+}

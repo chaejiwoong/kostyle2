@@ -109,9 +109,6 @@ $(document).ready(function(){
     		
     		
     	});
-	});
-	
-	//1:1실시간 채팅
-	
+	});	
 });
 //QnA ajax페이지 끝

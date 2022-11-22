@@ -19,10 +19,13 @@ import ko.kostyle.domain.AnswerVO;
 import ko.kostyle.domain.QuestionVO;
 import ko.kostyle.domain.ServiceCenterVo;
 import ko.kostyle.dto.AnswerDTO;
+import ko.kostyle.dto.ChatDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.PageDTO;
+import ko.kostyle.service.ChatService;
 import ko.kostyle.service.QuestionService;
 import ko.kostyle.service.ServiceCenterService;
+import ko.kostyle.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -36,6 +39,8 @@ public class AdminCustomerCenterController {
 	private ServiceCenterService service;
 	@Autowired
 	private QuestionService service2;
+	@Autowired
+	private ChatService chatService;
 	
 	@GetMapping("/qnaList")
 	public String getQnaList(@RequestParam(value = "category", required=false) String category, Model model) {
@@ -182,6 +187,20 @@ public class AdminCustomerCenterController {
 	public void getAnswer(@RequestParam("qno") Long qno, Model model, @ModelAttribute("cri") Criteria criteria) {
 		model.addAttribute("list", service2.get(qno));
 		model.addAttribute("showList", service2.showQuestion(qno));
+	}
+	
+	@GetMapping("/chatList")
+	public void getChatList(@ModelAttribute("cri") Criteria criteria, Model model, ChatDTO chatDTO) {
+		int total = chatService.totalCount(chatDTO);
+//		log.info("어드민공지사항: " + service.getNoticeList(criteria));
+		model.addAttribute("id" ,SecurityUtil.getCurrentMemberId());
+		model.addAttribute("chatList", chatService.chatLists(criteria));
+		model.addAttribute("count", total);
+		model.addAttribute("pageMaker", new PageDTO(criteria,total));
+	}
+	@GetMapping("/chatingRoom")
+	public void getChatingRoom() {
+		log.info("개인 chatingRoom으로 들어갑니다.");
 	}
 	
 }

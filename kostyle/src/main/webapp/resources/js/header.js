@@ -20,7 +20,8 @@ $(function () {
                 $(this).find("span").addClass("list-color");
                 $(".all-category").css("display", "none");
             } else if (index =="4"){
-                $(".li-list span").removeClass("list-color");
+            alert(index);
+                $(".li-list span").removeClass("products");
                 $(this).find("span").addClass("list-color");
                 $(".all-category").css("display", "none");
             }

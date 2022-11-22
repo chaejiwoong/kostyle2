@@ -1,13 +1,17 @@
 package ko.kostyle.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ChatUserVO  extends MemberVO{
+@AllArgsConstructor
+@NoArgsConstructor
+//채팅방 생성될때
+public class ChatUserVO {
 	private Long cuno;
-	private Long mno;
+	private Long member_id;
 	private String status;
 	private String chat_title;
 	
-	private MemberVO memberVO;
 }

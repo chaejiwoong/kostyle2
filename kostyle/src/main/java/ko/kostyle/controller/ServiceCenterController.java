@@ -1,8 +1,10 @@
 package ko.kostyle.controller;
 
+import ko.kostyle.domain.ChatUserVO;
 import ko.kostyle.domain.QuestionVO;
 import ko.kostyle.domain.ServiceCenterVo;
 import ko.kostyle.dto.AnswerDTO;
+import ko.kostyle.dto.ChatDTO;
 import ko.kostyle.dto.Criteria;
 import ko.kostyle.dto.PageDTO;
 import ko.kostyle.dto.QnaAjaxDTO;
@@ -16,6 +18,7 @@ import ko.kostyle.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,6 +41,8 @@ public class ServiceCenterController {
 
     private ServiceCenterService service;
     private QuestionService service2;
+    @Autowired
+    private ChatService chatService;
 //    private ChatService chatService;
 //  QNA 카테고리영역
 //    private AjaxDAO dao;
@@ -79,8 +84,7 @@ public class ServiceCenterController {
 
     // 로그인
     @GetMapping("/register")
-    public void getRegister(Criteria criteria, Model model) {
-    	
+    public void getRegister(Criteria criteria, Model model, ChatDTO chatDTO, ChatUserVO chatUserVO) {
     	List<QuestionVO> list = service2.getList(criteria);
 		log.info("list확인" + list);
 		for(QuestionVO vo : list) {
@@ -95,8 +99,13 @@ public class ServiceCenterController {
     	
     	int total = service2.questionTotal(criteria);
     	log.info("계수:"+total);
-        log.info("문의");
+    	
+  
+		log.info("확인"+ chatService.totalCount(chatDTO));
+		model.addAttribute("chatCount", chatService.totalCount(chatDTO));
+        
         model.addAttribute("registerList", list);
+        model.addAttribute("id" ,SecurityUtil.getCurrentMemberId());
         model.addAttribute("pageMaker", new PageDTO(criteria, total));
 //        model.addAttribute("name", service2.getname());
     }

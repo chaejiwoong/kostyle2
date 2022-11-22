@@ -44,7 +44,7 @@
 			<li class="li-list"><a href="/auctions"><span class="auctions">경매</span></a></li>
 			<li class="li-list"><a class="customerCenter"
 				href="/customerCenter/qna?category=all"><span>고객센터</span></a></li>
-			<li class="li-list"><a href="#"><span>About Us</span></a></li>
+			<li id="aboutUs" class="li-list"><a href="#"><span>About Us</span></a></li>
 		</ul>
 	</div>
 </nav>

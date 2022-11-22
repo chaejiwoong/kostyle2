@@ -14,6 +14,7 @@
     <script type="text/javascript" src="/resources/js/header.js"></script>
     <script type="text/javascript" src="/resources/js/customerCenter.js"></script>
     <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/resources/js/registerAjax.js"></script>
     <link href="/resources/css/header.css" rel="stylesheet"/>
     <link href="/resources/css/footer.css" rel="stylesheet"/>
     <link href="/resources/css/nav.css" rel="stylesheet"/>
@@ -24,15 +25,16 @@
     <%@ include file="/WEB-INF/views/customerCenter/include/nav.jsp"%>
     	<div class="chat-box">
     	<!--action="/customerCenter/register/chatadd"-->
-            <form method="post">
+            <form name="chat" class="chat-room">
                 <span class="inquiry-content">문의 내용</span>
-                <input class="inquiry-input" type="text" name="chat-title"/>
-                <button class="inquiry-btn" type="submit"><span>서비스 신청</span></button>
+                <input class="inquiry-input" type="text" name="chat_title"/>
+				<input class="inquiry-input Id" type="hidden" name="member_id" value="${id}"/>
+                <button class="inquiry-btn" type="button"><span>서비스 신청</span></button>
                 <div class="text-box"><span class="clean-text">상담원도 누군가의 소중한 가족입니다. 욕설/폭언/장난 등은 삼가 부탁드립니다.</span></div>
             </form>
         </div>
         <div class="waiting-box">
-            <span class="waiting-people">현재 대기중인 고객: 0명</span>
+            <span id="reload" class="waiting-people">현재 대기중인 고객: <c:out value="${chatCount}"/>명</span>
         </div>
 
         <div class="inquiry-box">
@@ -107,6 +109,8 @@
         $(document)
             .ready(
                 function() {
+                	
+                	
                 	var pageNum = $(".pageNum").val();
                 	var amount = $(".amount").val();
                 	$(".admin-box").each(function(){

@@ -252,6 +252,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.0.7.Final</version>
 		</dependency>
+		<!-- 소켓관련 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
 			<groupId>javax.validation</groupId>
