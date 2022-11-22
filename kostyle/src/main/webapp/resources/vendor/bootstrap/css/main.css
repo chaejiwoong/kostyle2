@@ -11371,3 +11371,7 @@ textarea.form-control-lg {
 #enrollBtn:hover {
     background-color: #ff7d9e;
 }
+.btn-box{
+    margin-left: 350px;
+}
+

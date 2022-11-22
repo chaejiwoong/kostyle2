@@ -68,7 +68,8 @@ public class AdminProductController {
 		// 페이지 정보
 		model.addAttribute("cri", cri);
 		// 선택상품정보
-		
+		int a = 0;
+		a =10;
 		
 		model.addAttribute("product", service.get(pno));
 		
@@ -135,7 +136,7 @@ public class AdminProductController {
 			}
 			
 		}
-		log.info("uploadAjaxActionPOST..........");
+		
 		
 		String uploadFolder = "C:\\upload";
 		// 날짜 폴더 경로

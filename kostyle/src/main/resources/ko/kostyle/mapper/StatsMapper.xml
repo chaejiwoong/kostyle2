@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.kostyle.mapper.StatsMapper"> <!-- 고유한 도메인 -->
+
+	<select id="statsList" resultType="ko.kostyle.domain.StatsVO">
+		
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		where pcno = 1
+		<![CDATA[ 
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsList2" resultType="ko.kostyle.domain.StatsVO">
+		
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		where pcno = 2
+		<![CDATA[ 
+		AND amount>0
+		]]>
+		
+	</select>
+		<select id="statsList3" resultType="ko.kostyle.domain.StatsVO">
+		
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		where pcno = 3
+		<![CDATA[ 
+		AND amount>0
+		]]>
+		
+	</select>
+	
+	<select id="statsList4" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		where pcno = 4
+		<![CDATA[ 
+		AND amount>0
+		]]>
+	</select>
+	
+
+	<select id="statsScnoList" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		where p.scno = 1 
+		<![CDATA[ 
+		AND amount>0
+		]]>
+	</select>
+	
+ 		<select id="statsScnoList2" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 2
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList3" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 3
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList4" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 4
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList5" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 5
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList6" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno =6
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList7" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 7
+		AND amount>0
+		]]>
+	</select>
+	
+	<select id="statsScnoList8" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 8
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList9" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 9
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList10" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 10
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList11" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 11
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList12" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 12
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList13" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 13
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList14" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 14
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList15" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 15
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList16" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 16
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList17" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 17
+		AND amount>0
+		]]>
+	</select>
+	
+		<select id="statsScnoList18" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 18
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList19" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 19
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList20" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 20
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList21" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 21
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList22" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 22
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList23" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 23
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList24" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 24
+		AND amount>0
+		]]>
+	</select>
+		<select id="statsScnoList25" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 25
+		AND amount>0
+		]]>
+	</select>
+			<select id="statsScnoList26" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 26
+		AND amount>0
+		]]>
+	</select>
+			<select id="statsScnoList27" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 27
+		AND amount>0
+		]]>
+	</select>
+			<select id="statsScnoList28" resultType="ko.kostyle.domain.StatsVO">
+		select p.pno,o.amount,p.scno,pcno
+		from order_detail o right JOIN product p
+		on p.pno = o.pno LEFT JOIN sub_category s
+		on p.scno = s.scno
+		<![CDATA[ 
+		where p.scno = 28
+		AND amount>0
+		]]>
+	</select>
+	
+   
+
+    
+</mapper>
+

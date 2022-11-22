@@ -35,10 +35,8 @@ $(document).ready(function () {
                     "</div>")
             }else if(title == "statistics"){
                 $(".bottom-category").html("<div>" +
-                    "<span class='bottom-title'><a data-title='statistics' href='#'>회원통계</a></span>" +
-                    "<span class='bottom-title'><a data-title='statistics' href='#'>매출통계</a></span>" +
-                    "<span class='bottom-title'><a data-title='statistics' href='#'>방문통계</a></span>" +
-                    "<span class='bottom-title'><a data-title='statistics' href='#'>기타통계</a></span>" +
+                    "<span class='bottom-title'><a data-title='statistics' href='/admin/stats'>통계</a></span>" +
+
                     "</div>")
             }
         });

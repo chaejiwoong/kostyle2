@@ -116,6 +116,7 @@
                             </div>
                         </div>
                     </div>
+                   
                </c:forEach>
                     
                 </div>
@@ -145,7 +146,7 @@
 		
 		$(uploadResultArr).each(function (i, obj) {
 			//섬네일 파일을 불러오기 위한 경로
-			var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
+			var fileCallPath = encodeURIComponent($(obj).data('filepath').replace(/\\/g,'/') + "/s_" + $(obj).data('uuid') + "_" + $(obj).data('filename'));
 			// 섬네일 눌렀을 때 원본 파일 호출해서 보여주기
 			$(obj).attr('src',"/commons/display?fileName=" + fileCallPath);
 			})
@@ -194,12 +195,8 @@
 			str += "<div id='result_card'";
 			str += "data-path='" + obj.filePath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
 			str += ">";
-<<<<<<< HEAD
-			str += "<img style='width:500px; height:300px;' src='/member/products/display?fileName=" + fileCallPath + "'>";
-=======
 			str += "<img src='/commons/display?fileName=" + fileCallPath + "' style='width:800px; height:600px;'>";
->>>>>>> branch 'master' of https://github.com/chaejiwoong/kostyle2.git
-			str += "</div>";		
+			str += "</div>";		 
 		
 			
 			uploadReslut.html(str);		

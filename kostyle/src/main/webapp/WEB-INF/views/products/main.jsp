@@ -6,6 +6,9 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <script type="text/javascript" src="/resources/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
@@ -14,25 +17,36 @@
 .products {
 	color: #35C5F0;
 }
+.bx-wrapper{
+	display: none;
+}
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
        
-       <div>
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Kostyle</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With Shopping</p>
-                </div>
-            </div>
-        </div>
+       <br>
+       <br>
+       <br>
+       <br>
+<ul class="bxslider">
+	<c:forEach  items="${product}" var="list" >
+	<form action="" method="get" >
+	 <a class="move" href ='<c:out value="${list.pno}"/>'> 
+ 		<img data-filepath="${list.imageList[0].filePath}" class = thumb src='' data-uuid="${list.imageList[0].uuid}" 
+	            data-filename="${list.imageList[0].fileName}" style= "width : 100%; height : 550px; ">
+   	</a>
+         </form>
+	</c:forEach>
+</ul>
         
         <!-- Section-->
         <section class="py-5">
+        <div class="btn-box">
+        	<button>가격순</button> <button>인기순</button>
+        </div>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                
                
                <c:forEach  items="${product}" var="list" >
                     <div class="col mb-5">
@@ -164,6 +178,10 @@
             </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script type="text/javascript">
+	var uri = window.location.search;
+
+
+
 var aa = (function loadThumbnail() {
 	var uploadResultArr = $('.thumb');
 	
@@ -207,6 +225,20 @@ $(".move").on("click", function(e){
 	
 });
 
+//슬라이더
+$(document).ready(function(){
+	$('.bxslider').bxSlider({
+		auto: true,
+		speed: 500,
+		pause: 4000,
+		mode:'fade',
+		pager:true,
+	});
+	if(uri == "") {
+		$(".btn-box").css("display","none");
+		$(".bx-wrapper").css("display","block");
+	}
+});
 
 
 

@@ -82,6 +82,7 @@
 			e.preventDefault();
 			console.log($(this).attr('href'))
 			location.href="/main?pcno=" + $(this).attr('href')
+
 			
 		})
 		
