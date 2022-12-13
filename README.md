@@ -1,12 +1,6 @@
-# 프로젝트 이름
+# 
 
-<p align="center">
-  <br>
-  <img src="./images/common/logo-sample.jpeg">
-  <br>
-</p>
-
-목차
+다양한 기능을 추가하여 흥미를 유발하는 사용자 맞춤형 웹 솔루션 Kostyle4U (의류 쇼핑몰 웹 솔루션)
 
 ## 프로젝트 소개
 
