@@ -1,7 +1,7 @@
 # 프로젝트명
 
 * 다양한 기능을 추가하여 흥미를 유발하는 사용자 맞춤형 웹 솔루션 Kostyle4U (의류 쇼핑몰 웹 솔루션)
-* 포트폴리오(https://docs.google.com/presentation/d/1UA7AtIS4YDtwutwLCTndC0l1wRU_24-2BXe1D52dAmw/edit
+[📄 포트폴리오](https://docs.google.com/presentation/d/1UA7AtIS4YDtwutwLCTndC0l1wRU_24-2BXe1D52dAmw/edit)
 
 ## 프로젝트 소개
 
